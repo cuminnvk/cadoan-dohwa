@@ -31,6 +31,7 @@
       <div class="user-badge" id="userHeaderBadge" title="Bấm để đổi tên ca viên hoặc xem thông tin">
         👤 <span>Chọn tên</span>
       </div>
+      <div id="adminHeaderBadgeWrap"></div>
       <button class="btn-icon" id="openCaiDatBtn" title="Cài đặt ca đoàn & danh sách ca viên" onclick="window.dohwaApp && dohwaApp.openCaiDatModal()">
         ⚙️
       </button>
@@ -130,12 +131,6 @@
                 </button>
                 <button type="button" class="action-btn btn-viewers" onclick="window.viewMassAttendance('mass-cn-25-tn-a')">
                   👤 Ai đã xem
-                </button>
-                <button type="button" class="action-btn btn-edit" onclick="window.editMassSet('mass-cn-25-tn-a')">
-                  ✏️ Sửa
-                </button>
-                <button type="button" class="action-btn btn-delete" onclick="window.deleteMassSet('mass-cn-25-tn-a')">
-                  🗑️ Xóa
                 </button>
               </div>
             </div>
@@ -292,7 +287,7 @@
             <h2 style="font-size:1.25rem; font-weight:800; color:var(--text-main);">📚 Kho Bộ Lễ Đã Soạn</h2>
             <div style="font-size:0.84rem; color:var(--text-muted);">Quản lý danh sách các bộ lễ gọn gàng, tiện theo dõi</div>
           </div>
-          <button class="btn btn-primary" onclick="window.dohwaApp.switchTab('tab-soanle')">
+          <button class="btn btn-primary" id="khoSoanMoiBtn" style="display:none;" onclick="window.dohwaApp.switchTab('tab-soanle')">
             + Soạn Lễ Mới
           </button>
         </div>
@@ -455,6 +450,30 @@
       <span>Ai Đã Xem</span>
     </button>
   </nav>
+
+  <!-- ========================================== -->
+  <!-- MODAL ĐĂNG NHẬP ADMIN / CA TRƯỞNG -->
+  <!-- ========================================== -->
+  <div class="baidoc-overlay" id="adminLoginModalOverlay" style="display:none; z-index:100002; background:rgba(0,0,0,0.55); backdrop-filter:blur(4px);">
+    <div style="width:min(380px,92vw); background:var(--bg-card,#fff); border-radius:20px; padding:24px 22px; box-shadow:0 20px 50px rgba(0,0,0,0.3); text-align:center;">
+      <div style="font-size:2.2rem; margin-bottom:8px;">🔐</div>
+      <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:4px;">Xác Thực Quyền Ca Trưởng</h3>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:16px;">
+        Chỉ Ca Trưởng / Quản Trị mới có quyền Soạn lễ, Sửa/Xóa bộ lễ và Quản lý danh sách ca viên.
+      </p>
+      <div style="margin-bottom:14px;">
+        <input type="password" id="adminPinInput" class="form-control" placeholder="Nhập mã PIN (Mặc định: 1234)" style="text-align:center; font-size:1.2rem; letter-spacing:4px; font-weight:800; padding:10px; border-radius:10px;" maxlength="10">
+        <div id="adminPinError" style="display:none; color:#ef4444; font-size:0.78rem; font-weight:700; margin-top:6px;">Mã PIN không đúng, vui lòng thử lại!</div>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button type="button" class="btn btn-outline" onclick="window.dohwaApp.closeAdminLoginModal()" style="padding:8px 16px; font-size:0.85rem; font-weight:700;">Hủy</button>
+        <button type="button" class="btn btn-primary" onclick="window.dohwaApp.submitAdminLogin()" style="padding:8px 22px; font-size:0.85rem; font-weight:700; background:#6b3fa0;">Đăng Nhập 👑</button>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted); margin-top:14px; background:var(--bg-card-subtle); padding:8px 10px; border-radius:8px;">
+        💡 Mã PIN quản trị ban đầu là <strong>1234</strong>. Bạn có thể đổi mã PIN bất kỳ lúc nào trong phần Cài Đặt.
+      </div>
+    </div>
+  </div>
 
   <!-- ========================================== -->
   <!-- MODAL CHỌN TÊN CA VIÊN VÀO PHÒNG (MEMBER GATE - SOANBOLE STYLE) -->

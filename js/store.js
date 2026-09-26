@@ -420,6 +420,43 @@ class DohwaStore {
     return newRoster;
   }
 
+  // --- ADMIN AUTHENTICATION & PERMISSIONS ---
+  isAdmin() {
+    return localStorage.getItem('dohwa_is_admin') === 'true';
+  }
+
+  getAdminPin() {
+    return localStorage.getItem('dohwa_admin_pin') || '1234';
+  }
+
+  setAdminPin(newPin) {
+    if (!newPin || newPin.trim().length < 4) {
+      throw new Error('Mã PIN quản trị phải có ít nhất 4 ký tự!');
+    }
+    localStorage.setItem('dohwa_admin_pin', newPin.trim());
+    return true;
+  }
+
+  loginAdmin(inputPin) {
+    const validPin = this.getAdminPin();
+    if (inputPin && inputPin.trim() === validPin) {
+      localStorage.setItem('dohwa_is_admin', 'true');
+      return true;
+    }
+    return false;
+  }
+
+  logoutAdmin() {
+    localStorage.removeItem('dohwa_is_admin');
+  }
+
+  async clearEntireRoster() {
+    await this.ensureReady();
+    const emptyRoster = [];
+    await this.saveRoster(emptyRoster);
+    return emptyRoster;
+  }
+
   // --- MEMBER GATE & DEVICE LOCKING ---
   getDeviceId() {
     let id = localStorage.getItem('dohwa_device_id');

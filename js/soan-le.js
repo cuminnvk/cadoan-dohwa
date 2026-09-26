@@ -558,6 +558,12 @@ class DohwaSoanLe {
       });
     }
 
+    if (window.dohwaStore && !window.dohwaStore.isAdmin()) {
+      alert('🔒 Chỉ Ca Trưởng / Admin mới có quyền lưu bộ lễ!');
+      window.dohwaApp?.openAdminLoginModal();
+      return;
+    }
+
     const validSongs = this.uploadedSongs.filter(s => s.title.trim() || s.pdfName);
 
     const massSet = {

@@ -15,6 +15,8 @@ class DohwaApp {
     const savedTheme = localStorage.getItem('dohwa_theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
 
+    this.updateAdminUI();
+
     await this.loadCurrentMassSet();
     await this.loadMassSetsArchive();
     await this.renderBaiDaSoanTrongNam();
@@ -95,6 +97,11 @@ class DohwaApp {
   }
 
   switchTab(tabId) {
+    if (tabId === 'tab-soanle' && window.dohwaStore && !window.dohwaStore.isAdmin()) {
+      this.openAdminLoginModal(() => this.switchTab('tab-soanle'));
+      return;
+    }
+
     // Ẩn toàn bộ tab khác
     document.querySelectorAll('.tab-pane').forEach(el => {
       el.classList.remove('active');
@@ -252,12 +259,14 @@ class DohwaApp {
               <button type="button" class="action-btn btn-baidoc" onclick="window.dohwaApp.openDanhSachChonTenModal()">
                 📝 Chọn lại tên
               </button>
-              <button type="button" class="action-btn btn-edit" onclick="window.editMassSet('${m.id}')">
-                ✏️ Sửa
-              </button>
-              <button type="button" class="action-btn btn-delete" onclick="window.deleteMassSet('${m.id}')">
-                🗑️ Xóa
-              </button>
+              ${window.dohwaStore?.isAdmin() ? `
+                <button type="button" class="action-btn btn-edit" onclick="window.editMassSet('${m.id}')">
+                  ✏️ Sửa
+                </button>
+                <button type="button" class="action-btn btn-delete" onclick="window.deleteMassSet('${m.id}')">
+                  🗑️ Xóa
+                </button>
+              ` : ''}
             </div>
           </div>
 
@@ -338,7 +347,7 @@ class DohwaApp {
                   <td style="font-size:0.8rem; color:var(--text-muted); max-width:180px; overflow:hidden; text-overflow:ellipsis;" title="${readersSummary}">${readersSummary}</td>
                   <td style="text-align:center;"><span style="font-weight:700; color:#0284c7;">${(m.songs || []).length}</span> bài</td>
                   <td style="text-align:center;">
-                    ${isCur ? '<span class="kho-badge-active">✓ Hiện tại</span>' : `<button class="action-btn-sm" onclick="window.dohwaApp.setActiveMass('${m.id}')" title="Chọn làm bộ lễ hiện tại">📌 Chọn</button>`}
+                    ${isCur ? '<span class="kho-badge-active">✓ Hiện tại</span>' : (window.dohwaStore?.isAdmin() ? `<button class="action-btn-sm" onclick="window.dohwaApp.setActiveMass('${m.id}')" title="Chọn làm bộ lễ hiện tại">📌 Chọn</button>` : '<span style="color:var(--text-muted); font-size:0.75rem;">—</span>')}
                   </td>
                   <td style="text-align:center;">
                     <div style="display:flex; justify-content:center; gap:4px;">
@@ -346,8 +355,10 @@ class DohwaApp {
                       <button class="action-btn-sm" onclick="window.openAiDaXemModal('${m.id}')" title="Ai đã xem bộ lễ này">👤</button>
                       <button class="action-btn-sm" onclick="window.openMassBaiDoc('${m.id}')" title="Xem Bài Đọc & Lời Nguyện">📖</button>
                       <button class="action-btn-sm" onclick="window.shareMassSet('${m.id}')" title="Chia sẻ">📤</button>
-                      <button class="action-btn-sm" onclick="window.editMassSet('${m.id}')" title="Sửa">✏️</button>
-                      <button class="action-btn-sm" style="color:#ef4444;" onclick="window.deleteMassSet('${m.id}')" title="Xóa">🗑️</button>
+                      ${window.dohwaStore?.isAdmin() ? `
+                        <button class="action-btn-sm" onclick="window.editMassSet('${m.id}')" title="Sửa">✏️</button>
+                        <button class="action-btn-sm" style="color:#ef4444;" onclick="window.deleteMassSet('${m.id}')" title="Xóa">🗑️</button>
+                      ` : ''}
                     </div>
                   </td>
                 </tr>
@@ -551,6 +562,11 @@ class DohwaApp {
   }
 
   async editMassSet(msId) {
+    if (window.dohwaStore && !window.dohwaStore.isAdmin()) {
+      this.openAdminLoginModal(() => this.editMassSet(msId));
+      return;
+    }
+
     let ms = null;
     if (window.dohwaStore) {
       ms = await window.dohwaStore.get('mass_sets', msId);
@@ -590,6 +606,11 @@ class DohwaApp {
   }
 
   async deleteMass(id) {
+    if (window.dohwaStore && !window.dohwaStore.isAdmin()) {
+      this.openAdminLoginModal(() => this.deleteMass(id));
+      return;
+    }
+
     if (confirm('Bạn có chắc chắn muốn xóa bộ lễ này?')) {
       if (window.dohwaStore) {
         await window.dohwaStore.deleteMassSet(id);
@@ -740,9 +761,142 @@ class DohwaApp {
   }
 
   // ==========================================
+  // ADMIN AUTHENTICATION & UI MANAGEMENT
+  // ==========================================
+  updateAdminUI() {
+    const isAdmin = window.dohwaStore?.isAdmin();
+    const adminWrap = document.getElementById('adminHeaderBadgeWrap');
+    if (adminWrap) {
+      if (isAdmin) {
+        adminWrap.innerHTML = `
+          <div class="user-badge" style="background:linear-gradient(135deg,#78350f,#d97706); color:#fff; border-color:#f59e0b; cursor:pointer;" onclick="window.dohwaApp.openAdminMenuModal()" title="Bạn đang có quyền Ca Trưởng / Quản Trị (Bấm để mở cài đặt)">
+            👑 <span>Ca Trưởng</span>
+          </div>
+        `;
+      } else {
+        adminWrap.innerHTML = `
+          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.openAdminLoginModal()" style="padding:4px 8px; font-weight:700; border-radius:8px; font-size:0.75rem; border-color:var(--border);" title="Đăng nhập quyền Ca Trưởng / Admin">
+            🔒 Quản Trị
+          </button>
+        `;
+      }
+    }
+
+    const khoBtn = document.getElementById('khoSoanMoiBtn');
+    if (khoBtn) khoBtn.style.display = isAdmin ? 'inline-flex' : 'none';
+  }
+
+  openAdminLoginModal(onSuccessCallback = null) {
+    this.adminLoginSuccessCallback = onSuccessCallback;
+    const modal = document.getElementById('adminLoginModalOverlay');
+    const input = document.getElementById('adminPinInput');
+    const err = document.getElementById('adminPinError');
+    if (input) input.value = '';
+    if (err) err.style.display = 'none';
+    if (modal) modal.style.display = 'flex';
+    if (input) setTimeout(() => input.focus(), 100);
+  }
+
+  closeAdminLoginModal() {
+    const modal = document.getElementById('adminLoginModalOverlay');
+    if (modal) modal.style.display = 'none';
+    this.adminLoginSuccessCallback = null;
+  }
+
+  submitAdminLogin() {
+    const input = document.getElementById('adminPinInput');
+    const err = document.getElementById('adminPinError');
+    const pin = input ? input.value.trim() : '';
+
+    if (!pin) {
+      if (err) { err.textContent = 'Vui lòng nhập mã PIN!'; err.style.display = 'block'; }
+      return;
+    }
+
+    const success = window.dohwaStore?.loginAdmin(pin);
+    if (success) {
+      this.closeAdminLoginModal();
+      this.updateAdminUI();
+      this.loadCurrentMassSet();
+      this.loadMassSetsArchive();
+
+      const toast = document.createElement('div');
+      toast.className = 'dohwa-toast';
+      toast.textContent = `👑 Đã đăng nhập quyền Ca Trưởng thành công!`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2500);
+
+      if (typeof this.adminLoginSuccessCallback === 'function') {
+        const cb = this.adminLoginSuccessCallback;
+        this.adminLoginSuccessCallback = null;
+        cb();
+      }
+    } else {
+      if (err) {
+        err.textContent = 'Mã PIN không đúng, vui lòng thử lại! (Mặc định: 1234)';
+        err.style.display = 'block';
+      }
+    }
+  }
+
+  logoutAdmin() {
+    if (confirm('Bạn có muốn đăng xuất quyền Ca Trưởng và quay lại chế độ thành viên chỉ xem?')) {
+      window.dohwaStore?.logoutAdmin();
+      this.updateAdminUI();
+      this.closeCaiDatModal();
+      this.loadCurrentMassSet();
+      this.loadMassSetsArchive();
+      this.switchTab('tab-hientai');
+
+      const toast = document.createElement('div');
+      toast.className = 'dohwa-toast';
+      toast.textContent = `👋 Đã trở về chế độ thành viên chỉ xem!`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2500);
+    }
+  }
+
+  openAdminMenuModal() {
+    this.openCaiDatModal();
+  }
+
+  changeAdminPin() {
+    const inp = document.getElementById('settingNewAdminPin');
+    if (!inp || !inp.value.trim()) {
+      alert('Vui lòng nhập mã PIN mới (ít nhất 4 số)!');
+      return;
+    }
+    try {
+      window.dohwaStore?.setAdminPin(inp.value.trim());
+      inp.value = '';
+      alert('✅ Đã cập nhật mã PIN Ca Trưởng mới thành công! Hãy ghi nhớ mã PIN này.');
+    } catch(err) {
+      alert(err.message || 'Lỗi đặt mã PIN!');
+    }
+  }
+
+  async clearEntireRoster() {
+    if (confirm('⚠️ CẢNH BÁO: Bạn có chắc chắn muốn xóa sạch toàn bộ ca viên cũ để thiết lập một danh sách ca viên hoàn toàn mới (ví dụ lúc 7h tối)?\n\nSau khi xóa, bạn chỉ cần dán danh sách mới vào ô nhập và bấm "Lưu Danh Sách".')) {
+      await window.dohwaStore?.clearEntireRoster();
+      await this.renderCaiDatContent();
+      const textarea = document.getElementById('settingRosterBatchInput');
+      if (textarea) {
+        textarea.value = '';
+        textarea.focus();
+      }
+      alert('🗑️ Đã xóa sạch toàn bộ danh sách cũ!\n\nBây giờ bạn hãy dán danh sách ca viên mới vào ô (mỗi dòng 1 tên) và bấm "Lưu Danh Sách Ca Viên".');
+    }
+  }
+
+  // ==========================================
   // MODAL CÀI ĐẶT (QUẢN LÝ CA VIÊN & THIẾT LẬP MÁY NÀY)
   // ==========================================
   async openCaiDatModal() {
+    if (window.dohwaStore && !window.dohwaStore.isAdmin()) {
+      this.openAdminLoginModal(() => this.openCaiDatModal());
+      return;
+    }
+
     let modal = document.getElementById('caiDatModal');
     if (!modal) return;
 
@@ -803,7 +957,10 @@ class DohwaApp {
         </p>
         <textarea id="settingRosterBatchInput" class="form-control" rows="6" style="width:100%; font-size:0.88rem; font-family:inherit; resize:vertical; padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-bottom:10px;" placeholder="Đôn Đôn&#10;Hồ Hoàng&#10;Kính Nguyễn...">${defaultBatchText}</textarea>
         
-        <div style="display:flex; justify-content:flex-end; gap:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.clearEntireRoster()" style="color:#ef4444; border-color:#fca5a5; font-size:0.78rem; padding:6px 12px; font-weight:700;">
+            🗑️ Xóa Sạch Để Đặt Mới (Dùng lúc 7h tối)
+          </button>
           <button type="button" class="btn btn-primary" onclick="window.dohwaApp.saveRosterFromCaiDat()" style="font-size:0.85rem; padding:8px 20px; font-weight:700; background:#6b3fa0; border-radius:8px;">
             💾 Lưu Danh Sách Ca Viên
           </button>
@@ -878,6 +1035,31 @@ class DohwaApp {
               }).join('')}
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- PHẦN THIẾT LẬP BẢO MẬT & MÃ PIN QUẢN TRỊ -->
+      <div style="background:var(--bg-card-subtle); border:1px solid var(--border); border-radius:12px; padding:14px; margin-top:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <h4 style="font-size:0.92rem; font-weight:800; color:var(--text-main); margin:0;">
+            🔐 Thiết Lập Mã PIN Ca Trưởng / Admin
+          </h4>
+          <span style="font-size:0.75rem; color:#16a34a; font-weight:700;">👑 Đang đăng nhập Admin</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">
+          Chỉ người có mã PIN này mới được quyền Soạn bộ lễ, Sửa/Xóa bộ lễ và Chỉnh sửa danh sách ca viên. Thành viên bình thường không có mã PIN chỉ có thể xem lễ và tải PDF.
+        </p>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+          <input type="text" id="settingNewAdminPin" class="form-control" placeholder="Nhập mã PIN mới (ít nhất 4 số)..." style="font-size:0.85rem; max-width:240px; padding:6px 10px; border-radius:8px;">
+          <button type="button" class="btn btn-outline" onclick="window.dohwaApp.changeAdminPin()" style="font-size:0.82rem; padding:6px 14px; font-weight:700;">
+            💾 Cập Nhật Mã PIN
+          </button>
+        </div>
+        <div style="border-top:1px solid var(--border); padding-top:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <span style="font-size:0.75rem; color:var(--text-muted);">Mã PIN mặc định: <strong>1234</strong></span>
+          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.logoutAdmin()" style="color:#ef4444; border-color:#ef4444; padding:5px 12px; font-size:0.78rem; font-weight:700;">
+            🚪 Đăng Xuất Quyền Admin (Về chế độ thành viên)
+          </button>
         </div>
       </div>
     `;
