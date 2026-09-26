@@ -84,6 +84,7 @@ class DohwaPlayer {
   extractYouTubeId(url) {
     if (!url) return null;
     const str = url.trim();
+    if (str.endsWith('.mp3') || str.endsWith('.m4a') || str.endsWith('.wav') || str.endsWith('.ogg')) return null;
     if (str.length === 11 && !str.includes('/') && !str.includes('?')) return str;
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
     const match = str.match(regExp);
@@ -161,8 +162,8 @@ class DohwaPlayer {
     const ytId = this.extractYouTubeId(song.youtubeUrl);
     if (ytId) {
       this.playYouTube(ytId);
-    } else if (song.audioUrl) {
-      this.playAudioFile(song.audioUrl);
+    } else if (song.audioUrl || (song.youtubeUrl && (song.youtubeUrl.endsWith('.mp3') || song.youtubeUrl.endsWith('.m4a') || song.youtubeUrl.includes('.mp3')))) {
+      this.playAudioFile(song.audioUrl || song.youtubeUrl);
     } else {
       this.handleSongEnded();
     }
@@ -271,7 +272,7 @@ class DohwaPlayer {
     }
   }
 
-  // --- ENGINE PHÁT YOUTUBE AUDIO-ONLY (HOÀN TOÀN ẨN VIDEO) ---
+  // --- ENGINE PHÁT YOUTUBE AUDIO-ONLY (HOÀN TOÀN ẨN VIDEO & GIẢM QUẢNG CÁO) ---
   playYouTube(videoId) {
     this.isYouTubeMode = true;
     this.audioElement.pause();
@@ -279,9 +280,11 @@ class DohwaPlayer {
     const container = document.getElementById('ytPlayerContainer');
     if (!container) return;
 
+    // Sử dụng Privacy-Enhanced Domain (youtube-nocookie.com) giúp loại bỏ cookie theo dõi và giảm tối đa quảng cáo
+    const noCookieSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&iv_load_policy=3`;
+
     if (!window.YT || !window.YT.Player) {
-      // Direct iframe player (cực kỳ ổn định và tương thích mọi trình duyệt di động)
-      container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="${noCookieSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
       this.isPlaying = true;
       this.updatePlayBtnState();
       return;
@@ -293,12 +296,14 @@ class DohwaPlayer {
           height: '100%',
           width: '100%',
           videoId: videoId,
+          host: 'https://www.youtube-nocookie.com',
           playerVars: {
             autoplay: 1,
             playsinline: 1,
-            controls: 1,
+            controls: 0,
             rel: 0,
-            modestbranding: 1
+            modestbranding: 1,
+            iv_load_policy: 3
           },
           events: {
             onReady: (event) => {
@@ -326,7 +331,7 @@ class DohwaPlayer {
           }
         });
       } catch (err) {
-        container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+        container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="${noCookieSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
         this.isPlaying = true;
         this.updatePlayBtnState();
       }
@@ -337,10 +342,10 @@ class DohwaPlayer {
           this.isPlaying = true;
           this.updatePlayBtnState();
         } else {
-          container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+          container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="${noCookieSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
         }
       } catch (e) {
-        container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+        container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="${noCookieSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
       }
     }
   }
