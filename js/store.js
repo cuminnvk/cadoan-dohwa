@@ -28,8 +28,8 @@ const DEFAULT_MASS_SET = {
       role: 'duc_me',
       roleLabel: 'Kính Đức Mẹ',
       title: 'Nguồn Cậy Trông',
-      composer: 'Hoàng Vũ',
-      youtubeUrl: '',
+      composer: '',
+      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
       pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf',
       pdfData: null
     },
@@ -38,7 +38,7 @@ const DEFAULT_MASS_SET = {
       role: 'nhap_le',
       roleLabel: 'Nhập Lễ',
       title: 'Chung lời cảm tạ',
-      composer: 'LM Nguyễn Duy',
+      composer: '',
       youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
       pdfName: 'Nhap_Le_Chung_Loi_Cam_Ta.pdf',
       pdfData: null
@@ -48,7 +48,7 @@ const DEFAULT_MASS_SET = {
       role: 'dap_ca',
       roleLabel: 'Thánh Vịnh',
       title: 'Chúa Nhật 25 Thường Niên A',
-      composer: 'Lm. Bùi Ninh',
+      composer: '',
       youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
       pdfName: 'Dap_Ca_Chua_Nhat_25_A.pdf',
       pdfData: null
@@ -58,8 +58,8 @@ const DEFAULT_MASS_SET = {
       role: 'alleluia',
       roleLabel: 'Alleluia',
       title: 'ALLELUIA',
-      composer: 'Lm. Huy Hoàng',
-      youtubeUrl: '',
+      composer: '',
+      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
       pdfName: 'Alleluia_Huy_Hoang.pdf',
       pdfData: null
     },
@@ -68,8 +68,8 @@ const DEFAULT_MASS_SET = {
       role: 'dang_le',
       roleLabel: 'Dâng Lễ',
       title: 'XIN DÂNG CỦA LỄ CHÂN THÀNH',
-      composer: 'Lm Jb. An Ninh',
-      youtubeUrl: '',
+      composer: '',
+      youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
       pdfName: 'Dang_Le_Xin_Dang_Cua_Le.pdf',
       pdfData: null
     },
@@ -78,8 +78,8 @@ const DEFAULT_MASS_SET = {
       role: 'hiep_le',
       roleLabel: 'Hiệp Lễ',
       title: 'CHÚA LUÔN CÒN MÃI',
-      composer: 'Phanxico',
-      youtubeUrl: '',
+      composer: '',
+      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
       pdfName: 'Hiep_Le_Chua_Luon_Con_Mai.pdf',
       pdfData: null
     },
@@ -88,8 +88,8 @@ const DEFAULT_MASS_SET = {
       role: 'ket_le',
       roleLabel: 'Kết Lễ',
       title: 'LỜI TẠ ƠN',
-      composer: 'Phanxicô',
-      youtubeUrl: '',
+      composer: '',
+      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
       pdfName: 'Ket_Le_Loi_Ta_On.pdf',
       pdfData: null
     }
@@ -230,7 +230,7 @@ class DohwaStore {
         if (m.liturgicalRoles.reader2 === 'Nam' || m.liturgicalRoles.reader2 === 'Phong Nguyễn') m.liturgicalRoles.reader2 = '';
         if (m.liturgicalRoles.petitions === 'Long' || m.liturgicalRoles.petitions === 'Mai Tuấn') m.liturgicalRoles.petitions = '';
       }
-      if (m.id === 'mass-cn-25-tn-a' && m.songs && m.songs[0] && m.songs[0].role !== 'duc_me') {
+      if (m.id === 'mass-cn-25-tn-a' && (!m.songs || !m.songs[0] || !m.songs[0].youtubeUrl || m.songs[0].role !== 'duc_me')) {
         m.songs = DEFAULT_MASS_SET.songs;
       }
     });

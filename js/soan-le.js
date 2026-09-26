@@ -473,10 +473,13 @@ class DohwaSoanLe {
         </select>
 
         <!-- Cột Tên bài hát -->
-        <input type="text" class="form-control-compact" value="${s.title || ''}" placeholder="Tên bài hát..." oninput="window.dohwaSoanLe.uploadedSongs[${index}].title = this.value">
+        <input type="text" class="form-control-compact song-title-input" value="${s.title || ''}" placeholder="Tên bài hát..." oninput="window.dohwaSoanLe.updateSongTitle(${index}, this.value)">
 
-        <!-- Cột Nhạc sĩ -->
-        <input type="text" class="form-control-compact" value="${s.composer || ''}" placeholder="Nhạc sĩ..." oninput="window.dohwaSoanLe.uploadedSongs[${index}].composer = this.value">
+        <!-- Cột Điền link YouTube (Bỏ nhạc sĩ) -->
+        <div style="position:relative; display:flex; align-items:center;">
+          <span style="position:absolute; left:7px; font-size:0.75rem; pointer-events:none; color:#ef4444; line-height:1;">▶</span>
+          <input type="url" class="form-control-compact song-youtube-input" style="padding-left:22px; font-size:0.78rem;" value="${s.youtubeUrl || ''}" placeholder="Dán link YouTube nghe thử..." oninput="window.dohwaSoanLe.updateSongYouTube(${index}, this.value)">
+        </div>
 
         <!-- Cột Đính kèm PDF -->
         <label class="pdf-status-pill ${s.pdfName ? 'has-pdf' : 'no-pdf'}" title="${s.pdfName ? s.pdfName : 'Bấm để chọn file PDF cho bài này'}">
@@ -496,15 +499,26 @@ class DohwaSoanLe {
     `;
   }
 
+  updateSongTitle(index, val) {
+    if (this.uploadedSongs[index]) {
+      this.uploadedSongs[index].title = val;
+    }
+  }
+
+  updateSongYouTube(index, val) {
+    if (this.uploadedSongs[index]) {
+      this.uploadedSongs[index].youtubeUrl = val;
+    }
+  }
+
   async uploadSingleSongPdf(index, file) {
     if (!file) return;
     const dataUrl = await this.readFileAsDataURL(file);
     this.uploadedSongs[index].pdfName = file.name;
     this.uploadedSongs[index].pdfData = dataUrl;
     if (!this.uploadedSongs[index].title) {
-      const { title, composer } = this.parseTitleAndComposer(file.name);
+      const { title } = this.parseTitleAndComposer(file.name);
       this.uploadedSongs[index].title = title;
-      if (composer) this.uploadedSongs[index].composer = composer;
     }
     this.renderUploadedSlots();
   }
@@ -549,10 +563,11 @@ class DohwaSoanLe {
     const rows = document.querySelectorAll('.song-row-compact');
     if (rows.length) {
       rows.forEach((el, idx) => {
-        const inps = el.querySelectorAll('input[type="text"]');
-        if (this.uploadedSongs[idx] && inps.length >= 2) {
-          this.uploadedSongs[idx].title = inps[0].value.trim();
-          this.uploadedSongs[idx].composer = inps[1].value.trim();
+        const titleInp = el.querySelector('.song-title-input');
+        const ytInp = el.querySelector('.song-youtube-input');
+        if (this.uploadedSongs[idx]) {
+          if (titleInp) this.uploadedSongs[idx].title = titleInp.value.trim();
+          if (ytInp) this.uploadedSongs[idx].youtubeUrl = ytInp.value.trim();
         }
       });
     }
@@ -563,7 +578,7 @@ class DohwaSoanLe {
       return;
     }
 
-    const validSongs = this.uploadedSongs.filter(s => s.title.trim() || s.pdfName);
+    const validSongs = this.uploadedSongs.filter(s => s.title.trim() || s.pdfName || (s.youtubeUrl && s.youtubeUrl.trim()));
 
     const massSet = {
       id: 'mass-' + Date.now(),

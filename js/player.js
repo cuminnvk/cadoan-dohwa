@@ -81,8 +81,10 @@ class DohwaPlayer {
 
   extractYouTubeId(url) {
     if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
+    const str = url.trim();
+    if (str.length === 11 && !str.includes('/') && !str.includes('?')) return str;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
+    const match = str.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
   }
 
@@ -139,6 +141,11 @@ class DohwaPlayer {
   playYouTube(videoId) {
     this.isYouTubeMode = true;
     this.audioElement.pause();
+
+    if (this.videoPopover) {
+      this.videoPopover.style.display = 'block';
+      if (this.videoToggleBtn) this.videoToggleBtn.classList.add('active');
+    }
 
     if (!this.ytPlayer) {
       if (!this.ytReady && !window.YT) {

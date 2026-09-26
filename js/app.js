@@ -195,15 +195,15 @@ class DohwaApp {
     const songsHtml = songs.length ? `
       <div class="massset-songs-list-compact">
         ${songs.map((s, idx) => `
-          <div class="massset-song-line" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,0,0,0.05); padding:3px 0;">
+          <div class="massset-song-line" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,0,0,0.05); padding:4px 0;">
             <div>
-              <span class="massset-song-role">${s.roleLabel || 'Bài hát'}:</span> 
+              <span class="massset-song-role" style="font-weight:700; color:var(--primary); margin-right:4px;">${s.roleLabel || 'Bài hát'}:</span> 
               <strong>${s.title}</strong> 
               ${s.composer ? `<span class="massset-song-composer">- ${s.composer}</span>` : ''}
             </div>
-            <div style="display:flex; gap:4px; flex-shrink:0;">
-              ${s.pdfData ? `<button type="button" class="btn-xs btn-outline" style="color:#0284c7; padding:1px 6px;" onclick="window.dohwaPDFViewer.open('${s.pdfData}','${s.title}','${s.pdfName||''}')">📄 Nốt</button>` : ''}
-              ${s.youtubeUrl ? `<button type="button" class="btn-xs btn-outline" style="color:#dc2626; padding:1px 6px;" onclick="window.dohwaPlayer.playSong(window.dohwaApp.findSongInMass('${m.id}','${s.id}'))">▶ Nghe</button>` : ''}
+            <div style="display:flex; gap:6px; flex-shrink:0;">
+              ${(s.pdfData || s.pdfName) ? `<button type="button" class="btn-xs btn-outline" style="color:#0284c7; border-color:#bae6fd; background:#f0f9ff; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem;" onclick="window.dohwaPDFViewer.open('${s.pdfData||''}','${(s.title||'').replace(/'/g, "\\'")}','${s.pdfName||''}')">📄 Nốt</button>` : ''}
+              ${s.youtubeUrl ? `<button type="button" class="btn-xs btn-outline" style="color:#dc2626; border-color:#fca5a5; background:#fef2f2; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem; display:inline-flex; align-items:center; gap:3px;" onclick="window.dohwaPlayer.playSong(window.dohwaApp.findSongInMass('${m.id}','${s.id}'))">▶ Nghe</button>` : ''}
             </div>
           </div>
         `).join('')}
@@ -521,6 +521,17 @@ class DohwaApp {
   }
 
   findSongInMass(msId, songId) {
+    if (this.currentMassSet && this.currentMassSet.id === msId && this.currentMassSet.songs) {
+      const found = this.currentMassSet.songs.find(s => s.id === songId);
+      if (found) return found;
+    }
+    if (this.archiveMassSets && this.archiveMassSets.length) {
+      const ms = this.archiveMassSets.find(m => m.id === msId);
+      if (ms && ms.songs) {
+        const found = ms.songs.find(s => s.id === songId);
+        if (found) return found;
+      }
+    }
     if (this.currentMassSet && this.currentMassSet.songs) {
       const found = this.currentMassSet.songs.find(s => s.id === songId);
       if (found) return found;
