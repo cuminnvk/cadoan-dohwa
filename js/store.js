@@ -17,10 +17,10 @@ const DEFAULT_MASS_SET = {
   createdAt: '2026-09-26T00:00:00.000Z',
   updatedAt: '2026-09-26T12:00:00.000Z',
   liturgicalRoles: {
-    reader1: 'Thu',
-    psalmist: 'Thu',
-    reader2: 'Nam',
-    petitions: 'Long'
+    reader1: '',
+    psalmist: '',
+    reader2: '',
+    petitions: ''
   },
   songs: [
     {
@@ -206,21 +206,33 @@ class DohwaStore {
   // --- CRUD MASS SETS ---
   async getAllMassSets() {
     await this.ensureReady();
+    let items = null;
     if (this.db) {
       try {
-        const items = await this.getAll('mass_sets');
-        if (items && items.length) {
-          this.setLocal('mass_sets', items); // Sync to LocalStorage
-          return items;
+        const dbItems = await this.getAll('mass_sets');
+        if (dbItems && dbItems.length) {
+          items = dbItems;
         }
       } catch (e) {}
     }
-    // Fallback LocalStorage
-    const local = this.getLocal('mass_sets', []);
-    if (!local.length) {
-      return [DEFAULT_MASS_SET];
+    if (!items || !items.length) {
+      items = this.getLocal('mass_sets', []);
     }
-    return local;
+    if (!items.length) {
+      items = [DEFAULT_MASS_SET];
+    }
+
+    // Làm sạch các tên mẫu cũ trong bài đọc nếu có
+    items.forEach(m => {
+      if (m.liturgicalRoles) {
+        if (m.liturgicalRoles.reader1 === 'Thu' || m.liturgicalRoles.reader1 === 'Mai Ngọc Thu') m.liturgicalRoles.reader1 = '';
+        if (m.liturgicalRoles.psalmist === 'Thu' || m.liturgicalRoles.psalmist === 'Mai Ngọc Thu') m.liturgicalRoles.psalmist = '';
+        if (m.liturgicalRoles.reader2 === 'Nam' || m.liturgicalRoles.reader2 === 'Phong Nguyễn') m.liturgicalRoles.reader2 = '';
+        if (m.liturgicalRoles.petitions === 'Long' || m.liturgicalRoles.petitions === 'Mai Tuấn') m.liturgicalRoles.petitions = '';
+      }
+    });
+    this.setLocal('mass_sets', items);
+    return items;
   }
 
   async getActiveMassSet() {
@@ -298,36 +310,24 @@ class DohwaStore {
   async getRoster() {
     await this.ensureReady();
 
-    // Tự động xóa sạch danh sách thành viên mẫu cũ theo yêu cầu người dùng
-    if (localStorage.getItem('dohwa_sample_purged_v2') !== 'true') {
-      localStorage.setItem('dohwa_sample_purged_v2', 'true');
-      localStorage.setItem('dohwa_roster_initialized', 'true');
-      this.setLocal('roster', []);
-      if (this.db) {
-        try { await this.clear('roster'); } catch(e) {}
-      }
-      const curSession = this.getUserSession();
-      if (curSession && curSession.memberId !== 'admin') {
-        this.setUserSession(null);
-      }
-      return [];
+    // 1. Luôn ưu tiên đọc từ LocalStorage trước (nhanh nhất, đồng bộ 100% không bao giờ mất khi F5)
+    const local = this.getLocal('roster', null);
+    if (Array.isArray(local) && local.length > 0) {
+      return local;
     }
 
-    let roster = null;
+    // 2. Nếu LocalStorage chưa có, kiểm tra IndexedDB
     if (this.db) {
       try {
         const items = await this.getAll('roster');
-        if (items) {
-          roster = items;
+        if (Array.isArray(items) && items.length > 0) {
+          this.setLocal('roster', items);
+          return items;
         }
       } catch (e) {}
     }
 
-    if (!roster) {
-      roster = this.getLocal('roster', []);
-    }
-
-    return roster;
+    return [];
   }
 
   async saveRoster(newRoster) {

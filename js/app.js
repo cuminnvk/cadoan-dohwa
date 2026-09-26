@@ -805,14 +805,32 @@ class DohwaApp {
   updateAdminUI() {
     const isAdmin = window.dohwaStore?.isAdmin();
     const adminWrap = document.getElementById('adminHeaderBadgeWrap');
-    if (adminWrap) {
-      if (isAdmin) {
+    const badge = document.getElementById('userHeaderBadge');
+
+    if (isAdmin) {
+      // Khi là Admin: chỉ hiển thị DUY NHẤT 1 nút Admin trong header, ẩn badge chọn tên đi
+      if (badge) badge.style.display = 'none';
+      if (adminWrap) {
+        adminWrap.style.display = 'inline-flex';
         adminWrap.innerHTML = `
-          <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:linear-gradient(135deg,#78350f,#d97706); color:#fff; border:1px solid #f59e0b; padding:5px 10px; font-weight:800; border-radius:8px; font-size:0.78rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;" title="Bấm để mở Cài Đặt">
+          <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:linear-gradient(135deg,#78350f,#d97706); color:#fff; border:1px solid #f59e0b; padding:5px 12px; font-weight:800; border-radius:8px; font-size:0.8rem; display:inline-flex; align-items:center; gap:5px; cursor:pointer;" title="Bấm để mở Cài Đặt">
             👑 <span>Admin</span>
           </button>
         `;
-      } else {
+      }
+    } else {
+      // Khi là ca viên: hiển thị tên ca viên và nút Quản trị
+      if (badge) {
+        badge.style.display = 'inline-flex';
+        const session = window.dohwaStore?.getUserSession();
+        if (session && session.name) {
+          badge.innerHTML = `👤 <span>${session.name}</span>`;
+        } else {
+          badge.innerHTML = `👤 <span>Chọn tên</span>`;
+        }
+      }
+      if (adminWrap) {
+        adminWrap.style.display = 'inline-flex';
         adminWrap.innerHTML = `
           <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:#78350f; color:#fef3c7; border:1px solid #f59e0b; padding:5px 9px; font-weight:800; border-radius:8px; font-size:0.78rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;" title="Đăng nhập quyền Admin">
             🔐 <span>Quản Trị</span>
@@ -830,18 +848,6 @@ class DohwaApp {
     const topAdminIcon = document.getElementById('topTabAdminIcon');
     if (topAdminText) topAdminText.textContent = isAdmin ? 'Admin' : 'Quản Trị';
     if (topAdminIcon) topAdminIcon.textContent = isAdmin ? '👑' : '🔐';
-
-    const badge = document.getElementById('userHeaderBadge');
-    if (badge) {
-      const session = window.dohwaStore?.getUserSession();
-      if (isAdmin) {
-        badge.innerHTML = `👑 <span>Admin</span>`;
-      } else if (session && session.name) {
-        badge.innerHTML = `👤 <span>${session.name}</span>`;
-      } else {
-        badge.innerHTML = `👤 <span>Chọn tên</span>`;
-      }
-    }
 
     const khoBtn = document.getElementById('khoSoanMoiBtn');
     if (khoBtn) khoBtn.style.display = isAdmin ? 'inline-flex' : 'none';

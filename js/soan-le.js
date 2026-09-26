@@ -256,14 +256,7 @@ class DohwaSoanLe {
     if (window.dohwaStore) {
       roster = await window.dohwaStore.getRoster();
     }
-    if (!roster || !roster.length) {
-      roster = [
-        { name: 'Mai Ngọc Thu' },
-        { name: 'Phong Nguyễn' },
-        { name: 'Mai Tuấn' },
-        { name: 'Peter Nguyễn' }
-      ];
-    }
+    if (!roster) roster = [];
 
     // Giữ nguyên giá trị đã chọn
     const prevValues = {};
@@ -327,7 +320,7 @@ class DohwaSoanLe {
     }
     const available = (roster || []).filter(m => m.canRead !== false);
     if (!available.length) {
-      alert('Vui lòng phân tích danh sách ca viên trước khi gợi ý xoay vòng!');
+      alert('Chưa có danh sách ca viên. Vui lòng vào Cài Đặt lưu danh sách ca viên trước khi gợi ý xoay vòng!');
       return;
     }
 
