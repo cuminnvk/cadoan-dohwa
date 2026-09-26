@@ -96,24 +96,7 @@ const DEFAULT_MASS_SET = {
   ]
 };
 
-const DEFAULT_ROSTER = [
-  { id: 'mb-dondon', name: 'Đôn Đôn', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-hohoang', name: 'Hồ Hoàng', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-kinhnguyen', name: 'Kính Nguyễn', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-lancong', name: 'Lan Cong', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-maingocthu', name: 'Mai Ngọc Thu', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-maituan', name: 'Mai Tuấn', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-ngaem', name: 'Ngà Em', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-nguyenle', name: 'Nguyễn Lê', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-nguyenlongcris', name: 'Nguyễn Long Cris', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-nguyenthuhuong', name: 'Nguyễn Thị Hương', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-nguyenvanmui', name: 'Nguyễn Văn Mùi', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-niemtran', name: 'Niệm Trần', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-ntlieu', name: 'Nt Liễu', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-thivanh', name: 'Thị Vanh', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-vuinguyen', name: 'Vui Nguyễn', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false },
-  { id: 'mb-phongnguyen', name: 'Phong Nguyễn', claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null, banned: false }
-];
+const DEFAULT_ROSTER = [];
 
 class DohwaStore {
   constructor() {
@@ -194,13 +177,7 @@ class DohwaStore {
         console.log('[DohwaStore] Khởi tạo bộ lễ mẫu...');
         await this.directSaveMassSet(DEFAULT_MASS_SET);
       }
-
-      const roster = await this.getRoster();
-      if (!roster || roster.length === 0) {
-        for (const m of DEFAULT_ROSTER) {
-          await this.saveMember(m);
-        }
-      }
+      // Không khởi tạo ca viên mẫu - để trống hoàn toàn cho Admin thiết lập
     } catch (e) {
       console.warn('[DohwaStore] Seed error:', e);
     }
@@ -320,9 +297,23 @@ class DohwaStore {
   // --- CRUD ROSTER ---
   async getRoster() {
     await this.ensureReady();
-    let roster = null;
-    const isInit = localStorage.getItem('dohwa_roster_initialized') === 'true';
 
+    // Tự động xóa sạch danh sách thành viên mẫu cũ theo yêu cầu người dùng
+    if (localStorage.getItem('dohwa_sample_purged_v2') !== 'true') {
+      localStorage.setItem('dohwa_sample_purged_v2', 'true');
+      localStorage.setItem('dohwa_roster_initialized', 'true');
+      this.setLocal('roster', []);
+      if (this.db) {
+        try { await this.clear('roster'); } catch(e) {}
+      }
+      const curSession = this.getUserSession();
+      if (curSession && curSession.memberId !== 'admin') {
+        this.setUserSession(null);
+      }
+      return [];
+    }
+
+    let roster = null;
     if (this.db) {
       try {
         const items = await this.getAll('roster');
@@ -333,33 +324,9 @@ class DohwaStore {
     }
 
     if (!roster) {
-      if (isInit) {
-        roster = this.getLocal('roster', []);
-      } else {
-        const local = this.getLocal('roster', null);
-        if (local !== null) {
-          roster = local;
-        } else {
-          roster = JSON.parse(JSON.stringify(DEFAULT_ROSTER));
-          this.setLocal('roster', roster);
-          localStorage.setItem('dohwa_roster_initialized', 'true');
-        }
-      }
+      roster = this.getLocal('roster', []);
     }
 
-    // Tự động dọn dẹp các ID máy giả lập dev-other- nếu còn sót lại từ bản mẫu cũ
-    let changed = false;
-    roster = roster.map(m => {
-      if (m.lockDeviceId && typeof m.lockDeviceId === 'string' && m.lockDeviceId.startsWith('dev-other-')) {
-        changed = true;
-        return { ...m, claimed: false, lockDeviceId: null, totalVisits: 0, lastVisitAt: null };
-      }
-      return m;
-    });
-
-    if (changed) {
-      this.setLocal('roster', roster);
-    }
     return roster;
   }
 

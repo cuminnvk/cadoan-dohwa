@@ -641,11 +641,18 @@ class DohwaApp {
       return;
     }
 
+    const roster = await window.dohwaStore.getRoster();
+    if (!roster || roster.length === 0) {
+      // Chưa có danh sách ca viên: không mở popup chặn màn hình
+      const modal = document.getElementById('sbMemberGateOverlay');
+      if (modal) modal.style.display = 'none';
+      return;
+    }
+
     if (!session || !session.memberId) {
       this.openMemberGateModal();
     } else {
       // Kiểm tra xem ca viên này có bị cấm không
-      const roster = await window.dohwaStore.getRoster();
       const current = roster.find(m => m.id === session.memberId);
       if (current && current.banned) {
         alert('Tài khoản ca viên này hiện đang bị tạm khóa. Vui lòng liên hệ Ca trưởng!');
@@ -674,10 +681,11 @@ class DohwaApp {
     const roster = await window.dohwaStore.getRoster();
     const curDev = window.dohwaStore.getDeviceId();
 
-    if (roster.length === 0) {
+    if (!roster || roster.length === 0) {
       grid.innerHTML = `
-        <div style="grid-column:1/-1; text-align:center; padding:16px; color:var(--text-muted); font-size:0.85rem;">
-          Chưa có tên ca viên nào trong danh sách. Vui lòng mở Cài Đặt để thêm danh sách ca viên!
+        <div style="grid-column:1/-1; text-align:center; padding:20px 10px; color:var(--text-muted); font-size:0.88rem; line-height:1.6;">
+          Hiện tại chưa có danh sách ca viên.<br>
+          <span style="color:#d97706; font-weight:700;">Ca Trưởng / Admin vui lòng bấm nút Admin ở trên để đăng nhập và dán danh sách ca viên mới.</span>
         </div>
       `;
       return;
