@@ -1,10 +1,11 @@
-const CACHE_NAME = 'cadoan-dohwa-v11';
+const CACHE_NAME = 'cadoan-dohwa-v12';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   './css/style.css',
   './css/components.css',
+  './js/firebase-config.js',
   './js/store.js',
   './js/liturgical-helper.js',
   './js/player.js',

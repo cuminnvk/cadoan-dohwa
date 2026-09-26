@@ -203,6 +203,137 @@ class DohwaStore {
     }
   }
 
+  // --- CLOUD SYNC CONFIG & REST API (FIREBASE REALTIME DATABASE) ---
+  getFirebaseUrl() {
+    let url = localStorage.getItem('dohwa_firebase_url') || window.DOHWA_FIREBASE_URL || '';
+    url = (url || '').trim();
+    if (url.endsWith('/')) url = url.slice(0, -1);
+    if (url.endsWith('.json')) url = url.slice(0, -5);
+    return url;
+  }
+
+  setFirebaseUrl(url) {
+    let clean = (url || '').trim();
+    if (clean.endsWith('/')) clean = clean.slice(0, -1);
+    if (clean.endsWith('.json')) clean = clean.slice(0, -5);
+    if (clean) {
+      localStorage.setItem('dohwa_firebase_url', clean);
+      window.DOHWA_FIREBASE_URL = clean;
+    } else {
+      localStorage.removeItem('dohwa_firebase_url');
+      window.DOHWA_FIREBASE_URL = '';
+    }
+    return clean;
+  }
+
+  async testCloudConnection(customUrl = null) {
+    const url = customUrl ? customUrl.trim().replace(/\/$/, '').replace(/\.json$/, '') : this.getFirebaseUrl();
+    if (!url) throw new Error('Chưa cấu hình Firebase Realtime Database URL!');
+    const testEndpoint = `${url}/cloud_ping.json`;
+    const res = await fetch(testEndpoint, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ping: 'ok', updated: new Date().toISOString() })
+    });
+    if (!res.ok) {
+      throw new Error(`Kết nối không thành công (HTTP ${res.status}). Vui lòng kiểm tra lại quyền Rules (Read/Write: true) hoặc URL Firebase!`);
+    }
+    return true;
+  }
+
+  async syncAllFromCloud() {
+    const url = this.getFirebaseUrl();
+    if (!url) return false;
+
+    let updated = false;
+    try {
+      // 1. Tải Roster từ Cloud
+      const rosterRes = await fetch(`${url}/roster.json`, { cache: 'no-store' });
+      if (rosterRes.ok) {
+        let cloudRoster = await rosterRes.json();
+        if (cloudRoster) {
+          if (!Array.isArray(cloudRoster)) cloudRoster = Object.values(cloudRoster);
+          if (Array.isArray(cloudRoster) && cloudRoster.length > 0) {
+            this.setLocal('roster', cloudRoster);
+            localStorage.setItem('dohwa_roster_initialized', 'true');
+            if (this.db) {
+              try {
+                await this.clear('roster');
+                for (const m of cloudRoster) await this.put('roster', m);
+              } catch (e) {}
+            }
+            updated = true;
+          }
+        }
+      }
+
+      // 2. Tải Mass Sets từ Cloud
+      const massRes = await fetch(`${url}/mass_sets.json`, { cache: 'no-store' });
+      if (massRes.ok) {
+        let cloudMass = await massRes.json();
+        if (cloudMass) {
+          if (!Array.isArray(cloudMass)) cloudMass = Object.values(cloudMass);
+          if (Array.isArray(cloudMass) && cloudMass.length > 0) {
+            this.setLocal('mass_sets', cloudMass);
+            if (this.db) {
+              try {
+                await this.clear('mass_sets');
+                for (const ms of cloudMass) await this.put('mass_sets', ms);
+              } catch (e) {}
+            }
+            updated = true;
+          }
+        }
+      }
+      return updated;
+    } catch (e) {
+      console.warn('[CloudSync] Tạm thời dùng offline cache:', e);
+      return false;
+    }
+  }
+
+  async pushRosterToCloud(roster) {
+    const url = this.getFirebaseUrl();
+    if (!url) return false;
+    try {
+      const res = await fetch(`${url}/roster.json`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(roster || [])
+      });
+      return res.ok;
+    } catch (e) {
+      console.warn('[CloudSync] Không thể lưu roster lên Cloud:', e);
+      return false;
+    }
+  }
+
+  async pushMassSetsToCloud(massSets) {
+    const url = this.getFirebaseUrl();
+    if (!url) return false;
+    try {
+      const res = await fetch(`${url}/mass_sets.json`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(massSets || [])
+      });
+      return res.ok;
+    } catch (e) {
+      console.warn('[CloudSync] Không thể lưu mass_sets lên Cloud:', e);
+      return false;
+    }
+  }
+
+  async pushAllToCloud() {
+    const roster = await this.getRoster();
+    const massSets = await this.getAllMassSets();
+    const [okR, okM] = await Promise.all([
+      this.pushRosterToCloud(roster),
+      this.pushMassSetsToCloud(massSets)
+    ]);
+    return okR && okM;
+  }
+
   // --- CRUD MASS SETS ---
   async getAllMassSets() {
     await this.ensureReady();
@@ -291,6 +422,8 @@ class DohwaStore {
         console.warn('IDB put error:', e);
       }
     }
+    // Tự động đồng bộ lên Đám Mây nếu có kết nối
+    this.pushMassSetsToCloud(all).catch(() => {});
     return massSet;
   }
 
@@ -306,6 +439,8 @@ class DohwaStore {
     if (this.db) {
       try { await this.delete('mass_sets', id); } catch (e) {}
     }
+    // Tự động đồng bộ lên Đám Mây nếu có kết nối
+    this.pushMassSetsToCloud(all).catch(() => {});
     return true;
   }
 
@@ -347,6 +482,8 @@ class DohwaStore {
         console.warn('IDB saveRoster error:', e);
       }
     }
+    // Tự động đẩy danh sách lên Đám Mây
+    this.pushRosterToCloud(newRoster).catch(() => {});
     return newRoster;
   }
 
@@ -362,6 +499,7 @@ class DohwaStore {
     if (this.db) {
       try { await this.put('roster', member); } catch (e) {}
     }
+    this.pushRosterToCloud(roster).catch(() => {});
     return member;
   }
 
@@ -373,6 +511,7 @@ class DohwaStore {
     if (this.db) {
       try { await this.delete('roster', id); } catch (e) {}
     }
+    this.pushRosterToCloud(roster).catch(() => {});
     return true;
   }
 

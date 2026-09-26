@@ -17,6 +17,15 @@ class DohwaApp {
 
     this.updateAdminUI();
 
+    // Tự động đồng bộ dữ liệu mới nhất từ Cloud ngay khi mở web (mọi thiết bị)
+    if (window.dohwaStore) {
+      try {
+        await window.dohwaStore.syncAllFromCloud();
+      } catch (e) {
+        console.warn('Sync on init error:', e);
+      }
+    }
+
     await this.loadCurrentMassSet();
     await this.loadMassSetsArchive();
     await this.renderBaiDaSoanTrongNam();
@@ -1033,6 +1042,44 @@ class DohwaApp {
 
     // Chuẩn bị danh sách tên mỗi dòng 1 tên
     const defaultBatchText = roster.map(m => m.name).join('\n');
+    const curFirebaseUrl = window.dohwaStore ? window.dohwaStore.getFirebaseUrl() : '';
+    const hasCloud = !!curFirebaseUrl;
+
+    let cloudSyncCard = '';
+    if (isAdmin) {
+      cloudSyncCard = `
+        <!-- CẤU HÌNH ĐỒNG BỘ ĐÁM MÂY (FIREBASE REALTIME SYNC) -->
+        <div style="background:var(--bg-card-subtle); border:1.5px solid #0284c7; border-radius:12px; padding:14px; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:6px;">
+            <h4 style="font-size:0.95rem; font-weight:800; color:#0284c7; margin:0; display:flex; align-items:center; gap:6px;">
+              ☁️ Đồng Bộ Đám Mây Tự Động (Cloud Sync)
+            </h4>
+            <span id="cloudStatusBadge" style="font-size:0.75rem; font-weight:700; padding:3px 8px; border-radius:6px; ${hasCloud ? 'background:#dcfce7; color:#15803d;' : 'background:#fee2e2; color:#b91c1c;'}">
+              ${hasCloud ? '🟢 Đã kết nối Cloud' : '⚪ Chưa kết nối Cloud'}
+            </span>
+          </div>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:10px;">
+            Đồng bộ thời gian thực dữ liệu danh sách ca viên & bộ lễ giữa máy tính của bạn và điện thoại của tất cả ca viên (Google Firebase miễn phí 100%).
+          </p>
+
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:10px;">
+            <input type="text" id="settingFirebaseUrlInput" class="form-control" placeholder="https://<tên-dự-án>-default-rtdb.firebaseio.com" value="${curFirebaseUrl}" style="flex:1; min-width:240px; font-size:0.84rem; padding:7px 10px; border-radius:8px; border:1px solid var(--border);">
+            <button type="button" class="btn btn-primary" onclick="window.dohwaApp.saveAndTestFirebaseConfig()" style="font-size:0.82rem; padding:7px 14px; font-weight:800; background:#0284c7; border-radius:8px; cursor:pointer;">
+              🔗 Kết Nối Cloud
+            </button>
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.pushLocalDataToCloud()" style="color:#0284c7; border-color:#38bdf8; font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:8px; cursor:pointer;">
+              ⬆️ Đẩy Dữ Liệu Máy Này Lên Cloud
+            </button>
+            <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.pullCloudDataToLocal()" style="color:#059669; border-color:#34d399; font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:8px; cursor:pointer;">
+              ⬇️ Tải Dữ Liệu Mới Nhất Từ Cloud
+            </button>
+          </div>
+        </div>
+      `;
+    }
 
     let adminBanner = '';
     if (isAdmin) {
@@ -1069,6 +1116,7 @@ class DohwaApp {
 
     container.innerHTML = `
       ${adminBanner}
+      ${cloudSyncCard}
 
       <!-- THÔNG TIN CA VIÊN TRÊN MÁY NÀY -->
       <div style="background:var(--bg-card-subtle); border:1px solid var(--border); border-radius:12px; padding:10px 14px; margin-bottom:16px;">
@@ -1237,6 +1285,60 @@ class DohwaApp {
     toast.textContent = `💾 Đã lưu danh sách ${unique.length} ca viên thành công!`;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 2500);
+  }
+
+  // --- CLOUD SYNC ACTIONS (FIREBASE REALTIME DATABASE) ---
+  async saveAndTestFirebaseConfig() {
+    const inp = document.getElementById('settingFirebaseUrlInput');
+    const val = inp ? inp.value.trim() : '';
+    if (!val) {
+      if (confirm('Bạn có muốn gỡ bỏ kết nối Cloud và chỉ dùng bộ nhớ cục bộ trên máy?')) {
+        window.dohwaStore.setFirebaseUrl('');
+        alert('Đã gỡ kết nối Cloud.');
+        await this.renderCaiDatContent();
+      }
+      return;
+    }
+
+    try {
+      await window.dohwaStore.testCloudConnection(val);
+      window.dohwaStore.setFirebaseUrl(val);
+      await window.dohwaStore.pushAllToCloud();
+      alert('🎉 Kết nối Google Firebase Cloud thành công!\n\nToàn bộ danh sách ca viên và bộ lễ trên máy này đã được đồng bộ lên Cloud. Mọi điện thoại ca viên mở web sẽ tự động nhận dữ liệu này!');
+      await this.renderCaiDatContent();
+    } catch (err) {
+      alert('❌ Lỗi kết nối Firebase:\n' + err.message + '\n\nVui lòng kiểm tra lại URL hoặc đảm bảo Rules trong Firebase Realtime Database đã mở (.read: true, .write: true).');
+    }
+  }
+
+  async pushLocalDataToCloud() {
+    if (!window.dohwaStore.getFirebaseUrl()) {
+      alert('Vui lòng kết nối Firebase URL trước!');
+      return;
+    }
+    const ok = await window.dohwaStore.pushAllToCloud();
+    if (ok) {
+      alert('✓ Đã tải toàn bộ danh sách ca viên và bộ lễ máy này lên Cloud thành công!');
+    } else {
+      alert('❌ Lỗi khi đẩy dữ liệu lên Cloud. Vui lòng kiểm tra lại kết nối mạng hoặc Firebase URL.');
+    }
+  }
+
+  async pullCloudDataToLocal() {
+    if (!window.dohwaStore.getFirebaseUrl()) {
+      alert('Vui lòng kết nối Firebase URL trước!');
+      return;
+    }
+    const ok = await window.dohwaStore.syncAllFromCloud();
+    if (ok) {
+      alert('✓ Đã tải dữ liệu mới nhất từ Cloud về máy!');
+      await this.loadCurrentMassSet();
+      await this.loadMassSetsArchive();
+      await this.renderBaiDaSoanTrongNam();
+      await this.renderCaiDatContent();
+    } else {
+      alert('Không có dữ liệu mới trên Cloud hoặc lỗi kết nối.');
+    }
   }
 
   async parseBulkRoster() {
