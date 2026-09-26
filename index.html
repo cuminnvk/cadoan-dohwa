@@ -462,7 +462,7 @@
         Chỉ Ca Trưởng / Quản Trị mới có quyền Soạn lễ, Sửa/Xóa bộ lễ và Quản lý danh sách ca viên.
       </p>
       <div style="margin-bottom:14px;">
-        <input type="password" id="adminPinInput" class="form-control" placeholder="Nhập mã PIN (Mặc định: 1234)" style="text-align:center; font-size:1.2rem; letter-spacing:4px; font-weight:800; padding:10px; border-radius:10px;" maxlength="10">
+        <input type="password" id="adminPinInput" class="form-control" placeholder="Nhập mã PIN (Mặc định: 2019)" style="text-align:center; font-size:1.2rem; letter-spacing:4px; font-weight:800; padding:10px; border-radius:10px;" maxlength="10">
         <div id="adminPinError" style="display:none; color:#ef4444; font-size:0.78rem; font-weight:700; margin-top:6px;">Mã PIN không đúng, vui lòng thử lại!</div>
       </div>
       <div style="display:flex; gap:10px; justify-content:center;">
@@ -470,7 +470,7 @@
         <button type="button" class="btn btn-primary" onclick="window.dohwaApp.submitAdminLogin()" style="padding:8px 22px; font-size:0.85rem; font-weight:700; background:#6b3fa0;">Đăng Nhập 👑</button>
       </div>
       <div style="font-size:0.75rem; color:var(--text-muted); margin-top:14px; background:var(--bg-card-subtle); padding:8px 10px; border-radius:8px;">
-        💡 Mã PIN quản trị ban đầu là <strong>1234</strong>. Bạn có thể đổi mã PIN bất kỳ lúc nào trong phần Cài Đặt.
+        💡 Mã PIN quản trị mặc định là <strong>2019</strong>. Bạn có thể đổi mã PIN bất kỳ lúc nào trong phần Cài Đặt.
       </div>
     </div>
   </div>
@@ -508,8 +508,14 @@
         <!-- Dynamically rendered -->
       </div>
 
-      <div style="font-size:0.74rem; color:var(--text-muted); line-height:1.4;">
-        * Chỉ cần chọn <strong>duy nhất 1 lần</strong> trên thiết bị này. Các lần sau web sẽ tự động ghi nhớ và điểm danh chuyên cần cho bạn.
+      <div style="font-size:0.74rem; color:var(--text-muted); line-height:1.4; margin-bottom:12px;">
+        * Ca viên chỉ cần chọn <strong>duy nhất 1 lần</strong> trên thiết bị này. Các lần sau web sẽ tự động ghi nhớ và điểm danh chuyên cần.
+      </div>
+
+      <div style="padding-top:10px; border-top:1px solid var(--border);">
+        <button type="button" class="btn-xs btn-outline" onclick="document.getElementById('sbMemberGateOverlay').style.display='none'; window.dohwaApp.openAdminLoginModal();" style="color:var(--primary); font-size:0.78rem; font-weight:700; border-radius:8px; padding:5px 14px;">
+          🔐 Bạn là Admin? Bấm vào đây để đăng nhập
+        </button>
       </div>
     </div>
   </div>

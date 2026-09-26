@@ -321,17 +321,30 @@ class DohwaStore {
   async getRoster() {
     await this.ensureReady();
     let roster = null;
+    const isInit = localStorage.getItem('dohwa_roster_initialized') === 'true';
+
     if (this.db) {
       try {
         const items = await this.getAll('roster');
-        if (items && items.length) {
+        if (items) {
           roster = items;
         }
       } catch (e) {}
     }
-    if (!roster || !roster.length) {
-      const local = this.getLocal('roster', []);
-      roster = local.length ? local : JSON.parse(JSON.stringify(DEFAULT_ROSTER));
+
+    if (!roster) {
+      if (isInit) {
+        roster = this.getLocal('roster', []);
+      } else {
+        const local = this.getLocal('roster', null);
+        if (local !== null) {
+          roster = local;
+        } else {
+          roster = JSON.parse(JSON.stringify(DEFAULT_ROSTER));
+          this.setLocal('roster', roster);
+          localStorage.setItem('dohwa_roster_initialized', 'true');
+        }
+      }
     }
 
     // Tự động dọn dẹp các ID máy giả lập dev-other- nếu còn sót lại từ bản mẫu cũ
@@ -352,6 +365,7 @@ class DohwaStore {
 
   async saveRoster(newRoster) {
     await this.ensureReady();
+    localStorage.setItem('dohwa_roster_initialized', 'true');
     this.setLocal('roster', newRoster);
     if (this.db) {
       try {
@@ -426,7 +440,7 @@ class DohwaStore {
   }
 
   getAdminPin() {
-    return localStorage.getItem('dohwa_admin_pin') || '1234';
+    return localStorage.getItem('dohwa_admin_pin') || '2019';
   }
 
   setAdminPin(newPin) {
@@ -441,6 +455,15 @@ class DohwaStore {
     const validPin = this.getAdminPin();
     if (inputPin && inputPin.trim() === validPin) {
       localStorage.setItem('dohwa_is_admin', 'true');
+      const dev = this.getDeviceId();
+      const adminSession = {
+        memberId: 'admin',
+        name: 'Admin',
+        voice: 'Quản trị viên',
+        deviceId: dev,
+        isAdmin: true
+      };
+      this.setUserSession(adminSession);
       return true;
     }
     return false;
@@ -448,6 +471,10 @@ class DohwaStore {
 
   logoutAdmin() {
     localStorage.removeItem('dohwa_is_admin');
+    const curSession = this.getUserSession();
+    if (curSession && curSession.memberId === 'admin') {
+      this.setUserSession(null);
+    }
   }
 
   async clearEntireRoster() {
