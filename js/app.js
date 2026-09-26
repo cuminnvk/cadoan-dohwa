@@ -621,51 +621,41 @@ class DohwaApp {
   }
 
   // ==========================================
-  // CỔNG XÁC THỰC CA VIÊN VÀO PHÒNG (MEMBER GATE - SOANBOLE STYLE)
+  // CỔNG XÁC THỰC CA VIÊN VÀO PHÒNG (MEMBER GATE - BẮT BUỘC ĐỂ VÀO BỘ LỄ)
   // ==========================================
   async checkMemberGate() {
-    if (window.dohwaStore?.isAdmin()) {
-      const badge = document.getElementById('userHeaderBadge');
-      if (badge) {
-        badge.innerHTML = `👑 <span>Admin</span>`;
-      }
-      return;
-    }
-
+    const modal = document.getElementById('sbMemberGateOverlay');
+    const badge = document.getElementById('userHeaderBadge');
+    const isAdmin = window.dohwaStore?.isAdmin();
     const session = window.dohwaStore?.getUserSession();
-    if (session && (session.memberId === 'admin' || session.isAdmin)) {
-      const badge = document.getElementById('userHeaderBadge');
-      if (badge) {
-        badge.innerHTML = `👑 <span>Admin</span>`;
-      }
-      return;
-    }
 
-    const roster = await window.dohwaStore.getRoster();
-    if (!roster || roster.length === 0) {
-      // Chưa có danh sách ca viên: không mở popup chặn màn hình
-      const modal = document.getElementById('sbMemberGateOverlay');
+    // 1. Nếu là Admin: luôn được vào thẳng
+    if (isAdmin || (session && (session.memberId === 'admin' || session.isAdmin))) {
       if (modal) modal.style.display = 'none';
-      return;
+      if (badge) badge.innerHTML = `👑 <span>Admin</span>`;
+      return true;
     }
 
-    if (!session || !session.memberId) {
-      this.openMemberGateModal();
-    } else {
-      // Kiểm tra xem ca viên này có bị cấm không
+    // 2. Lấy danh sách ca viên hiện tại
+    const roster = await window.dohwaStore.getRoster();
+
+    // 3. Nếu đã có session ca viên: kiểm tra ca viên đó có tồn tại trong danh sách thật và không bị khóa
+    if (session && session.memberId) {
       const current = roster.find(m => m.id === session.memberId);
-      if (current && current.banned) {
-        alert('Tài khoản ca viên này hiện đang bị tạm khóa. Vui lòng liên hệ Ca trưởng!');
+      if (current && !current.banned) {
+        // Hợp lệ: Cho phép truy cập bộ lễ
+        if (modal) modal.style.display = 'none';
+        if (badge) badge.innerHTML = `👤 <span>${current.name}</span>`;
+        return true;
+      } else {
+        // Tên này đã bị xóa hoặc bị khóa: hủy session và bắt chọn lại
         window.dohwaStore.setUserSession(null);
-        this.openMemberGateModal();
-        return;
-      }
-
-      const badge = document.getElementById('userHeaderBadge');
-      if (badge) {
-        badge.innerHTML = `👤 <span>${session.name}</span>`;
       }
     }
+
+    // 4. CHƯA CHỌN TÊN HOẶC CHƯA CÓ QUYỀN: BẮT BUỘC HIỂN THỊ CỔNG CHỌN TÊN (GATE) CHẶN TOÀN BỘ WEB
+    this.openMemberGateModal();
+    return false;
   }
 
   async openMemberGateModal() {
@@ -677,19 +667,28 @@ class DohwaApp {
 
   async renderMemberGateGrid() {
     const grid = document.getElementById('memberGateButtonsGrid');
+    const subNotice = document.getElementById('memberGateSubNotice');
     if (!grid) return;
     const roster = await window.dohwaStore.getRoster();
     const curDev = window.dohwaStore.getDeviceId();
 
     if (!roster || roster.length === 0) {
       grid.innerHTML = `
-        <div style="grid-column:1/-1; text-align:center; padding:20px 10px; color:var(--text-muted); font-size:0.88rem; line-height:1.6;">
-          Hiện tại chưa có danh sách ca viên.<br>
-          <span style="color:#d97706; font-weight:700;">Ca Trưởng / Admin vui lòng bấm nút Admin ở trên để đăng nhập và dán danh sách ca viên mới.</span>
+        <div style="grid-column:1/-1; text-align:center; padding:22px 14px; background:#fff7ed; border:1px dashed #f97316; border-radius:14px; margin-bottom:8px;">
+          <div style="font-size:1.8rem; margin-bottom:6px;">🔒</div>
+          <div style="font-size:0.95rem; font-weight:800; color:#9a3412; margin-bottom:6px;">Phòng Đang Khóa</div>
+          <div style="font-size:0.83rem; color:#78350f; line-height:1.5;">
+            Chưa có danh sách ca viên nào được thiết lập.<br>
+            Bạn cần có tên trong danh sách ca viên mới có thể xem bộ lễ.<br><br>
+            <span style="font-weight:700;">Nếu bạn là Ca Trưởng / Admin, vui lòng bấm nút "👑 BẠN LÀ ADMIN?" ở trên để đăng nhập và thiết lập danh sách ca viên.</span>
+          </div>
         </div>
       `;
+      if (subNotice) subNotice.style.display = 'none';
       return;
     }
+
+    if (subNotice) subNotice.style.display = 'block';
 
     grid.innerHTML = roster.map(m => {
       const isCurrentDev = m.lockDeviceId === curDev;
@@ -863,6 +862,7 @@ class DohwaApp {
     const modal = document.getElementById('adminLoginModalOverlay');
     if (modal) modal.style.display = 'none';
     this.adminLoginSuccessCallback = null;
+    this.checkMemberGate();
   }
 
   submitAdminLogin() {
