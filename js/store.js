@@ -25,6 +25,16 @@ const DEFAULT_MASS_SET = {
   songs: [
     {
       id: 'song-1',
+      role: 'duc_me',
+      roleLabel: 'Kính Đức Mẹ',
+      title: 'Nguồn Cậy Trông',
+      composer: 'Hoàng Vũ',
+      youtubeUrl: '',
+      pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf',
+      pdfData: null
+    },
+    {
+      id: 'song-2',
       role: 'nhap_le',
       roleLabel: 'Nhập Lễ',
       title: 'Chung lời cảm tạ',
@@ -34,9 +44,9 @@ const DEFAULT_MASS_SET = {
       pdfData: null
     },
     {
-      id: 'song-2',
+      id: 'song-3',
       role: 'dap_ca',
-      roleLabel: 'Thánh Vịnh & Đáp Ca',
+      roleLabel: 'Thánh Vịnh',
       title: 'Chúa Nhật 25 Thường Niên A',
       composer: 'Lm. Bùi Ninh',
       youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
@@ -44,7 +54,7 @@ const DEFAULT_MASS_SET = {
       pdfData: null
     },
     {
-      id: 'song-3',
+      id: 'song-4',
       role: 'alleluia',
       roleLabel: 'Alleluia',
       title: 'ALLELUIA',
@@ -54,7 +64,7 @@ const DEFAULT_MASS_SET = {
       pdfData: null
     },
     {
-      id: 'song-4',
+      id: 'song-5',
       role: 'dang_le',
       roleLabel: 'Dâng Lễ',
       title: 'XIN DÂNG CỦA LỄ CHÂN THÀNH',
@@ -64,7 +74,7 @@ const DEFAULT_MASS_SET = {
       pdfData: null
     },
     {
-      id: 'song-5',
+      id: 'song-6',
       role: 'hiep_le',
       roleLabel: 'Hiệp Lễ',
       title: 'CHÚA LUÔN CÒN MÃI',
@@ -74,23 +84,13 @@ const DEFAULT_MASS_SET = {
       pdfData: null
     },
     {
-      id: 'song-6',
-      role: 'ta_le',
-      roleLabel: 'Tạ Lễ',
-      title: 'LỜI TẠ ƠN',
-      composer: 'Phanxicô',
-      youtubeUrl: '',
-      pdfName: 'Ta_Le_Loi_Ta_On.pdf',
-      pdfData: null
-    },
-    {
       id: 'song-7',
       role: 'ket_le',
       roleLabel: 'Kết Lễ',
-      title: 'Nguồn Cậy Trông',
-      composer: 'Hoàng Vũ',
+      title: 'LỜI TẠ ƠN',
+      composer: 'Phanxicô',
       youtubeUrl: '',
-      pdfName: 'Ket_Le_Nguon_Cay_Trong.pdf',
+      pdfName: 'Ket_Le_Loi_Ta_On.pdf',
       pdfData: null
     }
   ]
@@ -222,13 +222,16 @@ class DohwaStore {
       items = [DEFAULT_MASS_SET];
     }
 
-    // Làm sạch các tên mẫu cũ trong bài đọc nếu có
+    // Làm sạch các tên mẫu cũ trong bài đọc nếu có & đồng bộ thứ tự bài hát mặc định
     items.forEach(m => {
       if (m.liturgicalRoles) {
         if (m.liturgicalRoles.reader1 === 'Thu' || m.liturgicalRoles.reader1 === 'Mai Ngọc Thu') m.liturgicalRoles.reader1 = '';
         if (m.liturgicalRoles.psalmist === 'Thu' || m.liturgicalRoles.psalmist === 'Mai Ngọc Thu') m.liturgicalRoles.psalmist = '';
         if (m.liturgicalRoles.reader2 === 'Nam' || m.liturgicalRoles.reader2 === 'Phong Nguyễn') m.liturgicalRoles.reader2 = '';
         if (m.liturgicalRoles.petitions === 'Long' || m.liturgicalRoles.petitions === 'Mai Tuấn') m.liturgicalRoles.petitions = '';
+      }
+      if (m.id === 'mass-cn-25-tn-a' && m.songs && m.songs[0] && m.songs[0].role !== 'duc_me') {
+        m.songs = DEFAULT_MASS_SET.songs;
       }
     });
     this.setLocal('mass_sets', items);

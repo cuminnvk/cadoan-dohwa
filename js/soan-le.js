@@ -12,14 +12,13 @@ class DohwaSoanLe {
     this.uploadedSongs = [];
     this.rosterDebounceTimer = null;
     this.defaultRoles = [
+      { key: 'duc_me',  label: 'Kính Đức Mẹ' },
       { key: 'nhap_le', label: 'Nhập Lễ' },
-      { key: 'dap_ca',  label: 'Đáp Ca (Thánh Vịnh)' },
+      { key: 'dap_ca',  label: 'Thánh Vịnh' },
       { key: 'alleluia',label: 'Alleluia' },
       { key: 'dang_le', label: 'Dâng Lễ' },
       { key: 'hiep_le', label: 'Hiệp Lễ' },
-      { key: 'ta_le',   label: 'Tạ Lễ' },
       { key: 'ket_le',  label: 'Kết Lễ' },
-      { key: 'duc_me',  label: 'Kính Đức Mẹ' },
       { key: 'khac',    label: 'Bài Hát Khác' }
     ];
 
@@ -36,13 +35,13 @@ class DohwaSoanLe {
 
   initDefaultSongs() {
     this.uploadedSongs = [
-      { id: 's-1', role: 'nhap_le', roleLabel: 'Nhập Lễ', title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
-      { id: 's-2', role: 'dap_ca', roleLabel: 'Đáp Ca (Thánh Vịnh)', title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
-      { id: 's-3', role: 'alleluia', roleLabel: 'Alleluia', title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
-      { id: 's-4', role: 'dang_le', roleLabel: 'Dâng Lễ', title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
-      { id: 's-5', role: 'hiep_le', roleLabel: 'Hiệp Lễ', title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
-      { id: 's-6', role: 'ta_le', roleLabel: 'Tạ Lễ', title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
-      { id: 's-7', role: 'ket_le', roleLabel: 'Kết Lễ', title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null }
+      { id: 's-1', role: 'duc_me',  roleLabel: 'Kính Đức Mẹ', title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
+      { id: 's-2', role: 'nhap_le', roleLabel: 'Nhập Lễ',     title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
+      { id: 's-3', role: 'dap_ca',  roleLabel: 'Thánh Vịnh',  title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
+      { id: 's-4', role: 'alleluia',roleLabel: 'Alleluia',    title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
+      { id: 's-5', role: 'dang_le', roleLabel: 'Dâng Lễ',     title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
+      { id: 's-6', role: 'hiep_le', roleLabel: 'Hiệp Lễ',     title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null },
+      { id: 's-7', role: 'ket_le',  roleLabel: 'Kết Lễ',      title: '', composer: '', youtubeUrl: '', pdfName: '', pdfData: null }
     ];
   }
 
@@ -351,11 +350,14 @@ class DohwaSoanLe {
   detectRoleFromFilename(fileName) {
     const clean = fileName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
+    if (clean.includes('me') || clean.includes('maria') || clean.includes('hoa dang') || clean.includes('duc me')) {
+      return { role: 'duc_me', label: 'Kính Đức Mẹ' };
+    }
     if (clean.includes('nhap') || clean.includes('tien vao') || clean.includes('dau le')) {
       return { role: 'nhap_le', label: 'Nhập Lễ' };
     }
-    if (clean.includes('dap ca') || clean.includes('thanh vinh') || clean.includes('tv ') || clean.includes('tv_')) {
-      return { role: 'dap_ca', label: 'Đáp Ca (Thánh Vịnh)' };
+    if (clean.includes('thanh vinh') || clean.includes('dap ca') || clean.includes('tv ') || clean.includes('tv_')) {
+      return { role: 'dap_ca', label: 'Thánh Vịnh' };
     }
     if (clean.includes('alleluia') || clean.includes('tin mung')) {
       return { role: 'alleluia', label: 'Alleluia' };
@@ -366,11 +368,8 @@ class DohwaSoanLe {
     if (clean.includes('hiep le') || clean.includes('ruoc le')) {
       return { role: 'hiep_le', label: 'Hiệp Lễ' };
     }
-    if (clean.includes('ta le') || clean.includes('ket le') || clean.includes('ra ve')) {
+    if (clean.includes('ket le') || clean.includes('ta le') || clean.includes('ra ve')) {
       return { role: 'ket_le', label: 'Kết Lễ' };
-    }
-    if (clean.includes('me') || clean.includes('maria') || clean.includes('hoa dang')) {
-      return { role: 'duc_me', label: 'Kính Đức Mẹ' };
     }
     return { role: 'khac', label: 'Bài Hát Khác' };
   }
@@ -378,7 +377,7 @@ class DohwaSoanLe {
   parseTitleAndComposer(fileName) {
     let name = fileName.replace(/\.[^/.]+$/, "");
     name = name.replace(/^[0-9]+[\.\-\_\s]*/, '');
-    name = name.replace(/^(nhap le|dap ca|thanh vinh|alleluia|dang le|hiep le|ket le|duc me)[\s\-\_\:]*/i, '');
+    name = name.replace(/^(kinh duc me|duc me|nhap le|thanh vinh|dap ca|alleluia|dang le|hiep le|ket le|ta le)[\s\-\_\:]*/i, '');
 
     let composer = '';
     const parenMatch = name.match(/^(.*?)\((.*?)\)$/);
@@ -460,7 +459,7 @@ class DohwaSoanLe {
     this.renderUploadedSlots();
   }
 
-  // --- RENDER 6 BÀI HÁT DẠNG 1 HÀNG COMPACT ZERO-SCROLL ---
+  // --- RENDER CÁC BÀI HÁT DẠNG 1 HÀNG COMPACT ZERO-SCROLL ---
   renderUploadedSlots() {
     const container = document.getElementById('soanSongSlotsContainer');
     if (!container) return;
@@ -470,6 +469,7 @@ class DohwaSoanLe {
         <!-- Cột vai trò phụng vụ -->
         <select class="form-control-compact" style="font-weight:700; color:var(--primary); font-size:0.78rem;" onchange="window.dohwaSoanLe.updateRole(${index}, this.value)">
           ${this.defaultRoles.map(r => `<option value="${r.key}" ${r.key === s.role ? 'selected' : ''}>${r.label}</option>`).join('')}
+          ${(!this.defaultRoles.some(r => r.key === s.role) && s.role) ? `<option value="${s.role}" selected>${s.roleLabel || s.role}</option>` : ''}
         </select>
 
         <!-- Cột Tên bài hát -->
@@ -487,7 +487,13 @@ class DohwaSoanLe {
         <!-- Nút Xóa bài -->
         <button type="button" class="btn-icon" style="width:26px; height:26px; color:#ef4444; font-size:0.85rem;" onclick="window.dohwaSoanLe.removeSong(${index})" title="Xóa bài hát này">✕</button>
       </div>
-    `).join('');
+    `).join('') + `
+      <div style="margin-top:10px; display:flex; justify-content:flex-end;">
+        <button type="button" class="btn-xs btn-outline" onclick="window.dohwaSoanLe.addEmptySlot()" style="font-size:0.8rem; font-weight:700; padding:6px 14px; border-radius:6px; cursor:pointer; background:var(--bg-card);">
+          ➕ Thêm bài hát khác
+        </button>
+      </div>
+    `;
   }
 
   async uploadSingleSongPdf(index, file) {
