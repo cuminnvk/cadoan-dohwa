@@ -36,10 +36,10 @@ class DohwaApp {
       } else if (hash === 'aidaxem') {
         this.openAiDaXemModal();
       } else if (hash === 'chonten') {
-        this.openDanhSachChonTenModal();
+        this.openMemberGateModal();
       } else if (hash === 'baidasoan') {
         this.scrollToBaiDaSoan();
-      } else if (hash === 'caidat') {
+      } else if (hash === 'caidat' || hash === 'admin') {
         this.openCaiDatModal();
       } else if (document.getElementById(hash)) {
         this.switchTab(hash);
@@ -86,7 +86,7 @@ class DohwaApp {
 
     const userBadge = document.getElementById('userHeaderBadge');
     if (userBadge) {
-      userBadge.addEventListener('click', () => this.openDanhSachChonTenModal());
+      userBadge.addEventListener('click', () => this.handleUserBadgeClick());
     }
 
     // Đóng Modal Bài Đọc
@@ -256,7 +256,7 @@ class DohwaApp {
               <button type="button" class="action-btn btn-view" onclick="window.dohwaApp.scrollToBaiDaSoan()">
                 📚 Bài đã soạn
               </button>
-              <button type="button" class="action-btn btn-baidoc" onclick="window.dohwaApp.openDanhSachChonTenModal()">
+              <button type="button" class="action-btn btn-baidoc" onclick="window.dohwaApp.openMemberGateModal()">
                 📝 Chọn lại tên
               </button>
               ${window.dohwaStore?.isAdmin() ? `
@@ -779,11 +779,19 @@ class DohwaApp {
   // ==========================================
   // ADMIN AUTHENTICATION & UI MANAGEMENT
   // ==========================================
+  handleUserBadgeClick() {
+    if (window.dohwaStore?.isAdmin()) {
+      this.openCaiDatModal();
+    } else {
+      this.openMemberGateModal();
+    }
+  }
+
   handleAdminClick() {
     if (window.dohwaStore?.isAdmin()) {
       this.openCaiDatModal();
     } else {
-      this.openAdminLoginModal();
+      this.openAdminLoginModal(() => this.openCaiDatModal());
     }
   }
 
@@ -810,6 +818,23 @@ class DohwaApp {
     const bNavIcon = document.getElementById('bottomNavAdminIcon');
     if (bNavText) bNavText.textContent = isAdmin ? 'Admin' : 'Quản Trị';
     if (bNavIcon) bNavIcon.textContent = isAdmin ? '👑' : '🔐';
+
+    const topAdminText = document.getElementById('topTabAdminText');
+    const topAdminIcon = document.getElementById('topTabAdminIcon');
+    if (topAdminText) topAdminText.textContent = isAdmin ? 'Admin' : 'Quản Trị';
+    if (topAdminIcon) topAdminIcon.textContent = isAdmin ? '👑' : '🔐';
+
+    const badge = document.getElementById('userHeaderBadge');
+    if (badge) {
+      const session = window.dohwaStore?.getUserSession();
+      if (isAdmin) {
+        badge.innerHTML = `👑 <span>Admin</span>`;
+      } else if (session && session.name) {
+        badge.innerHTML = `👤 <span>${session.name}</span>`;
+      } else {
+        badge.innerHTML = `👤 <span>Chọn tên</span>`;
+      }
+    }
 
     const khoBtn = document.getElementById('khoSoanMoiBtn');
     if (khoBtn) khoBtn.style.display = isAdmin ? 'inline-flex' : 'none';
@@ -859,6 +884,10 @@ class DohwaApp {
       this.updateAdminUI();
       this.loadCurrentMassSet();
       this.loadMassSetsArchive();
+
+      if (document.getElementById('caiDatModal')?.style.display === 'flex') {
+        this.renderCaiDatContent();
+      }
 
       const toast = document.createElement('div');
       toast.className = 'dohwa-toast';
@@ -920,15 +949,23 @@ class DohwaApp {
   }
 
   async clearEntireRoster() {
-    if (confirm('⚠️ BẠN CÓ CHẮC CHẮN MUỐN XÓA SẠCH TOÀN BỘ DANH SÁCH CA VIÊN?\n\nThao tác này sẽ xóa toàn bộ ca viên hiện tại để bạn dán và thiết lập một danh sách ca viên hoàn toàn mới.\n\nSau khi xóa, danh sách sẽ được lưu một lần để dùng mãi mãi.')) {
+    if (confirm('⚠️ BẠN CÓ CHẮC CHẮN MUỐN XÓA SẠCH TOÀN BỘ DANH SÁCH CA VIÊN?\n\nThao tác này sẽ xóa toàn bộ ca viên cũ (bao gồm cả Kính Nguyễn và các nick đã lưu) để bạn dán và thiết lập một danh sách ca viên hoàn toàn mới.\n\nSau khi xóa, danh sách sẽ được lưu một lần để dùng mãi mãi.')) {
       await window.dohwaStore?.clearEntireRoster();
+      
+      const curSession = window.dohwaStore?.getUserSession();
+      if (curSession && curSession.memberId !== 'admin') {
+        window.dohwaStore?.setUserSession(null);
+        const badge = document.getElementById('userHeaderBadge');
+        if (badge) badge.innerHTML = `👤 <span>Chọn tên</span>`;
+      }
+
       await this.renderCaiDatContent();
       const textarea = document.getElementById('settingRosterBatchInput');
       if (textarea) {
         textarea.value = '';
         textarea.focus();
       }
-      alert('🗑️ Đã xóa sạch toàn bộ danh sách cũ!\n\nBây giờ bạn hãy dán danh sách ca viên mới vào ô (mỗi dòng 1 tên) và bấm "Lưu Danh Sách Ca Viên".');
+      alert('🗑️ Đã xóa sạch toàn bộ danh sách cũ!\n\nBây giờ bạn hãy dán danh sách ca viên mới vào ô (mỗi dòng 1 tên) và bấm "💾 Lưu Danh Sách Ca Viên".');
     }
   }
 
@@ -936,11 +973,6 @@ class DohwaApp {
   // MODAL CÀI ĐẶT (QUẢN LÝ CA VIÊN & THIẾT LẬP MÁY NÀY)
   // ==========================================
   async openCaiDatModal() {
-    if (window.dohwaStore && !window.dohwaStore.isAdmin()) {
-      this.openAdminLoginModal(() => this.openCaiDatModal());
-      return;
-    }
-
     let modal = document.getElementById('caiDatModal');
     if (!modal) return;
 
@@ -963,27 +995,63 @@ class DohwaApp {
     }
     const currentSession = window.dohwaStore?.getUserSession() || null;
     const curDev = window.dohwaStore?.getDeviceId() || '';
+    const isAdmin = window.dohwaStore?.isAdmin();
 
     // Chuẩn bị danh sách tên mỗi dòng 1 tên
     const defaultBatchText = roster.map(m => m.name).join('\n');
 
+    let adminBanner = '';
+    if (isAdmin) {
+      adminBanner = `
+        <div style="background:linear-gradient(135deg, rgba(120,53,15,0.08), rgba(217,119,6,0.12)); border:2px solid #f59e0b; border-radius:12px; padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:1.8rem;">👑</span>
+            <div>
+              <div style="font-size:1rem; font-weight:900; color:#b45309;">Bạn Đang Quản Trị Với Quyền ADMIN</div>
+              <div style="font-size:0.76rem; color:#78350f;">Toàn quyền sửa / xóa bộ lễ, soạn lễ mới và thiết lập danh sách ca viên</div>
+            </div>
+          </div>
+          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.logoutAdmin()" style="color:#ef4444; border-color:#f87171; font-weight:800; padding:6px 12px; border-radius:8px; background:#fff; cursor:pointer;">
+            🚪 Đăng Xuất Admin
+          </button>
+        </div>
+      `;
+    } else {
+      adminBanner = `
+        <div style="background:#fffbeb; border:2px solid #f59e0b; border-radius:12px; padding:14px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:1.8rem;">🔐</span>
+            <div>
+              <div style="font-size:0.95rem; font-weight:900; color:#92400e;">Đang ở chế độ Ca Viên (${currentSession ? currentSession.name : 'Chưa chọn tên'})</div>
+              <div style="font-size:0.76rem; color:#78350f;">Nhập mã PIN <strong>2019</strong> để toàn quyền quản trị, xóa/dán danh sách ca viên</div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="window.dohwaApp.openAdminLoginModal()" style="background:linear-gradient(135deg,#78350f,#d97706); border:none; color:#fff; font-weight:800; padding:8px 16px; font-size:0.85rem; border-radius:10px; box-shadow:0 4px 12px rgba(217,119,6,0.3); cursor:pointer;">
+            👑 BẤM ĐÂY ĐỂ ĐĂNG NHẬP ADMIN (PIN: 2019)
+          </button>
+        </div>
+      `;
+    }
+
     container.innerHTML = `
+      ${adminBanner}
+
       <!-- THÔNG TIN CA VIÊN TRÊN MÁY NÀY -->
-      <div style="background:var(--bg-card-subtle); border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-bottom:16px;">
+      <div style="background:var(--bg-card-subtle); border:1px solid var(--border); border-radius:12px; padding:10px 14px; margin-bottom:16px;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:1.3rem;">👤</span>
+            <span style="font-size:1.2rem;">👤</span>
             <div>
-              <div style="font-size:0.92rem; font-weight:800; color:var(--text-main);">
-                ${currentSession ? currentSession.name : '<span style="color:#d97706;">Chưa chọn tên trên máy này</span>'}
+              <div style="font-size:0.9rem; font-weight:800; color:var(--text-main);">
+                Nick máy này: <strong>${currentSession ? currentSession.name : '<span style="color:#d97706;">Chưa chọn tên</span>'}</strong>
               </div>
-              <div style="font-size:0.75rem; color:var(--text-muted);">
+              <div style="font-size:0.74rem; color:var(--text-muted);">
                 ${currentSession ? '✓ Thiết bị này đã liên kết' : 'Mỗi ca viên chỉ cần chọn tên 1 lần đầu tiên'}
               </div>
             </div>
           </div>
-          <button type="button" class="btn btn-outline" onclick="window.dohwaApp.closeCaiDatModal(); window.dohwaApp.openMemberGateModal();" style="font-size:0.8rem; padding:5px 12px; font-weight:700;">
-            👉 Đổi / Chọn Tên
+          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.closeCaiDatModal(); window.dohwaApp.openMemberGateModal();" style="font-size:0.78rem; padding:5px 12px; font-weight:700; border-radius:8px;">
+            🔄 Đổi / Chọn Tên
           </button>
         </div>
       </div>
@@ -994,7 +1062,7 @@ class DohwaApp {
           <h4 style="font-size:0.95rem; font-weight:800; color:var(--text-main); margin:0;">
             📝 Danh Sách Ca Viên Ca Đoàn
           </h4>
-          <span style="font-size:0.75rem; color:var(--text-muted);">${roster.length} thành viên</span>
+          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">${roster.length} thành viên</span>
         </div>
         <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">
           Mỗi dòng một tên. Khi bạn xóa tên ai khỏi khung này và bấm <strong>"Lưu Danh Sách"</strong>, tên người đó sẽ bị xóa hoàn toàn khỏi ca đoàn:
@@ -1002,10 +1070,10 @@ class DohwaApp {
         <textarea id="settingRosterBatchInput" class="form-control" rows="6" style="width:100%; font-size:0.88rem; font-family:inherit; resize:vertical; padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-bottom:10px;" placeholder="Đôn Đôn&#10;Hồ Hoàng&#10;Kính Nguyễn...">${defaultBatchText}</textarea>
         
         <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
-          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.clearEntireRoster()" style="color:#ef4444; border-color:#fca5a5; font-size:0.78rem; padding:6px 12px; font-weight:700;">
+          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.clearEntireRoster()" style="color:#ef4444; border-color:#fca5a5; font-size:0.8rem; padding:8px 14px; font-weight:800; border-radius:8px; background:#fff; cursor:pointer;" title="Xóa sạch toàn bộ danh sách cũ để dán danh sách mới">
             🗑️ Xóa Sạch Danh Sách (Thiết lập danh sách mới)
           </button>
-          <button type="button" class="btn btn-primary" onclick="window.dohwaApp.saveRosterFromCaiDat()" style="font-size:0.85rem; padding:8px 20px; font-weight:700; background:#6b3fa0; border-radius:8px;">
+          <button type="button" class="btn btn-primary" onclick="window.dohwaApp.saveRosterFromCaiDat()" style="font-size:0.85rem; padding:8px 20px; font-weight:800; background:#6b3fa0; border-radius:8px; cursor:pointer;">
             💾 Lưu Danh Sách Ca Viên
           </button>
         </div>

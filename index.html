@@ -10,8 +10,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/style.css?v=2019_4">
+  <link rel="stylesheet" href="css/components.css?v=2019_4">
 </head>
 <body>
 
@@ -62,8 +62,8 @@
     <button class="top-tab-btn" data-tab="tab-thongke">
       <span>📊</span> <span>Ai Đã Xem</span>
     </button>
-    <button class="top-tab-btn" onclick="window.dohwaApp && dohwaApp.openCaiDatModal()">
-      <span>⚙️</span> <span>Cài Đặt</span>
+    <button class="top-tab-btn" id="topTabAdminBtn" onclick="window.dohwaApp && dohwaApp.handleAdminClick()" style="font-weight:700;">
+      <span id="topTabAdminIcon">🔐</span> <span id="topTabAdminText">Quản Trị</span>
     </button>
   </nav>
 
@@ -562,70 +562,21 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- MODAL 2: DANH SÁCH CHỌN TÊN KHÔNG CẦN ĐĂNG NHẬP (CHUẨN SOANBOLE SCREENSHOT 2) -->
-  <!-- ========================================== -->
-  <div class="baidoc-overlay" id="danhSachChonTenModalOverlay" style="display:none; z-index:100000; background:rgba(0,0,0,0.55); backdrop-filter:blur(4px);">
-    <div style="width:min(640px,95vw); max-height:90vh; background:var(--bg-card,#fff); border-radius:20px; box-shadow:0 24px 60px rgba(0,0,0,0.3); overflow:hidden; display:flex; flex-direction:column;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; padding:18px 22px 12px; border-bottom:1px solid var(--border);">
-        <div>
-          <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:8px; margin:0;">
-            📝 Danh sách chọn tên không cần đăng nhập
-          </h3>
-          <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px; margin-bottom:0;">
-            Dán danh sách ca đoàn, mỗi dòng một tên. Thành viên bấm link rồi chỉ chọn tên để vào bộ lễ.
-          </p>
-        </div>
-        <button type="button" class="btn-icon" onclick="window.dohwaApp.closeDanhSachChonTenModal()" style="font-size:1.2rem; cursor:pointer;">✕</button>
-      </div>
-
-      <div style="padding:16px 22px; overflow-y:auto; flex:1;">
-        <!-- KHUNG NHẬP DANH SÁCH MỖI DÒNG MỘT TÊN -->
-        <textarea id="modalRosterTextarea" class="form-control" rows="5" style="width:100%; font-size:0.88rem; font-family:inherit; resize:vertical; padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-bottom:10px;" placeholder="Đôn Đôn&#10;Hồ Hoàng&#10;Kính Nguyễn..."></textarea>
-        
-        <div style="display:flex; gap:10px; margin-bottom:18px;">
-          <button type="button" class="btn btn-primary" onclick="window.dohwaApp.saveRosterFromTextarea()" style="padding:8px 18px; font-size:0.85rem; font-weight:700; background:#6b3fa0; border-radius:8px;">
-            💾 Lưu danh sách
-          </button>
-          <button type="button" class="btn btn-outline" onclick="window.dohwaApp.reloadRosterTextarea()" style="padding:8px 16px; font-size:0.85rem; font-weight:700; border-radius:8px;">
-            🔄 Tải lại
-          </button>
-        </div>
-
-        <!-- BẢNG DANH SÁCH VÀ TRẠNG THÁI CA VIÊN -->
-        <div style="overflow-x:auto; border:1px solid var(--border); border-radius:10px;">
-          <table style="width:100%; border-collapse:collapse; font-size:0.84rem;">
-            <thead>
-              <tr style="background:var(--bg-card-subtle); border-bottom:1px solid var(--border); color:var(--text-muted); font-size:0.8rem;">
-                <th style="padding:10px 12px; text-align:left;">Tên</th>
-                <th style="padding:10px 8px; text-align:center;">Trạng thái</th>
-                <th style="padding:10px 8px; text-align:center;">Lượt vào</th>
-                <th style="padding:10px 8px; text-align:center;">Lần cuối</th>
-                <th style="padding:10px 12px; text-align:center; min-width:160px;">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody id="modalRosterTableBody">
-              <!-- Rendered dynamically -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/store.js"></script>
-  <script src="js/liturgical-helper.js"></script>
-  <script src="js/player.js"></script>
-  <script src="js/pdf-viewer.js"></script>
-  <script src="js/soan-le.js"></script>
-  <script src="js/thong-ke.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/store.js?v=2019_4"></script>
+  <script src="js/liturgical-helper.js?v=2019_4"></script>
+  <script src="js/player.js?v=2019_4"></script>
+  <script src="js/pdf-viewer.js?v=2019_4"></script>
+  <script src="js/soan-le.js?v=2019_4"></script>
+  <script src="js/thong-ke.js?v=2019_4"></script>
+  <script src="js/app.js?v=2019_4"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
+        navigator.serviceWorker.register('sw.js').then((reg) => {
+          reg.update();
+        }).catch(() => {});
       });
     }
   </script>
