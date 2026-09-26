@@ -1,7 +1,9 @@
 /**
- * CA ĐOÀN DOHWA - STICKY MUSIC PLAYER (Playlist Bộ Lễ + Lặp lại + Chạy nền)
- * Hỗ trợ nghe tuần tự toàn bộ các bài trong bộ lễ, tùy chọn lặp lại 1 bài / tất cả,
- * và ẩn hiện video YouTube mượt mà.
+ * CA ĐOÀN DOHWA - TRÌNH NGHE NHẠC BỘ LỄ THUẦN TÚY (AUDIO-ONLY)
+ * - Tự động phát từ bài này sang bài khác và lặp lại liên tục cả bộ lễ
+ * - Ẩn hoàn toàn video, tập trung trải nghiệm nghe nhạc thánh ca
+ * - Hỗ trợ chạy ngầm màn hình khóa qua MediaSession API (iOS Dynamic Island & Android)
+ * - Chế độ "Tắt Màn Hình (Bỏ túi)" OLED siêu tiết kiệm pin, nghe xuyên suốt không gián đoạn
  */
 
 class DohwaPlayer {
@@ -9,12 +11,17 @@ class DohwaPlayer {
     this.playlist = [];
     this.currentIndex = -1;
     this.currentSong = null;
+    this.currentMassSetTitle = 'Bộ Lễ Phụng Vụ';
     this.isPlaying = false;
     this.ytPlayer = null;
     this.audioElement = new Audio();
+    this.backgroundAudio = null;
     this.isYouTubeMode = false;
     this.ytReady = false;
-    this.repeatMode = 'all'; // 'all', 'one', 'none'
+    this.repeatMode = 'all'; // Mặc định luôn lặp lại toàn bộ lễ
+    this.wakeLock = null;
+    this.sleepClockInterval = null;
+    this.lastSleepTap = 0;
 
     this.initElements();
     this.initYouTubeAPI();
@@ -29,8 +36,6 @@ class DohwaPlayer {
     this.nextBtn = document.getElementById('playerNextBtn');
     this.repeatBtn = document.getElementById('playerRepeatBtn');
     this.closeBtn = document.getElementById('playerCloseBtn');
-    this.videoToggleBtn = document.getElementById('playerVideoToggleBtn');
-    this.videoPopover = document.getElementById('youtubePopover');
     this.ytContainer = document.getElementById('ytPlayerContainer');
 
     if (this.playBtn) {
@@ -48,11 +53,8 @@ class DohwaPlayer {
     if (this.closeBtn) {
       this.closeBtn.addEventListener('click', () => this.stop());
     }
-    if (this.videoToggleBtn) {
-      this.videoToggleBtn.addEventListener('click', () => this.toggleVideoPopup());
-    }
 
-    // Audio element listener
+    // Lắng nghe audio element kết thúc
     this.audioElement.addEventListener('ended', () => {
       this.handleSongEnded();
     });
@@ -88,20 +90,33 @@ class DohwaPlayer {
     return (match && match[2].length === 11) ? match[2] : null;
   }
 
-  // Phát danh sách toàn bộ bài hát trong bộ lễ
-  playMassPlaylist(songs, startIndex = 0) {
-    if (!songs || !songs.length) return;
-
-    // Lọc các bài có link nghe
-    const playable = songs.filter(s => s.youtubeUrl || s.audioUrl);
+  // --- PHÁT TOÀN BỘ BỘ LỄ (TUẦN TỰ + TỰ ĐỘNG CHUYỂN BÀI + LẶP LẠI) ---
+  playMassSet(massSet, startSongId = null) {
+    if (!massSet || !massSet.songs) return;
+    const playable = massSet.songs.filter(s => (s.youtubeUrl && s.youtubeUrl.trim()) || s.audioUrl);
     if (!playable.length) {
-      alert('Các bài hát trong bộ lễ này chưa được gắn link YouTube nghe thử!');
+      alert('Bộ lễ này chưa được gắn link YouTube nghe thử!');
       return;
     }
 
     this.playlist = playable;
-    this.currentIndex = (startIndex >= 0 && startIndex < this.playlist.length) ? startIndex : 0;
+    this.currentMassSetTitle = massSet.title || massSet.weekName || 'Bộ Lễ';
+
+    let startIndex = 0;
+    if (startSongId) {
+      const foundIdx = this.playlist.findIndex(s => s.id === startSongId);
+      if (foundIdx !== -1) startIndex = foundIdx;
+    }
+
+    this.currentIndex = startIndex;
+    this.repeatMode = 'all'; // Luôn lặp lại toàn bộ lễ
+    this.updateRepeatBtnDisplay();
     this.playCurrentIndex();
+  }
+
+  // Tương thích ngược với các hàm cũ
+  playMassPlaylist(songs, startIndex = 0) {
+    this.playMassSet({ songs, title: 'Bộ Lễ' }, (songs && songs[startIndex]) ? songs[startIndex].id : null);
   }
 
   playSong(song) {
@@ -118,17 +133,23 @@ class DohwaPlayer {
     this.currentSong = song;
 
     const indexBadge = this.playlist.length > 1 ? `[${this.currentIndex + 1}/${this.playlist.length}] ` : '';
-    if (this.titleEl) this.titleEl.textContent = indexBadge + (song.title || 'Bài hát');
-    if (this.artistEl) this.artistEl.textContent = (song.roleLabel || '') + (song.composer ? ` • ${song.composer}` : '');
+    if (this.titleEl) this.titleEl.textContent = `${indexBadge}${song.title || 'Bài hát'}`;
+    if (this.artistEl) this.artistEl.textContent = `${song.roleLabel || 'Thánh Ca'} • Ca Đoàn Do Hwa`;
     if (this.playerBar) this.playerBar.style.display = 'flex';
 
-    // Highlight card đang phát nếu có
-    document.querySelectorAll('.song-card').forEach(c => c.classList.remove('now-playing'));
-    const activeCard = document.querySelector(`.song-card[data-song-id="${song.id}"]`);
-    if (activeCard) activeCard.classList.add('now-playing');
+    // Cập nhật text trên màn hình tối nếu đang bật
+    const sleepTitle = document.getElementById('sleepSongTitle');
+    if (sleepTitle) {
+      sleepTitle.textContent = `${indexBadge}${song.roleLabel || ''}: ${song.title || ''}`;
+    }
+
+    // Thiết lập MediaSession để hỗ trợ màn hình khóa trên iOS và Android
+    this.updateMediaSession(song);
+
+    // Kích hoạt audio nền anchor để giữ tiến trình trên di động
+    this.startBackgroundAudioAnchor();
 
     const ytId = this.extractYouTubeId(song.youtubeUrl);
-
     if (ytId) {
       this.playYouTube(ytId);
     } else if (song.audioUrl) {
@@ -138,18 +159,119 @@ class DohwaPlayer {
     }
   }
 
+  // --- AUDIO ANCHOR: GIỮ TIẾN TRÌNH AUDIO NỀN TRÊN SAFARI/CHROME MOBILE ---
+  startBackgroundAudioAnchor() {
+    try {
+      if (!this.backgroundAudio) {
+        // 1-giây silent wav base64
+        const SILENT_WAV = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+        this.backgroundAudio = new Audio(SILENT_WAV);
+        this.backgroundAudio.loop = true;
+      }
+      this.backgroundAudio.play().catch(() => {});
+    } catch (e) {}
+  }
+
+  // --- MEDIASESSION API: HIỂN THỊ ĐIỀU KHIỂN TRÊN MÀN HÌNH KHÓA IPHONE & ANDROID ---
+  updateMediaSession(song) {
+    if (!('mediaSession' in navigator)) return;
+
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: song.title || 'Thánh Ca',
+        artist: `${song.roleLabel || 'Hát Lễ'} • Ca Đoàn Do Hwa`,
+        album: this.currentMassSetTitle || 'Bộ Lễ Phụng Vụ',
+        artwork: [
+          { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' }
+        ]
+      });
+
+      navigator.mediaSession.playbackState = 'playing';
+
+      navigator.mediaSession.setActionHandler('play', () => this.togglePlay());
+      navigator.mediaSession.setActionHandler('pause', () => this.togglePlay());
+      navigator.mediaSession.setActionHandler('previoustrack', () => this.playPrevious());
+      navigator.mediaSession.setActionHandler('nexttrack', () => this.playNext());
+    } catch (e) {
+      console.warn('MediaSession error:', e);
+    }
+  }
+
+  // --- CHẾ ĐỘ MÀN HÌNH TỐI TIẾT KIỆM PIN & KHÓA BỎ TÚI (NGHE CHẠY NGẦM) ---
+  async enableOledSleepMode() {
+    const overlay = document.getElementById('oledSleepOverlay');
+    if (!overlay) return;
+
+    overlay.style.display = 'flex';
+    this.updateSleepClock();
+    if (!this.sleepClockInterval) {
+      this.sleepClockInterval = setInterval(() => this.updateSleepClock(), 1000);
+    }
+
+    // Yêu cầu WakeLock để màn hình không bị khóa phần cứng làm ngắt YouTube trên web
+    if ('wakeLock' in navigator) {
+      try {
+        this.wakeLock = await navigator.wakeLock.request('screen');
+      } catch (e) {}
+    }
+  }
+
+  updateSleepClock() {
+    const clockEl = document.getElementById('sleepClock');
+    if (clockEl) {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      clockEl.textContent = `${h}:${m}`;
+    }
+  }
+
+  handleSleepTap() {
+    const now = Date.now();
+    if (this.lastSleepTap && (now - this.lastSleepTap < 500)) {
+      // Double tap -> thoát chế độ màn hình tối
+      this.disableOledSleepMode();
+      this.lastSleepTap = 0;
+    } else {
+      this.lastSleepTap = now;
+      const hint = document.querySelector('#oledSleepOverlay div:last-child');
+      if (hint) {
+        hint.style.color = '#38bdf8';
+        hint.textContent = '✨ Chạm thêm 1 lần nữa để mở lại màn hình!';
+        setTimeout(() => {
+          if (hint) {
+            hint.style.color = '#555';
+            hint.textContent = '📱 Chế độ bỏ túi tiết kiệm pin • Chạm 2 lần để bật sáng';
+          }
+        }, 1500);
+      }
+    }
+  }
+
+  disableOledSleepMode() {
+    const overlay = document.getElementById('oledSleepOverlay');
+    if (overlay) overlay.style.display = 'none';
+    if (this.sleepClockInterval) {
+      clearInterval(this.sleepClockInterval);
+      this.sleepClockInterval = null;
+    }
+    if (this.wakeLock) {
+      try { this.wakeLock.release(); } catch (e) {}
+      this.wakeLock = null;
+    }
+  }
+
+  // --- ENGINE PHÁT YOUTUBE AUDIO-ONLY (ẨN VIDEO) ---
   playYouTube(videoId) {
     this.isYouTubeMode = true;
     this.audioElement.pause();
 
-    if (this.videoPopover) {
-      this.videoPopover.style.display = 'block';
-      if (this.videoToggleBtn) this.videoToggleBtn.classList.add('active');
-    }
-
     if (!this.ytPlayer) {
       if (!this.ytReady && !window.YT) {
-        this.ytContainer.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        if (this.ytContainer) {
+          this.ytContainer.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        }
         this.isPlaying = true;
         this.updatePlayBtnState();
         return;
@@ -161,7 +283,7 @@ class DohwaPlayer {
         videoId: videoId,
         playerVars: {
           autoplay: 1,
-          controls: 1,
+          controls: 0,
           rel: 0,
           modestbranding: 1
         },
@@ -174,11 +296,13 @@ class DohwaPlayer {
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.PLAYING) {
               this.isPlaying = true;
+              if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
             } else if (event.data === YT.PlayerState.PAUSED) {
               this.isPlaying = false;
+              if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
             } else if (event.data === YT.PlayerState.ENDED) {
               this.isPlaying = false;
-              this.handleSongEnded();
+              this.handleSongEnded(); // Tự động nhảy sang bài tiếp theo!
             }
             this.updatePlayBtnState();
           }
@@ -208,18 +332,18 @@ class DohwaPlayer {
     });
   }
 
+  // --- XỬ LÝ HẾT BÀI: TỰ ĐỘNG CHUYỂN BÀI & LẶP LẠI BỘ LỄ ---
   handleSongEnded() {
     if (this.repeatMode === 'one') {
-      // Lặp lại đúng bài này
       this.playCurrentIndex();
       return;
     }
 
     if (this.currentIndex < this.playlist.length - 1) {
       this.currentIndex++;
-      this.playCurrentIndex();
+      this.playCurrentIndex(); // Sang bài kế tiếp
     } else {
-      // Hết danh sách
+      // Đã hết bài cuối cùng (Kết Lễ) -> LẶP LẠI TỪ BÀI ĐẦU TIÊN (Kính Đức Mẹ)
       if (this.repeatMode === 'all') {
         this.currentIndex = 0;
         this.playCurrentIndex();
@@ -235,7 +359,7 @@ class DohwaPlayer {
     if (this.currentIndex < this.playlist.length - 1) {
       this.currentIndex++;
     } else {
-      this.currentIndex = 0;
+      this.currentIndex = 0; // Quay về bài 1
     }
     this.playCurrentIndex();
   }
@@ -245,7 +369,7 @@ class DohwaPlayer {
     if (this.currentIndex > 0) {
       this.currentIndex--;
     } else {
-      this.currentIndex = this.playlist.length - 1;
+      this.currentIndex = this.playlist.length - 1; // Nhảy tới bài cuối
     }
     this.playCurrentIndex();
   }
@@ -265,7 +389,7 @@ class DohwaPlayer {
     if (!this.repeatBtn) return;
     if (this.repeatMode === 'all') {
       this.repeatBtn.innerHTML = '🔁';
-      this.repeatBtn.title = 'Chế độ: Lặp lại tất cả bài trong bộ lễ';
+      this.repeatBtn.title = 'Chế độ: Lặp lại liên tục toàn bộ lễ';
       this.repeatBtn.style.color = '#7c3aed';
     } else if (this.repeatMode === 'one') {
       this.repeatBtn.innerHTML = '🔂';
@@ -273,7 +397,7 @@ class DohwaPlayer {
       this.repeatBtn.style.color = '#0284c7';
     } else {
       this.repeatBtn.innerHTML = '➡️';
-      this.repeatBtn.title = 'Chế độ: Không lặp lại (hết bài thì dừng)';
+      this.repeatBtn.title = 'Chế độ: Không lặp lại';
       this.repeatBtn.style.color = 'var(--text-muted)';
     }
   }
@@ -302,6 +426,9 @@ class DohwaPlayer {
       }
     }
     this.updatePlayBtnState();
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = this.isPlaying ? 'playing' : 'paused';
+    }
   }
 
   stop() {
@@ -313,21 +440,18 @@ class DohwaPlayer {
     }
     this.audioElement.pause();
     this.audioElement.currentTime = 0;
+    if (this.backgroundAudio) {
+      this.backgroundAudio.pause();
+    }
+
+    this.disableOledSleepMode();
 
     if (this.playerBar) this.playerBar.style.display = 'none';
-    if (this.videoPopover) this.videoPopover.style.display = 'none';
-
-    document.querySelectorAll('.song-card').forEach(c => c.classList.remove('now-playing'));
-    this.updatePlayBtnState();
-  }
-
-  toggleVideoPopup() {
-    if (!this.videoPopover) return;
-    const isShowing = this.videoPopover.style.display === 'block';
-    this.videoPopover.style.display = isShowing ? 'none' : 'block';
-    if (this.videoToggleBtn) {
-      this.videoToggleBtn.classList.toggle('active', !isShowing);
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = 'none';
     }
+
+    this.updatePlayBtnState();
   }
 
   updatePlayBtnState() {

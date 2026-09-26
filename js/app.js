@@ -203,7 +203,7 @@ class DohwaApp {
             </div>
             <div style="display:flex; gap:6px; flex-shrink:0;">
               ${(s.pdfData || s.pdfName) ? `<button type="button" class="btn-xs btn-outline" style="color:#0284c7; border-color:#bae6fd; background:#f0f9ff; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem;" onclick="window.dohwaPDFViewer.open('${s.pdfData||''}','${(s.title||'').replace(/'/g, "\\'")}','${s.pdfName||''}')">📄 Nốt</button>` : ''}
-              ${s.youtubeUrl ? `<button type="button" class="btn-xs btn-outline" style="color:#dc2626; border-color:#fca5a5; background:#fef2f2; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem; display:inline-flex; align-items:center; gap:3px;" onclick="window.dohwaPlayer.playSong(window.dohwaApp.findSongInMass('${m.id}','${s.id}'))">▶ Nghe</button>` : ''}
+              ${s.youtubeUrl ? `<button type="button" class="btn-xs btn-outline" style="color:#dc2626; border-color:#fca5a5; background:#fef2f2; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem; display:inline-flex; align-items:center; gap:3px;" onclick="window.dohwaPlayer.playMassSet(window.dohwaApp.findMassSet('${m.id}'), '${s.id}')">▶ Nghe</button>` : ''}
             </div>
           </div>
         `).join('')}
@@ -235,14 +235,14 @@ class DohwaApp {
 
             <!-- DÀN NÚT BẤM THAO TÁC GỌN GÀNG -->
             <div class="massset-card-actions-compact">
+              <button type="button" class="action-btn btn-play" style="background:linear-gradient(135deg,#dc2626,#991b1b); color:#fff; font-weight:800; border:none; box-shadow:0 2px 8px rgba(220,38,38,0.35);" onclick="window.playMassSet('${m.id}')">
+                ▶ Nghe Toàn Bộ Lễ
+              </button>
               <button type="button" class="action-btn btn-view" onclick="window.openFullViewModal('${m.id}')">
-                👁️ Xem Chi Tiết
+                👁️ Chi Tiết
               </button>
               <button type="button" class="action-btn btn-share" onclick="window.shareMassSet('${m.id}')">
                 📤 Chia sẻ
-              </button>
-              <button type="button" class="action-btn btn-play" onclick="window.playMassSet('${m.id}')">
-                🎧 Nghe
               </button>
               <button type="button" class="action-btn btn-pdf" onclick="window.downloadMassSetPdfs('${m.id}')">
                 📄 Tải PDF
@@ -459,11 +459,11 @@ class DohwaApp {
     if (window.dohwaStore) {
       ms = await window.dohwaStore.get('mass_sets', msId);
     }
-    if (!ms) ms = this.currentMassSet;
+    if (!ms) ms = this.findMassSet(msId);
     if (!ms || !ms.songs || !ms.songs.length) return;
 
     if (window.dohwaPlayer) {
-      window.dohwaPlayer.playMassPlaylist(ms.songs, 0);
+      window.dohwaPlayer.playMassSet(ms, null);
     }
   }
 
@@ -537,6 +537,15 @@ class DohwaApp {
       if (found) return found;
     }
     return null;
+  }
+
+  findMassSet(id) {
+    if (this.currentMassSet && this.currentMassSet.id === id) return this.currentMassSet;
+    if (this.archiveMassSets && this.archiveMassSets.length) {
+      const found = this.archiveMassSets.find(m => m.id === id);
+      if (found) return found;
+    }
+    return this.currentMassSet;
   }
 
   async downloadAllPdfs(msId) {
