@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Ca Đoàn Dohwa – Soạn Bộ Lễ & Phân Công Phụng Vụ</title>
+  <meta name="description" content="Hệ thống Soạn Bộ Lễ, Phân Công Bài Đọc và Tập Hát Phụng Vụ cho Ca Đoàn Dohwa. Siêu nhẹ, mượt mà trên điện thoại.">
+  <meta name="theme-color" content="#6b3fa0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- APP HEADER -->
+  <header class="app-header">
+    <div class="brand-wrap">
+      <div class="brand-icon">✝</div>
+      <div>
+        <div class="brand-title">CA ĐOÀN DOHWA</div>
+        <div class="brand-sub">Soạn Bộ Lễ & Phụng Vụ</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="https://soanbole.com" class="btn-icon" title="Về trang chủ soanbole.com" target="_blank" rel="noopener" style="text-decoration:none;">
+        🏠
+      </a>
+      <div class="user-badge" id="userHeaderBadge" title="Bấm để đổi tên ca viên hoặc xem thông tin">
+        👤 <span>Chọn tên</span>
+      </div>
+      <button class="btn-icon" id="openCaiDatBtn" title="Cài đặt ca đoàn & danh sách ca viên" onclick="window.dohwaApp && dohwaApp.openCaiDatModal()">
+        ⚙️
+      </button>
+      <button class="btn-icon" id="themeToggleBtn" title="Chuyển chế độ Sáng / Tối">
+        🌓
+      </button>
+    </div>
+  </header>
+
+  <!-- TOP NAVIGATION TABS (DÀNH CHO MÁY TÍNH / IPAD) -->
+  <nav class="top-nav-tabs">
+    <a href="https://soanbole.com" target="_blank" rel="noopener" class="top-tab-btn" style="text-decoration:none;" title="Về trang chủ soanbole.com">
+      <span>🏠</span> <span>Trang Chủ</span>
+    </a>
+    <button class="top-tab-btn active" data-tab="tab-hientai">
+      <span>📖</span> <span>Bộ Lễ Hiện Tại</span>
+    </button>
+    <button class="top-tab-btn" data-tab="tab-soanle">
+      <span>✍️</span> <span>Soạn Bộ Lễ</span>
+    </button>
+    <button class="top-tab-btn" data-tab="tab-kho">
+      <span>📚</span> <span>Kho Bộ Lễ</span>
+    </button>
+    <button class="top-tab-btn" data-tab="tab-thongke">
+      <span>📊</span> <span>Ai Đã Xem</span>
+    </button>
+    <button class="top-tab-btn" onclick="window.dohwaApp && dohwaApp.openCaiDatModal()">
+      <span>⚙️</span> <span>Cài Đặt</span>
+    </button>
+  </nav>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="main-content">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: BỘ LỄ HIỆN TẠI (GIAO DIỆN CHUẨN SOANBOLE) -->
+    <!-- ========================================== -->
+    <section id="tab-hientai" class="tab-pane active">
+      <div id="massSetCardContainer">
+        <!-- PRE-RENDERED CARD CHUẨN 100% THEO ẢNH THAM CHIẾU -->
+        <div class="massset-saved-card" id="card-mass-cn-25-tn-a">
+          <!-- HEADER -->
+          <div class="massset-card-header">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;">
+              <div>
+                <h2 class="massset-card-title">Bộ lễ Chúa Nhật 25 Thường Niên - Năm A</h2>
+                <div class="massset-card-subtitle">Chúa Nhật 25 Thường Niên - Năm A</div>
+              </div>
+              <div class="massset-card-meta">
+                <div class="massset-card-meta-line">👥 Ca đoàn ca-doan-dohwa</div>
+                <div class="massset-card-meta-line">👤 ✝ Peter Nguyễn ✝ • 26/09/2026</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 CỘT ZERO-SCROLL TRÊN MÁY TÍNH -->
+          <div class="massset-card-body-grid">
+            <!-- CỘT TRÁI: PHÂN CÔNG PHỤNG VỤ & DÀN NÚT BẤM -->
+            <div class="massset-card-left-part">
+              <div class="boleht-role-summary-compact">
+                <div class="boleht-role-grid">
+                  <div class="boleht-role-item-compact">
+                    <span class="boleht-role-name">📖 Bài đọc 1:</span>
+                    <span class="boleht-role-assignee" id="card-role-reader1">Mai Ngọc Thu</span>
+                  </div>
+                  <div class="boleht-role-item-compact">
+                    <span class="boleht-role-name">🎶 Thánh Vịnh:</span>
+                    <span class="boleht-role-assignee" id="card-role-psalmist">Mai Ngọc Thu</span>
+                  </div>
+                  <div class="boleht-role-item-compact">
+                    <span class="boleht-role-name">📖 Bài đọc 2:</span>
+                    <span class="boleht-role-assignee" id="card-role-reader2">Phong Nguyễn</span>
+                  </div>
+                  <div class="boleht-role-item-compact">
+                    <span class="boleht-role-name">🙏 Lời Nguyện:</span>
+                    <span class="boleht-role-assignee" id="card-role-petitions">Mai Tuấn</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DÀN NÚT BẤM THAO TÁC GỌN GÀNG -->
+              <div class="massset-card-actions-compact">
+                <button type="button" class="action-btn btn-view" onclick="window.openFullViewModal('mass-cn-25-tn-a')">
+                  👁️ Xem Chi Tiết
+                </button>
+                <button type="button" class="action-btn btn-share" onclick="window.shareMassSet('mass-cn-25-tn-a')">
+                  📤 Chia sẻ
+                </button>
+                <button type="button" class="action-btn btn-play" onclick="window.playMassSet('mass-cn-25-tn-a')">
+                  🎧 Nghe
+                </button>
+                <button type="button" class="action-btn btn-pdf" onclick="window.downloadMassSetPdfs('mass-cn-25-tn-a')">
+                  📄 Tải PDF
+                </button>
+                <button type="button" class="action-btn btn-baidoc" onclick="window.openMassBaiDoc('mass-cn-25-tn-a')">
+                  📖 Bài Đọc & Lời Nguyện
+                </button>
+                <button type="button" class="action-btn btn-viewers" onclick="window.viewMassAttendance('mass-cn-25-tn-a')">
+                  👤 Ai đã xem
+                </button>
+                <button type="button" class="action-btn btn-edit" onclick="window.editMassSet('mass-cn-25-tn-a')">
+                  ✏️ Sửa
+                </button>
+                <button type="button" class="action-btn btn-delete" onclick="window.deleteMassSet('mass-cn-25-tn-a')">
+                  🗑️ Xóa
+                </button>
+              </div>
+            </div>
+
+            <!-- CỘT PHẢI: DANH SÁCH BÀI HÁT & FOOTER -->
+            <div class="massset-card-right-part">
+              <div class="massset-songs-list-compact">
+                <div class="massset-song-line" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,0,0,0.05); padding:3px 0;">
+                  <div><span class="massset-song-role">Nhập Lễ:</span> <strong>Chung lời cảm tạ</strong> <span class="massset-song-composer">- LM Nguyễn Duy</span></div>
+                  <div><button type="button" class="btn-xs btn-outline" style="color:#0284c7; padding:1px 6px;" onclick="window.dohwaPDFViewer.open(null,'Chung lời cảm tạ','Chung_loi_cam_ta.pdf')">📄 Nốt</button></div>
+                </div>
+                <div class="massset-song-line" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,0,0,0.05); padding:3px 0;">
+                  <div><span class="massset-song-role">Thánh Vịnh:</span> <strong>Chúa Nhật 25 Thường Niên A</strong> <span class="massset-song-composer">- Lm. Bùi Ninh</span></div>
+                  <div><button type="button" class="btn-xs btn-outline" style="color:#0284c7; padding:1px 6px;" onclick="window.dohwaPDFViewer.open(null,'Thánh Vịnh 25 TN A','tv_cn25_tna.pdf')">📄 Nốt</button></div>
+                </div>
+                <div class="massset-song-line" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,0,0,0.05); padding:3px 0;">
+                  <div><span class="massset-song-role">Alleluia:</span> <strong>ALLELUIA</strong> <span class="massset-song-composer">- Lm. Huy Hoàng</span></div>
+                  <div><button type="button" class="btn-xs btn-outline" style="color:#0284c7; padding:1px 6px;" onclick="window.dohwaPDFViewer.open(null,'Alleluia','alleluia.pdf')">📄 Nốt</button></div>
+                </div>
+                <div class="massset-song-line" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,0,0,0.05); padding:3px 0;">
+                  <div><span class="massset-song-role">Dâng Lễ:</span> <strong>XIN DÂNG CỦA LỄ CHÂN THÀNH</strong> <span class="massset-song-composer">- Lm Jb. An Ninh</span></div>
+                  <div><button type="button" class="btn-xs btn-outline" style="color:#0284c7; padding:1px 6px;" onclick="window.dohwaPDFViewer.open(null,'Xin Dâng Của Lễ Chân Thành','dang_le.pdf')">📄 Nốt</button></div>
+                </div>
+                <div class="massset-song-line" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,0,0,0.05); padding:3px 0;">
+                  <div><span class="massset-song-role">Hiệp Lễ:</span> <strong>CHÚA LUÔN CÒN MÃI</strong> <span class="massset-song-composer">- Phanxico</span></div>
+                  <div><button type="button" class="btn-xs btn-outline" style="color:#0284c7; padding:1px 6px;" onclick="window.dohwaPDFViewer.open(null,'Chúa Luôn Còn Mãi','hiep_le.pdf')">📄 Nốt</button></div>
+                </div>
+                <div class="massset-song-line" style="display:flex; justify-content:space-between; align-items:center; padding:3px 0;">
+                  <div><span class="massset-song-role">Kết Lễ:</span> <strong>Nguồn Cậy Trông</strong> <span class="massset-song-composer">- Hoàng Vũ</span></div>
+                  <div><button type="button" class="btn-xs btn-outline" style="color:#0284c7; padding:1px 6px;" onclick="window.dohwaPDFViewer.open(null,'Nguồn Cậy Trông','ket_le.pdf')">📄 Nốt</button></div>
+                </div>
+              </div>
+              <div class="massset-saved-footer-compact">
+                <span>6 mục đã chọn</span>
+                <span>Cập nhật 26/09/2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BÀI ĐÃ SOẠN TRONG NĂM (ACCORDION CHUẨN SOANBOLE) -->
+      <!-- ========================================== -->
+      <div class="card" id="sec-baidasoan" style="padding:16px 20px; margin-top:20px; border-radius:16px; border:1px solid var(--border);">
+        <!-- Header Accordion -->
+        <div style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="window.dohwaApp.toggleBaiDaSoanMain()">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span id="baiDaSoanMainIcon" style="background:#0f766e; color:#fff; border-radius:6px; width:22px; height:22px; display:inline-flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:800;">−</span>
+            <h3 style="font-size:1.05rem; font-weight:800; color:var(--text-main); margin:0;">
+              📚 Bài đã soạn trong năm
+            </h3>
+          </div>
+        </div>
+        <div id="baiDaSoanMainSubtitle" style="font-size:0.8rem; color:var(--text-muted); margin-top:4px; margin-left:30px; cursor:pointer;" onclick="window.dohwaApp.toggleBaiDaSoanMain()">
+          60 bài khác nhau • 82 lượt qua 12 bộ lễ • bấm để đóng
+        </div>
+
+        <!-- Nội dung các danh mục (Categories Accordion) -->
+        <div id="baiDaSoanCategoriesContainer" style="margin-top:14px; display:flex; flex-direction:column; gap:12px;">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: SOẠN BỘ LỄ THÔNG MINH -->
+    <!-- ========================================== -->
+    <section id="tab-soanle" class="tab-pane">
+      <div class="soanle-grid">
+        <!-- CỘT 1 (TRÁI): PHỤNG VỤ & PHÂN CÔNG CA VIÊN -->
+        <div class="soanle-left-col">
+          <!-- 1. Chọn ngày & Tự động Lịch Phụng Vụ -->
+          <div class="soan-card">
+            <div class="box-title">🗓️ Ngày Cử Hành & Lịch Phụng Vụ</div>
+            <div class="date-lit-row">
+              <div class="form-group-inline">
+                <label>Ngày:</label>
+                <input type="date" id="soanMassDate" class="form-control-compact" style="font-weight:700;">
+              </div>
+              <div class="form-group-inline">
+                <label>Mùa:</label>
+                <input type="text" id="soanMassSeason" class="form-control-compact" readonly style="font-weight:700; color:var(--primary); background:var(--bg-card-subtle);">
+              </div>
+            </div>
+            <div class="form-group-inline" style="margin-top:6px;">
+              <label>Tên Lễ:</label>
+              <input type="text" id="soanMassTitle" class="form-control-compact" style="font-weight:700; font-size:0.88rem;" placeholder="Tự động điền khi chọn ngày...">
+            </div>
+          </div>
+
+
+          <!-- 3. Phân Công Đọc Sách & Phụng Vụ (2x2 Grid) -->
+          <div class="soan-card">
+            <div class="box-title-with-actions">
+              <span>📖 Phân Công Đọc Sách & Phụng Vụ</span>
+              <button type="button" class="btn-xs btn-outline" id="soanAutoSuggestDutyBtn">
+                ✨ Gợi ý xoay vòng
+              </button>
+            </div>
+            <div class="duties-grid-compact" id="soanDutyInputsContainer">
+              <!-- 4 compact duty selects -->
+            </div>
+          </div>
+
+          <!-- 4. Nút Lưu Bộ Lễ -->
+          <div class="soan-card save-bar-compact">
+            <label style="display:flex; align-items:center; gap:6px; font-size:0.8rem; cursor:pointer; font-weight:700;">
+              <input type="checkbox" id="soanSetActive" checked style="width:16px; height:16px;">
+              <span>Đặt làm <strong>Bộ Lễ Hiện Tại</strong></span>
+            </label>
+            <button type="button" class="btn btn-primary" id="saveMassSetBtn" style="padding:7px 18px; font-size:0.88rem;">
+              💾 Lưu Bộ Lễ Này
+            </button>
+          </div>
+        </div>
+
+        <!-- CỘT 2 (PHẢI): BÀI HÁT PHỤNG VỤ & FILE PDF -->
+        <div class="soanle-right-col">
+          <div class="soan-card" style="margin-bottom:0;">
+            <div class="box-title-with-actions">
+              <span>🎶 7 Bài Hát Phụng Vụ & Nốt Nhạc PDF</span>
+              <button type="button" class="btn-xs btn-outline" id="addManualSongBtn">
+                + Thêm bài hát
+              </button>
+            </div>
+
+            <!-- KÉO THẢ PDF SIÊU GỌN -->
+            <div class="upload-dropzone-compact" id="uploadDropzone">
+              <div class="drop-icon">📥</div>
+              <div class="drop-text">
+                <strong>Kéo thả 7 - 10 file PDF vào đây</strong> hoặc bấm để chọn.<br>
+                <span>Hệ thống tự nhận diện: Nhập Lễ, Đáp Ca, Alleluia, Dâng Lễ, Hiệp Lễ, Tạ Lễ, Kết Lễ...</span>
+              </div>
+              <input type="file" id="pdfBatchInput" multiple accept="application/pdf" style="display:none;">
+            </div>
+
+            <!-- DANH SÁCH 7 BÀI HÁT GỌN GÀNG (MỖI BÀI 1 DÒNG) -->
+            <div class="song-slots-compact-wrap" id="soanSongSlotsContainer">
+              <!-- Render 7 compact rows -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: KHO BỘ LỄ GỌN GÀNG (20-30 BỘ/MÀN HÌNH) -->
+    <!-- ========================================== -->
+    <section id="tab-kho" class="tab-pane">
+      <div class="card" style="padding: 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div>
+            <h2 style="font-size:1.25rem; font-weight:800; color:var(--text-main);">📚 Kho Bộ Lễ Đã Soạn</h2>
+            <div style="font-size:0.84rem; color:var(--text-muted);">Quản lý danh sách các bộ lễ gọn gàng, tiện theo dõi</div>
+          </div>
+          <button class="btn btn-primary" onclick="window.dohwaApp.switchTab('tab-soanle')">
+            + Soạn Lễ Mới
+          </button>
+        </div>
+        <div id="massSetsArchiveContainer">
+          <!-- Render compact table -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: THỐNG KÊ CHUYÊN CẦN -->
+    <!-- ========================================== -->
+    <section id="tab-thongke" class="tab-pane">
+      <div class="card">
+        <h2 class="card-title">📊 Ai Đã Xem Bộ Lễ</h2>
+        <div class="stat-grid">
+          <div class="stat-box">
+            <div class="stat-number" id="statTotalViews">0</div>
+            <div class="stat-label">Tổng Lượt Xem</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="statUniqueMembers">0</div>
+            <div class="stat-label">Ca Viên Đã Xem</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="statPercent">0%</div>
+            <div class="stat-label">Tỷ Lệ Chuyên Cần</div>
+          </div>
+        </div>
+
+        <h3 style="font-size:0.95rem; font-weight:700; margin: 16px 0 10px 0;">Danh Sách Chi Tiết</h3>
+        <div style="overflow-x:auto;">
+          <table class="roster-table">
+            <thead>
+              <tr>
+                <th style="width:40px;">STT</th>
+                <th>Ca Viên</th>
+                <th>Số Lần Xem</th>
+                <th>Xem Lần Cuối</th>
+              </tr>
+            </thead>
+            <tbody id="statAttendanceBody">
+              <!-- Render attendance -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL XEM BÀI ĐỌC & LỜI NGUYỆN (4 TABS CHUẨN SOANBOLE) -->
+  <!-- ========================================== -->
+  <div class="baidoc-overlay" id="baiDocModalOverlay" style="display:none;">
+    <div class="baidoc-modal">
+      <div class="baidoc-header">
+        <div>
+          <span style="font-size:1.1rem; font-weight:800; color:var(--text-main);" id="baiDocModalTitle">📖 Bài Đọc & Lời Nguyện</span>
+          <div style="font-size:0.82rem; color:var(--text-muted); font-style:italic;" id="baiDocModalSubtitle">Chúa Nhật 25 Thường Niên - Năm A</div>
+        </div>
+        <button id="baiDocModalClose" onclick="window.baiDocViewer && baiDocViewer.close()" style="background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--text-muted); padding:4px 10px;">&times;</button>
+      </div>
+
+      <!-- 4 TAB PHỤNG VỤ CHUẨN -->
+      <div class="baidoc-tabs">
+        <button class="baidoc-tab-btn active" data-tab="bd1" onclick="window.baiDocViewer.switchTab('bd1')">Bài đọc 1</button>
+        <button class="baidoc-tab-btn" data-tab="bd2" onclick="window.baiDocViewer.switchTab('bd2')">Bài đọc 2</button>
+        <button class="baidoc-tab-btn" data-tab="tv" onclick="window.baiDocViewer.switchTab('tv')">Thánh Vịnh</button>
+        <button class="baidoc-tab-btn" data-tab="lnth" onclick="window.baiDocViewer.switchTab('lnth')">Lời nguyện TH</button>
+      </div>
+
+      <div class="baidoc-content" id="baiDocContent">
+        <!-- Content dynamically loaded -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL XEM BỘ LỄ CHI TIẾT (FULL VIEW) -->
+  <div id="fullViewModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:9999; display:none; align-items:center; justify-content:center; padding:14px;">
+    <div class="card" style="width:100%; max-width:640px; max-height:88vh; overflow-y:auto; margin-bottom:0;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid var(--border); padding-bottom:10px;">
+        <h3 id="fullViewModalTitle" style="font-size:1.15rem; font-weight:800; color:var(--primary);">Chi Tiết Bộ Lễ</h3>
+        <button class="btn-icon" onclick="window.dohwaApp.closeFullViewModal()">&times;</button>
+      </div>
+      <div id="fullViewSongsList">
+        <!-- List songs with individual PDF/play buttons -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CÀI ĐẶT (QUẢN LÝ CA VIÊN & THÀNH VIÊN) -->
+  <div class="caidat-overlay" id="caiDatModal" style="display:none;">
+    <div class="caidat-modal">
+      <div class="caidat-header">
+        <h3 style="font-size:1.15rem; font-weight:800; color:var(--primary);">⚙️ Cài Đặt Ca Đoàn & Ca Viên</h3>
+        <button class="btn-icon" onclick="window.dohwaApp && dohwaApp.closeCaiDatModal()">&times;</button>
+      </div>
+      <div class="caidat-body" id="caiDatBody">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY BOTTOM MUSIC PLAYER (PLAYLIST + LẶP LẠI) -->
+  <div class="sticky-player" id="stickyPlayer" style="display:none;">
+    <div class="player-song-meta">
+      <div class="player-thumb">🎵</div>
+      <div class="player-text">
+        <div class="player-title" id="playerTitle">Tên bài hát</div>
+        <div class="player-artist" id="playerArtist">Tác giả</div>
+      </div>
+    </div>
+    <div class="player-controls">
+      <button class="btn-icon" id="playerPrevBtn" title="Bài trước">⏮</button>
+      <button class="btn-icon" id="playerPlayBtn" title="Phát / Dừng">▶</button>
+      <button class="btn-icon" id="playerNextBtn" title="Bài tiếp">⏭</button>
+      <button class="btn-icon" id="playerRepeatBtn" title="Chế độ lặp lại">🔁</button>
+      <button class="btn-icon" id="playerVideoToggleBtn" title="Xem video YouTube mini">📺</button>
+      <button class="btn-icon" id="playerCloseBtn" title="Đóng thanh phát">✕</button>
+    </div>
+  </div>
+
+  <!-- YouTube Video Popover Container -->
+  <div class="youtube-popover" id="youtubePopover" style="display:none;">
+    <div id="ytPlayerContainer" style="width:100%; height:100%;"></div>
+  </div>
+
+  <!-- FULLSCREEN PDF MODAL VIEWER -->
+  <div class="pdf-modal" id="pdfModal" style="display:none;">
+    <div class="pdf-toolbar">
+      <div class="pdf-title" id="pdfModalTitle">Nốt Nhạc Thánh Ca</div>
+      <div class="pdf-tools">
+        <button class="action-btn btn-pdf" id="pdfDownloadBtn">📥 Tải PDF</button>
+        <button class="action-btn btn-view" id="pdfFullscreenBtn">⛶ Toàn màn hình</button>
+        <button class="action-btn btn-delete" id="pdfCloseBtn">✕ Đóng</button>
+      </div>
+    </div>
+    <div class="pdf-content-area">
+      <div class="pdf-frame-wrapper" id="pdfFrameWrapper"></div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAVIGATION BAR (CHO MÀN HÌNH ĐIỆN THOẠI) -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="tab-hientai">
+      <span class="nav-icon">📖</span>
+      <span>Bộ Lễ</span>
+    </button>
+    <button class="nav-item" data-tab="tab-soanle">
+      <span class="nav-icon">✍️</span>
+      <span>Soạn Lễ</span>
+    </button>
+    <button class="nav-item" data-tab="tab-kho">
+      <span class="nav-icon">📚</span>
+      <span>Kho Lễ</span>
+    </button>
+    <button class="nav-item" data-tab="tab-thongke">
+      <span class="nav-icon">📊</span>
+      <span>Ai Đã Xem</span>
+    </button>
+  </nav>
+
+  <!-- ========================================== -->
+  <!-- MODAL CHỌN TÊN CA VIÊN VÀO PHÒNG (MEMBER GATE - SOANBOLE STYLE) -->
+  <!-- ========================================== -->
+  <div class="caidat-overlay" id="sbMemberGateOverlay" style="display:none; z-index:100001; background:rgba(20,12,35,0.75); backdrop-filter:blur(6px);">
+    <div style="width:min(480px,94vw); max-height:88vh; overflow-y:auto; background:var(--bg-card,#fff); border-radius:20px; padding:22px; box-shadow:0 20px 60px rgba(0,0,0,0.38); text-align:center;">
+      <div style="font-size:2rem; line-height:1; margin-bottom:8px;">👉</div>
+      <h3 style="font-size:1.15rem; font-weight:900; color:var(--text-main); margin-bottom:2px;">Chọn Đúng Tên Ca Viên Của Bạn</h3>
+      <div style="font-size:0.8rem; color:var(--primary); font-weight:700; margin-bottom:12px;">Phòng: Ca Đoàn Dohwa</div>
+
+      <div style="background:#fffdf7; border:1px solid #fed7aa; border-radius:12px; padding:10px 14px; margin-bottom:14px;">
+        <div style="font-size:0.95rem; font-weight:900; color:#9a3412; font-family:'Times New Roman',serif;">"Hát là cầu nguyện 2 lần"</div>
+        <div style="font-size:0.75rem; color:#b45309; font-weight:700; margin-top:2px;">— Thánh Augustinô —</div>
+        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Hát là phục vụ Thiên Chúa và Cộng Đoàn Phụng Vụ</div>
+      </div>
+
+      <!-- THANH TIẾN TRÌNH XÁC NHẬN -->
+      <div id="memberGateProgressWrap" style="display:none; margin-bottom:14px;">
+        <div style="font-size:0.8rem; font-weight:700; color:var(--primary); margin-bottom:4px;" id="memberGateProgressText">⏳ Đang xác nhận thiết bị và vào phòng...</div>
+        <div style="width:100%; height:6px; background:#e2e8f0; border-radius:9999px; overflow:hidden;">
+          <div id="memberGateProgressBar" style="width:0%; height:100%; background:linear-gradient(90deg, #6b3fa0, #ec4899); transition:width 0.4s ease-out;"></div>
+        </div>
+      </div>
+
+      <div id="memberGateError" style="display:none; color:#ef4444; background:rgba(239,68,68,0.08); border-radius:8px; padding:8px 10px; font-size:0.8rem; font-weight:700; margin-bottom:10px;"></div>
+
+      <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:10px; text-align:left; font-weight:600;">
+        Danh sách ca viên ca đoàn (Chọn tên của bạn):
+      </div>
+
+      <div id="memberGateButtonsGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px; margin-bottom:14px;">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <div style="font-size:0.74rem; color:var(--text-muted); line-height:1.4;">
+        * Chỉ cần chọn <strong>duy nhất 1 lần</strong> trên thiết bị này. Các lần sau web sẽ tự động ghi nhớ và điểm danh chuyên cần cho bạn.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL 1: AI ĐÃ XEM (CHUẨN SOANBOLE SCREENSHOT 1) -->
+  <!-- ========================================== -->
+  <div class="baidoc-overlay" id="aiDaXemModalOverlay" style="display:none; z-index:100000; background:rgba(0,0,0,0.45); backdrop-filter:blur(3px);">
+    <div style="width:min(440px,94vw); max-height:85vh; background:var(--bg-card,#fff); border-radius:18px; box-shadow:0 20px 50px rgba(0,0,0,0.28); overflow:hidden; display:flex; flex-direction:column;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; padding:16px 20px 12px; border-bottom:1px solid var(--border);">
+        <div>
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:8px; margin:0;">
+            👤 Ai đã xem
+          </h3>
+          <div id="aiDaXemMassTitle" style="font-size:0.8rem; color:var(--primary); font-weight:700; margin-top:2px;"></div>
+        </div>
+        <button type="button" class="btn-icon" onclick="window.dohwaApp.closeAiDaXemModal()" style="font-size:1.2rem; cursor:pointer;">✕</button>
+      </div>
+      <div style="padding:10px 18px; overflow-y:auto; flex:1;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border); color:var(--text-muted); font-size:0.8rem;">
+              <th style="padding:10px 8px; text-align:left; font-weight:700;">Tên</th>
+              <th style="padding:10px 8px; text-align:center; font-weight:700;">Lần</th>
+              <th style="padding:10px 8px; text-align:right; font-weight:700;">Lần cuối</th>
+            </tr>
+          </thead>
+          <tbody id="aiDaXemModalTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL 2: DANH SÁCH CHỌN TÊN KHÔNG CẦN ĐĂNG NHẬP (CHUẨN SOANBOLE SCREENSHOT 2) -->
+  <!-- ========================================== -->
+  <div class="baidoc-overlay" id="danhSachChonTenModalOverlay" style="display:none; z-index:100000; background:rgba(0,0,0,0.55); backdrop-filter:blur(4px);">
+    <div style="width:min(640px,95vw); max-height:90vh; background:var(--bg-card,#fff); border-radius:20px; box-shadow:0 24px 60px rgba(0,0,0,0.3); overflow:hidden; display:flex; flex-direction:column;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; padding:18px 22px 12px; border-bottom:1px solid var(--border);">
+        <div>
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:8px; margin:0;">
+            📝 Danh sách chọn tên không cần đăng nhập
+          </h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px; margin-bottom:0;">
+            Dán danh sách ca đoàn, mỗi dòng một tên. Thành viên bấm link rồi chỉ chọn tên để vào bộ lễ.
+          </p>
+        </div>
+        <button type="button" class="btn-icon" onclick="window.dohwaApp.closeDanhSachChonTenModal()" style="font-size:1.2rem; cursor:pointer;">✕</button>
+      </div>
+
+      <div style="padding:16px 22px; overflow-y:auto; flex:1;">
+        <!-- KHUNG NHẬP DANH SÁCH MỖI DÒNG MỘT TÊN -->
+        <textarea id="modalRosterTextarea" class="form-control" rows="5" style="width:100%; font-size:0.88rem; font-family:inherit; resize:vertical; padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-bottom:10px;" placeholder="Đôn Đôn&#10;Hồ Hoàng&#10;Kính Nguyễn..."></textarea>
+        
+        <div style="display:flex; gap:10px; margin-bottom:18px;">
+          <button type="button" class="btn btn-primary" onclick="window.dohwaApp.saveRosterFromTextarea()" style="padding:8px 18px; font-size:0.85rem; font-weight:700; background:#6b3fa0; border-radius:8px;">
+            💾 Lưu danh sách
+          </button>
+          <button type="button" class="btn btn-outline" onclick="window.dohwaApp.reloadRosterTextarea()" style="padding:8px 16px; font-size:0.85rem; font-weight:700; border-radius:8px;">
+            🔄 Tải lại
+          </button>
+        </div>
+
+        <!-- BẢNG DANH SÁCH VÀ TRẠNG THÁI CA VIÊN -->
+        <div style="overflow-x:auto; border:1px solid var(--border); border-radius:10px;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.84rem;">
+            <thead>
+              <tr style="background:var(--bg-card-subtle); border-bottom:1px solid var(--border); color:var(--text-muted); font-size:0.8rem;">
+                <th style="padding:10px 12px; text-align:left;">Tên</th>
+                <th style="padding:10px 8px; text-align:center;">Trạng thái</th>
+                <th style="padding:10px 8px; text-align:center;">Lượt vào</th>
+                <th style="padding:10px 8px; text-align:center;">Lần cuối</th>
+                <th style="padding:10px 12px; text-align:center; min-width:160px;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="modalRosterTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT MODULES -->
+  <script src="js/store.js"></script>
+  <script src="js/liturgical-helper.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/pdf-viewer.js"></script>
+  <script src="js/soan-le.js"></script>
+  <script src="js/thong-ke.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

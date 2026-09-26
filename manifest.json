@@ -1,0 +1,17 @@
+{
+  "name": "Ca Đoàn Dohwa",
+  "short_name": "Dohwa",
+  "description": "Ứng dụng soạn bộ lễ, phân công phụng vụ và học hát chuyên biệt cho Ca Đoàn Dohwa",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#120e1c",
+  "theme_color": "#6b3fa0",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

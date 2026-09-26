@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6b3fa0"/>
+      <stop offset="100%" stop-color="#3d1d66"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe27a"/>
+      <stop offset="100%" stop-color="#c8963c"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <!-- Cross -->
+  <path d="M256 90 L256 420 M180 180 L332 180" stroke="url(#gold)" stroke-width="32" stroke-linecap="round"/>
+  <!-- Musical note decoration -->
+  <circle cx="360" cy="350" r="30" fill="url(#gold)"/>
+  <path d="M390 350 L390 240 L430 250" stroke="url(#gold)" stroke-width="16" stroke-linecap="round" fill="none"/>
+</svg>
