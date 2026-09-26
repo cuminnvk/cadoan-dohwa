@@ -31,7 +31,11 @@
       <div class="user-badge" id="userHeaderBadge" title="Bấm để đổi tên ca viên hoặc xem thông tin">
         👤 <span>Chọn tên</span>
       </div>
-      <div id="adminHeaderBadgeWrap"></div>
+      <div id="adminHeaderBadgeWrap">
+        <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:#78350f; color:#fef3c7; border:1px solid #f59e0b; padding:5px 9px; font-weight:800; border-radius:8px; font-size:0.78rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;" title="Đăng nhập quyền Admin">
+          🔐 <span>Quản Trị</span>
+        </button>
+      </div>
       <button class="btn-icon" id="openCaiDatBtn" title="Cài đặt ca đoàn & danh sách ca viên" onclick="window.dohwaApp && dohwaApp.openCaiDatModal()">
         ⚙️
       </button>
@@ -449,6 +453,10 @@
       <span class="nav-icon">📊</span>
       <span>Ai Đã Xem</span>
     </button>
+    <button class="nav-item" id="bottomNavAdminBtn" onclick="window.dohwaApp.handleAdminClick()">
+      <span class="nav-icon" id="bottomNavAdminIcon">🔐</span>
+      <span id="bottomNavAdminText">Quản Trị</span>
+    </button>
   </nav>
 
   <!-- ========================================== -->
@@ -480,7 +488,16 @@
   <!-- ========================================== -->
   <div class="caidat-overlay" id="sbMemberGateOverlay" style="display:none; z-index:100001; background:rgba(20,12,35,0.75); backdrop-filter:blur(6px);">
     <div style="width:min(480px,94vw); max-height:88vh; overflow-y:auto; background:var(--bg-card,#fff); border-radius:20px; padding:22px; box-shadow:0 20px 60px rgba(0,0,0,0.38); text-align:center;">
-      <div style="font-size:2rem; line-height:1; margin-bottom:8px;">👉</div>
+      
+      <!-- NÚT ĐĂNG NHẬP ADMIN NỔI BẬT TO RÕ NGAY ĐẦU MODAL -->
+      <div style="margin-bottom:14px;">
+        <button type="button" class="btn btn-primary" onclick="document.getElementById('sbMemberGateOverlay').style.display='none'; window.dohwaApp.openAdminLoginModal();" style="width:100%; background:linear-gradient(135deg, #78350f, #d97706); border:none; padding:11px 16px; font-weight:800; font-size:0.92rem; border-radius:12px; box-shadow:0 4px 14px rgba(217,119,6,0.38); display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
+          <span>👑</span>
+          <span>BẠN LÀ ADMIN? BẤM ĐÂY ĐỂ ĐĂNG NHẬP (PIN: 2019)</span>
+        </button>
+      </div>
+
+      <div style="font-size:1.8rem; line-height:1; margin-bottom:6px;">👉</div>
       <h3 style="font-size:1.15rem; font-weight:900; color:var(--text-main); margin-bottom:2px;">Chọn Đúng Tên Ca Viên Của Bạn</h3>
       <div style="font-size:0.8rem; color:var(--primary); font-weight:700; margin-bottom:12px;">Phòng: Ca Đoàn Dohwa</div>
 
@@ -508,14 +525,8 @@
         <!-- Dynamically rendered -->
       </div>
 
-      <div style="font-size:0.74rem; color:var(--text-muted); line-height:1.4; margin-bottom:12px;">
+      <div style="font-size:0.74rem; color:var(--text-muted); line-height:1.4;">
         * Ca viên chỉ cần chọn <strong>duy nhất 1 lần</strong> trên thiết bị này. Các lần sau web sẽ tự động ghi nhớ và điểm danh chuyên cần.
-      </div>
-
-      <div style="padding-top:10px; border-top:1px solid var(--border);">
-        <button type="button" class="btn-xs btn-outline" onclick="document.getElementById('sbMemberGateOverlay').style.display='none'; window.dohwaApp.openAdminLoginModal();" style="color:var(--primary); font-size:0.78rem; font-weight:700; border-radius:8px; padding:5px 14px;">
-          🔐 Bạn là Admin? Bấm vào đây để đăng nhập
-        </button>
       </div>
     </div>
   </div>

@@ -779,24 +779,37 @@ class DohwaApp {
   // ==========================================
   // ADMIN AUTHENTICATION & UI MANAGEMENT
   // ==========================================
+  handleAdminClick() {
+    if (window.dohwaStore?.isAdmin()) {
+      this.openCaiDatModal();
+    } else {
+      this.openAdminLoginModal();
+    }
+  }
+
   updateAdminUI() {
     const isAdmin = window.dohwaStore?.isAdmin();
     const adminWrap = document.getElementById('adminHeaderBadgeWrap');
     if (adminWrap) {
       if (isAdmin) {
         adminWrap.innerHTML = `
-          <div class="user-badge" style="background:linear-gradient(135deg,#78350f,#d97706); color:#fff; border-color:#f59e0b; cursor:pointer;" onclick="window.dohwaApp.openAdminMenuModal()" title="Bạn đang có quyền Ca Trưởng / Quản Trị (Bấm để mở cài đặt)">
-            👑 <span>Ca Trưởng</span>
-          </div>
+          <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:linear-gradient(135deg,#78350f,#d97706); color:#fff; border:1px solid #f59e0b; padding:5px 10px; font-weight:800; border-radius:8px; font-size:0.78rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;" title="Bấm để mở Cài Đặt">
+            👑 <span>Admin</span>
+          </button>
         `;
       } else {
         adminWrap.innerHTML = `
-          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.openAdminLoginModal()" style="padding:4px 8px; font-weight:700; border-radius:8px; font-size:0.75rem; border-color:var(--border);" title="Đăng nhập quyền Ca Trưởng / Admin">
-            🔒 Quản Trị
+          <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:#78350f; color:#fef3c7; border:1px solid #f59e0b; padding:5px 9px; font-weight:800; border-radius:8px; font-size:0.78rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;" title="Đăng nhập quyền Admin">
+            🔐 <span>Quản Trị</span>
           </button>
         `;
       }
     }
+
+    const bNavText = document.getElementById('bottomNavAdminText');
+    const bNavIcon = document.getElementById('bottomNavAdminIcon');
+    if (bNavText) bNavText.textContent = isAdmin ? 'Admin' : 'Quản Trị';
+    if (bNavIcon) bNavIcon.textContent = isAdmin ? '👑' : '🔐';
 
     const khoBtn = document.getElementById('khoSoanMoiBtn');
     if (khoBtn) khoBtn.style.display = isAdmin ? 'inline-flex' : 'none';
