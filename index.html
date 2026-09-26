@@ -10,8 +10,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/style.css?v=2019_4">
-  <link rel="stylesheet" href="css/components.css?v=2019_4">
+  <link rel="stylesheet" href="css/style.css?v=2026_01">
+  <link rel="stylesheet" href="css/components.css?v=2026_01">
 </head>
 <body>
 
@@ -470,7 +470,7 @@
         Chỉ Ca Trưởng / Quản Trị mới có quyền Soạn lễ, Sửa/Xóa bộ lễ và Quản lý danh sách ca viên.
       </p>
       <div style="margin-bottom:14px;">
-        <input type="password" id="adminPinInput" class="form-control" placeholder="Nhập mã PIN (Mặc định: 2019)" style="text-align:center; font-size:1.2rem; letter-spacing:4px; font-weight:800; padding:10px; border-radius:10px;" maxlength="10">
+        <input type="password" id="adminPinInput" class="form-control" placeholder="Nhập mã PIN..." style="text-align:center; font-size:1.2rem; letter-spacing:4px; font-weight:800; padding:10px; border-radius:10px;" maxlength="10">
         <div id="adminPinError" style="display:none; color:#ef4444; font-size:0.78rem; font-weight:700; margin-top:6px;">Mã PIN không đúng, vui lòng thử lại!</div>
       </div>
       <div style="display:flex; gap:10px; justify-content:center;">
@@ -478,7 +478,7 @@
         <button type="button" class="btn btn-primary" onclick="window.dohwaApp.submitAdminLogin()" style="padding:8px 22px; font-size:0.85rem; font-weight:700; background:#6b3fa0;">Đăng Nhập 👑</button>
       </div>
       <div style="font-size:0.75rem; color:var(--text-muted); margin-top:14px; background:var(--bg-card-subtle); padding:8px 10px; border-radius:8px;">
-        💡 Mã PIN quản trị mặc định là <strong>2019</strong>. Bạn có thể đổi mã PIN bất kỳ lúc nào trong phần Cài Đặt.
+        💡 Vui lòng nhập mã PIN bảo mật để kích hoạt quyền quản trị.
       </div>
     </div>
   </div>
@@ -493,7 +493,7 @@
       <div style="margin-bottom:14px;">
         <button type="button" class="btn btn-primary" onclick="document.getElementById('sbMemberGateOverlay').style.display='none'; window.dohwaApp.openAdminLoginModal();" style="width:100%; background:linear-gradient(135deg, #78350f, #d97706); border:none; padding:11px 16px; font-weight:800; font-size:0.92rem; border-radius:12px; box-shadow:0 4px 14px rgba(217,119,6,0.38); display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
           <span>👑</span>
-          <span>BẠN LÀ ADMIN? BẤM ĐÂY ĐỂ ĐĂNG NHẬP (PIN: 2019)</span>
+          <span>BẠN LÀ ADMIN? BẤM ĐÂY ĐỂ ĐĂNG NHẬP</span>
         </button>
       </div>
 
@@ -504,7 +504,6 @@
       <div style="background:#fffdf7; border:1px solid #fed7aa; border-radius:12px; padding:10px 14px; margin-bottom:14px;">
         <div style="font-size:0.95rem; font-weight:900; color:#9a3412; font-family:'Times New Roman',serif;">"Hát là cầu nguyện 2 lần"</div>
         <div style="font-size:0.75rem; color:#b45309; font-weight:700; margin-top:2px;">— Thánh Augustinô —</div>
-        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Hát là phục vụ Thiên Chúa và Cộng Đoàn Phụng Vụ</div>
       </div>
 
       <!-- THANH TIẾN TRÌNH XÁC NHẬN -->
@@ -563,13 +562,13 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/store.js?v=2019_4"></script>
-  <script src="js/liturgical-helper.js?v=2019_4"></script>
-  <script src="js/player.js?v=2019_4"></script>
-  <script src="js/pdf-viewer.js?v=2019_4"></script>
-  <script src="js/soan-le.js?v=2019_4"></script>
-  <script src="js/thong-ke.js?v=2019_4"></script>
-  <script src="js/app.js?v=2019_4"></script>
+  <script src="js/store.js?v=2026_01"></script>
+  <script src="js/liturgical-helper.js?v=2026_01"></script>
+  <script src="js/player.js?v=2026_01"></script>
+  <script src="js/pdf-viewer.js?v=2026_01"></script>
+  <script src="js/soan-le.js?v=2026_01"></script>
+  <script src="js/thong-ke.js?v=2026_01"></script>
+  <script src="js/app.js?v=2026_01"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {

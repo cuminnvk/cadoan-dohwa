@@ -902,7 +902,7 @@ class DohwaApp {
       }
     } else {
       if (err) {
-        err.textContent = 'Mã PIN không đúng, vui lòng thử lại! (Mặc định: 2019)';
+        err.textContent = 'Mã PIN không đúng, vui lòng thử lại!';
         err.style.display = 'block';
       }
     }
@@ -1023,11 +1023,11 @@ class DohwaApp {
             <span style="font-size:1.8rem;">🔐</span>
             <div>
               <div style="font-size:0.95rem; font-weight:900; color:#92400e;">Đang ở chế độ Ca Viên (${currentSession ? currentSession.name : 'Chưa chọn tên'})</div>
-              <div style="font-size:0.76rem; color:#78350f;">Nhập mã PIN <strong>2019</strong> để toàn quyền quản trị, xóa/dán danh sách ca viên</div>
+              <div style="font-size:0.76rem; color:#78350f;">Đăng nhập quyền Admin để toàn quyền quản trị, xóa/dán danh sách ca viên</div>
             </div>
           </div>
           <button type="button" class="btn btn-primary" onclick="window.dohwaApp.openAdminLoginModal()" style="background:linear-gradient(135deg,#78350f,#d97706); border:none; color:#fff; font-weight:800; padding:8px 16px; font-size:0.85rem; border-radius:10px; box-shadow:0 4px 12px rgba(217,119,6,0.3); cursor:pointer;">
-            👑 BẤM ĐÂY ĐỂ ĐĂNG NHẬP ADMIN (PIN: 2019)
+            👑 BẤM ĐÂY ĐỂ ĐĂNG NHẬP ADMIN
           </button>
         </div>
       `;
@@ -1168,7 +1168,7 @@ class DohwaApp {
           </button>
         </div>
         <div style="border-top:1px solid var(--border); padding-top:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-          <span style="font-size:0.75rem; color:var(--text-muted);">Mã PIN mặc định: <strong>2019</strong></span>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Bảo mật quản trị ca đoàn</span>
           <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.logoutAdmin()" style="color:#ef4444; border-color:#ef4444; padding:5px 12px; font-size:0.78rem; font-weight:700;">
             🚪 Đăng Xuất Quyền Admin (Về chế độ thành viên)
           </button>
