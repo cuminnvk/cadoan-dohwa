@@ -337,85 +337,101 @@
   padding: 0 16px;
 }
 
-@media (max-width: 767px) {
-  .sticky-player {
-    bottom: var(--nav-height);
-  }
-}
-
 [data-theme="dark"] .sticky-player {
   background: rgba(28, 23, 43, 0.98);
-}
-
-#playerVideoDock {
-  position: fixed;
-  bottom: calc(var(--player-height) + 12px);
-  right: 16px;
-  width: 280px;
-  height: 160px;
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  z-index: 1001;
-  border: 2px solid var(--primary);
-  transition: all 0.3s ease;
-}
-
-@media (max-width: 767px) {
-  #playerVideoDock {
-    bottom: calc(var(--nav-height) + var(--player-height) + 10px) !important;
-    right: 10px !important;
-    left: 10px !important;
-    width: auto !important;
-    height: 190px !important;
-  }
 }
 
 .player-song-meta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .player-thumb {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-sm);
   background: var(--primary-light);
   color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   flex-shrink: 0;
 }
 
 .player-text {
   min-width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .player-title {
-  font-size: 0.92rem;
-  font-weight: 700;
+  font-size: 0.88rem;
+  font-weight: 800;
   color: var(--text-main);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.25;
 }
 
 .player-artist {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .player-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .sticky-player {
+    bottom: var(--nav-height);
+    padding: 0 8px;
+    height: 58px;
+  }
+  .player-song-meta {
+    gap: 8px;
+  }
+  .player-thumb {
+    width: 34px;
+    height: 34px;
+    font-size: 1.05rem;
+  }
+  .player-title {
+    font-size: 0.82rem;
+  }
+  .player-artist {
+    font-size: 0.7rem;
+  }
+  .player-controls {
+    gap: 4px;
+  }
+  .player-controls .btn-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    padding: 0;
+  }
+  #playerPlayBtn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  #playerSleepBtn {
+    padding: 4px 6px !important;
+    font-size: 0.7rem !important;
+  }
 }
 
 .youtube-popover {

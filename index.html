@@ -421,19 +421,13 @@
     </div>
   </div>
 
-  <!-- STICKY BOTTOM MUSIC PLAYER (TRÌNH PHÁT NHẠC THÁNH CA & TỰ ĐỘNG CHUYỂN BÀI) -->
+  <!-- STICKY BOTTOM MUSIC PLAYER (TRÌNH PHÁT NHẠC THUẦN TÚY - HOÀN TOÀN ẨN VIDEO) -->
   <div class="sticky-player" id="stickyPlayer" style="display:none;">
-    <!-- Khung xem Video YouTube có thể thu gọn / mở rộng -->
-    <div id="playerVideoDock" style="display:none; position:fixed; bottom:calc(var(--player-height) + 12px); right:16px; width:280px; height:160px; background:#000; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.5); z-index:1001; border:2px solid var(--primary);">
-      <div id="ytPlayerContainer" style="width:100%; height:100%;"></div>
-      <button type="button" onclick="window.dohwaPlayer.toggleVideoDock()" style="position:absolute; top:5px; right:5px; background:rgba(0,0,0,0.7); color:#fff; border:none; border-radius:50%; width:24px; height:24px; cursor:pointer; font-weight:800; font-size:0.75rem; z-index:10; display:flex; align-items:center; justify-content:center;" title="Thu nhỏ video">✕</button>
-    </div>
-
     <div class="player-song-meta">
-      <div class="player-thumb" id="playerThumb" style="font-size:1.3rem; cursor:pointer;" onclick="window.dohwaPlayer.toggleVideoDock()" title="Bấm để bật/tắt khung video">🎶</div>
+      <div class="player-thumb" id="playerThumb" style="font-size:1.3rem;">🎶</div>
       <div class="player-text">
         <div class="player-title" id="playerTitle" style="font-weight:800; color:var(--text-main);">Tên bài hát</div>
-        <div class="player-artist" id="playerArtist" style="font-size:0.78rem; color:var(--text-muted);">Thánh Ca • Ca Đoàn Do Hwa</div>
+        <div class="player-artist" id="playerArtist" style="font-size:0.75rem; color:var(--text-muted);">Thánh Ca • Ca Đoàn Do Hwa</div>
       </div>
     </div>
     <div class="player-controls">
@@ -441,14 +435,16 @@
       <button class="btn-icon" id="playerPlayBtn" style="background:var(--primary); color:#fff; border-radius:50%; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(14,165,233,0.4);" title="Phát / Tạm dừng">▶</button>
       <button class="btn-icon" id="playerNextBtn" title="Bài tiếp">⏭</button>
       <button class="btn-icon" id="playerRepeatBtn" title="Chế độ lặp lại">🔁</button>
-      <button type="button" class="btn-xs" id="playerVideoToggleBtn" onclick="window.dohwaPlayer.toggleVideoDock()" style="background:#0284c7; color:#fff; border:none; padding:5px 9px; border-radius:8px; font-weight:700; font-size:0.75rem; display:inline-flex; align-items:center; gap:3px; cursor:pointer;" title="Hiện / Ẩn khung video">
-        🎬 <span>Video</span>
-      </button>
-      <button type="button" class="btn-xs" id="playerSleepBtn" onclick="window.dohwaPlayer.enableOledSleepMode()" style="background:#1e293b; color:#fbbf24; border:1px solid #475569; padding:5px 9px; border-radius:8px; font-weight:700; font-size:0.75rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;" title="Chế độ tắt màn hình bỏ túi để nghe ngầm liên tục">
+      <button type="button" class="btn-xs" id="playerSleepBtn" onclick="window.dohwaPlayer.enableOledSleepMode()" style="background:#1e293b; color:#fbbf24; border:1px solid #475569; padding:5px 8px; border-radius:8px; font-weight:700; font-size:0.75rem; display:inline-flex; align-items:center; gap:3px; cursor:pointer;" title="Chế độ tắt màn hình bỏ túi để nghe ngầm liên tục">
         🌙
       </button>
       <button class="btn-icon" id="playerCloseBtn" title="Đóng thanh phát">✕</button>
     </div>
+  </div>
+
+  <!-- ENGINE PHÁT ÂM THANH YOUTUBE NGẦM (HOÀN TOÀN VÔ HÌNH 100%, KHÔNG HIỆN VIDEO TRÊN MÀN HÌNH) -->
+  <div id="ytAudioEngineContainer" style="position:fixed; bottom:0; right:0; width:200px; height:200px; opacity:0.001; pointer-events:none; z-index:-999; overflow:hidden;">
+    <div id="ytPlayerContainer" style="width:100%; height:100%;"></div>
   </div>
 
   <!-- MÀN HÌNH TỐI TIẾT KIỆM PIN & KHÓA BỎ TÚI (NGHE CHẠY NGẦM LIÊN TỤC TRÊN IPHONE & ANDROID) -->
@@ -603,14 +599,14 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/firebase-config.js?v=2026_09"></script>
-  <script src="js/store.js?v=2026_09"></script>
-  <script src="js/liturgical-helper.js?v=2026_09"></script>
-  <script src="js/player.js?v=2026_09"></script>
-  <script src="js/pdf-viewer.js?v=2026_09"></script>
-  <script src="js/soan-le.js?v=2026_09"></script>
-  <script src="js/thong-ke.js?v=2026_09"></script>
-  <script src="js/app.js?v=2026_09"></script>
+  <script src="js/firebase-config.js?v=2026_10"></script>
+  <script src="js/store.js?v=2026_10"></script>
+  <script src="js/liturgical-helper.js?v=2026_10"></script>
+  <script src="js/player.js?v=2026_10"></script>
+  <script src="js/pdf-viewer.js?v=2026_10"></script>
+  <script src="js/soan-le.js?v=2026_10"></script>
+  <script src="js/thong-ke.js?v=2026_10"></script>
+  <script src="js/app.js?v=2026_10"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {

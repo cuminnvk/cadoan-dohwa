@@ -29,7 +29,6 @@ class DohwaPlayer {
 
   initElements() {
     this.playerBar = document.getElementById('stickyPlayer');
-    this.videoDock = document.getElementById('playerVideoDock');
     this.titleEl = document.getElementById('playerTitle');
     this.artistEl = document.getElementById('playerArtist');
     this.playBtn = document.getElementById('playerPlayBtn');
@@ -61,18 +60,6 @@ class DohwaPlayer {
     });
 
     this.updateRepeatBtnDisplay();
-  }
-
-  toggleVideoDock() {
-    if (!this.videoDock) this.videoDock = document.getElementById('playerVideoDock');
-    if (this.videoDock) {
-      const isHidden = this.videoDock.style.display === 'none' || !this.videoDock.style.display;
-      this.videoDock.style.display = isHidden ? 'block' : 'none';
-      const btn = document.getElementById('playerVideoToggleBtn');
-      if (btn) {
-        btn.style.background = isHidden ? '#0284c7' : '#64748b';
-      }
-    }
   }
 
   initYouTubeAPI() {
@@ -149,10 +136,6 @@ class DohwaPlayer {
     if (this.titleEl) this.titleEl.textContent = `${indexBadge}${song.title || 'Bài hát'}`;
     if (this.artistEl) this.artistEl.textContent = `${song.roleLabel || 'Thánh Ca'} • Ca Đoàn Do Hwa`;
     if (this.playerBar) this.playerBar.style.display = 'flex';
-
-    // Đảm bảo mở khung video dock để phát ổn định
-    if (!this.videoDock) this.videoDock = document.getElementById('playerVideoDock');
-    if (this.videoDock) this.videoDock.style.display = 'block';
 
     // Hiện thông báo toast đang phát để người dùng nhận biết ngay lập tức
     const oldToast = document.querySelector('.dohwa-player-toast');
@@ -288,14 +271,10 @@ class DohwaPlayer {
     }
   }
 
-  // --- ENGINE PHÁT YOUTUBE AUDIO + VIDEO DOCK ---
+  // --- ENGINE PHÁT YOUTUBE AUDIO-ONLY (HOÀN TOÀN ẨN VIDEO) ---
   playYouTube(videoId) {
     this.isYouTubeMode = true;
     this.audioElement.pause();
-
-    // Mở khung video dock lên để người dùng thấy video đang phát và tránh bị browser chặn autoplay
-    if (!this.videoDock) this.videoDock = document.getElementById('playerVideoDock');
-    if (this.videoDock) this.videoDock.style.display = 'block';
 
     const container = document.getElementById('ytPlayerContainer');
     if (!container) return;
@@ -503,7 +482,6 @@ class DohwaPlayer {
     this.disableOledSleepMode();
 
     if (this.playerBar) this.playerBar.style.display = 'none';
-    if (this.videoDock) this.videoDock.style.display = 'none';
     if ('mediaSession' in navigator) {
       navigator.mediaSession.playbackState = 'none';
     }
