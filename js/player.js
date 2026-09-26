@@ -29,6 +29,7 @@ class DohwaPlayer {
 
   initElements() {
     this.playerBar = document.getElementById('stickyPlayer');
+    this.videoDock = document.getElementById('playerVideoDock');
     this.titleEl = document.getElementById('playerTitle');
     this.artistEl = document.getElementById('playerArtist');
     this.playBtn = document.getElementById('playerPlayBtn');
@@ -60,6 +61,18 @@ class DohwaPlayer {
     });
 
     this.updateRepeatBtnDisplay();
+  }
+
+  toggleVideoDock() {
+    if (!this.videoDock) this.videoDock = document.getElementById('playerVideoDock');
+    if (this.videoDock) {
+      const isHidden = this.videoDock.style.display === 'none' || !this.videoDock.style.display;
+      this.videoDock.style.display = isHidden ? 'block' : 'none';
+      const btn = document.getElementById('playerVideoToggleBtn');
+      if (btn) {
+        btn.style.background = isHidden ? '#0284c7' : '#64748b';
+      }
+    }
   }
 
   initYouTubeAPI() {
@@ -136,6 +149,19 @@ class DohwaPlayer {
     if (this.titleEl) this.titleEl.textContent = `${indexBadge}${song.title || 'Bài hát'}`;
     if (this.artistEl) this.artistEl.textContent = `${song.roleLabel || 'Thánh Ca'} • Ca Đoàn Do Hwa`;
     if (this.playerBar) this.playerBar.style.display = 'flex';
+
+    // Đảm bảo mở khung video dock để phát ổn định
+    if (!this.videoDock) this.videoDock = document.getElementById('playerVideoDock');
+    if (this.videoDock) this.videoDock.style.display = 'block';
+
+    // Hiện thông báo toast đang phát để người dùng nhận biết ngay lập tức
+    const oldToast = document.querySelector('.dohwa-player-toast');
+    if (oldToast) oldToast.remove();
+    const toast = document.createElement('div');
+    toast.className = 'dohwa-toast dohwa-player-toast';
+    toast.textContent = `▶ Đang phát [${this.currentIndex + 1}/${this.playlist.length}]: ${song.roleLabel ? song.roleLabel + ' - ' : ''}${song.title || ''}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
 
     // Cập nhật text trên màn hình tối nếu đang bật
     const sleepTitle = document.getElementById('sleepSongTitle');
@@ -262,56 +288,81 @@ class DohwaPlayer {
     }
   }
 
-  // --- ENGINE PHÁT YOUTUBE AUDIO-ONLY (ẨN VIDEO) ---
+  // --- ENGINE PHÁT YOUTUBE AUDIO + VIDEO DOCK ---
   playYouTube(videoId) {
     this.isYouTubeMode = true;
     this.audioElement.pause();
 
-    if (!this.ytPlayer) {
-      if (!this.ytReady && !window.YT) {
-        if (this.ytContainer) {
-          this.ytContainer.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-        }
-        this.isPlaying = true;
-        this.updatePlayBtnState();
-        return;
-      }
+    // Mở khung video dock lên để người dùng thấy video đang phát và tránh bị browser chặn autoplay
+    if (!this.videoDock) this.videoDock = document.getElementById('playerVideoDock');
+    if (this.videoDock) this.videoDock.style.display = 'block';
 
-      this.ytPlayer = new YT.Player('ytPlayerContainer', {
-        height: '100%',
-        width: '100%',
-        videoId: videoId,
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          rel: 0,
-          modestbranding: 1
-        },
-        events: {
-          onReady: (event) => {
-            event.target.playVideo();
-            this.isPlaying = true;
-            this.updatePlayBtnState();
-          },
-          onStateChange: (event) => {
-            if (event.data === YT.PlayerState.PLAYING) {
-              this.isPlaying = true;
-              if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
-            } else if (event.data === YT.PlayerState.PAUSED) {
-              this.isPlaying = false;
-              if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
-            } else if (event.data === YT.PlayerState.ENDED) {
-              this.isPlaying = false;
-              this.handleSongEnded(); // Tự động nhảy sang bài tiếp theo!
-            }
-            this.updatePlayBtnState();
-          }
-        }
-      });
-    } else {
-      this.ytPlayer.loadVideoById(videoId);
+    const container = document.getElementById('ytPlayerContainer');
+    if (!container) return;
+
+    if (!window.YT || !window.YT.Player) {
+      // Direct iframe player (cực kỳ ổn định và tương thích mọi trình duyệt di động)
+      container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
       this.isPlaying = true;
       this.updatePlayBtnState();
+      return;
+    }
+
+    if (!this.ytPlayer) {
+      try {
+        this.ytPlayer = new YT.Player('ytPlayerContainer', {
+          height: '100%',
+          width: '100%',
+          videoId: videoId,
+          playerVars: {
+            autoplay: 1,
+            playsinline: 1,
+            controls: 1,
+            rel: 0,
+            modestbranding: 1
+          },
+          events: {
+            onReady: (event) => {
+              try { event.target.playVideo(); } catch(e) {}
+              this.isPlaying = true;
+              this.updatePlayBtnState();
+            },
+            onStateChange: (event) => {
+              if (event.data === YT.PlayerState.PLAYING) {
+                this.isPlaying = true;
+                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+              } else if (event.data === YT.PlayerState.PAUSED) {
+                this.isPlaying = false;
+                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+              } else if (event.data === YT.PlayerState.ENDED) {
+                this.isPlaying = false;
+                this.handleSongEnded(); // Tự động nhảy sang bài tiếp theo!
+              }
+              this.updatePlayBtnState();
+            },
+            onError: (event) => {
+              console.warn('YouTube Player error code:', event.data);
+              this.handleSongEnded(); // Tự động chuyển bài tiếp nếu video lỗi
+            }
+          }
+        });
+      } catch (err) {
+        container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+        this.isPlaying = true;
+        this.updatePlayBtnState();
+      }
+    } else {
+      try {
+        if (this.ytPlayer.loadVideoById) {
+          this.ytPlayer.loadVideoById(videoId);
+          this.isPlaying = true;
+          this.updatePlayBtnState();
+        } else {
+          container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+        }
+      } catch (e) {
+        container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      }
     }
   }
 
@@ -436,7 +487,12 @@ class DohwaPlayer {
     this.currentSong = null;
 
     if (this.isYouTubeMode && this.ytPlayer && this.ytPlayer.stopVideo) {
-      this.ytPlayer.stopVideo();
+      try { this.ytPlayer.stopVideo(); } catch(e) {}
+    }
+    const container = document.getElementById('ytPlayerContainer');
+    if (container) {
+      container.innerHTML = '';
+      this.ytPlayer = null;
     }
     this.audioElement.pause();
     this.audioElement.currentTime = 0;
@@ -447,6 +503,7 @@ class DohwaPlayer {
     this.disableOledSleepMode();
 
     if (this.playerBar) this.playerBar.style.display = 'none';
+    if (this.videoDock) this.videoDock.style.display = 'none';
     if ('mediaSession' in navigator) {
       navigator.mediaSession.playbackState = 'none';
     }

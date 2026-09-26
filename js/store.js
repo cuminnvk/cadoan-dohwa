@@ -28,8 +28,8 @@ const DEFAULT_MASS_SET = {
       role: 'duc_me',
       roleLabel: 'Kính Đức Mẹ',
       title: 'Nguồn Cậy Trông',
-      composer: '',
-      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
+      composer: 'Hoàng Vũ',
+      youtubeUrl: 'https://www.youtube.com/watch?v=8KNNz5uGVtw',
       pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf',
       pdfData: null
     },
@@ -38,8 +38,8 @@ const DEFAULT_MASS_SET = {
       role: 'nhap_le',
       roleLabel: 'Nhập Lễ',
       title: 'Chung lời cảm tạ',
-      composer: '',
-      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
+      composer: 'Lm. Nguyễn Duy',
+      youtubeUrl: 'https://www.youtube.com/watch?v=YRgiOJiLzUQ',
       pdfName: 'Nhap_Le_Chung_Loi_Cam_Ta.pdf',
       pdfData: null
     },
@@ -48,8 +48,8 @@ const DEFAULT_MASS_SET = {
       role: 'dap_ca',
       roleLabel: 'Thánh Vịnh',
       title: 'Chúa Nhật 25 Thường Niên A',
-      composer: '',
-      youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      composer: 'Lm. Thái Nguyên',
+      youtubeUrl: 'https://www.youtube.com/watch?v=FP9UgmgYnG8',
       pdfName: 'Dap_Ca_Chua_Nhat_25_A.pdf',
       pdfData: null
     },
@@ -58,8 +58,8 @@ const DEFAULT_MASS_SET = {
       role: 'alleluia',
       roleLabel: 'Alleluia',
       title: 'ALLELUIA',
-      composer: '',
-      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
+      composer: 'Lm. Huy Hoàng',
+      youtubeUrl: 'https://www.youtube.com/watch?v=a5Ay4SN2_EQ',
       pdfName: 'Alleluia_Huy_Hoang.pdf',
       pdfData: null
     },
@@ -68,8 +68,8 @@ const DEFAULT_MASS_SET = {
       role: 'dang_le',
       roleLabel: 'Dâng Lễ',
       title: 'XIN DÂNG CỦA LỄ CHÂN THÀNH',
-      composer: '',
-      youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      composer: 'Lm. JB. An Ninh',
+      youtubeUrl: 'https://www.youtube.com/watch?v=UQXnyEzbDGg',
       pdfName: 'Dang_Le_Xin_Dang_Cua_Le.pdf',
       pdfData: null
     },
@@ -78,8 +78,8 @@ const DEFAULT_MASS_SET = {
       role: 'hiep_le',
       roleLabel: 'Hiệp Lễ',
       title: 'CHÚA LUÔN CÒN MÃI',
-      composer: '',
-      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
+      composer: 'Như Ý',
+      youtubeUrl: 'https://www.youtube.com/watch?v=ZT2f9deVVK0',
       pdfName: 'Hiep_Le_Chua_Luon_Con_Mai.pdf',
       pdfData: null
     },
@@ -88,8 +88,8 @@ const DEFAULT_MASS_SET = {
       role: 'ket_le',
       roleLabel: 'Kết Lễ',
       title: 'LỜI TẠ ƠN',
-      composer: '',
-      youtubeUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U',
+      composer: 'Thánh Ca',
+      youtubeUrl: 'https://www.youtube.com/watch?v=orVNPwYCtOs',
       pdfName: 'Ket_Le_Loi_Ta_On.pdf',
       pdfData: null
     }
@@ -373,8 +373,11 @@ class DohwaStore {
         if (m.liturgicalRoles.reader2 === 'Nam' || m.liturgicalRoles.reader2 === 'Phong Nguyễn') m.liturgicalRoles.reader2 = '';
         if (m.liturgicalRoles.petitions === 'Long' || m.liturgicalRoles.petitions === 'Mai Tuấn') m.liturgicalRoles.petitions = '';
       }
-      if (m.id === 'mass-cn-25-tn-a' && (!m.songs || !m.songs[0] || !m.songs[0].youtubeUrl || m.songs[0].role !== 'duc_me')) {
-        m.songs = DEFAULT_MASS_SET.songs;
+      if (m.id === 'mass-cn-25-tn-a') {
+        const firstSong = m.songs && m.songs[0];
+        if (!firstSong || !firstSong.youtubeUrl || firstSong.youtubeUrl.includes('kYJv6W7tZ7U') || firstSong.role !== 'duc_me') {
+          m.songs = DEFAULT_MASS_SET.songs;
+        }
       }
     });
     this.setLocal('mass_sets', items);
