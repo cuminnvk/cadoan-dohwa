@@ -264,6 +264,12 @@ class DohwaStore {
             }
             updated = true;
           }
+        } else {
+          // Nếu Cloud trống nhưng máy này đã có ca viên, tự động đẩy lên Cloud ngay lập tức
+          const localRoster = this.getLocal('roster', []);
+          if (Array.isArray(localRoster) && localRoster.length > 0) {
+            await this.pushRosterToCloud(localRoster);
+          }
         }
       }
 
@@ -282,6 +288,12 @@ class DohwaStore {
               } catch (e) {}
             }
             updated = true;
+          }
+        } else {
+          // Nếu Cloud chưa có bộ lễ, tự động đẩy bộ lễ lên Cloud
+          const localMass = this.getLocal('mass_sets', [DEFAULT_MASS_SET]);
+          if (Array.isArray(localMass) && localMass.length > 0) {
+            await this.pushMassSetsToCloud(localMass);
           }
         }
       }
