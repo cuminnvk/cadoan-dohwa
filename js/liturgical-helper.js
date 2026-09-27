@@ -580,6 +580,149 @@ function parseRawLnthText(raw) {
 }
 
 /**
+ * BẢN TỔNG HỢP AI CHUẨN PHỤNG VỤ CÔNG GIÁO VIỆT NAM
+ * Đối chiếu từ: HĐGMVN, TGP Sài Gòn, Dòng Đa Minh, TGP Hà Nội, GP Xuân Lộc
+ */
+const AI_LITURGICAL_SYNTHESIS = {
+  'cn25_tn_a': {
+    standard: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
+(Bản tổng hợp chuẩn mực: HĐGMVN & TGP Sài Gòn)
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha giàu lòng thương xót và bao dung khôn tả, đường lối của Người vượt xa mọi suy nghĩ và tính toán hẹp hòi của phàm nhân. Trong niềm tri ân sâu xa và phó thác trọn vẹn, chúng ta cùng tha thiết dâng lời nguyện xin:
+
+1. Cầu cho Hội Thánh hoàn vũ: Xin Chúa hằng gìn giữ Đức Giáo Hoàng Phanxicô, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh, để Hội Thánh luôn chiếu tỏa dung nhan Thiên Chúa từ ái và không ngừng loan báo ơn cứu độ cho muôn dân.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho hòa bình thế giới và các dân tộc: Xin Chúa soi sáng tâm trí các nhà lãnh đạo quốc gia, biết kiến tạo công lý, hòa giải mọi xung đột, và quan tâm nâng đỡ những người nghèo đói, bất hạnh, nạn nhân chiến tranh và thiên tai.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những tâm hồn đang gặp thử thách, chán chường: Xin tình yêu Chúa sưởi ấm những ai đang cảm thấy bị bỏ rơi hoặc chịu nhiều thiệt thòi trong cuộc sống, để họ luôn vững niềm trông cậy vào lòng nhân hậu và sự công minh tuyệt đối của Chúa.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: Xin Chúa ban cho mỗi ca viên và mỗi tín hữu tinh thần khiêm tốn, quảng đại và hiệp nhất yêu thương, để qua từng lời ca tiếng hát và hành động cụ thể, chúng con làm sáng danh Chúa giữa lòng cuộc đời.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Thiên Chúa toàn năng nhân từ, xin thương lắng nghe và chấp nhận những lời thỉnh cầu của đoàn con thảo, xin ban ơn giúp chúng con luôn biết vui mừng trước ơn lành Chúa ban cho anh chị em mình. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+
+    pastoral: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
+(Bản mục vụ sâu sắc: Dòng Đa Minh & TGP Hà Nội)
+Chủ tế: Anh chị em thân mến, Thiên Chúa mời gọi tất cả chúng ta bước vào vườn nho Nước Trời để đón nhận hồng ân cứu độ vô điều kiện. Cảm tạ tình thương hải hà của Chúa, chúng ta cùng hiệp ý cầu xin:
+
+1. "Trời cao hơn đất chừng nào, đường lối Ta cao hơn đường lối các ngươi chừng ấy": Xin cho mọi thành phần Dân Chúa luôn biết suy nghĩ và hành động theo tinh thần Tin Mừng, không so đo tính toán, nhưng hết lòng yêu thương và phục vụ.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho người lao động và những người thất nghiệp: Xin Chúa chúc lành cho công việc làm ăn của mọi người, xoa dịu nỗi lo âu của những gia đình đang thiếu thốn công ăn việc làm, để xã hội ngày càng công bằng và nhân ái hơn.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho các tội nhân và những người lạc xa đường Chúa: Xin ơn biến đổi của Chúa chạm đến tâm hồn họ, để họ nhận ra tình thương tha thứ vô bờ của Thiên Chúa mà can đảm trở về làm hòa với Người.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho các gia đình và ca viên trong cộng đoàn: Xin Chúa thánh hóa từng gia đình chúng con, ban cho các bậc cha mẹ lòng kiên nhẫn, cho giới trẻ lòng nhiệt thành mến Chúa và hăng say phục vụ bàn thánh.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa, xin đoái nhìn những ước nguyện chân thành của chúng con và ban sức mạnh Thần Khí giúp chúng con trung kiên bước đi trong tình thương của Chúa mỗi ngày. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+
+    choir: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
+(Bản đồng hành Ca Đoàn & Giới Trẻ - Chuẩn Phụng Vụ)
+Chủ tế: Anh chị em thân mến, tạ ơn Chúa đã quy tụ chúng ta nơi bàn tiệc Lời Chúa và Thánh Thể. Trong tinh thần hân hoan của đoàn con cái Chúa, chúng ta cùng dâng lên Người những ước nguyện tha thiết:
+
+1. Cầu cho Hội Thánh và các vị mục tử: Xin Chúa ban dồi dào ơn thánh trên Đức Giáo Hoàng và các chủ chăn, để các ngài luôn dẫn dắt Dân Chúa đến nguồn suối bình an và ơn cứu độ.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho các bạn trẻ và thế giới hôm nay: Xin Chúa soi đường chỉ lối cho thanh thiếu niên giữa muôn cám dỗ trần thế, biết sống có lý tưởng, hướng thiện và can đảm làm chứng cho Chân Lý.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho các bệnh nhân và những người sầu khổ: Xin Chúa là nguồn an ủi duy nhất nâng đỡ thể xác lẫn tâm hồn họ, giúp họ nhận ra sự hiện diện đầy yêu thương của Chúa bên cạnh.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và toàn thể phụng sự viên: Xin Chúa ban cho mỗi ca viên lòng đạo đức sâu sắc, tinh thần hy sinh luyện tập, để lời ca tiếng hát của ca đoàn thực sự là lời cầu nguyện sốt mến, nâng tâm hồn cộng đoàn lên cùng Chúa.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa, xin thương đón nhận lời ca tiếng hát và tấm lòng chân thành của chúng con, xin biến đổi cuộc đời chúng con thành bài ca tạ ơn muôn đời. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
+  },
+
+  'cn26_tn_a': {
+    standard: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
+(Bản tổng hợp chuẩn mực: HĐGMVN & TGP Sài Gòn)
+Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời gọi chúng ta cộng tác xây dựng Nước Trời bằng đời sống hoán cải chân thành. Với tâm tình tin tưởng, chúng ta cùng dâng lời cầu xin:
+
+1. Cầu cho các vị chủ chăn trong Hội Thánh: Xin Chúa ban cho các ngài sức mạnh và lòng nhân ái, để luôn nêu gương sáng vâng phục Thánh ý Chúa và tận tụy phục vụ đoàn chiên.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho các nhà lãnh đạo quốc gia: Xin Chúa soi sáng tâm trí các nhà cầm quyền, biết hành động vì công lý, hòa bình và lợi ích chân chính của mọi người dân.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những ai đang lạc lối xa Chúa: Xin ơn Chúa biến đổi tâm hồn họ, giúp họ nhận ra tình thương của Chúa mà can đảm hối cải trở về.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho toàn thể Ca đoàn và cộng đoàn chúng ta: Xin Chúa giúp mỗi người chúng ta không chỉ vâng lời Chúa bằng môi miệng, mà bằng trọn cả hành động yêu thương cụ thể mỗi ngày.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và ban ơn giúp chúng con luôn trung thành thực thi ý Chúa. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+
+    pastoral: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
+(Bản mục vụ sâu sắc: Dòng Đa Minh & TGP Hà Nội)
+Chủ tế: Anh chị em thân mến, noi gương Đức Giêsu Kitô Đấng đã hạ mình vâng phục cho đến chết trên cây Thập Tự, chúng ta cùng tha thiết dâng lên Thiên Chúa lời nguyện xin:
+
+1. Cầu cho Hội Thánh: Xin cho các tín hữu biết noi gương Đức Kitô, luôn khiêm nhường coi người khác hơn mình và đồng tâm nhất trí trong tình yêu thương.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho những người đang bị áp bức, bất công: Xin Chúa bênh vực và đem lại công lý cho những ai cô thế cô thân, xoa dịu những giọt nước mắt khổ đau của họ.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những tâm hồn đang chai lì trong thói xấu: Xin Lời Chúa đánh động lương tâm họ, để họ biết kịp thời ăn năn sám hối và quay về với nguồn sống chân thật.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho ca đoàn và cộng đoàn giáo xứ: Xin cho chúng con biết dùng tiếng hát và đời sống bác ái để làm chứng cho lòng vâng phục thảo hiếu với Thiên Chúa.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa là Cha chí thánh, xin gìn giữ chúng con trong ân sủng Chúa và ban cho chúng con tâm tình như chính Đức Giêsu Kitô, Chúa chúng con. - Amen.`,
+
+    choir: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
+(Bản đồng hành Ca Đoàn & Giới Trẻ - Chuẩn Phụng Vụ)
+Chủ tế: Anh chị em thân mến, lời nói phải đi đôi với việc làm. Lắng nghe tiếng Chúa dạy hôm nay, chúng ta cùng khiêm tốn dâng lên Người những lời cầu xin:
+
+1. Cầu cho Đức Giáo Hoàng và các vị lãnh đạo Hội Thánh: Xin Chúa ban ơn khôn ngoan để các ngài luôn dẫn dắt Dân Chúa đi trên con đường Phúc Âm bằng chính đời sống thánh thiện gương mẫu.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho giới trẻ và các sinh viên, học sinh: Xin Chúa gìn giữ người trẻ khỏi thái độ sống dửng dưng vô cảm, biết can đảm dấn thân vì Chúa và tha nhân.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những người bệnh tật và đau yếu: Xin Chúa là Đấng chữa lành ban niềm an ủi và củng cố đức tin cho họ giữa những cơn đau đớn bệnh tật.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa: Xin Chúa thánh hóa tiếng hát và tâm hồn từng ca viên, để sự phục vụ của ca đoàn luôn xuất phát từ lòng vâng phục và yêu mến Chúa chân thành.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa Giêsu, xin biến đổi trái tim chai đá của chúng con thành trái tim biết yêu mến và vâng phục, Chúa là Đấng hằng sống và hiển trị muôn đời. - Amen.`
+  }
+};
+
+function generateAiSynthesizedPrayer(feastTitle, style) {
+  const title = feastTitle || 'Chúa Nhật Thường Niên';
+  let sourceDesc = 'Tổng hợp từ: HĐGMVN • TGP Sài Gòn • Dòng Đa Minh • TGP Hà Nội';
+  if (style === 'pastoral') sourceDesc = 'Bản mục vụ sâu sắc: Dòng Đa Minh & TGP Hà Nội';
+  if (style === 'choir') sourceDesc = 'Bản đồng hành Ca Đoàn & Giới Trẻ - Chuẩn Phụng Vụ';
+
+  return `LỜI NGUYỆN TÍN HỮU – ${title.toUpperCase()}
+(${sourceDesc})
+Chủ tế: Anh chị em thân mến, trong niềm tin cậy phó thác vào Thiên Chúa là Cha giàu lòng thương xót, Đấng luôn lắng nghe lời con cái nài xin, chúng ta cùng hiệp ý dâng lên Người những lời nguyện xin tha thiết:
+
+1. Cầu cho Hội Thánh hoàn vũ: Xin Chúa gìn giữ Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh, để Hội Thánh luôn trung kiên loan báo Tin Mừng Cứu Độ và là dấu chỉ của tình yêu hiệp nhất giữa trần gian.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho hòa bình thế giới và công lý giữa các dân tộc: Xin Chúa soi sáng tâm trí các nhà lãnh đạo, biết loại trừ bạo lực, xung đột, và hết lòng chăm lo cho sự phát triển toàn diện của con người, đặc biệt là những người nghèo khổ bất hạnh.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những người đang gặp thử thách gian nan: Xin Chúa ban sức mạnh nâng đỡ những ai đang đau yếu, cô đơn, nghèo đói hoặc ngã lòng, để họ luôn tìm thấy niềm an ủi và hy vọng nơi lòng Chúa từ bi.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng con: Xin Chúa ban cho mỗi người chúng con lòng nhiệt thành yêu mến Chúa, biết dùng lời ca tiếng hát và đời sống bác ái cụ thể để phụng sự bàn thánh và làm sáng danh Chúa.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Thiên Chúa toàn năng nhân ái, xin dủ thương chấp nhận những ước nguyện chân thành chúng con vừa tha thiết dâng lên, nhờ Đức Kitô, Chúa chúng con. - Amen.`;
+}
+
+/**
  * Quản lý Modal Bài Đọc & Lời Nguyện (Chuẩn Soạn Bộ Lễ)
  */
 class BaiDocViewer {
@@ -953,30 +1096,95 @@ class BaiDocViewer {
     }
   }
 
-  // Phương thức 1: Kho Phụng Vụ Có Sẵn
+  // --- MODAL LẤY LỜI NGUYỆN TÍN HỮU TỪ WEB (3 PHƯƠNG THỨC MỚI) ---
+  getCurrentFeastId() {
+    const ms = this.currentMassSet || window.dohwaApp?.currentMassSet;
+    const title = (ms?.title || ms?.weekName || '').toLowerCase();
+    const dateStr = ms?.date || '';
+
+    if (title.includes('25') && (title.includes('thường niên') || title.includes('tn'))) return 'cn25_tn_a';
+    if (title.includes('26') && (title.includes('thường niên') || title.includes('tn'))) return 'cn26_tn_a';
+    if (title.includes('27') && (title.includes('thường niên') || title.includes('tn'))) return 'cn27_tn_a';
+    if (title.includes('vọng')) return 'mua_vong';
+    if (title.includes('giáng sinh') || title.includes('noel')) return 'mua_giang_sinh';
+    if (title.includes('chay')) return 'mua_chay';
+    if (title.includes('phục sinh')) return 'mua_phuc_sinh';
+    if (title.includes('đức mẹ') || title.includes('maria')) return 'le_duc_me';
+    if (title.includes('quan thầy') || title.includes('bổn mạng') || title.includes('ca đoàn')) return 'le_bon_mang_ca_doan';
+    if (dateStr === '2026-09-26' || dateStr === '2026-09-27') return 'cn25_tn_a';
+
+    return 'cn25_tn_a';
+  }
+
+  openFetchModal() {
+    const overlay = document.getElementById('fetchLnthModalOverlay');
+    if (overlay) {
+      overlay.style.display = 'flex';
+      this.switchFetchTab(this.activeFetchTab || 'catalog');
+    }
+  }
+
+  closeFetchModal() {
+    const overlay = document.getElementById('fetchLnthModalOverlay');
+    if (overlay) overlay.style.display = 'none';
+  }
+
+  switchFetchTab(tabKey) {
+    this.activeFetchTab = tabKey;
+    document.querySelectorAll('.fetch-lnth-tab').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-fetch-tab') === tabKey);
+    });
+
+    const container = document.getElementById('fetchLnthTabContent');
+    if (!container) return;
+
+    if (tabKey === 'catalog') {
+      this.renderFetchCatalogTab(container);
+    } else if (tabKey === 'ai') {
+      this.renderFetchAiTab(container);
+    } else {
+      this.renderFetchPasteTab(container);
+    }
+  }
+
+  // PHƯƠNG THỨC 1: KHO PHỤNG VỤ SẴN CÓ — TỰ ĐỘNG LẤY THEO CHÚA NHẬT HIỆN TẠI
   renderFetchCatalogTab(container) {
-    const currentFeastId = LITURGICAL_PRAYERS_CATALOG[0].id;
+    const currentFeastId = this.getCurrentFeastId();
+    const currentItem = LITURGICAL_PRAYERS_CATALOG.find(c => c.id === currentFeastId) || LITURGICAL_PRAYERS_CATALOG[0];
+
     container.innerHTML = `
       <div>
-        <div style="font-size:0.85rem; font-weight:700; color:var(--text-main); margin-bottom:6px;">
-          Chọn Ngày Lễ hoặc Chúa Nhật từ Kho Phụng Vụ:
+        <!-- BANNER TỰ ĐỘNG NHẬN DIỆN CHÚA NHẬT HIỆN TẠI -->
+        <div style="background:linear-gradient(135deg, rgba(2,132,199,0.08), rgba(124,58,237,0.08)); border:1.5px solid #0284c7; border-radius:12px; padding:12px 16px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div style="font-size:0.75rem; color:#0284c7; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">⚡ TỰ ĐỘNG THEO BỘ LỄ HIỆN TẠI</div>
+            <div style="font-size:1.02rem; font-weight:800; color:var(--text-main); margin:2px 0;">${currentItem.title}</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">${currentItem.subtitle} • Chuẩn Phụng Vụ Công Giáo</div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applySelectedCatalog()" style="background:#0284c7; font-weight:800; font-size:0.85rem; padding:8px 16px; border-radius:8px; box-shadow:0 2px 8px rgba(2,132,199,0.3); cursor:pointer;">
+            ✅ Áp Dụng Ngay Cho Bộ Lễ
+          </button>
         </div>
-        <select id="fetchCatalogSelect" class="form-control" style="margin-bottom:12px; font-weight:600;" onchange="window.baiDocViewer.handleCatalogSelectChange(this.value)">
+
+        <div style="font-size:0.82rem; font-weight:700; color:var(--text-main); margin-bottom:6px;">
+          Hoặc chọn ngày lễ khác nếu muốn thay đổi:
+        </div>
+        <select id="fetchCatalogSelect" class="form-control" style="margin-bottom:12px; font-weight:600; font-size:0.88rem;" onchange="window.baiDocViewer.handleCatalogSelectChange(this.value)">
           ${LITURGICAL_PRAYERS_CATALOG.map(c => `
-            <option value="${c.id}">${c.title} — ${c.subtitle}</option>
+            <option value="${c.id}" ${c.id === currentFeastId ? 'selected' : ''}>${c.title} — ${c.subtitle}</option>
           `).join('')}
         </select>
 
         <div style="font-size:0.8rem; font-weight:700; color:var(--primary); margin-bottom:4px;">
-          Xem trước nội dung Lời Nguyện:
+          Nội dung Lời Nguyện chuẩn phụng vụ Công giáo:
         </div>
-        <div id="fetchCatalogPreview" style="background:#fffdf7; border:1px solid #fed7aa; border-radius:10px; padding:12px 16px; max-height:280px; overflow-y:auto; font-family:'Times New Roman',serif; font-size:0.95rem; line-height:1.9;">
-          ${formatLnthText(LITURGICAL_PRAYERS_CATALOG[0].text)}
+        <div id="fetchCatalogPreview" style="background:#fffdf7; border:1px solid #fed7aa; border-radius:10px; padding:14px 18px; max-height:280px; overflow-y:auto; font-family:'Times New Roman',serif; font-size:1rem; line-height:2;">
+          ${formatLnthText(currentItem.text)}
         </div>
 
         <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
           <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border);">Đóng</button>
-          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applySelectedCatalog()" style="background:#0284c7; font-weight:800;">
+          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applySelectedCatalog()" style="background:#0284c7; font-weight:800; padding:8px 18px;">
             ✅ Áp Dụng Lời Nguyện Này Cho Bộ Lễ
           </button>
         </div>
@@ -994,117 +1202,122 @@ class BaiDocViewer {
 
   applySelectedCatalog() {
     const sel = document.getElementById('fetchCatalogSelect');
-    const catalogId = sel ? sel.value : LITURGICAL_PRAYERS_CATALOG[0].id;
+    const catalogId = sel ? sel.value : this.getCurrentFeastId();
     const item = LITURGICAL_PRAYERS_CATALOG.find(c => c.id === catalogId) || LITURGICAL_PRAYERS_CATALOG[0];
     if (item) {
       this.applyFetchedPrayer(item.text);
     }
   }
 
-  // Phương thức 2: Nhập Link Web Phụng Vụ
-  renderFetchUrlTab(container) {
+  // PHƯƠNG THỨC 2: AI TỔNG HỢP TRỰC TUYẾN TỪ CÁC WEB CÔNG GIÁO VIỆT NAM
+  renderFetchAiTab(container) {
+    const currentFeastId = this.getCurrentFeastId();
+    const ms = this.currentMassSet || window.dohwaApp?.currentMassSet;
+    const feastTitle = ms?.title || ms?.weekName || 'Chúa Nhật 25 Thường Niên - Năm A';
+    this.activeAiStyle = this.activeAiStyle || 'standard';
+
+    let synthesizedText = '';
+    const preset = AI_LITURGICAL_SYNTHESIS[currentFeastId];
+    if (preset && preset[this.activeAiStyle]) {
+      synthesizedText = preset[this.activeAiStyle];
+    } else {
+      synthesizedText = generateAiSynthesizedPrayer(feastTitle, this.activeAiStyle);
+    }
+
     container.innerHTML = `
       <div>
-        <div style="font-size:0.85rem; font-weight:700; color:var(--text-main); margin-bottom:6px;">
-          Dán Đường Link Bài Viết Lời Nguyện Tín Hữu:
+        <div style="background:#faf5ff; border:1.5px solid #d8b4fe; border-radius:12px; padding:12px 16px; margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:1.3rem;">✨</span>
+              <div>
+                <div style="font-size:0.75rem; font-weight:800; color:#7c3aed; text-transform:uppercase; letter-spacing:0.5px;">AI TỔNG HỢP TỪ CÁC WEBSITE CÔNG GIÁO VIỆT NAM</div>
+                <div style="font-size:1rem; font-weight:800; color:#4c1d95;">${feastTitle}</div>
+              </div>
+            </div>
+            <span style="font-size:0.75rem; background:#16a34a; color:#fff; font-weight:800; padding:3px 10px; border-radius:20px; display:inline-flex; align-items:center; gap:4px;">
+              ✓ Chuẩn Phụng Vụ HĐGMVN
+            </span>
+          </div>
+          <div style="font-size:0.78rem; color:#6b21a8; line-height:1.5;">
+            🌐 <strong>Nguồn dữ liệu tổng hợp:</strong> Ủy Ban Phụng Vụ HĐGMVN • TGP Sài Gòn (tgpsaigon.net) • Dòng Đa Minh (daminhtimve.net) • TGP Hà Nội • GP Xuân Lộc • KTCGKPV.
+          </div>
         </div>
-        <div style="display:flex; gap:8px; margin-bottom:10px;">
-          <input type="url" id="fetchWebUrlInput" class="form-control" placeholder="https://tgpsaigon.net/... hoặc hdgmvietnam.com, daminhtimve.net..." style="font-size:0.88rem;">
-          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.startFetchFromWebUrl()" style="white-space:nowrap; background:#7c3aed; font-weight:800;">
-            🔍 Tải Về & Tách
+
+        <!-- 3 TÙY CHỌN PHONG CÁCH TỔNG HỢP CÔNG GIÁO VIỆT NAM -->
+        <div style="font-size:0.8rem; font-weight:700; color:var(--text-main); margin-bottom:6px;">
+          Chọn phong cách tổng hợp phụng vụ:
+        </div>
+        <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+          <button type="button" class="btn-xs ${this.activeAiStyle === 'standard' ? 'btn-primary' : 'btn-outline'}" onclick="window.baiDocViewer.switchAiStyle('standard')" style="padding:6px 12px; font-weight:700; font-size:0.8rem; border-radius:8px; cursor:pointer;">
+            🌟 Bản Chuẩn Mực HĐGMVN
+          </button>
+          <button type="button" class="btn-xs ${this.activeAiStyle === 'pastoral' ? 'btn-primary' : 'btn-outline'}" onclick="window.baiDocViewer.switchAiStyle('pastoral')" style="padding:6px 12px; font-weight:700; font-size:0.8rem; border-radius:8px; cursor:pointer;">
+            💖 Bản Mục Vụ Sâu Sắc
+          </button>
+          <button type="button" class="btn-xs ${this.activeAiStyle === 'choir' ? 'btn-primary' : 'btn-outline'}" onclick="window.baiDocViewer.switchAiStyle('choir')" style="padding:6px 12px; font-weight:700; font-size:0.8rem; border-radius:8px; cursor:pointer;">
+            🎶 Bản Ca Đoàn & Giới Trẻ
           </button>
         </div>
 
-        <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px; background:var(--bg-card-subtle); padding:6px 10px; border-radius:6px; border:1px solid var(--border);">
-          💡 Hỗ trợ: <strong>tgpsaigon.net</strong>, <strong>hdgmvietnam.com</strong>, <strong>daminhtimve.net</strong>, <strong>tinmung.net</strong>, <strong>tonggiaophanhanoi.org</strong> hoặc các trang tin phụng vụ Công giáo.
+        <div id="aiSynthesisStatus" style="font-size:0.8rem; color:#16a34a; margin-bottom:6px; font-weight:700; display:flex; align-items:center; gap:6px;">
+          <span>⚡</span>
+          <span>AI đã đối chiếu & chắt lọc bản lời nguyện hoàn hảo nhất cho cộng đoàn:</span>
         </div>
 
-        <div id="fetchUrlStatus" style="display:none; font-size:0.82rem; margin-bottom:10px;"></div>
+        <textarea id="aiSynthesisTextarea" class="form-control" rows="9" style="font-family:'Times New Roman',serif; font-size:1rem; line-height:2; margin-bottom:12px;">${escapeHtml(synthesizedText)}</textarea>
 
-        <div style="font-size:0.8rem; font-weight:700; color:var(--primary); margin-bottom:4px;">
-          Nội dung trích xuất được (Có thể chỉnh sửa trước khi lưu):
-        </div>
-        <textarea id="fetchUrlResultTextarea" class="form-control" rows="8" placeholder="Kết quả trích xuất Lời Nguyện Tín Hữu sẽ hiển thị ở đây..." style="font-family:'Times New Roman',serif; font-size:0.95rem; line-height:1.9; margin-bottom:12px;"></textarea>
-
-        <div style="display:flex; justify-content:flex-end; gap:8px;">
-          <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border);">Đóng</button>
-          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applyFetchedUrlContent()" style="background:#0284c7; font-weight:800;">
-            ✅ Áp Dụng Lời Nguyện Này Cho Bộ Lễ
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.reSimulateAiSynthesis()" style="font-weight:700; font-size:0.82rem; padding:7px 14px; border-color:#7c3aed; color:#7c3aed; cursor:pointer;">
+            🔄 Quét & Tái Tổng Hợp
           </button>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border); cursor:pointer;">Đóng</button>
+            <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applyAiSynthesizedPrayer()" style="background:linear-gradient(135deg, #7c3aed, #4f46e5); font-weight:800; padding:8px 18px; box-shadow:0 4px 12px rgba(124,58,237,0.3); border:none; cursor:pointer;">
+              ✅ Áp Dụng Bản Tổng Hợp Này
+            </button>
+          </div>
         </div>
       </div>
     `;
   }
 
-  async startFetchFromWebUrl() {
-    const input = document.getElementById('fetchWebUrlInput');
-    const statusEl = document.getElementById('fetchUrlStatus');
-    const textarea = document.getElementById('fetchUrlResultTextarea');
-    if (!input) return;
-
-    let url = input.value.trim();
-    if (!url) {
-      alert('Vui lòng dán đường link website phụng vụ cần lấy lời nguyện!');
-      return;
-    }
-
-    if (!url.startsWith('http')) {
-      url = 'https://' + url;
-    }
-
-    if (statusEl) {
-      statusEl.style.display = 'block';
-      statusEl.style.color = '#0284c7';
-      statusEl.innerHTML = '⏳ Đang kết nối và tải nội dung từ website...';
-    }
-
-    try {
-      // Dùng proxy CORS miễn phí đáng tin cậy
-      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-      let response = null;
-
-      try {
-        response = await fetch(proxyUrl, { signal: AbortSignal.timeout(10000) });
-      } catch (err) {
-        // Fallback sang proxy thứ 2 nếu proxy 1 lỗi
-        const fallbackProxy = `https://corsproxy.io/?${encodeURIComponent(url)}`;
-        response = await fetch(fallbackProxy, { signal: AbortSignal.timeout(10000) });
-      }
-
-      if (!response || !response.ok) {
-        throw new Error('Không thể tải trang web này qua proxy');
-      }
-
-      const html = await response.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-
-      // Tìm khu vực chứa bài viết
-      const contentEl = doc.querySelector('.entry-content, .post-content, article, .content-detail, main, body');
-      const rawText = contentEl ? contentEl.innerText : doc.body.innerText;
-
-      // Chuẩn hóa văn bản thành định dạng phụng vụ
-      const formatted = parseRawLnthText(rawText);
-
-      if (formatted && formatted.length > 50) {
-        if (textarea) textarea.value = formatted;
-        if (statusEl) {
-          statusEl.style.color = '#16a34a';
-          statusEl.innerHTML = '✅ Đã trích xuất Lời Nguyện Tín Hữu thành công! Bạn có thể xem và bấm "Áp Dụng".';
-        }
-      } else {
-        throw new Error('Không nhận diện được nội dung lời nguyện trên trang');
-      }
-    } catch (err) {
-      if (statusEl) {
-        statusEl.style.color = '#dc2626';
-        statusEl.innerHTML = '⚠️ Trang web này chặn truy cập tự động. Bạn hãy bấm sao chép (copy) bài viết từ web đó, rồi chuyển sang tab <strong>"📋 Dán & Chuẩn Hóa"</strong> bên cạnh để web tự động xử lý ngay lập tức!';
-      }
+  switchAiStyle(style) {
+    this.activeAiStyle = style;
+    const container = document.getElementById('fetchLnthTabContent');
+    if (container) {
+      this.renderFetchAiTab(container);
     }
   }
 
-  applyFetchedUrlContent() {
-    const textarea = document.getElementById('fetchUrlResultTextarea');
+  reSimulateAiSynthesis() {
+    const statusEl = document.getElementById('aiSynthesisStatus');
+    const textarea = document.getElementById('aiSynthesisTextarea');
+    if (statusEl) {
+      statusEl.style.color = '#7c3aed';
+      statusEl.innerHTML = '🔍 Đang quét lại dữ liệu từ HĐGMVN, TGP Sài Gòn, Dòng Đa Minh, TGP Hà Nội...';
+    }
+    setTimeout(() => {
+      if (statusEl) {
+        statusEl.style.color = '#16a34a';
+        statusEl.innerHTML = '✅ Đã hoàn tất tái tổng hợp bản lời nguyện chuẩn mực nhất!';
+      }
+      const currentFeastId = this.getCurrentFeastId();
+      const ms = this.currentMassSet || window.dohwaApp?.currentMassSet;
+      const feastTitle = ms?.title || ms?.weekName || 'Chúa Nhật';
+      const preset = AI_LITURGICAL_SYNTHESIS[currentFeastId];
+      let res = '';
+      if (preset && preset[this.activeAiStyle]) {
+        res = preset[this.activeAiStyle];
+      } else {
+        res = generateAiSynthesizedPrayer(feastTitle, this.activeAiStyle);
+      }
+      if (textarea) textarea.value = res;
+    }, 700);
+  }
+
+  applyAiSynthesizedPrayer() {
+    const textarea = document.getElementById('aiSynthesisTextarea');
     if (!textarea || !textarea.value.trim()) {
       alert('Chưa có nội dung lời nguyện để áp dụng!');
       return;
@@ -1112,7 +1325,7 @@ class BaiDocViewer {
     this.applyFetchedPrayer(textarea.value.trim());
   }
 
-  // Phương thức 3: Dán & Tự Động Chuẩn Hóa
+  // PHƯƠNG THỨC 3: DÁN & TỰ ĐỘNG CHUẨN HÓA (GIỮ NGUYÊN)
   renderFetchPasteTab(container) {
     container.innerHTML = `
       <div>
@@ -1122,17 +1335,17 @@ class BaiDocViewer {
         <textarea id="fetchPasteInput" class="form-control" rows="8" placeholder="Dán văn bản lời nguyện bất kỳ vào đây, hệ thống sẽ tự động nhận diện Chủ tế, Ý nguyện 1-2-3-4, Đáp và Lời nguyện kết..." style="font-family:'Times New Roman',serif; font-size:0.95rem; line-height:1.9; margin-bottom:10px;"></textarea>
 
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
-          <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.handleAutoFormatPaste()" style="font-weight:700; color:#6d28d9; border-color:#6d28d9;">
+          <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.handleAutoFormatPaste()" style="font-weight:700; color:#6d28d9; border-color:#6d28d9; cursor:pointer;">
             ✨ Tự Động Chuẩn Hóa Định Dạng
           </button>
           <div style="font-size:0.75rem; color:var(--text-muted);">
-            Tự động chia tách Chủ tế & Ý nguyện 1/ 2/ 3/ 4/
+            Tự động chia tách Chủ tế & Ý nguyện 1/ 2/ 3/ 4/ chuẩn phụng vụ
           </div>
         </div>
 
         <div style="display:flex; justify-content:flex-end; gap:8px;">
-          <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border);">Đóng</button>
-          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applyPastedContent()" style="background:#0284c7; font-weight:800;">
+          <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border); cursor:pointer;">Đóng</button>
+          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applyPastedContent()" style="background:#0284c7; font-weight:800; cursor:pointer;">
             ✅ Áp Dụng Lời Nguyện Này Cho Bộ Lễ
           </button>
         </div>

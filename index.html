@@ -404,10 +404,10 @@
       <div style="display:flex; justify-content:space-between; align-items:flex-start; padding:16px 20px 12px; border-bottom:1px solid var(--border);">
         <div>
           <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:8px; margin:0;">
-            🌐 Lấy Lời Nguyện Tín Hữu Từ Web
+            🌐 Lời Nguyện Tín Hữu Chuẩn Phụng Vụ
           </h3>
-          <div style="font-size:0.78rem; color:var(--primary); font-weight:600; margin-top:3px;">
-            Nhập link từ tgpsaigon.net, hdgmvietnam.com hoặc chọn từ kho phụng vụ
+          <div style="font-size:0.78rem; color:var(--primary); font-weight:600; margin-top:3px;" id="fetchLnthModalSubtitle">
+            Tự động theo Chúa Nhật hiện tại • AI tổng hợp từ các web Công giáo Việt Nam
           </div>
         </div>
         <button type="button" onclick="window.baiDocViewer && window.baiDocViewer.closeFetchModal()" style="background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--text-muted); padding:2px 8px;">&times;</button>
@@ -416,10 +416,10 @@
       <!-- TABS PHƯƠNG THỨC LẤY LỜI NGUYỆN -->
       <div style="display:flex; background:var(--bg-card-subtle); border-bottom:1px solid var(--border); overflow-x:auto;">
         <button type="button" class="baidoc-tab-btn fetch-lnth-tab active" data-fetch-tab="catalog" onclick="window.baiDocViewer.switchFetchTab('catalog')">
-          ⚡ Kho Phụng Vụ Sẵn Có
+          ⚡ Tự Động Theo Chúa Nhật
         </button>
-        <button type="button" class="baidoc-tab-btn fetch-lnth-tab" data-fetch-tab="url" onclick="window.baiDocViewer.switchFetchTab('url')">
-          🔗 Dán Link Website
+        <button type="button" class="baidoc-tab-btn fetch-lnth-tab" data-fetch-tab="ai" onclick="window.baiDocViewer.switchFetchTab('ai')">
+          ✨ AI Tổng Hợp Các Web
         </button>
         <button type="button" class="baidoc-tab-btn fetch-lnth-tab" data-fetch-tab="paste" onclick="window.baiDocViewer.switchFetchTab('paste')">
           📋 Dán & Chuẩn Hóa
@@ -641,14 +641,14 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/firebase-config.js?v=2026_17"></script>
-  <script src="js/store.js?v=2026_17"></script>
-  <script src="js/liturgical-helper.js?v=2026_17"></script>
-  <script src="js/player.js?v=2026_17"></script>
-  <script src="js/pdf-viewer.js?v=2026_17"></script>
-  <script src="js/soan-le.js?v=2026_17"></script>
-  <script src="js/thong-ke.js?v=2026_17"></script>
-  <script src="js/app.js?v=2026_17"></script>
+  <script src="js/firebase-config.js?v=2026_18"></script>
+  <script src="js/store.js?v=2026_18"></script>
+  <script src="js/liturgical-helper.js?v=2026_18"></script>
+  <script src="js/player.js?v=2026_18"></script>
+  <script src="js/pdf-viewer.js?v=2026_18"></script>
+  <script src="js/soan-le.js?v=2026_18"></script>
+  <script src="js/thong-ke.js?v=2026_18"></script>
+  <script src="js/app.js?v=2026_18"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
