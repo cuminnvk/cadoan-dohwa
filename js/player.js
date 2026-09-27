@@ -272,7 +272,7 @@ class DohwaPlayer {
     }
   }
 
-  // --- ENGINE PHÁT YOUTUBE AUDIO-ONLY (HOÀN TOÀN ẨN VIDEO & GIẢM QUẢNG CÁO) ---
+  // --- ENGINE PHÁT YOUTUBE AUDIO-ONLY (CHUẨN SOANBOLE.COM: KHÔNG QUẢNG CÁO) ---
   playYouTube(videoId) {
     this.isYouTubeMode = true;
     this.audioElement.pause();
@@ -280,73 +280,77 @@ class DohwaPlayer {
     const container = document.getElementById('ytPlayerContainer');
     if (!container) return;
 
-    // Sử dụng Privacy-Enhanced Domain (youtube-nocookie.com) giúp loại bỏ cookie theo dõi và giảm tối đa quảng cáo
-    const noCookieSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&iv_load_policy=3`;
+    // 1. Luôn giải phóng (destroy) instance cũ trước khi nạp bài mới để ngăn YouTube tích lũy session chèn quảng cáo giữa/đầu video
+    if (this.ytPlayer) {
+      try { this.ytPlayer.destroy(); } catch (e) {}
+      this.ytPlayer = null;
+    }
+
+    container.innerHTML = '<div id="yt-player-instance"></div>';
+
+    // 2. KHÔNG dùng youtube-nocookie.com (vì nocookie tước quyền đăng nhập/Premium và ép chèn quảng cáo đại trà)
+    // Dùng chuẩn https://www.youtube.com với origin chính xác để YouTube handshake bảo mật và loại bỏ quảng cáo ép buộc
+    const originUrl = (window.location.origin && window.location.origin !== 'null') 
+      ? window.location.origin 
+      : (window.location.protocol + '//' + window.location.host);
+
+    const fallbackSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&controls=0&disablekb=1&modestbranding=1&rel=0&iv_load_policy=3&enablejsapi=1&origin=${encodeURIComponent(originUrl)}`;
 
     if (!window.YT || !window.YT.Player) {
-      container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="${noCookieSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      container.innerHTML = `<iframe id="ytIframeDirect" width="320" height="180" src="${fallbackSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
       this.isPlaying = true;
       this.updatePlayBtnState();
       return;
     }
 
-    if (!this.ytPlayer) {
-      try {
-        this.ytPlayer = new YT.Player('ytPlayerContainer', {
-          height: '100%',
-          width: '100%',
-          videoId: videoId,
-          host: 'https://www.youtube-nocookie.com',
-          playerVars: {
-            autoplay: 1,
-            playsinline: 1,
-            controls: 0,
-            rel: 0,
-            modestbranding: 1,
-            iv_load_policy: 3
+    try {
+      this.ytPlayer = new YT.Player('yt-player-instance', {
+        height: '180',
+        width: '320',
+        videoId: videoId,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          modestbranding: 1,
+          rel: 0,
+          playsinline: 1,
+          iv_load_policy: 3,
+          origin: originUrl
+        },
+        events: {
+          onReady: (event) => {
+            try {
+              event.target.setVolume(100);
+              event.target.playVideo();
+            } catch (e) {}
+            this.isPlaying = true;
+            this.updatePlayBtnState();
           },
-          events: {
-            onReady: (event) => {
-              try { event.target.playVideo(); } catch(e) {}
+          onStateChange: (event) => {
+            if (event.data === YT.PlayerState.PLAYING) {
               this.isPlaying = true;
-              this.updatePlayBtnState();
-            },
-            onStateChange: (event) => {
-              if (event.data === YT.PlayerState.PLAYING) {
-                this.isPlaying = true;
-                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
-              } else if (event.data === YT.PlayerState.PAUSED) {
-                this.isPlaying = false;
-                if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
-              } else if (event.data === YT.PlayerState.ENDED) {
-                this.isPlaying = false;
-                this.handleSongEnded(); // Tự động nhảy sang bài tiếp theo!
-              }
-              this.updatePlayBtnState();
-            },
-            onError: (event) => {
-              console.warn('YouTube Player error code:', event.data);
-              this.handleSongEnded(); // Tự động chuyển bài tiếp nếu video lỗi
+              if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+            } else if (event.data === YT.PlayerState.PAUSED) {
+              this.isPlaying = false;
+              if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+            } else if (event.data === YT.PlayerState.ENDED) {
+              this.isPlaying = false;
+              this.handleSongEnded(); // Tự động nhảy sang bài tiếp theo!
             }
+            this.updatePlayBtnState();
+          },
+          onError: (event) => {
+            console.warn('YouTube Player error code:', event.data);
+            this.handleSongEnded(); // Tự động chuyển bài tiếp nếu video lỗi
           }
-        });
-      } catch (err) {
-        container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="${noCookieSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-        this.isPlaying = true;
-        this.updatePlayBtnState();
-      }
-    } else {
-      try {
-        if (this.ytPlayer.loadVideoById) {
-          this.ytPlayer.loadVideoById(videoId);
-          this.isPlaying = true;
-          this.updatePlayBtnState();
-        } else {
-          container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="${noCookieSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
         }
-      } catch (e) {
-        container.innerHTML = `<iframe id="ytIframeDirect" width="100%" height="100%" src="${noCookieSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-      }
+      });
+    } catch (err) {
+      console.warn('YT.Player create error, falling back to direct iframe:', err);
+      container.innerHTML = `<iframe id="ytIframeDirect" width="320" height="180" src="${fallbackSrc}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      this.isPlaying = true;
+      this.updatePlayBtnState();
     }
   }
 
