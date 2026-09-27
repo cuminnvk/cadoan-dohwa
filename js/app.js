@@ -153,7 +153,26 @@ class DohwaApp {
   // --- TẢI VÀ RENDER THẺ BỘ LỄ HIỆN TẠI ---
   async loadCurrentMassSet() {
     if (window.dohwaStore) {
-      this.currentMassSet = await window.dohwaStore.getActiveMassSet();
+      // Kiểm tra tham số trên URL (?massId=... hoặc ?id=... hoặc ?mass=...)
+      const urlParams = new URLSearchParams(window.location.search);
+      let targetId = urlParams.get('massId') || urlParams.get('id') || urlParams.get('mass');
+
+      if (!targetId && window.location.hash) {
+        const h = window.location.hash.replace('#', '');
+        if (h.startsWith('mass=')) {
+          targetId = h.replace('mass=', '');
+        } else if (h.startsWith('mass-')) {
+          targetId = h;
+        }
+      }
+
+      if (targetId) {
+        this.currentMassSet = await window.dohwaStore.get('mass_sets', targetId);
+      }
+
+      if (!this.currentMassSet) {
+        this.currentMassSet = await window.dohwaStore.getActiveMassSet();
+      }
     }
 
     const container = document.getElementById('massSetCardContainer');
@@ -449,7 +468,8 @@ class DohwaApp {
       text += `${i + 1}. [${s.roleLabel || 'Bài hát'}] ${s.title}${s.composer ? ` - ${s.composer}` : ''}\n`;
     });
 
-    const directUrl = window.location.href;
+    const baseUrl = window.location.origin + window.location.pathname;
+    const directUrl = `${baseUrl}?massId=${encodeURIComponent(ms.id)}`;
     text += `\n🔗 Link xem bộ lễ & nốt nhạc trực tiếp:\n${directUrl}\n`;
 
     // 1. Sao chép vào Clipboard
