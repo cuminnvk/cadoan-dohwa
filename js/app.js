@@ -441,7 +441,7 @@ class DohwaApp {
     this.switchTab('tab-hientai');
   }
 
-  // --- NÚT [ 📤 CHIA SẺ ] TỔNG HỢP (GỘP TỪ COPY & CHIA SẺ) ---
+  // --- NÚT [ 📤 CHIA SẺ ] TỔNG HỢP VỚI TỰ ĐỘNG TẠO LINK RÚT GỌN SIÊU ĐẸP ---
   async shareMassSet(msId) {
     let ms = null;
     if (window.dohwaStore) {
@@ -449,6 +449,53 @@ class DohwaApp {
     }
     if (!ms) ms = this.currentMassSet;
     if (!ms) return;
+
+    const baseUrl = window.location.origin + window.location.pathname;
+    const directUrl = `${baseUrl}?massId=${encodeURIComponent(ms.id)}`;
+
+    // Kiểm tra cache link rút gọn đã tạo trước đó
+    const cacheKey = `dohwa_short_${ms.id}`;
+    let shareUrl = localStorage.getItem(cacheKey);
+
+    if (!shareUrl || !shareUrl.startsWith('https://da.gd/')) {
+      try {
+        // Đặt tên slug rút gọn dễ nhớ (ví dụ: dohwa-25 hoặc dohwa-cn25)
+        let candidateSlug = 'dohwa';
+        if (ms.id === 'mass-cn-25-tn-a') {
+          candidateSlug = 'dohwa-25';
+        } else {
+          const cleanId = ms.id.replace(/[^a-zA-Z0-9]/g, '').slice(-6).toLowerCase();
+          candidateSlug = `dohwa-${cleanId}`;
+        }
+
+        // Thử tạo link rút gọn với slug ưu tiên
+        let shortRes = await fetch(`https://da.gd/s?url=${encodeURIComponent(directUrl)}&shorturl=${encodeURIComponent(candidateSlug)}`);
+        let shortText = shortRes.ok ? (await shortRes.text()).trim() : '';
+        
+        if (shortText.startsWith('https://da.gd/')) {
+          shareUrl = shortText;
+        } else {
+          // Nếu slug đã bị trùng thì tạo ngẫu nhiên
+          let randomRes = await fetch(`https://da.gd/s?url=${encodeURIComponent(directUrl)}`);
+          if (randomRes.ok) {
+            let randText = (await randomRes.text()).trim();
+            if (randText.startsWith('https://da.gd/')) {
+              shareUrl = randText;
+            }
+          }
+        }
+
+        if (shareUrl && shareUrl.startsWith('https://da.gd/')) {
+          localStorage.setItem(cacheKey, shareUrl);
+        }
+      } catch (e) {
+        console.warn('Lỗi tạo link rút gọn:', e);
+      }
+    }
+
+    if (!shareUrl) {
+      shareUrl = directUrl;
+    }
 
     const dateFormatted = this.formatDisplayDate(ms.date);
     const r = ms.liturgicalRoles || {};
@@ -468,16 +515,14 @@ class DohwaApp {
       text += `${i + 1}. [${s.roleLabel || 'Bài hát'}] ${s.title}${s.composer ? ` - ${s.composer}` : ''}\n`;
     });
 
-    const baseUrl = window.location.origin + window.location.pathname;
-    const directUrl = `${baseUrl}?massId=${encodeURIComponent(ms.id)}`;
-    text += `\n🔗 Link xem bộ lễ & nốt nhạc trực tiếp:\n${directUrl}\n`;
+    text += `\n🔗 Link xem bộ lễ & nốt nhạc trực tiếp:\n${shareUrl}\n`;
 
     // 1. Sao chép vào Clipboard
     try {
       await navigator.clipboard.writeText(text);
       const toast = document.createElement('div');
       toast.className = 'dohwa-toast';
-      toast.textContent = '📋 Đã sao chép nội dung chia sẻ bộ lễ vào bộ nhớ tạm!';
+      toast.textContent = `📋 Đã sao chép link rút gọn: ${shareUrl}`;
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 2500);
     } catch(e) {}
@@ -488,7 +533,7 @@ class DohwaApp {
         await navigator.share({
           title: ms.title,
           text: text,
-          url: directUrl
+          url: shareUrl
         });
       } catch (e) {}
     }
