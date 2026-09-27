@@ -282,11 +282,20 @@
   background: var(--bg-card-subtle);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.baidoc-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .baidoc-tab-btn {
   flex: 1;
-  padding: 12px 6px;
+  min-width: 85px;
+  white-space: nowrap;
+  padding: 12px 8px;
   border: none;
   background: transparent;
   font-size: 0.85rem;

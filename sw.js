@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cadoan-dohwa-v21';
+const CACHE_NAME = 'cadoan-dohwa-v22';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

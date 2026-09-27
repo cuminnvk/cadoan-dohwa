@@ -381,16 +381,54 @@
         <button id="baiDocModalClose" onclick="window.baiDocViewer && baiDocViewer.close()" style="background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--text-muted); padding:4px 10px;">&times;</button>
       </div>
 
-      <!-- 4 TAB PHỤNG VỤ CHUẨN -->
+      <!-- 5 TAB PHỤNG VỤ CHUẨN: BÀI ĐỌC 1, THÁNH VỊNH (PDF), BÀI ĐỌC 2, TIN MỪNG, LỜI NGUYỆN TH -->
       <div class="baidoc-tabs">
         <button class="baidoc-tab-btn active" data-tab="bd1" onclick="window.baiDocViewer.switchTab('bd1')">Bài đọc 1</button>
+        <button class="baidoc-tab-btn" data-tab="tv" onclick="window.baiDocViewer.switchTab('tv')">Thánh Vịnh (PDF)</button>
         <button class="baidoc-tab-btn" data-tab="bd2" onclick="window.baiDocViewer.switchTab('bd2')">Bài đọc 2</button>
-        <button class="baidoc-tab-btn" data-tab="tv" onclick="window.baiDocViewer.switchTab('tv')">Thánh Vịnh</button>
+        <button class="baidoc-tab-btn" data-tab="tm" onclick="window.baiDocViewer.switchTab('tm')">Tin Mừng</button>
         <button class="baidoc-tab-btn" data-tab="lnth" onclick="window.baiDocViewer.switchTab('lnth')">Lời nguyện TH</button>
       </div>
 
       <div class="baidoc-content" id="baiDocContent">
         <!-- Content dynamically loaded -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL LẤY LỜI NGUYỆN TÍN HỮU TỪ WEB (KHO PHỤNG VỤ & CÀO DỮ LIỆU) -->
+  <!-- ========================================== -->
+  <div class="baidoc-overlay" id="fetchLnthModalOverlay" style="display:none; z-index:100010; background:rgba(0,0,0,0.7); backdrop-filter:blur(4px);">
+    <div style="width:min(660px, 95vw); max-height:90vh; background:var(--bg-card,#fff); border-radius:18px; box-shadow:0 24px 60px rgba(0,0,0,0.4); overflow:hidden; display:flex; flex-direction:column;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; padding:16px 20px 12px; border-bottom:1px solid var(--border);">
+        <div>
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:8px; margin:0;">
+            🌐 Lấy Lời Nguyện Tín Hữu Từ Web
+          </h3>
+          <div style="font-size:0.78rem; color:var(--primary); font-weight:600; margin-top:3px;">
+            Nhập link từ tgpsaigon.net, hdgmvietnam.com hoặc chọn từ kho phụng vụ
+          </div>
+        </div>
+        <button type="button" onclick="window.baiDocViewer && window.baiDocViewer.closeFetchModal()" style="background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--text-muted); padding:2px 8px;">&times;</button>
+      </div>
+
+      <!-- TABS PHƯƠNG THỨC LẤY LỜI NGUYỆN -->
+      <div style="display:flex; background:var(--bg-card-subtle); border-bottom:1px solid var(--border); overflow-x:auto;">
+        <button type="button" class="baidoc-tab-btn fetch-lnth-tab active" data-fetch-tab="catalog" onclick="window.baiDocViewer.switchFetchTab('catalog')">
+          ⚡ Kho Phụng Vụ Sẵn Có
+        </button>
+        <button type="button" class="baidoc-tab-btn fetch-lnth-tab" data-fetch-tab="url" onclick="window.baiDocViewer.switchFetchTab('url')">
+          🔗 Dán Link Website
+        </button>
+        <button type="button" class="baidoc-tab-btn fetch-lnth-tab" data-fetch-tab="paste" onclick="window.baiDocViewer.switchFetchTab('paste')">
+          📋 Dán & Chuẩn Hóa
+        </button>
+      </div>
+
+      <!-- NỘI DUNG TỪNG TAB -->
+      <div style="padding:16px 20px; overflow-y:auto; flex:1;" id="fetchLnthTabContent">
+        <!-- Rendered dynamically -->
       </div>
     </div>
   </div>
@@ -603,14 +641,14 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/firebase-config.js?v=2026_16"></script>
-  <script src="js/store.js?v=2026_16"></script>
-  <script src="js/liturgical-helper.js?v=2026_16"></script>
-  <script src="js/player.js?v=2026_16"></script>
-  <script src="js/pdf-viewer.js?v=2026_16"></script>
-  <script src="js/soan-le.js?v=2026_16"></script>
-  <script src="js/thong-ke.js?v=2026_16"></script>
-  <script src="js/app.js?v=2026_16"></script>
+  <script src="js/firebase-config.js?v=2026_17"></script>
+  <script src="js/store.js?v=2026_17"></script>
+  <script src="js/liturgical-helper.js?v=2026_17"></script>
+  <script src="js/player.js?v=2026_17"></script>
+  <script src="js/pdf-viewer.js?v=2026_17"></script>
+  <script src="js/soan-le.js?v=2026_17"></script>
+  <script src="js/thong-ke.js?v=2026_17"></script>
+  <script src="js/app.js?v=2026_17"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
