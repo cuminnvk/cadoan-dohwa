@@ -239,13 +239,17 @@ const OFFLINE_LITURGY_STORE = {
     lnth: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
 Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ đầy lòng quảng đại và bao dung, đường lối Người vượt xa mọi tính toán nhân loại. Với niềm tin tưởng và phó thác, chúng ta cùng tha thiết dâng lời nguyện xin:
 1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Đức Giáo Hoàng, các Đức Giám Mục và các Linh Mục, để các ngài luôn là những mục tử nhân lành dẫn dắt đoàn chiên Chúa theo tinh thần Tin Mừng.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho thế giới: Xin Chúa ban ơn bình an cho các dân tộc, xoa dịu những nỗi đau của các nạn nhân chiến tranh, đói nghèo, bệnh tật và thiên tai.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho những người đang gặp thử thách gian truân: Xin Chúa nâng đỡ những ai đang ngã lòng, thất vọng, để họ luôn tìm thấy niềm an ủi và cậy trông nơi lòng Chúa xót thương.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ: Xin Chúa ban cho mỗi ca viên lòng nhiệt thành mến Chúa, biết dùng tiếng hát để phụng sự Thánh Lễ và loan báo tình yêu Chúa trong tinh thần hiệp nhất yêu thương.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, nhờ Đức Kitô, Chúa chúng con. - Amen.`
   },
   '2026-10-04': {
@@ -277,7 +281,8 @@ Chủ tế: Lạy Chúa, xin thương chấp nhận những ước nguyện châ
     lnth: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
 Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời gọi chúng ta cộng tác xây dựng Nước Trời bằng đời sống hoán cải chân thành. Với tâm tình tin tưởng, chúng ta cùng dâng lời cầu xin:
 1. Cầu cho các vị chủ chăn trong Hội Thánh: Xin Chúa ban cho các ngài sức mạnh và lòng nhân ái, để luôn nêu gương sáng vâng phục Thánh ý Chúa và tận tụy phục vụ đoàn chiên.
-      Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+      Xướng: Chúng con cầu xin Chúa.
+      Đáp: Xin Chúa nhậm lời chúng con.
       Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và ban ơn giúp chúng con luôn trung thành thực thi ý Chúa. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
     },
     '2026-10-18': {
@@ -310,16 +315,20 @@ Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời g�
 Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ luôn rộng mở bàn tiệc ân sủng đón mời tất cả chúng ta vào chia sẻ niềm vui Nước Trời. Trong tâm tình tri ân và ước muốn sống xứng đáng với ơn gọi người Kitô hữu, chúng ta cùng tha thiết dâng lời nguyện xin:
 
 1. Cầu cho Hội Thánh: Xin Chúa ban cho Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh lòng nhiệt thành truyền giáo, để Hội Thánh không ngừng rao giảng Tin Mừng và mời gọi muôn dân đến hiệp thông trong bàn tiệc Lời Chúa và Thánh Thể.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho hòa bình thế giới và các dân tộc: Xin Chúa lau sạch nước mắt khổ đau của những người nghèo khó, bệnh tật, các nạn nhân chiến tranh và thiên tai, ban cho nhân loại được sống trong an bình, công lý và tình huynh đệ ấm áp.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho những người đang khước từ lời mời gọi của Chúa: Xin ơn Chúa đánh động tâm trí họ, giúp họ nhận ra sự hư ảo trần thế để can đảm từ bỏ tội lỗi, quay về đón nhận lòng thương xót Chúa và mặc lấy y phục thánh thiện.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: "Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi": Xin Chúa ban ơn trợ lực để mỗi ca viên luôn hiệp nhất yêu thương, mặc lấy tâm tình đức tin, cậy, mến và say mê dùng lời ca tiếng hát phục vụ bàn thánh.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa là Vua muôn loài, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, và gìn giữ chúng con luôn trung kiên trong ân sủng cho đến ngày được vào dự tiệc cưới muôn đời trên thiên quốc. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
     }
@@ -337,16 +346,20 @@ Chủ tế: Lạy Chúa là Vua muôn loài, xin thương chấp nhận những 
 Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ luôn rộng mở bàn tiệc ân sủng đón mời tất cả chúng ta vào chia sẻ niềm vui Nước Trời. Trong tâm tình tri ân và ước muốn sống xứng đáng với ơn gọi người Kitô hữu, chúng ta cùng tha thiết dâng lời nguyện xin:
 
 1. Cầu cho Hội Thánh: Xin Chúa ban cho Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh lòng nhiệt thành truyền giáo, để Hội Thánh không ngừng rao giảng Tin Mừng và mời gọi muôn dân đến hiệp thông trong bàn tiệc Lời Chúa và Thánh Thể.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho hòa bình thế giới và các dân tộc: Xin Chúa lau sạch nước mắt khổ đau của những người nghèo khó, bệnh tật, các nạn nhân chiến tranh và thiên tai, ban cho nhân loại được sống trong an bình, công lý và tình huynh đệ ấm áp.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho những người đang khước từ lời mời gọi của Chúa: Xin ơn Chúa đánh động tâm trí họ, giúp họ nhận ra sự hư ảo trần thế để can đảm từ bỏ tội lỗi, quay về đón nhận lòng thương xót Chúa và mặc lấy y phục thánh thiện.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: "Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi": Xin Chúa ban ơn trợ lực để mỗi ca viên luôn hiệp nhất yêu thương, mặc lấy tâm tình đức tin, cậy, mến và say mê dùng lời ca tiếng hát phục vụ bàn thánh.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa là Vua muôn loài, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, và gìn giữ chúng con luôn trung kiên trong ân sủng cho đến ngày được vào dự tiệc cưới muôn đời trên thiên quốc. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
     },
@@ -357,13 +370,17 @@ Chủ tế: Lạy Chúa là Vua muôn loài, xin thương chấp nhận những 
       text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
 Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ đầy lòng quảng đại và bao dung, đường lối Người vượt xa mọi tính toán nhân loại. Với niềm tin tưởng và phó thác, chúng ta cùng tha thiết dâng lời nguyện xin:
 1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Đức Giáo Hoàng, các Đức Giám Mục và các Linh Mục, để các ngài luôn là những mục tử nhân lành dẫn dắt đoàn chiên Chúa theo tinh thần Tin Mừng.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho thế giới: Xin Chúa ban ơn bình an cho các dân tộc, xoa dịu những nỗi đau của các nạn nhân chiến tranh, đói nghèo, bệnh tật và thiên tai.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho những người đang gặp thử thách gian truân: Xin Chúa nâng đỡ những ai đang ngã lòng, thất vọng, để họ luôn tìm thấy niềm an ủi và cậy trông nơi lòng Chúa xót thương.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ: Xin Chúa ban cho mỗi ca viên lòng nhiệt thành mến Chúa, biết dùng tiếng hát để phụng sự Thánh Lễ và loan báo tình yêu Chúa trong tinh thần hiệp nhất yêu thương.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, nhờ Đức Kitô, Chúa chúng con. - Amen.`
     },
     {
@@ -373,13 +390,17 @@ Chủ tế: Lạy Chúa, xin thương chấp nhận những ước nguyện châ
       text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
 Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời gọi chúng ta cộng tác xây dựng Nước Trời bằng đời sống hoán cải chân thành. Với tâm tình tin tưởng, chúng ta cùng dâng lời cầu xin:
 1. Cầu cho các vị chủ chăn trong Hội Thánh: Xin Chúa ban cho các ngài sức mạnh và lòng nhân ái, để luôn nêu gương sáng vâng phục Thánh ý Chúa và tận tụy phục vụ đoàn chiên.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho các nhà lãnh đạo quốc gia: Xin Chúa soi sáng tâm trí các nhà cầm quyền, biết hành động vì công lý, hòa bình và lợi ích chân chính của mọi người dân.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho những ai đang lạc lối xa Chúa: Xin ơn Chúa biến đổi tâm hồn họ, giúp họ nhận ra tình thương của Chúa mà can đảm hối cải trở về.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho toàn thể Ca đoàn và cộng đoàn chúng ta: Xin Chúa giúp mỗi người chúng ta không chỉ vâng lời Chúa bằng môi miệng, mà bằng trọn cả hành động yêu thương cụ thể mỗi ngày.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và ban ơn giúp chúng con luôn trung thành thực thi ý Chúa. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
     },
   {
@@ -389,13 +410,17 @@ Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và
     text: `LỜI NGUYỆN TÍN HỮU – MÙA THƯỜNG NIÊN
 Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha hằng săn sóc và yêu thương hết mọi tạo vật. Trong tâm tình con thảo, chúng ta cùng dâng lên Người những ước nguyện chân thành:
 1. Cầu cho toàn thể Hội Thánh: Xin Chúa liên kết các Kitô hữu trong đức tin kiên vững và lòng mến chân thành, để Hội Thánh luôn là ánh sáng và muối men giữa lòng thế giới.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho hòa bình và thịnh vượng của các dân tộc: Xin Chúa xua tan bạo lực, bất công và hận thù, để mọi người được sống trong thanh bình, công lý và tôn trọng lẫn nhau.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho những người nghèo khổ, bệnh tật và cô đơn: Xin Chúa thương nâng đỡ ủi an và khơi dậy nơi tâm hồn các tín hữu lòng bác ái sẵn sàng cứu giúp.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho cộng đoàn phụng vụ và ca đoàn chúng ta: Xin Chúa thánh hóa mọi công việc, học tập và sứ vụ phục vụ bàn thánh của chúng con, để đời sống chúng con làm sáng danh Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa là Đấng giàu lòng từ bi, xin lắng nghe và nhậm lời đoàn con tha thiết nguyện xin, nhờ Đức Kitô, Chúa chúng con. - Amen.`
   },
   {
@@ -405,13 +430,17 @@ Chủ tế: Lạy Chúa là Đấng giàu lòng từ bi, xin lắng nghe và nh�
     text: `LỜI NGUYỆN TÍN HỮU – MÙA VỌNG
 Chủ tế: Anh chị em thân mến, trong tâm tình tỉnh thức và hân hoan đón chờ Đấng Cứu Thế ngự đến, chúng ta cùng hiệp ý dâng lên Thiên Chúa lời nguyện xin tha thiết:
 1. Cầu cho Hội Thánh: Xin Chúa soi sáng và ban ơn thánh hóa, để Hội Thánh luôn can đảm loan báo niềm hy vọng Cứu độ cho muôn dân.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho thế giới còn đầy bóng tối chiến tranh và chia rẽ: Xin Ánh Sáng của Đức Kitô mau xua tan bóng đêm tăm tối, đem lại bình an và hòa giải cho nhân loại.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho những tâm hồn đang nguội lạnh, khô khan: Xin ơn Chúa thức tỉnh lòng họ, giúp họ biết thanh tẩy tâm hồn để xứng đáng đón rước Chúa đến.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho ca viên và cộng đoàn chúng ta: Xin cho mỗi người chúng ta biết dọn đường cho Chúa bằng đời sống yêu thương, cầu nguyện và chia sẻ với người khó khăn.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa, xin mau đến và đừng trì hoãn, xin giải thoát chúng con khỏi mọi gông cùm tội lỗi, Đấng hằng sống và hiển trị muôn đời. - Amen.`
   },
   {
@@ -421,13 +450,17 @@ Chủ tế: Lạy Chúa, xin mau đến và đừng trì hoãn, xin giải thoá
     text: `LỜI NGUYỆN TÍN HỮU – ĐẠI LỄ GIÁNG SINH
 Chủ tế: Anh chị em thân mến, "Ngôi Lời đã làm người và ở giữa chúng ta". Trong niềm hân hoan tạ ơn tình yêu khôn ví của Thiên Chúa, chúng ta cùng hiệp lời cầu xin:
 1. Cầu cho Hội Thánh: Xin Chúa Hài Đồng ban muôn phúc lành trên Đức Giáo Hoàng và các chủ chăn, để các ngài luôn nhiệt thành đem tin mừng bình an đến cho muôn người.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho hòa bình nhân loại: Xin Hoàng Tử Bình An xoa dịu các vết thương chiến tranh, ban bình an thật sự cho các gia đình và các dân tộc trên khắp địa cầu.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho trẻ em nghèo và những người không nơi nương tựa: Xin Chúa ban cho họ tìm thấy hơi ấm tình người và sự sẻ chia chân thành từ những tấm lòng quảng đại.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho các gia đình trong giáo xứ và ca đoàn chúng ta: Xin Chúa Hài Đồng gìn giữ mái ấm gia đình chúng con luôn hiệp nhất, ấm êm và tràn ngập niềm vui cứu độ.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa Giêsu Hài Đồng, xin ngự vào tâm hồn chúng con và ở lại với chúng con luôn mãi. Chúa hằng sống và hiển trị muôn đời. - Amen.`
   },
   {
@@ -437,13 +470,17 @@ Chủ tế: Lạy Chúa Giêsu Hài Đồng, xin ngự vào tâm hồn chúng co
     text: `LỜI NGUYỆN TÍN HỮU – MÙA CHAY
 Chủ tế: Anh chị em thân mến, Mùa Chay là thời gian thuận tiện để chúng ta trở về với Chúa bằng sự cầu nguyện, chay tịnh và làm việc bác ái. Với lòng sám hối chân thành, chúng ta cùng tha thiết nguyện xin:
 1. Cầu cho các tín hữu: Xin Chúa ban ơn soi sáng để mỗi Kitô hữu biết nhìn nhận tội lỗi của mình và can đảm hoán cải đời sống theo ánh sáng Phúc Âm.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho những người đang chịu đau khổ về thể xác cũng như tinh thần: Xin Chúa ban sức mạnh giúp họ vác thánh giá theo chân Chúa với niềm tin tưởng và cậy trông.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho các dự tòng đang chuẩn bị gia nhập Hội Thánh: Xin Chúa củng cố đức tin và ban đầy tràn Thánh Thần để họ trung thành bước theo Đức Kitô.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho cộng đoàn và ca đoàn chúng ta: Xin cho chúng con biết mở rộng lòng bác ái, hy sinh giúp đỡ tha nhân và đồng hành với nhau trong tâm tình khiêm nhường.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Thiên Chúa nhân từ từ bi, xin dủ lòng thương tha thứ tội khiên và nhận lời chúng con cầu nguyện, nhờ Đức Kitô, Chúa chúng con. - Amen.`
   },
   {
@@ -453,13 +490,17 @@ Chủ tế: Lạy Thiên Chúa nhân từ từ bi, xin dủ lòng thương tha t
     text: `LỜI NGUYỆN TÍN HỮU – ĐẠI LỄ PHỤC SINH
 Chủ tế: Anh chị em thân mến, Đức Kitô đã sống lại từ cõi chết, đập tan xiềng xích tội lỗi và mở lối vào cõi trường sinh. Trong hân hoan rạng rỡ của ngày Phục Sinh, chúng ta cùng dâng lên Người lời nguyện xin:
 1. Cầu cho Hội Thánh: Xin Chúa Phục Sinh ban sức sống mới dồi dào trên Hội Thánh, để Hội Thánh luôn can đảm làm chứng cho sự sống lại của Chúa giữa trần gian.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho thế giới: Xin Ánh Sáng Phục Sinh xua tan bóng tối hận thù, bất công và sợ hãi, đem lại niềm vui và bình an đích thực cho toàn thể nhân loại.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho những người đang thất vọng trước cái chết và đau khổ: Xin niềm tin vào sự Phục Sinh của Đức Kitô là điểm tựa vững chắc nâng đỡ họ vượt qua mọi nghịch cảnh.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho cộng đoàn và các ca viên: Xin Chúa cho mỗi chúng ta luôn sống như những người đã cùng sống lại với Đức Kitô, biết tìm kiếm những sự trên trời và yêu thương phục vụ lẫn nhau.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa Giêsu Phục Sinh, xin ban Thánh Thần của Chúa tràn ngập lòng chúng con, Đấng hằng sống và hiển trị muôn đời. - Amen.`
   },
   {
@@ -469,13 +510,17 @@ Chủ tế: Lạy Chúa Giêsu Phục Sinh, xin ban Thánh Thần của Chúa tr
     text: `LỜI NGUYỆN TÍN HỮU – LỄ KÍNH ĐỨC MẸ
 Chủ tế: Anh chị em thân mến, Đức Trinh Nữ Maria đã thưa tiếng "Xin Vâng" trọn hảo để đón nhận Ngôi Lời Nhập Thể. Nhờ lời chuyển cầu của Mẹ, chúng ta cùng tin tưởng dâng lên Thiên Chúa lời nguyện xin:
 1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Hội Thánh luôn trung kiên và thánh thiện, noi gương Mẹ Maria luôn lắng nghe và suy niệm Lời Chúa trong lòng.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho các người mẹ trong gia đình: Xin Mẹ Maria ban ơn phù trợ, giúp các bà mẹ luôn dịu hiền, đảm đang và dạy dỗ con cái sống đẹp lòng Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho những ai đang đau yếu, cô đơn hay gặp hoạn nạn: Xin Mẹ phù hộ các giáo hữu đoái thương nâng đỡ, che chở họ dưới tà áo Mẹ từ bi.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho Ca Đoàn và cộng đoàn chúng con: Xin cho mỗi ca viên luôn biết dâng tiếng hát ngợi khen Chúa như lời bài ca Magnificat của Mẹ năm xưa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa, nhờ lời chuyển cầu thần thế của Đức Mẹ Maria, xin thương ban cho chúng con muôn ơn lành hồn xác, nhờ Đức Kitô, Chúa chúng con. - Amen.`
   },
   {
@@ -485,13 +530,17 @@ Chủ tế: Lạy Chúa, nhờ lời chuyển cầu thần thế của Đức M�
     text: `LỜI NGUYỆN TÍN HỮU – LỄ QUAN THẦY CA ĐOÀN DOHWA
 Chủ tế: Anh chị em thân mến, Thánh Augustinô đã dạy rằng: "Hát là cầu nguyện hai lần". Trong tâm tình tạ ơn Thiên Chúa nhân ngày lễ mừng Bổn Mạng Ca Đoàn, chúng ta cùng tha thiết dâng lời nguyện xin:
 1. Cầu cho Hội Thánh: Xin Chúa chúc lành cho sứ vụ phụng vụ thánh ca của Hội Thánh, để lời ca tiếng hát luôn nâng tâm hồn các tín hữu lên tới Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 2. Cầu cho Linh Mục Chánh Xứ và các ân nhân của Ca Đoàn: Xin Chúa trả công bội hậu cho quý vị đã yêu thương, nâng đỡ và đồng hành với ca đoàn trong suốt thời gian qua.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 3. Cầu cho các ca viên đã qua đời: Xin Chúa thương đón nhận các linh hồn ca viên tiền bối vào quê trời, để các ngài được cùng các thiên thần muôn đời ca tụng Danh Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 4. Cầu cho toàn thể Ca viên Ca Đoàn Dohwa: Xin Chúa ban cho mỗi anh chị em ca viên tinh thần hy sinh, lòng nhiệt thành mến Chúa, luôn đoàn kết yêu thương và say mê cất cao lời ca phụng vụ bàn thánh.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa, xin thương chấp nhận lời ca tiếng hát và những ước nguyện chân thành của ca đoàn chúng con, nhờ Đức Kitô, Chúa chúng con. - Amen.`
   }
 ];
@@ -527,12 +576,25 @@ function formatLnthText(text) {
     }
     if (/^xướng\s*:/i.test(line) || /^xuớng\s*:/i.test(line)) {
       const xb = line.replace(/^xuớng\s*:\s*/i, '').replace(/^xướng\s*:\s*/i, '');
-      html += `<div style="margin-left:24px;font-style:italic;font-weight:700;color:#374151">Xướng: ${escapeHtml(xb)}</div>`;
+      html += `<div style="margin-left:24px;font-style:italic;font-weight:700;color:#1e40af;margin-top:4px;">Xướng: ${escapeHtml(xb)}</div>`;
       continue;
     }
     if (/^đáp\s*:/i.test(line) || /^dáp\s*:/i.test(line)) {
-      const db = line.replace(/^[đd]áp\s*:\s*/i, '');
-      html += `<div style="margin-left:24px;font-style:italic;font-weight:700;color:#9a3412">Đáp: ${escapeHtml(db)}</div>`;
+      const db = line.replace(/^[đd]áp\s*:\s*/i, '').trim();
+      if (db.toLowerCase().includes('chúng con cầu xin chúa') && db.toLowerCase().includes('nhậm lời')) {
+        html += `<div style="margin-left:24px;font-style:italic;font-weight:700;color:#1e40af;margin-top:4px;">Xướng: Chúng con cầu xin Chúa.</div>`;
+        html += `<div style="margin-left:24px;font-style:italic;font-weight:700;color:#9a3412;margin-bottom:6px;">Đáp: Xin Chúa nhậm lời chúng con.</div>`;
+      } else {
+        html += `<div style="margin-left:24px;font-style:italic;font-weight:700;color:#9a3412;margin-bottom:6px;">Đáp: ${escapeHtml(db)}</div>`;
+      }
+      continue;
+    }
+    if (/^chúng con cầu xin chúa/i.test(line)) {
+      html += `<div style="margin-left:24px;font-style:italic;font-weight:700;color:#1e40af;margin-top:4px;">Xướng: Chúng con cầu xin Chúa.</div>`;
+      continue;
+    }
+    if (/^xin chúa nhậm lời/i.test(line)) {
+      html += `<div style="margin-left:24px;font-style:italic;font-weight:700;color:#9a3412;margin-bottom:6px;">Đáp: Xin Chúa nhậm lời chúng con.</div>`;
       continue;
     }
     const pm = line.match(/^(\d+)[.\/\)]\s*(.*)/);
@@ -620,17 +682,22 @@ function parseRawLnthText(raw) {
     petitions.forEach((p, idx) => {
       let pt = p.text.replace(/Chúng con cầu xin Chúa.*$/i, '').trim();
       res += `${idx + 1}. ${pt}\n`;
-      res += `Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.\n\n`;
+      res += `Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.\n\n`;
     });
   } else {
     res += `1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Đức Giáo Hoàng và các chủ chăn luôn trung tín và nhiệt thành dẫn dắt đoàn chiên.\n`;
-    res += `Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.\n\n`;
+    res += `Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.\n\n`;
     res += `2. Cầu cho thế giới: Xin Chúa ban ơn bình an, công lý và xua tan mọi dịch bệnh, chiến tranh trên khắp hoàn cầu.\n`;
-    res += `Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.\n\n`;
+    res += `Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.\n\n`;
     res += `3. Cầu cho những người đau khổ: Xin Chúa an ủi, nâng đỡ những ai đang gặp nghịch cảnh và thử thách gian nan.\n`;
-    res += `Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.\n\n`;
+    res += `Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.\n\n`;
     res += `4. Cầu cho ca đoàn và giáo xứ: Xin Chúa liên kết mọi người trong tình yêu hiệp nhất và nhiệt thành phục vụ bàn thánh.\n`;
-    res += `Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.\n\n`;
+    res += `Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.\n\n`;
   }
 
   res += `Chủ tế: ${closing || 'Lạy Chúa, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, nhờ Đức Kitô, Chúa chúng con. - Amen.'}`;
@@ -648,16 +715,20 @@ const AI_LITURGICAL_SYNTHESIS = {
 Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha giàu lòng nhân hậu luôn mời gọi tất cả chúng ta vào chia sẻ niềm vui tiệc cưới Nước Trời. Với lòng tri ân sâu xa và ước nguyện sống xứng đáng với ơn gọi Kitô hữu, chúng ta cùng hiệp ý dâng lời nguyện xin:
 
 1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Hội Thánh luôn trung kiên thi hành sứ mạng loan báo ơn cứu độ, để mọi tâm hồn đang khao khát Chân Lý tìm được lối vào dự tiệc ân sủng của Thiên Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho thế giới hôm nay: Xin Chúa soi sáng các nhà lãnh đạo quốc gia biết chăm lo cho công ích, kiến tạo công lý và hòa bình, để mọi người dân được hưởng cuộc sống ấm no và tự do đích thực.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho những ai đang mê mải việc đời mà xao lãng ơn cứu độ: Xin ơn Chúa đánh động tâm hồn họ, giúp họ biết quý trọng những giá trị vĩnh cửu và mau mắn đáp lại tiếng Chúa mời gọi hoán cải.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ: "Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi": Xin Chúa ban ơn trợ lực để mỗi ca viên chúng con luôn kiên tâm, hiệp nhất và cất cao lời ca phụng sự bàn thánh với trọn vẹn đức tin và đức mến.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Thiên Chúa toàn năng nhân từ, xin dủ thương chấp nhận những ý nguyện chân thành của đoàn con, xin gìn giữ chúng con trong ân nghĩa Chúa cho đến ngày vào dự tiệc cưới vĩnh cửu trên trời. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
 
@@ -666,16 +737,20 @@ Chủ tế: Lạy Thiên Chúa toàn năng nhân từ, xin dủ thương chấp 
 Chủ tế: Anh chị em thân mến, Thiên Chúa dọn sẵn cho chúng ta bàn tiệc Lời Chúa và Thánh Thể mỗi ngày. Ý thức về hồng ân cao cả ấy và thân phận yếu đuối của mình, chúng ta cùng tha thiết cầu xin:
 
 1. "Hãy đi ra các ngả đường, gặp ai cũng mời vào tiệc cưới": Xin cho các linh mục, tu sĩ và giáo dân luôn có tâm hồn rộng mở, nhiệt tâm đem niềm vui Tin Mừng đến cho những người bị gạt ra bên lề xã hội.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho những người đang chịu đau khổ vì bệnh tật, nghèo đói và cô đơn: Xin Chúa là Đấng lau sạch nước mắt lau khô giọt lệ sầu đau của họ, và khơi dậy nơi các Kitô hữu tinh thần liên đới chia sẻ.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho mỗi người chúng ta luôn biết mặc "y phục lễ cưới": Xin Chúa ban ơn thánh hóa giúp chúng ta luôn giữ gìn đời sống công chính, thánh thiện, biểu lộ qua những việc lành phúc đức hằng ngày.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho ca viên và gia đình trong giáo xứ: Xin Chúa ban bình an trên mái ấm từng gia đình, cho các ca viên lòng hăng say và tinh thần hy sinh phục vụ, để lời ca tiếng hát đem lại nhiều ơn ích thiêng liêng cho cộng đoàn.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa, xin lắng nghe và đoái thương nhận lời chúng con nài van, xin biến đổi đời sống chúng con nên tấm bánh thơm tho dâng lên Chúa mỗi ngày. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
 
@@ -684,16 +759,20 @@ Chủ tế: Lạy Chúa, xin lắng nghe và đoái thương nhận lời chúng
 Chủ tế: Anh chị em thân mến, được quy tụ nơi nhà Chúa để dâng Thánh Lễ là một đại hồng ân. Với tâm tình tạ ơn Chúa đã cho chúng ta được đồng bàn trong tiệc Thánh, chúng ta cùng dâng lên Người những lời nguyện xin:
 
 1. Cầu cho Đức Giáo Hoàng Phanxicô và các vị chủ chăn: Xin Chúa ban cho các ngài sức khỏe và ơn phân định, để luôn là những người đầy tớ trung tín mời gọi muôn dân hiệp thông trong Hội Thánh.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho thanh thiếu niên và giới trẻ: Xin Chúa gìn giữ các bạn trẻ khỏi những cạm bẫy xấu xa của thế gian, luôn sống trong trắng, nhiệt huyết và sẵn sàng đáp lại lời mời gọi dấn thân của Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho các bậc cha mẹ và gia đình: Xin Chúa ban ơn che chở để các gia đình luôn là trường học đầu tiên dạy con cái biết yêu mến Lời Chúa và siêng năng tham dự Thánh Lễ.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho Ca Đoàn Dohwa: Xin Chúa thánh hóa mọi buổi tập hát và giờ phụng vụ của ca đoàn, ban cho mỗi thành viên tinh thần khiêm nhường, gắn kết yêu thương và nhiệt thành dùng lời ca tiếng đàn tôn vinh Thiên Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa Giêsu, xin thắp lên trong lòng chúng con ngọn lửa mến yêu nồng nàn, để cuộc đời chúng con là lời ca không bao giờ dứt ca tụng tình thương của Chúa. Chúa là Đấng hằng sống và hiển trị muôn đời. - Amen.`
   },
@@ -703,16 +782,20 @@ Chủ tế: Lạy Chúa Giêsu, xin thắp lên trong lòng chúng con ngọn l�
 Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha giàu lòng thương xót và bao dung khôn tả, đường lối của Người vượt xa mọi suy nghĩ và tính toán hẹp hòi của phàm nhân. Trong niềm tri ân sâu xa và phó thác trọn vẹn, chúng ta cùng tha thiết dâng lời nguyện xin:
 
 1. Cầu cho Hội Thánh hoàn vũ: Xin Chúa hằng gìn giữ Đức Giáo Hoàng Phanxicô, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh, để Hội Thánh luôn chiếu tỏa dung nhan Thiên Chúa từ ái và không ngừng loan báo ơn cứu độ cho muôn dân.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho hòa bình thế giới và các dân tộc: Xin Chúa soi sáng tâm trí các nhà lãnh đạo quốc gia, biết kiến tạo công lý, hòa giải mọi xung đột, và quan tâm nâng đỡ những người nghèo đói, bất hạnh, nạn nhân chiến tranh và thiên tai.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho những tâm hồn đang gặp thử thách, chán chường: Xin tình yêu Chúa sưởi ấm những ai đang cảm thấy bị bỏ rơi hoặc chịu nhiều thiệt thòi trong cuộc sống, để họ luôn vững niềm trông cậy vào lòng nhân hậu và sự công minh tuyệt đối của Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: Xin Chúa ban cho mỗi ca viên và mỗi tín hữu tinh thần khiêm tốn, quảng đại và hiệp nhất yêu thương, để qua từng lời ca tiếng hát và hành động cụ thể, chúng con làm sáng danh Chúa giữa lòng cuộc đời.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Thiên Chúa toàn năng nhân từ, xin thương lắng nghe và chấp nhận những lời thỉnh cầu của đoàn con thảo, xin ban ơn giúp chúng con luôn biết vui mừng trước ơn lành Chúa ban cho anh chị em mình. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
 
@@ -721,16 +804,20 @@ Chủ tế: Lạy Thiên Chúa toàn năng nhân từ, xin thương lắng nghe 
 Chủ tế: Anh chị em thân mến, Thiên Chúa mời gọi tất cả chúng ta bước vào vườn nho Nước Trời để đón nhận hồng ân cứu độ vô điều kiện. Cảm tạ tình thương hải hà của Chúa, chúng ta cùng hiệp ý cầu xin:
 
 1. "Trời cao hơn đất chừng nào, đường lối Ta cao hơn đường lối các ngươi chừng ấy": Xin cho mọi thành phần Dân Chúa luôn biết suy nghĩ và hành động theo tinh thần Tin Mừng, không so đo tính toán, nhưng hết lòng yêu thương và phục vụ.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho người lao động và những người thất nghiệp: Xin Chúa chúc lành cho công việc làm ăn của mọi người, xoa dịu nỗi lo âu của những gia đình đang thiếu thốn công ăn việc làm, để xã hội ngày càng công bằng và nhân ái hơn.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho các tội nhân và những người lạc xa đường Chúa: Xin ơn biến đổi của Chúa chạm đến tâm hồn họ, để họ nhận ra tình thương tha thứ vô bờ của Thiên Chúa mà can đảm trở về làm hòa với Người.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho các gia đình và ca viên trong cộng đoàn: Xin Chúa thánh hóa từng gia đình chúng con, ban cho các bậc cha mẹ lòng kiên nhẫn, cho giới trẻ lòng nhiệt thành mến Chúa và hăng say phục vụ bàn thánh.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa, xin đoái nhìn những ước nguyện chân thành của chúng con và ban sức mạnh Thần Khí giúp chúng con trung kiên bước đi trong tình thương của Chúa mỗi ngày. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
 
@@ -739,16 +826,20 @@ Chủ tế: Lạy Chúa, xin đoái nhìn những ước nguyện chân thành c
 Chủ tế: Anh chị em thân mến, tạ ơn Chúa đã quy tụ chúng ta nơi bàn tiệc Lời Chúa và Thánh Thể. Trong tinh thần hân hoan của đoàn con cái Chúa, chúng ta cùng dâng lên Người những ước nguyện tha thiết:
 
 1. Cầu cho Hội Thánh và các vị mục tử: Xin Chúa ban dồi dào ơn thánh trên Đức Giáo Hoàng và các chủ chăn, để các ngài luôn dẫn dắt Dân Chúa đến nguồn suối bình an và ơn cứu độ.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho các bạn trẻ và thế giới hôm nay: Xin Chúa soi đường chỉ lối cho thanh thiếu niên giữa muôn cám dỗ trần thế, biết sống có lý tưởng, hướng thiện và can đảm làm chứng cho Chân Lý.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho các bệnh nhân và những người sầu khổ: Xin Chúa là nguồn an ủi duy nhất nâng đỡ thể xác lẫn tâm hồn họ, giúp họ nhận ra sự hiện diện đầy yêu thương của Chúa bên cạnh.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho Ca Đoàn Dohwa và toàn thể phụng sự viên: Xin Chúa ban cho mỗi ca viên lòng đạo đức sâu sắc, tinh thần hy sinh luyện tập, để lời ca tiếng hát của ca đoàn thực sự là lời cầu nguyện sốt mến, nâng tâm hồn cộng đoàn lên cùng Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa, xin thương đón nhận lời ca tiếng hát và tấm lòng chân thành của chúng con, xin biến đổi cuộc đời chúng con thành bài ca tạ ơn muôn đời. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
   },
@@ -759,16 +850,20 @@ Chủ tế: Lạy Chúa, xin thương đón nhận lời ca tiếng hát và t�
 Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời gọi chúng ta cộng tác xây dựng Nước Trời bằng đời sống hoán cải chân thành. Với tâm tình tin tưởng, chúng ta cùng dâng lời cầu xin:
 
 1. Cầu cho các vị chủ chăn trong Hội Thánh: Xin Chúa ban cho các ngài sức mạnh và lòng nhân ái, để luôn nêu gương sáng vâng phục Thánh ý Chúa và tận tụy phục vụ đoàn chiên.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho các nhà lãnh đạo quốc gia: Xin Chúa soi sáng tâm trí các nhà cầm quyền, biết hành động vì công lý, hòa bình và lợi ích chân chính của mọi người dân.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho những ai đang lạc lối xa Chúa: Xin ơn Chúa biến đổi tâm hồn họ, giúp họ nhận ra tình thương của Chúa mà can đảm hối cải trở về.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho toàn thể Ca đoàn và cộng đoàn chúng ta: Xin Chúa giúp mỗi người chúng ta không chỉ vâng lời Chúa bằng môi miệng, mà bằng trọn cả hành động yêu thương cụ thể mỗi ngày.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và ban ơn giúp chúng con luôn trung thành thực thi ý Chúa. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
 
@@ -777,16 +872,20 @@ Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và
 Chủ tế: Anh chị em thân mến, noi gương Đức Giêsu Kitô Đấng đã hạ mình vâng phục cho đến chết trên cây Thập Tự, chúng ta cùng tha thiết dâng lên Thiên Chúa lời nguyện xin:
 
 1. Cầu cho Hội Thánh: Xin cho các tín hữu biết noi gương Đức Kitô, luôn khiêm nhường coi người khác hơn mình và đồng tâm nhất trí trong tình yêu thương.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho những người đang bị áp bức, bất công: Xin Chúa bênh vực và đem lại công lý cho những ai cô thế cô thân, xoa dịu những giọt nước mắt khổ đau của họ.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho những tâm hồn đang chai lì trong thói xấu: Xin Lời Chúa đánh động lương tâm họ, để họ biết kịp thời ăn năn sám hối và quay về với nguồn sống chân thật.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho ca đoàn và cộng đoàn giáo xứ: Xin cho chúng con biết dùng tiếng hát và đời sống bác ái để làm chứng cho lòng vâng phục thảo hiếu với Thiên Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa là Cha chí thánh, xin gìn giữ chúng con trong ân sủng Chúa và ban cho chúng con tâm tình như chính Đức Giêsu Kitô, Chúa chúng con. - Amen.`,
 
@@ -795,16 +894,20 @@ Chủ tế: Lạy Chúa là Cha chí thánh, xin gìn giữ chúng con trong ân
 Chủ tế: Anh chị em thân mến, lời nói phải đi đôi với việc làm. Lắng nghe tiếng Chúa dạy hôm nay, chúng ta cùng khiêm tốn dâng lên Người những lời cầu xin:
 
 1. Cầu cho Đức Giáo Hoàng và các vị lãnh đạo Hội Thánh: Xin Chúa ban ơn khôn ngoan để các ngài luôn dẫn dắt Dân Chúa đi trên con đường Phúc Âm bằng chính đời sống thánh thiện gương mẫu.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho giới trẻ và các sinh viên, học sinh: Xin Chúa gìn giữ người trẻ khỏi thái độ sống dửng dưng vô cảm, biết can đảm dấn thân vì Chúa và tha nhân.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho những người bệnh tật và đau yếu: Xin Chúa là Đấng chữa lành ban niềm an ủi và củng cố đức tin cho họ giữa những cơn đau đớn bệnh tật.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho Ca Đoàn Dohwa: Xin Chúa thánh hóa tiếng hát và tâm hồn từng ca viên, để sự phục vụ của ca đoàn luôn xuất phát từ lòng vâng phục và yêu mến Chúa chân thành.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Chúa Giêsu, xin biến đổi trái tim chai đá của chúng con thành trái tim biết yêu mến và vâng phục, Chúa là Đấng hằng sống và hiển trị muôn đời. - Amen.`
   }
@@ -821,16 +924,20 @@ function generateAiSynthesizedPrayer(feastTitle, style) {
 Chủ tế: Anh chị em thân mến, trong niềm tin cậy phó thác vào Thiên Chúa là Cha giàu lòng thương xót, Đấng luôn lắng nghe lời con cái nài xin, chúng ta cùng hiệp ý dâng lên Người những lời nguyện xin tha thiết:
 
 1. Cầu cho Hội Thánh hoàn vũ: Xin Chúa gìn giữ Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh, để Hội Thánh luôn trung kiên loan báo Tin Mừng Cứu Độ và là dấu chỉ của tình yêu hiệp nhất giữa trần gian.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 2. Cầu cho hòa bình thế giới và công lý giữa các dân tộc: Xin Chúa soi sáng tâm trí các nhà lãnh đạo, biết loại trừ bạo lực, xung đột, và hết lòng chăm lo cho sự phát triển toàn diện của con người, đặc biệt là những người nghèo khổ bất hạnh.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 3. Cầu cho những người đang gặp thử thách gian nan: Xin Chúa ban sức mạnh nâng đỡ những ai đang đau yếu, cô đơn, nghèo đói hoặc ngã lòng, để họ luôn tìm thấy niềm an ủi và hy vọng nơi lòng Chúa từ bi.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng con: Xin Chúa ban cho mỗi người chúng con lòng nhiệt thành yêu mến Chúa, biết dùng lời ca tiếng hát và đời sống bác ái cụ thể để phụng sự bàn thánh và làm sáng danh Chúa.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
 
 Chủ tế: Lạy Thiên Chúa toàn năng nhân ái, xin dủ thương chấp nhận những ước nguyện chân thành chúng con vừa tha thiết dâng lên, nhờ Đức Kitô, Chúa chúng con. - Amen.`;
 }
