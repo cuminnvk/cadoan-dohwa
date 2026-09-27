@@ -263,16 +263,34 @@ body {
   transform: translateY(-2px);
 }
 
+/* ADMIN-ONLY VISIBILITY RULES */
+.admin-only,
+.admin-only-tab {
+  display: none !important;
+}
+
+body.is-admin .admin-only {
+  display: inline-flex !important;
+}
+
+body.is-admin .top-tab-btn.admin-only-tab {
+  display: inline-flex !important;
+}
+
+body.is-admin .nav-item.admin-only-tab {
+  display: flex !important;
+}
+
 /* Responsive Switching between Top and Bottom Nav */
 @media (max-width: 640px) {
   .top-nav-tabs {
-    display: none;
+    display: none !important;
   }
 }
 
 @media (min-width: 641px) {
   .bottom-nav {
-    display: none;
+    display: none !important;
   }
   body {
     padding-bottom: calc(var(--player-height) + 32px);

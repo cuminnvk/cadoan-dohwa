@@ -43,13 +43,21 @@ class DohwaApp {
           if (window.baiDocViewer) window.baiDocViewer.switchTab('lnth');
         }
       } else if (hash === 'aidaxem') {
-        this.openAiDaXemModal();
+        if (window.dohwaStore?.isAdmin()) {
+          this.openAiDaXemModal();
+        } else {
+          this.switchTab('tab-hientai');
+        }
       } else if (hash === 'chonten') {
         this.openMemberGateModal();
       } else if (hash === 'baidasoan') {
         this.scrollToBaiDaSoan();
       } else if (hash === 'caidat' || hash === 'admin') {
-        this.openCaiDatModal();
+        if (window.dohwaStore?.isAdmin()) {
+          this.openCaiDatModal();
+        } else {
+          this.switchTab('tab-hientai');
+        }
       } else if (document.getElementById(hash)) {
         this.switchTab(hash);
       }
@@ -106,8 +114,8 @@ class DohwaApp {
   }
 
   switchTab(tabId) {
-    if (tabId === 'tab-soanle' && window.dohwaStore && !window.dohwaStore.isAdmin()) {
-      this.openAdminLoginModal(() => this.switchTab('tab-soanle'));
+    if ((tabId === 'tab-soanle' || tabId === 'tab-thongke') && window.dohwaStore && !window.dohwaStore.isAdmin()) {
+      this.openAdminLoginModal(() => this.switchTab(tabId));
       return;
     }
 
@@ -259,9 +267,11 @@ class DohwaApp {
               <button type="button" class="action-btn btn-baidoc" onclick="window.openMassBaiDoc('${m.id}')">
                 📖 Bài Đọc & Lời Nguyện
               </button>
-              <button type="button" class="action-btn btn-viewers" onclick="window.viewMassAttendance('${m.id}')">
-                👤 Ai đã xem
-              </button>
+              ${window.dohwaStore?.isAdmin() ? `
+                <button type="button" class="action-btn btn-viewers" onclick="window.viewMassAttendance('${m.id}')">
+                  👤 Ai đã xem
+                </button>
+              ` : ''}
               <button type="button" class="action-btn btn-view" onclick="window.dohwaApp.scrollToBaiDaSoan()">
                 📚 Bài đã soạn
               </button>
@@ -361,7 +371,9 @@ class DohwaApp {
                   <td style="text-align:center;">
                     <div style="display:flex; justify-content:center; gap:4px;">
                       <button class="action-btn-sm" onclick="window.openFullViewModal('${m.id}')" title="Xem chi tiết">👁️</button>
-                      <button class="action-btn-sm" onclick="window.openAiDaXemModal('${m.id}')" title="Ai đã xem bộ lễ này">👤</button>
+                      ${window.dohwaStore?.isAdmin() ? `
+                        <button class="action-btn-sm" onclick="window.openAiDaXemModal('${m.id}')" title="Ai đã xem bộ lễ này">👤</button>
+                      ` : ''}
                       <button class="action-btn-sm" onclick="window.openMassBaiDoc('${m.id}')" title="Xem Bài Đọc & Lời Nguyện">📖</button>
                       <button class="action-btn-sm" onclick="window.shareMassSet('${m.id}')" title="Chia sẻ">📤</button>
                       ${window.dohwaStore?.isAdmin() ? `
@@ -791,6 +803,7 @@ class DohwaApp {
       if (badge) {
         badge.innerHTML = `👤 <span>${member.name}</span>`;
       }
+      this.updateAdminUI();
 
       // Ghi nhận chuyên cần riêng cho bộ lễ hiện tại
       if (this.currentMassSet && window.dohwaStore) {
@@ -832,23 +845,34 @@ class DohwaApp {
   }
 
   updateAdminUI() {
-    const isAdmin = window.dohwaStore?.isAdmin();
+    const isAdmin = !!window.dohwaStore?.isAdmin();
     const adminWrap = document.getElementById('adminHeaderBadgeWrap');
     const badge = document.getElementById('userHeaderBadge');
+    const openCaiDatBtn = document.getElementById('openCaiDatBtn');
 
     if (isAdmin) {
-      // Khi là Admin: chỉ hiển thị DUY NHẤT 1 nút Admin trong header, ẩn badge chọn tên đi
+      document.body.classList.add('is-admin');
+      // Khi là Admin: hiển thị nút 👑 Admin trong header, ẩn badge chọn tên
       if (badge) badge.style.display = 'none';
+      if (openCaiDatBtn) openCaiDatBtn.style.display = 'inline-flex';
       if (adminWrap) {
         adminWrap.style.display = 'inline-flex';
         adminWrap.innerHTML = `
-          <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:linear-gradient(135deg,#78350f,#d97706); color:#fff; border:1px solid #f59e0b; padding:5px 12px; font-weight:800; border-radius:8px; font-size:0.8rem; display:inline-flex; align-items:center; gap:5px; cursor:pointer;" title="Bấm để mở Cài Đặt">
+          <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:linear-gradient(135deg,#78350f,#d97706); color:#fff; border:1px solid #f59e0b; padding:5px 12px; font-weight:800; border-radius:8px; font-size:0.8rem; display:inline-flex; align-items:center; gap:5px; cursor:pointer;" title="Bấm để mở Cài Đặt / Đăng xuất">
             👑 <span>Admin</span>
           </button>
         `;
       }
     } else {
-      // Khi là ca viên: hiển thị tên ca viên và nút Quản trị
+      document.body.classList.remove('is-admin');
+      // Khi là ca viên: hiển thị tên ca viên, TUYỆT ĐỐI ẨN nút Admin/Quản trị và nút Cài đặt
+      if (adminWrap) {
+        adminWrap.style.display = 'none';
+        adminWrap.innerHTML = '';
+      }
+      if (openCaiDatBtn) {
+        openCaiDatBtn.style.display = 'none';
+      }
       if (badge) {
         badge.style.display = 'inline-flex';
         const session = window.dohwaStore?.getUserSession();
@@ -858,28 +882,38 @@ class DohwaApp {
           badge.innerHTML = `👤 <span>Chọn tên</span>`;
         }
       }
-      if (adminWrap) {
-        adminWrap.style.display = 'inline-flex';
-        adminWrap.innerHTML = `
-          <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:#78350f; color:#fef3c7; border:1px solid #f59e0b; padding:5px 9px; font-weight:800; border-radius:8px; font-size:0.78rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;" title="Đăng nhập quyền Admin">
-            🔐 <span>Quản Trị</span>
-          </button>
-        `;
-      }
     }
+
+    // Ẩn/Hiện toàn bộ các tab và nút chỉ dành cho Admin (Top Nav, Bottom Nav)
+    document.querySelectorAll('.admin-only, .admin-only-tab').forEach(el => {
+      if (isAdmin) {
+        if (el.classList.contains('nav-item')) {
+          el.style.display = 'flex';
+        } else {
+          el.style.display = 'inline-flex';
+        }
+      } else {
+        el.style.display = 'none';
+      }
+    });
 
     const bNavText = document.getElementById('bottomNavAdminText');
     const bNavIcon = document.getElementById('bottomNavAdminIcon');
-    if (bNavText) bNavText.textContent = isAdmin ? 'Admin' : 'Quản Trị';
-    if (bNavIcon) bNavIcon.textContent = isAdmin ? '👑' : '🔐';
+    if (bNavText) bNavText.textContent = 'Admin';
+    if (bNavIcon) bNavIcon.textContent = '👑';
 
     const topAdminText = document.getElementById('topTabAdminText');
     const topAdminIcon = document.getElementById('topTabAdminIcon');
-    if (topAdminText) topAdminText.textContent = isAdmin ? 'Admin' : 'Quản Trị';
-    if (topAdminIcon) topAdminIcon.textContent = isAdmin ? '👑' : '🔐';
+    if (topAdminText) topAdminText.textContent = 'Admin';
+    if (topAdminIcon) topAdminIcon.textContent = '👑';
 
     const khoBtn = document.getElementById('khoSoanMoiBtn');
     if (khoBtn) khoBtn.style.display = isAdmin ? 'inline-flex' : 'none';
+
+    // Ẩn tất cả nút 'Ai đã xem' trên mass cards nếu không phải admin
+    document.querySelectorAll('.btn-viewers').forEach(btn => {
+      btn.style.display = isAdmin ? 'inline-flex' : 'none';
+    });
   }
 
   openAdminLoginModal(onSuccessCallback = null) {
@@ -1016,6 +1050,11 @@ class DohwaApp {
   // MODAL CÀI ĐẶT (QUẢN LÝ CA VIÊN & THIẾT LẬP MÁY NÀY)
   // ==========================================
   async openCaiDatModal() {
+    if (window.dohwaStore && !window.dohwaStore.isAdmin()) {
+      this.openAdminLoginModal(() => this.openCaiDatModal());
+      return;
+    }
+
     let modal = document.getElementById('caiDatModal');
     if (!modal) return;
 
@@ -1431,6 +1470,11 @@ class DohwaApp {
   // MODAL 1: AI ĐÃ XEM (CHUẨN SOANBOLE SCREENSHOT 1)
   // ==========================================
   async openAiDaXemModal(msId) {
+    if (window.dohwaStore && !window.dohwaStore.isAdmin()) {
+      this.openAdminLoginModal(() => this.openAiDaXemModal(msId));
+      return;
+    }
+
     const modal = document.getElementById('aiDaXemModalOverlay');
     if (!modal) return;
     modal.style.display = 'flex';

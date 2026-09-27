@@ -10,8 +10,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/style.css?v=2026_04">
-  <link rel="stylesheet" href="css/components.css?v=2026_04">
+  <link rel="stylesheet" href="css/style.css?v=2026_05">
+  <link rel="stylesheet" href="css/components.css?v=2026_05">
 </head>
 <body>
 
@@ -31,12 +31,12 @@
       <div class="user-badge" id="userHeaderBadge" title="Bấm để đổi tên ca viên hoặc xem thông tin">
         👤 <span>Chọn tên</span>
       </div>
-      <div id="adminHeaderBadgeWrap">
-        <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:#78350f; color:#fef3c7; border:1px solid #f59e0b; padding:5px 9px; font-weight:800; border-radius:8px; font-size:0.78rem; display:inline-flex; align-items:center; gap:4px; cursor:pointer;" title="Đăng nhập quyền Admin">
-          🔐 <span>Quản Trị</span>
+      <div id="adminHeaderBadgeWrap" class="admin-only" style="display:none;">
+        <button type="button" class="btn-xs" onclick="window.dohwaApp.handleAdminClick()" style="background:linear-gradient(135deg,#78350f,#d97706); color:#fff; border:1px solid #f59e0b; padding:5px 12px; font-weight:800; border-radius:8px; font-size:0.8rem; display:inline-flex; align-items:center; gap:5px; cursor:pointer;" title="Bấm để mở Cài Đặt">
+          👑 <span>Admin</span>
         </button>
       </div>
-      <button class="btn-icon" id="openCaiDatBtn" title="Cài đặt ca đoàn & danh sách ca viên" onclick="window.dohwaApp && dohwaApp.openCaiDatModal()">
+      <button class="btn-icon admin-only" id="openCaiDatBtn" title="Cài đặt ca đoàn & danh sách ca viên" onclick="window.dohwaApp && dohwaApp.openCaiDatModal()" style="display:none;">
         ⚙️
       </button>
       <button class="btn-icon" id="themeToggleBtn" title="Chuyển chế độ Sáng / Tối">
@@ -53,17 +53,17 @@
     <button class="top-tab-btn active" data-tab="tab-hientai">
       <span>📖</span> <span>Bộ Lễ Hiện Tại</span>
     </button>
-    <button class="top-tab-btn" data-tab="tab-soanle">
-      <span>✍️</span> <span>Soạn Bộ Lễ</span>
-    </button>
     <button class="top-tab-btn" data-tab="tab-kho">
       <span>📚</span> <span>Kho Bộ Lễ</span>
     </button>
-    <button class="top-tab-btn" data-tab="tab-thongke">
+    <button class="top-tab-btn admin-only-tab" data-tab="tab-soanle" style="display:none;">
+      <span>✍️</span> <span>Soạn Bộ Lễ</span>
+    </button>
+    <button class="top-tab-btn admin-only-tab" data-tab="tab-thongke" style="display:none;">
       <span>📊</span> <span>Ai Đã Xem</span>
     </button>
-    <button class="top-tab-btn" id="topTabAdminBtn" onclick="window.dohwaApp && dohwaApp.handleAdminClick()" style="font-weight:700;">
-      <span id="topTabAdminIcon">🔐</span> <span id="topTabAdminText">Quản Trị</span>
+    <button class="top-tab-btn admin-only-tab" id="topTabAdminBtn" onclick="window.dohwaApp && dohwaApp.handleAdminClick()" style="font-weight:700; display:none;">
+      <span id="topTabAdminIcon">👑</span> <span id="topTabAdminText">Admin</span>
     </button>
   </nav>
 
@@ -133,7 +133,7 @@
                 <button type="button" class="action-btn btn-baidoc" onclick="window.openMassBaiDoc('mass-cn-25-tn-a')">
                   📖 Bài Đọc & Lời Nguyện
                 </button>
-                <button type="button" class="action-btn btn-viewers" onclick="window.viewMassAttendance('mass-cn-25-tn-a')">
+                <button type="button" class="action-btn btn-viewers admin-only" style="display:none;" onclick="window.viewMassAttendance('mass-cn-25-tn-a')">
                   👤 Ai đã xem
                 </button>
               </div>
@@ -474,25 +474,29 @@
 
   <!-- BOTTOM NAVIGATION BAR (CHO MÀN HÌNH ĐIỆN THOẠI) -->
   <nav class="bottom-nav">
+    <a href="https://soanbole.com" target="_blank" rel="noopener" class="nav-item" style="text-decoration:none;" title="Về trang chủ soanbole.com">
+      <span class="nav-icon">🏠</span>
+      <span>Trang Chủ</span>
+    </a>
     <button class="nav-item active" data-tab="tab-hientai">
       <span class="nav-icon">📖</span>
       <span>Bộ Lễ</span>
-    </button>
-    <button class="nav-item" data-tab="tab-soanle">
-      <span class="nav-icon">✍️</span>
-      <span>Soạn Lễ</span>
     </button>
     <button class="nav-item" data-tab="tab-kho">
       <span class="nav-icon">📚</span>
       <span>Kho Lễ</span>
     </button>
-    <button class="nav-item" data-tab="tab-thongke">
+    <button class="nav-item admin-only-tab" data-tab="tab-soanle" style="display:none;">
+      <span class="nav-icon">✍️</span>
+      <span>Soạn Lễ</span>
+    </button>
+    <button class="nav-item admin-only-tab" data-tab="tab-thongke" style="display:none;">
       <span class="nav-icon">📊</span>
       <span>Ai Đã Xem</span>
     </button>
-    <button class="nav-item" id="bottomNavAdminBtn" onclick="window.dohwaApp.handleAdminClick()">
-      <span class="nav-icon" id="bottomNavAdminIcon">🔐</span>
-      <span id="bottomNavAdminText">Quản Trị</span>
+    <button class="nav-item admin-only-tab" id="bottomNavAdminBtn" onclick="window.dohwaApp.handleAdminClick()" style="display:none;">
+      <span class="nav-icon" id="bottomNavAdminIcon">👑</span>
+      <span id="bottomNavAdminText">Admin</span>
     </button>
   </nav>
 
@@ -599,14 +603,14 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/firebase-config.js?v=2026_11"></script>
-  <script src="js/store.js?v=2026_11"></script>
-  <script src="js/liturgical-helper.js?v=2026_11"></script>
-  <script src="js/player.js?v=2026_11"></script>
-  <script src="js/pdf-viewer.js?v=2026_11"></script>
-  <script src="js/soan-le.js?v=2026_11"></script>
-  <script src="js/thong-ke.js?v=2026_11"></script>
-  <script src="js/app.js?v=2026_11"></script>
+  <script src="js/firebase-config.js?v=2026_12"></script>
+  <script src="js/store.js?v=2026_12"></script>
+  <script src="js/liturgical-helper.js?v=2026_12"></script>
+  <script src="js/player.js?v=2026_12"></script>
+  <script src="js/pdf-viewer.js?v=2026_12"></script>
+  <script src="js/soan-le.js?v=2026_12"></script>
+  <script src="js/thong-ke.js?v=2026_12"></script>
+  <script src="js/app.js?v=2026_12"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
