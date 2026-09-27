@@ -1087,16 +1087,14 @@ class BaiDocViewer {
       container.innerHTML = `
         <div style="text-align:center; padding:38px 20px; background:linear-gradient(180deg, #fffdf8, #fef9ee); border:1.5px dashed #f59e0b; border-radius:16px; margin:14px 0; box-shadow:0 4px 16px rgba(245,158,11,0.06);">
           <div style="font-size:3.5rem; margin-bottom:12px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));">🙏</div>
-          <div style="font-size:0.78rem; font-weight:800; color:#d97706; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Phụng Vụ Thánh Lễ</div>
           <h3 style="font-family:'Times New Roman',serif; font-size:1.45rem; font-weight:800; color:#92400e; margin-bottom:12px; line-height:1.4;">
-            Lời Nguyện Tín Hữu Đang Được Ca Trưởng Chuẩn Bị
+            Lời Nguyện Tín Hữu đang được biên soạn
           </h3>
-          <p style="font-family:'Times New Roman',serif; font-size:1.06rem; line-height:2; color:#475569; max-width:580px; margin:0 auto 16px; text-align:justify;">
-            Hiện tại, phần Lời Nguyện Tín Hữu (Lời Nguyện Chung) cho <strong>${escapeHtml(ms.title || ms.weekName || 'Thánh Lễ')}</strong> đang được Ca Trưởng / Ban Phụng Vụ xem xét, soạn thảo và chuẩn hóa theo đúng Phụng vụ của Hội Đồng Giám Mục Việt Nam.
-          </p>
-          <div style="display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid #fde68a; border-radius:10px; padding:12px 20px; color:#b45309; font-size:0.95rem; font-family:'Times New Roman',serif; margin-bottom:20px; box-shadow:0 2px 6px rgba(217,119,6,0.08); text-align:left;">
-            <span style="font-size:1.2rem;">⏳</span>
-            <span><em>Ca Trưởng sẽ sớm cập nhật và bấm áp dụng mẫu lời nguyện cho cả đoàn trước giờ Lễ. Xin quý ca viên vui lòng quay lại sau!</em></span>
+          <div style="display:inline-block; background:#fff; border:1px solid #fde68a; border-radius:12px; padding:14px 24px; color:#b45309; font-size:1.06rem; font-family:'Times New Roman',serif; margin-bottom:16px; box-shadow:0 2px 8px rgba(217,119,6,0.08);">
+            Xin quý ca viên vui lòng quay lại sau nhé, xin cảm ơn!
+          </div>
+          <div style="font-size:0.86rem; color:#64748b; margin-bottom:12px;">
+            Thánh Lễ: <strong>${escapeHtml(ms.title || ms.weekName || 'Bộ lễ hiện tại')}</strong>
           </div>
           <div style="border-top:1px solid rgba(245,158,11,0.2); padding-top:16px; margin-top:8px; font-size:0.85rem; color:#64748b;">
             Bạn là Ca Trưởng hoặc người phụ trách phụng vụ? 
