@@ -238,7 +238,7 @@ class DohwaApp {
               ${s.composer ? `<span class="massset-song-composer">- ${s.composer}</span>` : ''}
             </div>
             <div style="display:flex; gap:6px; flex-shrink:0;">
-              ${(s.pdfData || s.pdfName) ? `<button type="button" class="btn-xs btn-outline" style="color:#0284c7; border-color:#bae6fd; background:#f0f9ff; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem;" onclick="window.dohwaPDFViewer.open('${s.pdfData||''}','${(s.title||'').replace(/'/g, "\\'")}','${s.pdfName||''}')">📄 Nốt</button>` : ''}
+              <button type="button" class="btn-xs btn-outline" style="color:#0284c7; border-color:#bae6fd; background:#f0f9ff; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem;" onclick="window.dohwaPDFViewer.open('${s.pdfData||''}','${(s.title||'').replace(/'/g, "\\'")}','${s.pdfName||''}')">📄 Pdf</button>
               ${s.youtubeUrl ? `<button type="button" class="btn-xs btn-outline" style="color:#dc2626; border-color:#fca5a5; background:#fef2f2; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem; display:inline-flex; align-items:center; gap:3px;" onclick="window.dohwaPlayer.playMassSet(window.dohwaApp.findMassSet('${m.id}'), '${s.id}')">▶ Nghe</button>` : ''}
             </div>
           </div>
@@ -591,7 +591,7 @@ class DohwaApp {
             </div>
           </div>
           <div class="song-actions" style="display:flex; gap:6px;">
-            <button class="action-btn btn-view" style="font-size:0.78rem; padding:4px 8px;" onclick="window.dohwaPDFViewer.open('${s.pdfData || ''}', '${s.title}', '${s.pdfName || ''}')">📄 Nốt Nhạc</button>
+            <button class="action-btn btn-view" style="font-size:0.78rem; padding:4px 8px;" onclick="window.dohwaPDFViewer.open('${s.pdfData || ''}', '${s.title}', '${s.pdfName || ''}')">📄 Pdf</button>
             ${s.youtubeUrl ? `<button class="action-btn btn-play" style="font-size:0.78rem; padding:4px 8px;" onclick="window.dohwaPlayer.playSong(window.dohwaApp.findSongInMass('${ms.id}', '${s.id}'))">▶ Nghe</button>` : ''}
           </div>
         </div>
@@ -642,24 +642,25 @@ class DohwaApp {
     if (!ms) ms = this.currentMassSet;
     if (!ms || !ms.songs) return;
 
-    const pdfSongs = ms.songs.filter(s => s.pdfData);
-    if (!pdfSongs.length) {
-      const firstSong = ms.songs[0];
-      if (firstSong && window.dohwaPDFViewer) {
-        window.dohwaPDFViewer.open(firstSong.pdfData, firstSong.title, firstSong.pdfName);
-      } else {
-        alert('Bộ lễ này chưa có file PDF nào!');
-      }
+    const songsWithPdf = ms.songs.filter(s => s.pdfData || s.pdfName);
+    if (!songsWithPdf.length) {
+      alert('Bộ lễ này chưa có file PDF nào!');
       return;
     }
 
-    pdfSongs.forEach(s => {
-      const a = document.createElement('a');
-      a.href = s.pdfData;
-      a.download = s.pdfName || `${s.title}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+    songsWithPdf.forEach(s => {
+      let url = s.pdfData;
+      if (!url && s.pdfName) {
+        url = s.pdfName.startsWith('sheets/') ? s.pdfName : `sheets/${s.pdfName}`;
+      }
+      if (url) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = s.pdfName || `${s.title}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => a.remove(), 100);
+      }
     });
   }
 
