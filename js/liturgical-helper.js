@@ -277,26 +277,84 @@ Chủ tế: Lạy Chúa, xin thương chấp nhận những ước nguyện châ
     lnth: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
 Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời gọi chúng ta cộng tác xây dựng Nước Trời bằng đời sống hoán cải chân thành. Với tâm tình tin tưởng, chúng ta cùng dâng lời cầu xin:
 1. Cầu cho các vị chủ chăn trong Hội Thánh: Xin Chúa ban cho các ngài sức mạnh và lòng nhân ái, để luôn nêu gương sáng vâng phục Thánh ý Chúa và tận tụy phục vụ đoàn chiên.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
-2. Cầu cho các nhà lãnh đạo quốc gia: Xin Chúa soi sáng tâm trí các nhà cầm quyền, biết hành động vì công lý, hòa bình và lợi ích chân chính của mọi người dân.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
-3. Cầu cho những ai đang lạc lối xa Chúa: Xin ơn Chúa biến đổi tâm hồn họ, giúp họ nhận ra tình thương của Chúa mà can đảm hối cải trở về.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
-4. Cầu cho toàn thể Ca đoàn và cộng đoàn chúng ta: Xin Chúa giúp mỗi người chúng ta không chỉ vâng lời Chúa bằng môi miệng, mà bằng trọn cả hành động yêu thương cụ thể mỗi ngày.
-Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
-Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và ban ơn giúp chúng con luôn trung thành thực thi ý Chúa. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
-  }
-};
+      Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+      Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và ban ơn giúp chúng con luôn trung thành thực thi ý Chúa. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
+    },
+    '2026-10-18': {
+      title: 'Chúa Nhật 28 Thường Niên - Năm A',
+      bd1: {
+        ref: 'Is 25, 6-10a',
+        bookTitle: 'Bài trích sách ngôn sứ I-sai-a.',
+        lead: 'Đức Chúa sẽ thết đãi muôn dân một bữa tiệc và lau sạch nước mắt trên mọi khuôn mặt.',
+        content: `Ngày ấy, trên núi này, Đức Chúa các đạo binh sẽ thiết đãi muôn dân một bữa tiệc đầy thịt béo và rượu ngon. Trên núi này, Người sẽ xé bỏ chiếc khăn tang trùm trên muôn dân và tấm màn che phủ mọi nước. Người sẽ vĩnh viễn tiêu diệt tử thần, và Thiên Chúa là Đức Chúa sẽ lau sạch nước mắt trên mọi khuôn mặt.`
+      },
+      tv: {
+        ref: 'Thánh Vịnh 22, 1-3a. 3b-4. 5. 6',
+        dap: 'Trong nhà Chúa, tôi sẽ định cư suốt chuỗi ngày dài miên viễn.',
+        pdfName: 'Dap_Ca_Chua_Nhat_25_A.pdf'
+      },
+      bd2: {
+        ref: 'Pl 4, 12-14. 19-20',
+        bookTitle: 'Bài trích thư của Thánh Phaolô Tông đồ gửi tín hữu Phi-líp-phê.',
+        lead: 'Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi.',
+        content: `Thưa anh em, tôi đã tập quen với mọi hoàn cảnh: no hay đói, dư dật hay thiếu thốn. Với Đấng ban sức mạnh cho tôi, tôi có thể làm được mọi sự. Tuy nhiên, anh em đã chia sẻ nỗi gian truân với tôi, như thế là điều tốt. Thiên Chúa của tôi sẽ thỏa mãn mọi nhu cầu của anh em một cách huy hoàng phong phú, theo sự giàu sang của Người trong Đức Kitô Giêsu.`
+      },
+      tm: {
+        ref: 'Mt 22, 1-14',
+        bookTitle: 'Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.',
+        lead: 'Hãy đi ra các ngả đường, gặp ai cũng mời vào tiệc cưới.',
+        alleluia: 'Xin Cha của Đức Giêsu Kitô, Chúa chúng ta, soi trí mở lòng, cho chúng ta biết thế nào là niềm hy vọng mà ơn Người kêu gọi đem lại cho chúng ta.',
+        content: `Khi ấy, Đức Giêsu lại dùng dụ ngôn mà nói với các thượng tế và kỳ mục rằng: "Nước Trời cũng giống như chuyện một vua kia mở tiệc cưới cho con mình. Nhà vua sai đầy tớ đi thỉnh các quan khách đã được mời trước, nhưng họ không chịu đến. Vua lại sai những đầy tớ khác đi và dặn họ: 'Hãy thưa với quan khách đã được mời rằng: Này cỗ bàn, ta đã dọn xong, bò tơ và thú béo đã hạ rồi, mọi sự đã sẵn. Mời quý vị đến dự tiệc cưới!' Nhưng quan khách không thèm đếm xỉa tới, lại bỏ đi: kẻ thì đi thăm trại, người thì đi buôn bán... Bấy giờ vua bảo đầy tớ: 'Tiệc cưới đã sẵn sàng rồi, mà quan khách đã được mời lại không xứng đáng. Vậy các ngươi đi ra các ngả đường, gặp ai cũng mời vào tiệc cưới.' Đầy tớ liền đi ra các nẻo đường, gặp ai, bất luận xấu tốt, cũng tập họp cả lại, nên phòng tiệc cưới đầy những thực khách. Bấy giờ vua tiến vào quan sát thực khách, thấy ở đó có một người không mang y phục lễ cưới, mới hỏi người ấy: 'Này bạn, làm sao bạn vào đây mà lại không có y phục lễ cưới?' Người ấy câm miệng không nói được gì. Bấy giờ vua bảo những người phục dịch: 'Trói chân tay nó lại, quăng nó ra chỗ tối tăm bên ngoài: ở đó, người ta sẽ phải khóc lóc nghiến răng!' Vì kẻ được gọi thì nhiều, mà người được chọn thì ít."`
+      },
+      lnth: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 28 THƯỜNG NIÊN - NĂM A
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ luôn rộng mở bàn tiệc ân sủng đón mời tất cả chúng ta vào chia sẻ niềm vui Nước Trời. Trong tâm tình tri ân và ước muốn sống xứng đáng với ơn gọi người Kitô hữu, chúng ta cùng tha thiết dâng lời nguyện xin:
 
-/**
- * KHO MẪU LỜI NGUYỆN TÍN HỮU CHUẨN PHỤNG VỤ ĐA DẠNG CÁC MÙA & LỄ TRỌNG
- */
-const LITURGICAL_PRAYERS_CATALOG = [
-  {
-    id: 'cn25_tn_a',
-    title: 'Chúa Nhật 25 Thường Niên - Năm A',
-    subtitle: 'Lòng quảng đại của Thiên Chúa & Tinh thần phục vụ',
-    text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
+1. Cầu cho Hội Thánh: Xin Chúa ban cho Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh lòng nhiệt thành truyền giáo, để Hội Thánh không ngừng rao giảng Tin Mừng và mời gọi muôn dân đến hiệp thông trong bàn tiệc Lời Chúa và Thánh Thể.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho hòa bình thế giới và các dân tộc: Xin Chúa lau sạch nước mắt khổ đau của những người nghèo khó, bệnh tật, các nạn nhân chiến tranh và thiên tai, ban cho nhân loại được sống trong an bình, công lý và tình huynh đệ ấm áp.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những người đang khước từ lời mời gọi của Chúa: Xin ơn Chúa đánh động tâm trí họ, giúp họ nhận ra sự hư ảo trần thế để can đảm từ bỏ tội lỗi, quay về đón nhận lòng thương xót Chúa và mặc lấy y phục thánh thiện.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: "Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi": Xin Chúa ban ơn trợ lực để mỗi ca viên luôn hiệp nhất yêu thương, mặc lấy tâm tình đức tin, cậy, mến và say mê dùng lời ca tiếng hát phục vụ bàn thánh.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa là Vua muôn loài, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, và gìn giữ chúng con luôn trung kiên trong ân sủng cho đến ngày được vào dự tiệc cưới muôn đời trên thiên quốc. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
+    }
+  };
+
+  /**
+   * KHO MẪU LỜI NGUYỆN TÍN HỮU CHUẨN PHỤNG VỤ ĐA DẠNG CÁC MÙA & LỄ TRỌNG
+   */
+  const LITURGICAL_PRAYERS_CATALOG = [
+    {
+      id: 'cn28_tn_a',
+      title: 'Chúa Nhật 28 Thường Niên - Năm A',
+      subtitle: 'Bàn tiệc Nước Trời & Y phục thánh thiện (Is 25, Pl 4, Mt 22)',
+      text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 28 THƯỜNG NIÊN - NĂM A
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ luôn rộng mở bàn tiệc ân sủng đón mời tất cả chúng ta vào chia sẻ niềm vui Nước Trời. Trong tâm tình tri ân và ước muốn sống xứng đáng với ơn gọi người Kitô hữu, chúng ta cùng tha thiết dâng lời nguyện xin:
+
+1. Cầu cho Hội Thánh: Xin Chúa ban cho Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh lòng nhiệt thành truyền giáo, để Hội Thánh không ngừng rao giảng Tin Mừng và mời gọi muôn dân đến hiệp thông trong bàn tiệc Lời Chúa và Thánh Thể.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho hòa bình thế giới và các dân tộc: Xin Chúa lau sạch nước mắt khổ đau của những người nghèo khó, bệnh tật, các nạn nhân chiến tranh và thiên tai, ban cho nhân loại được sống trong an bình, công lý và tình huynh đệ ấm áp.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những người đang khước từ lời mời gọi của Chúa: Xin ơn Chúa đánh động tâm trí họ, giúp họ nhận ra sự hư ảo trần thế để can đảm từ bỏ tội lỗi, quay về đón nhận lòng thương xót Chúa và mặc lấy y phục thánh thiện.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: "Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi": Xin Chúa ban ơn trợ lực để mỗi ca viên luôn hiệp nhất yêu thương, mặc lấy tâm tình đức tin, cậy, mến và say mê dùng lời ca tiếng hát phục vụ bàn thánh.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa là Vua muôn loài, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, và gìn giữ chúng con luôn trung kiên trong ân sủng cho đến ngày được vào dự tiệc cưới muôn đời trên thiên quốc. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
+    },
+    {
+      id: 'cn25_tn_a',
+      title: 'Chúa Nhật 25 Thường Niên - Năm A',
+      subtitle: 'Lòng quảng đại của Thiên Chúa & Tinh thần phục vụ',
+      text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
 Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ đầy lòng quảng đại và bao dung, đường lối Người vượt xa mọi tính toán nhân loại. Với niềm tin tưởng và phó thác, chúng ta cùng tha thiết dâng lời nguyện xin:
 1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Đức Giáo Hoàng, các Đức Giám Mục và các Linh Mục, để các ngài luôn là những mục tử nhân lành dẫn dắt đoàn chiên Chúa theo tinh thần Tin Mừng.
 Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
@@ -307,12 +365,12 @@ Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ đầy lò
 4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ: Xin Chúa ban cho mỗi ca viên lòng nhiệt thành mến Chúa, biết dùng tiếng hát để phụng sự Thánh Lễ và loan báo tình yêu Chúa trong tinh thần hiệp nhất yêu thương.
 Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, nhờ Đức Kitô, Chúa chúng con. - Amen.`
-  },
-  {
-    id: 'cn26_tn_a',
-    title: 'Chúa Nhật 26 Thường Niên - Năm A',
-    subtitle: 'Vâng phục Thánh ý bằng hành động cụ thể',
-    text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
+    },
+    {
+      id: 'cn26_tn_a',
+      title: 'Chúa Nhật 26 Thường Niên - Năm A',
+      subtitle: 'Vâng phục Thánh ý bằng hành động cụ thể',
+      text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
 Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời gọi chúng ta cộng tác xây dựng Nước Trời bằng đời sống hoán cải chân thành. Với tâm tình tin tưởng, chúng ta cùng dâng lời cầu xin:
 1. Cầu cho các vị chủ chăn trong Hội Thánh: Xin Chúa ban cho các ngài sức mạnh và lòng nhân ái, để luôn nêu gương sáng vâng phục Thánh ý Chúa và tận tụy phục vụ đoàn chiên.
 Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
@@ -323,7 +381,7 @@ Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời g�
 4. Cầu cho toàn thể Ca đoàn và cộng đoàn chúng ta: Xin Chúa giúp mỗi người chúng ta không chỉ vâng lời Chúa bằng môi miệng, mà bằng trọn cả hành động yêu thương cụ thể mỗi ngày.
 Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
 Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và ban ơn giúp chúng con luôn trung thành thực thi ý Chúa. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
-  },
+    },
   {
     id: 'thuong_nien_chung',
     title: 'Mùa Thường Niên (Mẫu Chung Phụng Vụ)',
@@ -584,6 +642,61 @@ function parseRawLnthText(raw) {
  * Đối chiếu từ: HĐGMVN, TGP Sài Gòn, Dòng Đa Minh, TGP Hà Nội, GP Xuân Lộc
  */
 const AI_LITURGICAL_SYNTHESIS = {
+  'cn28_tn_a': {
+    standard: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 28 THƯỜNG NIÊN - NĂM A
+(Bản tổng hợp chuẩn mực: HĐGMVN & TGP Sài Gòn)
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha giàu lòng nhân hậu luôn mời gọi tất cả chúng ta vào chia sẻ niềm vui tiệc cưới Nước Trời. Với lòng tri ân sâu xa và ước nguyện sống xứng đáng với ơn gọi Kitô hữu, chúng ta cùng hiệp ý dâng lời nguyện xin:
+
+1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Hội Thánh luôn trung kiên thi hành sứ mạng loan báo ơn cứu độ, để mọi tâm hồn đang khao khát Chân Lý tìm được lối vào dự tiệc ân sủng của Thiên Chúa.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho thế giới hôm nay: Xin Chúa soi sáng các nhà lãnh đạo quốc gia biết chăm lo cho công ích, kiến tạo công lý và hòa bình, để mọi người dân được hưởng cuộc sống ấm no và tự do đích thực.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những ai đang mê mải việc đời mà xao lãng ơn cứu độ: Xin ơn Chúa đánh động tâm hồn họ, giúp họ biết quý trọng những giá trị vĩnh cửu và mau mắn đáp lại tiếng Chúa mời gọi hoán cải.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ: "Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi": Xin Chúa ban ơn trợ lực để mỗi ca viên chúng con luôn kiên tâm, hiệp nhất và cất cao lời ca phụng sự bàn thánh với trọn vẹn đức tin và đức mến.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Thiên Chúa toàn năng nhân từ, xin dủ thương chấp nhận những ý nguyện chân thành của đoàn con, xin gìn giữ chúng con trong ân nghĩa Chúa cho đến ngày vào dự tiệc cưới vĩnh cửu trên trời. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+
+    pastoral: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 28 THƯỜNG NIÊN - NĂM A
+(Bản mục vụ sâu sắc: Dòng Đa Minh & TGP Hà Nội)
+Chủ tế: Anh chị em thân mến, Thiên Chúa dọn sẵn cho chúng ta bàn tiệc Lời Chúa và Thánh Thể mỗi ngày. Ý thức về hồng ân cao cả ấy và thân phận yếu đuối của mình, chúng ta cùng tha thiết cầu xin:
+
+1. "Hãy đi ra các ngả đường, gặp ai cũng mời vào tiệc cưới": Xin cho các linh mục, tu sĩ và giáo dân luôn có tâm hồn rộng mở, nhiệt tâm đem niềm vui Tin Mừng đến cho những người bị gạt ra bên lề xã hội.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho những người đang chịu đau khổ vì bệnh tật, nghèo đói và cô đơn: Xin Chúa là Đấng lau sạch nước mắt lau khô giọt lệ sầu đau của họ, và khơi dậy nơi các Kitô hữu tinh thần liên đới chia sẻ.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho mỗi người chúng ta luôn biết mặc "y phục lễ cưới": Xin Chúa ban ơn thánh hóa giúp chúng ta luôn giữ gìn đời sống công chính, thánh thiện, biểu lộ qua những việc lành phúc đức hằng ngày.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho ca viên và gia đình trong giáo xứ: Xin Chúa ban bình an trên mái ấm từng gia đình, cho các ca viên lòng hăng say và tinh thần hy sinh phục vụ, để lời ca tiếng hát đem lại nhiều ơn ích thiêng liêng cho cộng đoàn.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa, xin lắng nghe và đoái thương nhận lời chúng con nài van, xin biến đổi đời sống chúng con nên tấm bánh thơm tho dâng lên Chúa mỗi ngày. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+
+    choir: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 28 THƯỜNG NIÊN - NĂM A
+(Bản đồng hành Ca Đoàn & Giới Trẻ - Chuẩn Phụng Vụ)
+Chủ tế: Anh chị em thân mến, được quy tụ nơi nhà Chúa để dâng Thánh Lễ là một đại hồng ân. Với tâm tình tạ ơn Chúa đã cho chúng ta được đồng bàn trong tiệc Thánh, chúng ta cùng dâng lên Người những lời nguyện xin:
+
+1. Cầu cho Đức Giáo Hoàng Phanxicô và các vị chủ chăn: Xin Chúa ban cho các ngài sức khỏe và ơn phân định, để luôn là những người đầy tớ trung tín mời gọi muôn dân hiệp thông trong Hội Thánh.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho thanh thiếu niên và giới trẻ: Xin Chúa gìn giữ các bạn trẻ khỏi những cạm bẫy xấu xa của thế gian, luôn sống trong trắng, nhiệt huyết và sẵn sàng đáp lại lời mời gọi dấn thân của Chúa.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho các bậc cha mẹ và gia đình: Xin Chúa ban ơn che chở để các gia đình luôn là trường học đầu tiên dạy con cái biết yêu mến Lời Chúa và siêng năng tham dự Thánh Lễ.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa: Xin Chúa thánh hóa mọi buổi tập hát và giờ phụng vụ của ca đoàn, ban cho mỗi thành viên tinh thần khiêm nhường, gắn kết yêu thương và nhiệt thành dùng lời ca tiếng đàn tôn vinh Thiên Chúa.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa Giêsu, xin thắp lên trong lòng chúng con ngọn lửa mến yêu nồng nàn, để cuộc đời chúng con là lời ca không bao giờ dứt ca tụng tình thương của Chúa. Chúa là Đấng hằng sống và hiển trị muôn đời. - Amen.`
+  },
   'cn25_tn_a': {
     standard: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
 (Bản tổng hợp chuẩn mực: HĐGMVN & TGP Sài Gòn)
@@ -956,15 +1069,29 @@ class BaiDocViewer {
    * Có nút [🌐 Lấy Từ Web] nổi bật
    */
   renderLoiNguyen(container, ms) {
-    const dateStr = ms.date || '2026-09-26';
-    const currentContent = ms.loiNguyenText || (OFFLINE_LITURGY_STORE[dateStr] || OFFLINE_LITURGY_STORE['2026-09-26']).lnth;
+    const currentFeastId = this.getCurrentFeastId();
+    let currentContent = ms.loiNguyenText;
+
+    if (!currentContent) {
+      const catalogItem = LITURGICAL_PRAYERS_CATALOG.find(c => c.id === currentFeastId);
+      if (catalogItem) {
+        currentContent = catalogItem.text;
+      } else if (AI_LITURGICAL_SYNTHESIS[currentFeastId]?.standard) {
+        currentContent = AI_LITURGICAL_SYNTHESIS[currentFeastId].standard;
+      } else if (OFFLINE_LITURGY_STORE[ms.date]?.lnth) {
+        currentContent = OFFLINE_LITURGY_STORE[ms.date].lnth;
+      } else {
+        const feastTitle = ms.title || ms.weekName || 'Chúa Nhật';
+        currentContent = generateAiSynthesizedPrayer(feastTitle, 'standard');
+      }
+    }
 
     container.innerHTML = `
       <div id="sb-lnth-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
           <span style="font-size:0.85rem; color:var(--text-muted); font-weight:700;">LỜI NGUYỆN TÍN HỮU (LỜI NGUYỆN CHUNG)</span>
           <div style="display:flex; gap:6px; flex-wrap:wrap;">
-            <button type="button" class="action-btn btn-pdf" onclick="window.baiDocViewer.openFetchModal()" style="font-size:0.8rem; padding:6px 12px; background:linear-gradient(135deg, #7c3aed, #4f46e5); color:#fff; border:none; font-weight:800; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(124,58,237,0.25);">
+            <button type="button" class="action-btn btn-pdf" onclick="window.baiDocViewer.openFetchModal()" style="font-size:0.8rem; padding:6px 12px; background:linear-gradient(135deg, #7c3aed, #4f46e5); color:#fff; border:none; font-weight:800; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(124,58,237,0.25); cursor:pointer;">
               🌐 Lấy Từ Web
             </button>
             <button type="button" class="action-btn btn-view" onclick="window.baiDocViewer.startEditLnth()" style="font-size:0.8rem; padding:6px 12px;">✏️ Sửa</button>
@@ -1043,7 +1170,12 @@ class BaiDocViewer {
 
   printLnth() {
     const ms = this.currentMassSet || {};
-    const content = ms.loiNguyenText || (OFFLINE_LITURGY_STORE[ms.date] || OFFLINE_LITURGY_STORE['2026-09-26']).lnth;
+    const currentFeastId = this.getCurrentFeastId();
+    let content = ms.loiNguyenText;
+    if (!content) {
+      const catalogItem = LITURGICAL_PRAYERS_CATALOG.find(c => c.id === currentFeastId);
+      content = catalogItem ? catalogItem.text : (OFFLINE_LITURGY_STORE[ms.date]?.lnth || generateAiSynthesizedPrayer(ms.title || 'Phụng Vụ', 'standard'));
+    }
     const formatted = formatLnthText(content);
 
     const win = window.open('', '_blank', 'width=800,height=720');
@@ -1064,56 +1196,44 @@ class BaiDocViewer {
     win.document.close();
   }
 
-  // --- MODAL LẤY LỜI NGUYỆN TÍN HỮU TỪ WEB (3 PHƯƠNG THỨC) ---
-  openFetchModal() {
-    const overlay = document.getElementById('fetchLnthModalOverlay');
-    if (overlay) {
-      overlay.style.display = 'flex';
-      this.switchFetchTab(this.activeFetchTab || 'catalog');
-    }
-  }
-
-  closeFetchModal() {
-    const overlay = document.getElementById('fetchLnthModalOverlay');
-    if (overlay) overlay.style.display = 'none';
-  }
-
-  switchFetchTab(tabKey) {
-    this.activeFetchTab = tabKey;
-    document.querySelectorAll('.fetch-lnth-tab').forEach(b => {
-      b.classList.toggle('active', b.getAttribute('data-fetch-tab') === tabKey);
-    });
-
-    const container = document.getElementById('fetchLnthTabContent');
-    if (!container) return;
-
-    if (tabKey === 'catalog') {
-      this.renderFetchCatalogTab(container);
-    } else if (tabKey === 'url') {
-      this.renderFetchUrlTab(container);
-    } else {
-      this.renderFetchPasteTab(container);
-    }
-  }
-
   // --- MODAL LẤY LỜI NGUYỆN TÍN HỮU TỪ WEB (3 PHƯƠNG THỨC MỚI) ---
   getCurrentFeastId() {
     const ms = this.currentMassSet || window.dohwaApp?.currentMassSet;
     const title = (ms?.title || ms?.weekName || '').toLowerCase();
     const dateStr = ms?.date || '';
 
-    if (title.includes('25') && (title.includes('thường niên') || title.includes('tn'))) return 'cn25_tn_a';
-    if (title.includes('26') && (title.includes('thường niên') || title.includes('tn'))) return 'cn26_tn_a';
-    if (title.includes('27') && (title.includes('thường niên') || title.includes('tn'))) return 'cn27_tn_a';
+    // 1. Nhận diện số tuần Thường Niên bất kỳ (từ 1 đến 34)
+    const tnMatch = title.match(/(\d+)\s*(thường niên|tn)/i) || 
+                    title.match(/chúa nhật\s*(\d+)/i) || 
+                    title.match(/cn\s*(\d+)/i);
+    if (tnMatch) {
+      const week = parseInt(tnMatch[1]);
+      if (week >= 1 && week <= 34) {
+        return `cn${week}_tn_a`;
+      }
+    }
+
+    // 2. Nhận diện các mùa phụng vụ
     if (title.includes('vọng')) return 'mua_vong';
-    if (title.includes('giáng sinh') || title.includes('noel')) return 'mua_giang_sinh';
-    if (title.includes('chay')) return 'mua_chay';
-    if (title.includes('phục sinh')) return 'mua_phuc_sinh';
+    if (title.includes('giáng sinh') || title.includes('noel') || title.includes('hiển linh')) return 'mua_giang_sinh';
+    if (title.includes('chay') || title.includes('lễ lá')) return 'mua_chay';
+    if (title.includes('phục sinh') || title.includes('thăng thiên') || title.includes('hiện xuống')) return 'mua_phuc_sinh';
     if (title.includes('đức mẹ') || title.includes('maria')) return 'le_duc_me';
     if (title.includes('quan thầy') || title.includes('bổn mạng') || title.includes('ca đoàn')) return 'le_bon_mang_ca_doan';
-    if (dateStr === '2026-09-26' || dateStr === '2026-09-27') return 'cn25_tn_a';
+    if (title.includes('kitô vua')) return 'cn34_tn_a';
 
-    return 'cn25_tn_a';
+    // 3. Tính toán theo ngày cử hành (dateStr)
+    if (dateStr && window.calculateLiturgicalInfo) {
+      const info = window.calculateLiturgicalInfo(dateStr);
+      if (info && info.title) {
+        const infoMatch = info.title.match(/(\d+)\s*thường niên/i);
+        if (infoMatch) {
+          return `cn${parseInt(infoMatch[1])}_tn_a`;
+        }
+      }
+    }
+
+    return 'cn28_tn_a';
   }
 
   openFetchModal() {
@@ -1213,7 +1333,7 @@ class BaiDocViewer {
   renderFetchAiTab(container) {
     const currentFeastId = this.getCurrentFeastId();
     const ms = this.currentMassSet || window.dohwaApp?.currentMassSet;
-    const feastTitle = ms?.title || ms?.weekName || 'Chúa Nhật 25 Thường Niên - Năm A';
+    const feastTitle = ms?.title || ms?.weekName || (window.calculateLiturgicalInfo && ms?.date ? window.calculateLiturgicalInfo(ms.date)?.title : '') || 'Chúa Nhật 28 Thường Niên - Năm A';
     this.activeAiStyle = this.activeAiStyle || 'standard';
 
     let synthesizedText = '';
