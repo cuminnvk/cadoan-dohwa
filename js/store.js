@@ -695,17 +695,29 @@ class DohwaStore {
     return false;
   }
 
-  // --- ATTENDANCE TRACKER (HIỂN THỊ KẾT QUẢ RIÊNG CHO TỪNG BỘ LỄ) ---
+  // --- ATTENDANCE TRACKER (ĐỒNG BỘ THỜI GIAN THỰC VỚI FIREBASE CLOUD CHO TỪNG BỘ LỄ) ---
   async recordView(massSetId, memberName) {
     await this.ensureReady();
     if (!massSetId || !memberName) return;
+    const name = String(memberName).trim();
+    if (!name || name === 'Admin' || name === 'Chọn tên') return;
+
+    // Tránh spam ghi nhận nhiều lần trong 30 giây nếu người dùng F5 liên tục
+    const throttleKey = `dohwa_view_throttle_${massSetId}_${name}`;
+    const lastViewTime = sessionStorage.getItem(throttleKey);
+    const now = Date.now();
+    if (lastViewTime && (now - Number(lastViewTime)) < 30 * 1000) {
+      return;
+    }
+    sessionStorage.setItem(throttleKey, String(now));
 
     const entry = {
       massSetId,
-      memberName,
+      memberName: name,
       viewedAt: new Date().toISOString()
     };
 
+    // 1. Lưu offline trên thiết bị này
     let att = this.getLocal('attendance', []);
     att.push(entry);
     this.setLocal('attendance', att);
@@ -716,6 +728,20 @@ class DohwaStore {
         tx.objectStore('attendance').add(entry);
       } catch (e) {}
     }
+
+    // 2. Đẩy ngay lập tức lên Google Firebase Realtime Database
+    const url = this.getFirebaseUrl();
+    if (url) {
+      try {
+        await fetch(`${url}/attendance/${massSetId}.json`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+          body: JSON.stringify(entry)
+        });
+      } catch (err) {
+        console.warn('[Firebase] Lỗi đẩy chuyên cần lên Cloud:', err);
+      }
+    }
   }
 
   async getAttendanceForMass(massSetId) {
@@ -723,56 +749,90 @@ class DohwaStore {
     if (!massSetId) return [];
 
     let list = [];
-    if (this.db) {
+
+    // 1. Tải trực tiếp dữ liệu mới nhất từ Firebase Realtime Database
+    const url = this.getFirebaseUrl();
+    if (url) {
       try {
-        list = await this.getAllFromIndex('attendance', 'massSetId', massSetId);
-      } catch (e) {}
-    }
-    if (!list || !list.length) {
-      const local = this.getLocal('attendance', []);
-      list = local.filter(a => a.massSetId === massSetId);
+        const res = await fetch(`${url}/attendance/${massSetId}.json`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' }
+        });
+        if (res.ok) {
+          const cloudData = await res.json();
+          if (cloudData && typeof cloudData === 'object') {
+            list = Object.values(cloudData);
+          }
+        }
+      } catch (err) {
+        console.warn('[Firebase] Lỗi tải chuyên cần từ Cloud:', err);
+      }
     }
 
-    // Tổng hợp chuyên cần theo từng ca viên cho RIÊNG BỘ LỄ NÀY
+    // 2. Nếu không có mạng hoặc chưa có dữ liệu trên Cloud, đọc từ bộ nhớ cục bộ
+    if (!list || list.length === 0) {
+      if (this.db) {
+        try {
+          list = await this.getAllFromIndex('attendance', 'massSetId', massSetId);
+        } catch (e) {}
+      }
+      if (!list || !list.length) {
+        const local = this.getLocal('attendance', []);
+        list = local.filter(a => a.massSetId === massSetId);
+      }
+    }
+
+    // 3. Tổng hợp danh sách ca viên xem bộ lễ này (đếm số lần, tìm ngày xem gần nhất)
     const summary = {};
     (list || []).forEach(item => {
-      if (!summary[item.memberName]) {
-        summary[item.memberName] = {
-          name: item.memberName,
+      if (!item || !item.memberName) return;
+      const mName = String(item.memberName).trim();
+      if (!mName || mName === 'Admin' || mName === 'Chọn tên') return;
+
+      if (!summary[mName]) {
+        summary[mName] = {
+          name: mName,
+          memberName: mName,
           count: 0,
-          lastViewed: item.viewedAt
+          viewsCount: 0,
+          lastViewed: item.viewedAt,
+          lastViewedAt: item.viewedAt
         };
       }
-      summary[item.memberName].count++;
-      if (new Date(item.viewedAt) > new Date(summary[item.memberName].lastViewed)) {
-        summary[item.memberName].lastViewed = item.viewedAt;
+      summary[mName].count++;
+      summary[mName].viewsCount++;
+      if (item.viewedAt && (!summary[mName].lastViewed || new Date(item.viewedAt) > new Date(summary[mName].lastViewed))) {
+        summary[mName].lastViewed = item.viewedAt;
+        summary[mName].lastViewedAt = item.viewedAt;
       }
     });
+
+    // 4. Bổ sung các ca viên đã xác nhận thiết bị và đã vào phòng trong danh sách roster
+    try {
+      const roster = await this.getRoster();
+      (roster || []).forEach(m => {
+        if (m && m.name && m.claimed && m.totalVisits > 0) {
+          const mName = String(m.name).trim();
+          if (!summary[mName]) {
+            const vTime = m.lastVisitAt || m.claimedAt || new Date().toISOString();
+            summary[mName] = {
+              name: mName,
+              memberName: mName,
+              count: m.totalVisits,
+              viewsCount: m.totalVisits,
+              lastViewed: vTime,
+              lastViewedAt: vTime
+            };
+          }
+        }
+      });
+    } catch (e) {}
 
     const result = Object.values(summary);
     if (result.length > 0) {
       return result.sort((a, b) => b.count - a.count);
     }
 
-    // NẾU LÀ BỘ LỄ GỐC BAN ĐẦU 'mass-cn-25-tn-a', TRẢ VỀ DỮ LIỆU MẪU CỦA RIÊNG BỘ ĐÓ
-    if (massSetId === 'mass-cn-25-tn-a') {
-      return [
-        { name: 'Nt Liễu', count: 11, lastViewed: '2026-08-16T19:01:00.000Z' },
-        { name: 'Niệm Trần', count: 8, lastViewed: '2026-08-16T15:49:00.000Z' },
-        { name: 'Hồ Hoàng', count: 7, lastViewed: '2026-08-16T18:45:00.000Z' },
-        { name: 'Lan Cong', count: 6, lastViewed: '2026-08-16T17:35:00.000Z' },
-        { name: 'Vui Nguyễn', count: 5, lastViewed: '2026-08-15T19:50:00.000Z' },
-        { name: 'Nguyễn Văn Mùi', count: 4, lastViewed: '2026-08-15T13:55:00.000Z' },
-        { name: 'Phong Nguyễn', count: 4, lastViewed: '2026-08-16T17:37:00.000Z' },
-        { name: 'Nguyễn Thị Hương', count: 2, lastViewed: '2026-08-14T19:48:00.000Z' },
-        { name: 'Thị Vanh', count: 2, lastViewed: '2026-08-14T21:21:00.000Z' },
-        { name: 'Mai Ngọc Thu', count: 1, lastViewed: '2026-08-14T21:11:00.000Z' },
-        { name: 'Ngà Em', count: 1, lastViewed: '2026-08-13T23:04:00.000Z' },
-        { name: 'Nguyễn Long Cris', count: 1, lastViewed: '2026-08-13T20:36:00.000Z' }
-      ];
-    }
-
-    // Các bộ lễ khác hoàn toàn độc lập, hiển thị kết quả riêng biệt
     return [];
   }
 

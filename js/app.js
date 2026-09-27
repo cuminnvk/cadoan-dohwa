@@ -190,10 +190,10 @@ class DohwaApp {
     }
 
     // Ghi nhận chuyên cần khi mở bộ lễ
-    if (window.dohwaStore) {
-      const profile = window.dohwaStore.getUserProfile();
-      if (profile && profile.name) {
-        await window.dohwaStore.recordView(this.currentMassSet.id, profile.name, profile.voice);
+    if (window.dohwaStore && this.currentMassSet) {
+      const session = window.dohwaStore.getUserSession() || window.dohwaStore.getUserProfile();
+      if (session && session.name && session.memberId !== 'admin' && session.name !== 'Admin' && session.name !== 'Chọn tên') {
+        window.dohwaStore.recordView(this.currentMassSet.id, session.name);
       }
     }
 
@@ -1517,7 +1517,7 @@ class DohwaApp {
     const tbody = document.getElementById('aiDaXemModalTableBody');
     if (!tbody) return;
 
-    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:16px; color:var(--text-muted);">Đang tải dữ liệu chuyên cần...</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:16px; color:var(--text-muted);">⏳ Đang tải dữ liệu từ Đám Mây...</td></tr>`;
 
     const list = await window.dohwaStore.getAttendanceForMass(targetId);
 
@@ -1535,9 +1535,10 @@ class DohwaApp {
     }
 
     tbody.innerHTML = list.map(item => {
-      let timeStr = '';
-      if (item.lastViewed) {
-        const d = new Date(item.lastViewed);
+      let timeStr = 'Vừa mới';
+      const vTime = item.lastViewed || item.lastViewedAt;
+      if (vTime) {
+        const d = new Date(vTime);
         const hh = String(d.getHours()).padStart(2, '0');
         const mm = String(d.getMinutes()).padStart(2, '0');
         const dd = String(d.getDate()).padStart(2, '0');
@@ -1547,8 +1548,8 @@ class DohwaApp {
 
       return `
         <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 8px; font-weight:600; color:var(--text-main);">${item.name}</td>
-          <td style="padding:10px 8px; text-align:center; font-weight:800; color:#0284c7; font-size:0.95rem;">${item.count}</td>
+          <td style="padding:10px 8px; font-weight:600; color:var(--text-main);">${item.name || item.memberName}</td>
+          <td style="padding:10px 8px; text-align:center; font-weight:800; color:#0284c7; font-size:0.95rem;">${item.count || item.viewsCount || 1}</td>
           <td style="padding:10px 8px; text-align:right; color:#64748b; font-size:0.8rem; font-family:monospace;">${timeStr}</td>
         </tr>
       `;

@@ -13,7 +13,7 @@ class DohwaThongKe {
     const records = await window.dohwaStore.getAttendanceForMass(massSetId);
     const roster = await window.dohwaStore.getRoster();
 
-    const totalViews = records.reduce((sum, r) => sum + (r.viewsCount || 1), 0);
+    const totalViews = records.reduce((sum, r) => sum + (r.count || r.viewsCount || 1), 0);
     const uniqueCount = records.length;
     const rosterCount = roster.length;
     const percent = rosterCount > 0 ? Math.round((uniqueCount / rosterCount) * 100) : 0;
@@ -37,17 +37,17 @@ class DohwaThongKe {
     }
 
     // Sắp xếp người xem gần nhất lên đầu
-    const sorted = [...records].sort((a, b) => new Date(b.lastViewedAt) - new Date(a.lastViewedAt));
+    const sorted = [...records].sort((a, b) => new Date(b.lastViewed || b.lastViewedAt) - new Date(a.lastViewed || a.lastViewedAt));
 
     tbody.innerHTML = sorted.map((r, idx) => `
       <tr>
         <td>${idx + 1}</td>
         <td>
-          <strong>${r.memberName}</strong>
+          <strong>${r.name || r.memberName}</strong>
           <span class="voice-badge voice-${(r.voice || '').toLowerCase()}" style="margin-left:6px;">${r.voice || 'Ca Viên'}</span>
         </td>
-        <td><span style="font-weight:700; color:var(--primary); font-size:1rem;">${r.viewsCount || 1}</span> lần</td>
-        <td style="color:var(--text-muted); font-size:0.8rem;">${this.formatTimeAgo(r.lastViewedAt)}</td>
+        <td><span style="font-weight:700; color:var(--primary); font-size:1rem;">${r.count || r.viewsCount || 1}</span> lần</td>
+        <td style="color:var(--text-muted); font-size:0.8rem;">${this.formatTimeAgo(r.lastViewed || r.lastViewedAt)}</td>
       </tr>
     `).join('');
   }
