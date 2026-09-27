@@ -1068,7 +1068,73 @@ class BaiDocViewer {
    * RENDER LỜI NGUYỆN TÍN HỮU:
    * Có nút [🌐 Lấy Từ Web] nổi bật
    */
+  /**
+   * RENDER LỜI NGUYỆN TÍN HỮU:
+   * Phân quyền chặt chẽ giữa Admin và Ca viên:
+   * - Admin: Luôn thấy mẫu/bản soạn, có công cụ biên tập, lấy từ web, và nút [🚀 Áp Dụng Mẫu Này Cho Cả Đoàn].
+   * - Ca viên: Khi Admin CHƯA bấm áp dụng -> Hiển thị thông báo phụng vụ lịch sự "Lời nguyện đang được chuẩn bị".
+   *            Khi Admin ĐÃ bấm áp dụng -> Xem được bản chính thức và có nút [In A4] & [Copy].
+   */
   renderLoiNguyen(container, ms) {
+    const isAdmin = !!(
+      window.dohwaStore?.isAdmin?.() ||
+      localStorage.getItem('dohwa_is_admin') === 'true'
+    );
+    const isPublished = ms.loiNguyenPublished === true && !!(ms.loiNguyenText && ms.loiNguyenText.trim());
+
+    // 1. DÀNH CHO CA VIÊN KHI CHƯA ĐƯỢC ADMIN ÁP DỤNG / BAN HÀNH
+    if (!isAdmin && !isPublished) {
+      container.innerHTML = `
+        <div style="text-align:center; padding:38px 20px; background:linear-gradient(180deg, #fffdf8, #fef9ee); border:1.5px dashed #f59e0b; border-radius:16px; margin:14px 0; box-shadow:0 4px 16px rgba(245,158,11,0.06);">
+          <div style="font-size:3.5rem; margin-bottom:12px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));">🙏</div>
+          <div style="font-size:0.78rem; font-weight:800; color:#d97706; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Phụng Vụ Thánh Lễ</div>
+          <h3 style="font-family:'Times New Roman',serif; font-size:1.45rem; font-weight:800; color:#92400e; margin-bottom:12px; line-height:1.4;">
+            Lời Nguyện Tín Hữu Đang Được Ca Trưởng Chuẩn Bị
+          </h3>
+          <p style="font-family:'Times New Roman',serif; font-size:1.06rem; line-height:2; color:#475569; max-width:580px; margin:0 auto 16px; text-align:justify;">
+            Hiện tại, phần Lời Nguyện Tín Hữu (Lời Nguyện Chung) cho <strong>${escapeHtml(ms.title || ms.weekName || 'Thánh Lễ')}</strong> đang được Ca Trưởng / Ban Phụng Vụ xem xét, soạn thảo và chuẩn hóa theo đúng Phụng vụ của Hội Đồng Giám Mục Việt Nam.
+          </p>
+          <div style="display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid #fde68a; border-radius:10px; padding:12px 20px; color:#b45309; font-size:0.95rem; font-family:'Times New Roman',serif; margin-bottom:20px; box-shadow:0 2px 6px rgba(217,119,6,0.08); text-align:left;">
+            <span style="font-size:1.2rem;">⏳</span>
+            <span><em>Ca Trưởng sẽ sớm cập nhật và bấm áp dụng mẫu lời nguyện cho cả đoàn trước giờ Lễ. Xin quý ca viên vui lòng quay lại sau!</em></span>
+          </div>
+          <div style="border-top:1px solid rgba(245,158,11,0.2); padding-top:16px; margin-top:8px; font-size:0.85rem; color:#64748b;">
+            Bạn là Ca Trưởng hoặc người phụ trách phụng vụ? 
+            <a href="javascript:void(0)" onclick="window.dohwaApp && window.dohwaApp.openAdminLoginModal()" style="color:#6d28d9; font-weight:800; text-decoration:underline; margin-left:4px;">
+              Đăng nhập Quyền Admin để Soạn & Ban Hành ↗
+            </a>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    // 2. DÀNH CHO CA VIÊN KHI ĐÃ CÔNG BỐ (PUBLISHED)
+    if (!isAdmin && isPublished) {
+      container.innerHTML = `
+        <div id="sb-lnth-view">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:0.85rem; color:var(--text-muted); font-weight:700;">LỜI NGUYỆN TÍN HỮU</span>
+              <span style="font-size:0.75rem; background:#dcfce7; color:#15803d; font-weight:800; padding:2px 10px; border-radius:12px; border:1px solid #86efac; display:inline-flex; align-items:center; gap:4px;">
+                ✓ Bản chính thức của Ca đoàn
+              </span>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button type="button" class="action-btn btn-share" onclick="window.baiDocViewer.printLnth()" style="font-size:0.8rem; padding:6px 12px; cursor:pointer;">🖨️ In A4</button>
+              <button type="button" class="action-btn btn-copy" onclick="window.baiDocViewer.copyLnth()" style="font-size:0.8rem; padding:6px 12px; cursor:pointer;">📋 Copy</button>
+            </div>
+          </div>
+
+          <div style="padding:18px 22px; background:#fffdf7; border:1.5px solid #fed7aa; border-radius:12px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+            ${formatLnthText(ms.loiNguyenText)}
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    // 3. DÀNH CHO ADMIN: LUÔN CÓ SẴN BẢN ĐỂ XEM XÉT, SOẠN VÀ BAN HÀNH
     const currentFeastId = this.getCurrentFeastId();
     let currentContent = ms.loiNguyenText;
 
@@ -1087,16 +1153,57 @@ class BaiDocViewer {
     }
 
     container.innerHTML = `
+      <!-- THANH TRẠNG THÁI PHÊ DUYỆT CỦA ADMIN -->
+      ${ms.loiNguyenPublished ? `
+        <div style="background:#f0fdf4; border:1.5px solid #86efac; border-radius:10px; padding:12px 16px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:1.3rem;">🎉</span>
+            <div>
+              <div style="color:#15803d; font-size:0.95rem; font-weight:800;">ĐÃ ÁP DỤNG & CÔNG BỐ CHO CẢ ĐOÀN</div>
+              <div style="font-size:0.78rem; color:#166534;">Tất cả ca viên hiện đã có thể xem, sao chép và in bản Lời Nguyện này.</div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.unpublishLnth()" style="font-size:0.8rem; padding:5px 12px; border-color:#dc2626; color:#dc2626; font-weight:700; cursor:pointer;">
+            🔒 Thu Hồi Về Bản Nháp
+          </button>
+        </div>
+      ` : `
+        <div style="background:#fffbeb; border:1.5px solid #fcd34d; border-radius:10px; padding:12px 16px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:1.4rem;">⚠️</span>
+            <div>
+              <div style="color:#b45309; font-size:0.95rem; font-weight:800;">ĐANG LÀ BẢN NHÁP (CA VIÊN CHƯA THỂ XEM)</div>
+              <div style="font-size:0.8rem; color:#92400e;">Ca viên truy cập sẽ chỉ thấy thông báo chờ bạn chuẩn bị. Bấm nút bên cạnh để chính thức ban hành!</div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.publishCurrentLnth()" style="background:linear-gradient(135deg, #16a34a, #15803d); font-weight:800; font-size:0.88rem; padding:8px 18px; border-radius:8px; box-shadow:0 3px 10px rgba(22,163,74,0.3); border:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+            🚀 ÁP DỤNG MẪU NÀY CHO CẢ ĐOÀN
+          </button>
+        </div>
+      `}
+
       <div id="sb-lnth-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
-          <span style="font-size:0.85rem; color:var(--text-muted); font-weight:700;">LỜI NGUYỆN TÍN HỮU (LỜI NGUYỆN CHUNG)</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="font-size:0.85rem; color:var(--text-muted); font-weight:700;">LỜI NGUYỆN TÍN HỮU (CHẾ ĐỘ ADMIN)</span>
+            ${!ms.loiNguyenPublished ? `
+              <span style="font-size:0.75rem; background:#fef3c7; color:#b45309; font-weight:800; padding:2px 8px; border-radius:10px; border:1px solid #fde68a;">
+                Bản nháp
+              </span>
+            ` : ''}
+          </div>
           <div style="display:flex; gap:6px; flex-wrap:wrap;">
             <button type="button" class="action-btn btn-pdf" onclick="window.baiDocViewer.openFetchModal()" style="font-size:0.8rem; padding:6px 12px; background:linear-gradient(135deg, #7c3aed, #4f46e5); color:#fff; border:none; font-weight:800; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(124,58,237,0.25); cursor:pointer;">
               🌐 Lấy Từ Web
             </button>
-            <button type="button" class="action-btn btn-view" onclick="window.baiDocViewer.startEditLnth()" style="font-size:0.8rem; padding:6px 12px;">✏️ Sửa</button>
-            <button type="button" class="action-btn btn-share" onclick="window.baiDocViewer.printLnth()" style="font-size:0.8rem; padding:6px 12px;">🖨️ In A4</button>
-            <button type="button" class="action-btn btn-copy" onclick="window.baiDocViewer.copyLnth()" style="font-size:0.8rem; padding:6px 12px;">📋 Copy</button>
+            <button type="button" class="action-btn btn-view" onclick="window.baiDocViewer.startEditLnth()" style="font-size:0.8rem; padding:6px 12px; cursor:pointer;">✏️ Sửa</button>
+            ${!ms.loiNguyenPublished ? `
+              <button type="button" class="action-btn btn-primary" onclick="window.baiDocViewer.publishCurrentLnth()" style="font-size:0.8rem; padding:6px 14px; background:#16a34a; color:#fff; border:none; font-weight:800; display:inline-flex; align-items:center; gap:4px; cursor:pointer;">
+                🚀 Áp Dụng Cho Cả Đoàn
+              </button>
+            ` : ''}
+            <button type="button" class="action-btn btn-share" onclick="window.baiDocViewer.printLnth()" style="font-size:0.8rem; padding:6px 12px; cursor:pointer;">🖨️ In A4</button>
+            <button type="button" class="action-btn btn-copy" onclick="window.baiDocViewer.copyLnth()" style="font-size:0.8rem; padding:6px 12px; cursor:pointer;">📋 Copy</button>
           </div>
         </div>
 
@@ -1106,11 +1213,16 @@ class BaiDocViewer {
       </div>
 
       <div id="sb-lnth-edit-form" style="display:none; margin-top:10px;">
-        <div style="font-weight:700; margin-bottom:8px; color:var(--primary);">Chỉnh sửa Lời Nguyện Tín Hữu:</div>
+        <div style="font-weight:700; margin-bottom:8px; color:var(--primary);">Chỉnh sửa Lời Nguyện Tín Hữu (Admin):</div>
         <textarea id="sb-lnth-input" rows="12" class="form-control" style="font-family:'Times New Roman',serif; font-size:1.05rem; line-height:2;">${escapeHtml(currentContent)}</textarea>
-        <div style="display:flex; gap:8px; margin-top:10px; justify-content:flex-end;">
-          <button type="button" class="btn" onclick="window.baiDocViewer.cancelEditLnth()" style="background:var(--border);">Hủy</button>
-          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.saveLnth()">💾 Lưu Lời Nguyện</button>
+        <div style="display:flex; gap:8px; margin-top:10px; justify-content:flex-end; flex-wrap:wrap;">
+          <button type="button" class="btn" onclick="window.baiDocViewer.cancelEditLnth()" style="background:var(--border); cursor:pointer;">Hủy</button>
+          <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.saveLnth(false)" style="border-color:#d97706; color:#d97706; font-weight:700; cursor:pointer;">
+            💾 Lưu Bản Nháp
+          </button>
+          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.saveLnth(true)" style="background:linear-gradient(135deg, #16a34a, #15803d); font-weight:800; border:none; box-shadow:0 2px 8px rgba(22,163,74,0.3); cursor:pointer;">
+            🚀 Lưu & Áp Dụng Cho Cả Đoàn
+          </button>
         </div>
       </div>
     `;
@@ -1131,13 +1243,74 @@ class BaiDocViewer {
     if (f) f.style.display = 'none';
   }
 
-  async saveLnth() {
+  // Ban hành Lời Nguyện Tín Hữu cho cả đoàn
+  async publishCurrentLnth(customText) {
+    if (!this.currentMassSet) return;
+
+    let textToPublish = customText;
+    if (!textToPublish) {
+      if (this.currentMassSet.loiNguyenText && this.currentMassSet.loiNguyenText.trim()) {
+        textToPublish = this.currentMassSet.loiNguyenText;
+      } else {
+        const currentFeastId = this.getCurrentFeastId();
+        const catalogItem = LITURGICAL_PRAYERS_CATALOG.find(c => c.id === currentFeastId);
+        textToPublish = catalogItem ? catalogItem.text : (AI_LITURGICAL_SYNTHESIS[currentFeastId]?.standard || OFFLINE_LITURGY_STORE[this.currentMassSet.date]?.lnth || generateAiSynthesizedPrayer(this.currentMassSet.title || 'Phụng Vụ', 'standard'));
+      }
+    }
+
+    this.currentMassSet.loiNguyenText = textToPublish;
+    this.currentMassSet.loiNguyenPublished = true;
+    this.currentMassSet.loiNguyenPublishedAt = new Date().toISOString();
+
+    if (window.dohwaStore) {
+      await window.dohwaStore.saveMassSet(this.currentMassSet);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'dohwa-toast';
+    toast.textContent = '🎉 Đã áp dụng & ban hành Lời Nguyện Tín Hữu cho cả đoàn!';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2800);
+
+    const contentEl = document.getElementById('baiDocContent');
+    if (contentEl) {
+      this.renderLoiNguyen(contentEl, this.currentMassSet);
+    }
+  }
+
+  // Thu hồi về bản nháp
+  async unpublishLnth() {
+    if (!this.currentMassSet) return;
+    if (!confirm('Bạn có chắc muốn thu hồi bản Lời Nguyện Tín Hữu này về bản nháp? Ca viên sẽ tạm thời không xem được cho đến khi bạn bấm Áp dụng lại.')) return;
+
+    this.currentMassSet.loiNguyenPublished = false;
+    if (window.dohwaStore) {
+      await window.dohwaStore.saveMassSet(this.currentMassSet);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'dohwa-toast';
+    toast.textContent = '🔒 Đã chuyển về Bản nháp (Ca viên chưa thể xem).';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2500);
+
+    const contentEl = document.getElementById('baiDocContent');
+    if (contentEl) {
+      this.renderLoiNguyen(contentEl, this.currentMassSet);
+    }
+  }
+
+  async saveLnth(publishNow = false) {
     const inp = document.getElementById('sb-lnth-input');
     if (!inp) return;
     const text = inp.value.trim();
 
     if (this.currentMassSet) {
       this.currentMassSet.loiNguyenText = text;
+      this.currentMassSet.loiNguyenPublished = !!publishNow;
+      if (publishNow) {
+        this.currentMassSet.loiNguyenPublishedAt = new Date().toISOString();
+      }
       if (window.dohwaStore) {
         await window.dohwaStore.saveMassSet(this.currentMassSet);
       }
@@ -1145,7 +1318,9 @@ class BaiDocViewer {
 
     const toast = document.createElement('div');
     toast.className = 'dohwa-toast';
-    toast.textContent = '✅ Đã lưu Lời Nguyện Tín Hữu!';
+    toast.textContent = publishNow
+      ? '🎉 Đã lưu và áp dụng Lời Nguyện cho cả đoàn!'
+      : '💾 Đã lưu bản nháp Lời Nguyện Tín Hữu!';
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 2500);
 
@@ -1281,9 +1456,14 @@ class BaiDocViewer {
             <div style="font-size:1.02rem; font-weight:800; color:var(--text-main); margin:2px 0;">${currentItem.title}</div>
             <div style="font-size:0.78rem; color:var(--text-muted);">${currentItem.subtitle} • Chuẩn Phụng Vụ Công Giáo</div>
           </div>
-          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applySelectedCatalog()" style="background:#0284c7; font-weight:800; font-size:0.85rem; padding:8px 16px; border-radius:8px; box-shadow:0 2px 8px rgba(2,132,199,0.3); cursor:pointer;">
-            ✅ Áp Dụng Ngay Cho Bộ Lễ
-          </button>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.applySelectedCatalog(false)" style="font-size:0.8rem; font-weight:700; padding:6px 12px; border-color:#0284c7; color:#0284c7; cursor:pointer;">
+              💾 Lưu Bản Nháp
+            </button>
+            <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applySelectedCatalog(true)" style="background:linear-gradient(135deg, #16a34a, #15803d); font-weight:800; font-size:0.85rem; padding:8px 16px; border-radius:8px; box-shadow:0 2px 8px rgba(22,163,74,0.3); border:none; cursor:pointer;">
+              🚀 Áp Dụng Mẫu Này Cho Cả Đoàn
+            </button>
+          </div>
         </div>
 
         <div style="font-size:0.82rem; font-weight:700; color:var(--text-main); margin-bottom:6px;">
@@ -1302,10 +1482,13 @@ class BaiDocViewer {
           ${formatLnthText(currentItem.text)}
         </div>
 
-        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
-          <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border);">Đóng</button>
-          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applySelectedCatalog()" style="background:#0284c7; font-weight:800; padding:8px 18px;">
-            ✅ Áp Dụng Lời Nguyện Này Cho Bộ Lễ
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px; flex-wrap:wrap;">
+          <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border); cursor:pointer;">Đóng</button>
+          <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.applySelectedCatalog(false)" style="border-color:#d97706; color:#d97706; font-weight:700; cursor:pointer;">
+            💾 Lưu Làm Bản Nháp
+          </button>
+          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applySelectedCatalog(true)" style="background:linear-gradient(135deg, #16a34a, #15803d); font-weight:800; padding:8px 18px; border:none; cursor:pointer;">
+            🚀 Áp Dụng Mẫu Này Cho Cả Đoàn
           </button>
         </div>
       </div>
@@ -1320,12 +1503,12 @@ class BaiDocViewer {
     }
   }
 
-  applySelectedCatalog() {
+  applySelectedCatalog(publishNow = true) {
     const sel = document.getElementById('fetchCatalogSelect');
     const catalogId = sel ? sel.value : this.getCurrentFeastId();
     const item = LITURGICAL_PRAYERS_CATALOG.find(c => c.id === catalogId) || LITURGICAL_PRAYERS_CATALOG[0];
     if (item) {
-      this.applyFetchedPrayer(item.text);
+      this.applyFetchedPrayer(item.text, publishNow);
     }
   }
 
@@ -1391,10 +1574,13 @@ class BaiDocViewer {
           <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.reSimulateAiSynthesis()" style="font-weight:700; font-size:0.82rem; padding:7px 14px; border-color:#7c3aed; color:#7c3aed; cursor:pointer;">
             🔄 Quét & Tái Tổng Hợp
           </button>
-          <div style="display:flex; gap:8px;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border); cursor:pointer;">Đóng</button>
-            <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applyAiSynthesizedPrayer()" style="background:linear-gradient(135deg, #7c3aed, #4f46e5); font-weight:800; padding:8px 18px; box-shadow:0 4px 12px rgba(124,58,237,0.3); border:none; cursor:pointer;">
-              ✅ Áp Dụng Bản Tổng Hợp Này
+            <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.applyAiSynthesizedPrayer(false)" style="border-color:#d97706; color:#d97706; font-weight:700; cursor:pointer;">
+              💾 Lưu Bản Nháp
+            </button>
+            <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applyAiSynthesizedPrayer(true)" style="background:linear-gradient(135deg, #16a34a, #15803d); font-weight:800; padding:8px 18px; box-shadow:0 4px 12px rgba(22,163,74,0.3); border:none; cursor:pointer;">
+              🚀 Áp Dụng Mẫu Này Cho Cả Đoàn
             </button>
           </div>
         </div>
@@ -1436,16 +1622,16 @@ class BaiDocViewer {
     }, 700);
   }
 
-  applyAiSynthesizedPrayer() {
+  applyAiSynthesizedPrayer(publishNow = true) {
     const textarea = document.getElementById('aiSynthesisTextarea');
     if (!textarea || !textarea.value.trim()) {
       alert('Chưa có nội dung lời nguyện để áp dụng!');
       return;
     }
-    this.applyFetchedPrayer(textarea.value.trim());
+    this.applyFetchedPrayer(textarea.value.trim(), publishNow);
   }
 
-  // PHƯƠNG THỨC 3: DÁN & TỰ ĐỘNG CHUẨN HÓA (GIỮ NGUYÊN)
+  // PHƯƠNG THỨC 3: DÁN & TỰ ĐỘNG CHUẨN HÓA
   renderFetchPasteTab(container) {
     container.innerHTML = `
       <div>
@@ -1463,10 +1649,13 @@ class BaiDocViewer {
           </div>
         </div>
 
-        <div style="display:flex; justify-content:flex-end; gap:8px;">
+        <div style="display:flex; justify-content:flex-end; gap:8px; flex-wrap:wrap;">
           <button type="button" class="btn" onclick="window.baiDocViewer.closeFetchModal()" style="background:var(--border); cursor:pointer;">Đóng</button>
-          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applyPastedContent()" style="background:#0284c7; font-weight:800; cursor:pointer;">
-            ✅ Áp Dụng Lời Nguyện Này Cho Bộ Lễ
+          <button type="button" class="btn btn-outline" onclick="window.baiDocViewer.applyPastedContent(false)" style="border-color:#d97706; color:#d97706; font-weight:700; cursor:pointer;">
+            💾 Lưu Bản Nháp
+          </button>
+          <button type="button" class="btn btn-primary" onclick="window.baiDocViewer.applyPastedContent(true)" style="background:linear-gradient(135deg, #16a34a, #15803d); font-weight:800; padding:8px 18px; border:none; cursor:pointer;">
+            🚀 Áp Dụng Mẫu Này Cho Cả Đoàn
           </button>
         </div>
       </div>
@@ -1483,22 +1672,26 @@ class BaiDocViewer {
     inp.value = formatted;
   }
 
-  applyPastedContent() {
+  applyPastedContent(publishNow = true) {
     const inp = document.getElementById('fetchPasteInput');
     if (!inp || !inp.value.trim()) {
       alert('Vui lòng nhập hoặc dán nội dung lời nguyện!');
       return;
     }
     const formatted = parseRawLnthText(inp.value.trim());
-    this.applyFetchedPrayer(formatted);
+    this.applyFetchedPrayer(formatted, publishNow);
   }
 
   // Áp dụng lời nguyện vào Bộ Lễ hiện tại và lưu vào Firebase / IndexedDB
-  async applyFetchedPrayer(prayerText) {
+  async applyFetchedPrayer(prayerText, publishNow = true) {
     if (!prayerText) return;
 
     if (this.currentMassSet) {
       this.currentMassSet.loiNguyenText = prayerText;
+      this.currentMassSet.loiNguyenPublished = !!publishNow;
+      if (publishNow) {
+        this.currentMassSet.loiNguyenPublishedAt = new Date().toISOString();
+      }
       if (window.dohwaStore) {
         await window.dohwaStore.saveMassSet(this.currentMassSet);
       }
@@ -1508,9 +1701,11 @@ class BaiDocViewer {
 
     const toast = document.createElement('div');
     toast.className = 'dohwa-toast';
-    toast.textContent = '✅ Đã cập nhật Lời Nguyện Tín Hữu thành công!';
+    toast.textContent = publishNow
+      ? '🎉 Đã áp dụng & ban hành Lời Nguyện Tín Hữu cho cả đoàn!'
+      : '💾 Đã lưu Lời Nguyện thành bản nháp (ca viên chưa thấy).';
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2500);
+    setTimeout(() => toast.remove(), 2800);
 
     const contentEl = document.getElementById('baiDocContent');
     if (contentEl) {

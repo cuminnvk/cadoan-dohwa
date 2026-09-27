@@ -16,6 +16,18 @@ const DEFAULT_MASS_SET = {
   active: true,
   createdAt: '2026-09-26T00:00:00.000Z',
   updatedAt: '2026-09-26T12:00:00.000Z',
+  loiNguyenPublished: true,
+  loiNguyenText: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ đầy lòng quảng đại và bao dung, đường lối Người vượt xa mọi tính toán nhân loại. Với niềm tin tưởng và phó thác, chúng ta cùng tha thiết dâng lời nguyện xin:
+1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Đức Giáo Hoàng, các Đức Giám Mục và các Linh Mục, để các ngài luôn là những mục tử nhân lành dẫn dắt đoàn chiên Chúa theo tinh thần Tin Mừng.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+2. Cầu cho thế giới: Xin Chúa ban ơn bình an cho các dân tộc, xoa dịu những nỗi đau của các nạn nhân chiến tranh, đói nghèo, bệnh tật và thiên tai.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+3. Cầu cho những người đang gặp thử thách gian truân: Xin Chúa nâng đỡ những ai đang ngã lòng, thất vọng, để họ luôn tìm thấy niềm an ủi và cậy trông nơi lòng Chúa xót thương.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ: Xin Chúa ban cho mỗi ca viên lòng nhiệt thành mến Chúa, biết dùng tiếng hát để phụng sự Thánh Lễ và loan báo tình yêu Chúa trong tinh thần hiệp nhất yêu thương.
+Đáp: Chúng con cầu xin Chúa. - Xin Chúa nhậm lời chúng con.
+Chủ tế: Lạy Chúa, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, nhờ Đức Kitô, Chúa chúng con. - Amen.`,
   liturgicalRoles: {
     reader1: '',
     psalmist: '',

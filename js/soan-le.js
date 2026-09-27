@@ -590,6 +590,8 @@ class DohwaSoanLe {
       active: isActive,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
+      loiNguyenPublished: false,
+      loiNguyenText: '',
       songs: validSongs.length ? validSongs : this.uploadedSongs
     };
 
