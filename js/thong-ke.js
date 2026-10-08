@@ -10,6 +10,12 @@ class DohwaThongKe {
 
   async loadStats(massSetId) {
     this.currentMassSetId = massSetId;
+    const currentMs = window.dohwaApp?.currentMassSet;
+    const currentTitleEl = document.getElementById('statCurrentMassTitle');
+    if (currentTitleEl) {
+      currentTitleEl.textContent = currentMs ? `${currentMs.title} (${window.dohwaApp?.formatDisplayDate(currentMs.date) || ''})` : 'Bộ Lễ Đang Chọn';
+    }
+
     const records = await window.dohwaStore.getAttendanceForMass(massSetId);
     const roster = await window.dohwaStore.getRoster();
 
@@ -27,29 +33,97 @@ class DohwaThongKe {
     if (uniqueMembersEl) uniqueMembersEl.textContent = `${uniqueCount} / ${rosterCount}`;
     if (percentEl) percentEl.textContent = `${percent}%`;
 
-    // Render bảng chi tiết
+    // Render bảng chi tiết bộ lễ hiện tại
     const tbody = document.getElementById('statAttendanceBody');
-    if (!tbody) return;
-
-    if (records.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:16px; color:var(--text-muted);">Chưa có ca viên nào vào xem bài hát tuần này.</td></tr>`;
-      return;
+    if (tbody) {
+      if (records.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:16px; color:var(--text-muted);">Chưa có ca viên nào vào xem bài hát tuần này.</td></tr>`;
+      } else {
+        const sorted = [...records].sort((a, b) => new Date(b.lastViewed || b.lastViewedAt) - new Date(a.lastViewed || a.lastViewedAt));
+        tbody.innerHTML = sorted.map((r, idx) => `
+          <tr>
+            <td>${idx + 1}</td>
+            <td>
+              <strong>${r.name || r.memberName}</strong>
+              <span class="voice-badge voice-${(r.voice || '').toLowerCase()}" style="margin-left:6px;">${r.voice || 'Ca Viên'}</span>
+            </td>
+            <td><span style="font-weight:700; color:var(--primary); font-size:1rem;">${r.count || r.viewsCount || 1}</span> lần</td>
+            <td style="color:var(--text-muted); font-size:0.8rem;">${this.formatTimeAgo(r.lastViewed || r.lastViewedAt)}</td>
+          </tr>
+        `).join('');
+      }
     }
 
-    // Sắp xếp người xem gần nhất lên đầu
-    const sorted = [...records].sort((a, b) => new Date(b.lastViewed || b.lastViewedAt) - new Date(a.lastViewed || a.lastViewedAt));
+    // Tải toàn bộ thống kê tất cả các bộ lễ & Leaderboard ca viên
+    try {
+      if (window.dohwaStore?.getAllMassAttendanceSummary) {
+        const summary = await window.dohwaStore.getAllMassAttendanceSummary();
+        if (summary) {
+          // 1. Leaderboard
+          const lbBody = document.getElementById('statLeaderboardBody');
+          if (lbBody) {
+            if (!summary.leaderboard || !summary.leaderboard.length) {
+              lbBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:16px; color:var(--text-muted);">Chưa có dữ liệu chuyên cần.</td></tr>`;
+            } else {
+              lbBody.innerHTML = summary.leaderboard.map((m, idx) => {
+                let rankText = `#${idx + 1}`;
+                if (idx === 0) rankText = '🥇 1';
+                else if (idx === 1) rankText = '🥈 2';
+                else if (idx === 2) rankText = '🥉 3';
 
-    tbody.innerHTML = sorted.map((r, idx) => `
-      <tr>
-        <td>${idx + 1}</td>
-        <td>
-          <strong>${r.name || r.memberName}</strong>
-          <span class="voice-badge voice-${(r.voice || '').toLowerCase()}" style="margin-left:6px;">${r.voice || 'Ca Viên'}</span>
-        </td>
-        <td><span style="font-weight:700; color:var(--primary); font-size:1rem;">${r.count || r.viewsCount || 1}</span> lần</td>
-        <td style="color:var(--text-muted); font-size:0.8rem;">${this.formatTimeAgo(r.lastViewed || r.lastViewedAt)}</td>
-      </tr>
-    `).join('');
+                return `
+                  <tr>
+                    <td style="text-align:center; font-weight:800; color:${idx < 3 ? '#d97706' : 'var(--text-muted)'};">${rankText}</td>
+                    <td>
+                      <strong>${m.name}</strong>
+                      <span style="font-size:0.72rem; color:var(--text-muted); margin-left:4px;">(${m.voice})</span>
+                    </td>
+                    <td style="text-align:center; font-weight:800; color:#6b3fa0;">${m.totalViews} lần</td>
+                    <td style="text-align:center; font-weight:600; color:#475569;">${m.massSetsCount} bộ lễ</td>
+                    <td style="text-align:center;">
+                      <span style="font-size:0.72rem; font-weight:700; color:${m.badgeColor || '#64748b'}; background:rgba(0,0,0,0.04); padding:2px 6px; border-radius:6px; white-space:nowrap;">
+                        ${m.rankBadge || '---'}
+                      </span>
+                    </td>
+                  </tr>
+                `;
+              }).join('');
+            }
+          }
+
+          // 2. Thống kê từng bộ lễ
+          const massBody = document.getElementById('statMassSetsBody');
+          if (massBody) {
+            if (!summary.massStats || !summary.massStats.length) {
+              massBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:16px; color:var(--text-muted);">Chưa có bộ lễ nào.</td></tr>`;
+            } else {
+              massBody.innerHTML = summary.massStats.map((ms, idx) => `
+                <tr>
+                  <td style="text-align:center; color:var(--text-muted);">${idx + 1}</td>
+                  <td>
+                    <div style="font-weight:700; color:var(--text-main);">${ms.title} ${ms.active ? '<span style="color:#16a34a; font-size:0.72rem;">(Hiện tại)</span>' : ''}</div>
+                    <div style="font-size:0.75rem; color:var(--text-muted);">${window.dohwaApp?.formatDisplayDate(ms.date) || ms.date}</div>
+                  </td>
+                  <td style="text-align:center;">
+                    <span style="font-weight:800; color:#0284c7; background:rgba(2,132,199,0.1); padding:2px 8px; border-radius:6px;">
+                      ${ms.totalViews}
+                    </span>
+                  </td>
+                  <td style="text-align:center; font-weight:600; color:#475569;">${ms.uniqueCount} người</td>
+                  <td style="text-align:center;">
+                    <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp?.openAiDaXemModal('${ms.id}')" style="padding:3px 8px; font-size:0.72rem; font-weight:700; color:#6b3fa0; border-color:#6b3fa0; border-radius:6px; cursor:pointer;">
+                      🔍 Chi tiết
+                    </button>
+                  </td>
+                </tr>
+              `).join('');
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Lỗi tải toàn bộ thống kê:', e);
+    }
   }
 
   formatTimeAgo(isoString) {

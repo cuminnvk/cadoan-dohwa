@@ -142,6 +142,21 @@ class DohwaSoanLe {
       seasonInput.value = info.season;
     }
 
+    // Nếu chọn ngày thuộc tương lai (các tuần sau hoặc tháng sau), không tự động đặt làm lễ hiện tại
+    const activeCb = document.getElementById('soanSetActive');
+    if (activeCb) {
+      const selectedDate = new Date(dateStr);
+      const today = new Date();
+      const currentSunday = new Date(today);
+      currentSunday.setDate(today.getDate() + (7 - today.getDay()) % 7);
+      currentSunday.setHours(23, 59, 59, 999);
+      if (selectedDate > currentSunday) {
+        activeCb.checked = false;
+      } else {
+        activeCb.checked = true;
+      }
+    }
+
     this.renderDutyInputs();
   }
 

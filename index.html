@@ -330,9 +330,18 @@
     <!-- TAB 4: THỐNG KÊ CHUYÊN CẦN -->
     <!-- ========================================== -->
     <section id="tab-thongke" class="tab-pane">
-      <div class="card">
-        <h2 class="card-title">📊 Ai Đã Xem Bộ Lễ</h2>
-        <div class="stat-grid">
+      <div class="card" style="margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div>
+            <h2 class="card-title" style="margin-bottom:2px;">📊 Ai Đã Xem Bộ Lễ Này</h2>
+            <div id="statCurrentMassTitle" style="font-size:0.85rem; color:var(--primary); font-weight:700;">Bộ Lễ Hiện Tại</div>
+          </div>
+          <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp?.openCaiDatModal()" style="font-size:0.75rem; padding:4px 10px; border-radius:6px; cursor:pointer;">
+            ⚙️ Quản Lý Cài Đặt
+          </button>
+        </div>
+
+        <div class="stat-grid" style="margin-top:14px;">
           <div class="stat-box">
             <div class="stat-number" id="statTotalViews">0</div>
             <div class="stat-label">Tổng Lượt Xem</div>
@@ -347,7 +356,7 @@
           </div>
         </div>
 
-        <h3 style="font-size:0.95rem; font-weight:700; margin: 16px 0 10px 0;">Danh Sách Chi Tiết</h3>
+        <h3 style="font-size:0.95rem; font-weight:700; margin: 16px 0 10px 0;">Danh Sách Chi Tiết Ca Viên Đã Xem</h3>
         <div style="overflow-x:auto;">
           <table class="roster-table">
             <thead>
@@ -360,6 +369,54 @@
             </thead>
             <tbody id="statAttendanceBody">
               <!-- Render attendance -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- BẢNG VINH DANH CA VIÊN TOÀN ĐOÀN -->
+      <div class="card" style="margin-bottom:16px;">
+        <h2 class="card-title">🏆 Bảng Vinh Danh Ca Viên Chăm Chỉ Nhất</h2>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">
+          Tổng kết lượt vào học bài & xem nốt nhạc trên tất cả các bộ lễ trong năm
+        </p>
+        <div style="overflow-x:auto;">
+          <table class="roster-table">
+            <thead>
+              <tr>
+                <th style="width:50px; text-align:center;">Hạng</th>
+                <th>Ca Viên</th>
+                <th style="text-align:center;">Tổng Lượt Xem</th>
+                <th style="text-align:center;">Số Bộ Lễ</th>
+                <th style="text-align:center;">Đánh Giá</th>
+              </tr>
+            </thead>
+            <tbody id="statLeaderboardBody">
+              <!-- Render leaderboard -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- THỐNG KÊ TỔNG HỢP TẤT CẢ CÁC BỘ LỄ -->
+      <div class="card">
+        <h2 class="card-title">📑 Thống Kê Lượt Xem Từng Bộ Lễ</h2>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">
+          Theo dõi số lượt xem độc lập của từng bộ lễ đã tạo
+        </p>
+        <div style="overflow-x:auto;">
+          <table class="roster-table">
+            <thead>
+              <tr>
+                <th style="width:40px; text-align:center;">#</th>
+                <th>Tên Bộ Lễ</th>
+                <th style="text-align:center;">Lượt Xem</th>
+                <th style="text-align:center;">Ca Viên</th>
+                <th style="text-align:center; width:100px;">Chi Tiết</th>
+              </tr>
+            </thead>
+            <tbody id="statMassSetsBody">
+              <!-- Render all mass sets stats -->
             </tbody>
           </table>
         </div>
@@ -641,14 +698,14 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/firebase-config.js?v=2026_23"></script>
-  <script src="js/store.js?v=2026_23"></script>
-  <script src="js/liturgical-helper.js?v=2026_23"></script>
-  <script src="js/player.js?v=2026_23"></script>
-  <script src="js/pdf-viewer.js?v=2026_23"></script>
-  <script src="js/soan-le.js?v=2026_23"></script>
-  <script src="js/thong-ke.js?v=2026_23"></script>
-  <script src="js/app.js?v=2026_23"></script>
+  <script src="js/firebase-config.js?v=2026_24"></script>
+  <script src="js/store.js?v=2026_24"></script>
+  <script src="js/liturgical-helper.js?v=2026_24"></script>
+  <script src="js/player.js?v=2026_24"></script>
+  <script src="js/pdf-viewer.js?v=2026_24"></script>
+  <script src="js/soan-le.js?v=2026_24"></script>
+  <script src="js/thong-ke.js?v=2026_24"></script>
+  <script src="js/app.js?v=2026_24"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {

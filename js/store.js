@@ -405,6 +405,51 @@ class DohwaStore {
     return items;
   }
 
+  async getMassSet(id) {
+    if (!id) return null;
+    await this.ensureReady();
+    let ms = null;
+    if (this.db) {
+      try {
+        ms = await this.get('mass_sets', id);
+      } catch (e) {}
+    }
+    if (!ms) {
+      const all = this.getLocal('mass_sets', []);
+      ms = all.find(m => m && m.id === id);
+    }
+    if (ms) return ms;
+
+    // Nếu máy chưa có (ví dụ ca viên mở link chia sẻ bộ lễ mới), tải trực tiếp từ Firebase Cloud
+    const url = this.getFirebaseUrl();
+    if (url) {
+      try {
+        const res = await fetch(`${url}/mass_sets.json`, { cache: 'no-store' });
+        if (res.ok) {
+          const cloudMass = await res.json();
+          if (cloudMass) {
+            const arr = Array.isArray(cloudMass) ? cloudMass : Object.values(cloudMass);
+            const found = arr.find(m => m && m.id === id);
+            if (found) {
+              let localAll = this.getLocal('mass_sets', []);
+              if (!localAll.some(m => m && m.id === found.id)) {
+                localAll.unshift(found);
+                this.setLocal('mass_sets', localAll);
+              }
+              if (this.db) {
+                try { await this.put('mass_sets', found); } catch (e) {}
+              }
+              return found;
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('[Store] Lỗi tìm bộ lễ từ Cloud:', e);
+      }
+    }
+    return null;
+  }
+
   async getActiveMassSet() {
     const all = await this.getAllMassSets();
     return all.find(m => m.active) || all[0] || DEFAULT_MASS_SET;
@@ -828,33 +873,182 @@ class DohwaStore {
       }
     });
 
-    // 4. Bổ sung các ca viên đã xác nhận thiết bị và đã vào phòng trong danh sách roster
-    try {
-      const roster = await this.getRoster();
-      (roster || []).forEach(m => {
-        if (m && m.name && m.claimed && m.totalVisits > 0) {
-          const mName = String(m.name).trim();
-          if (!summary[mName]) {
-            const vTime = m.lastVisitAt || m.claimedAt || new Date().toISOString();
-            summary[mName] = {
-              name: mName,
-              memberName: mName,
-              count: m.totalVisits,
-              viewsCount: m.totalVisits,
-              lastViewed: vTime,
-              lastViewedAt: vTime
-            };
-          }
-        }
-      });
-    } catch (e) {}
-
     const result = Object.values(summary);
     if (result.length > 0) {
       return result.sort((a, b) => b.count - a.count);
     }
 
     return [];
+  }
+
+  // --- TỔNG HỢP TOÀN BỘ LƯỢT XEM TỪNG BỘ LỄ & BẢNG VINH DANH CA VIÊN CHO ADMIN ---
+  async getAllMassAttendanceSummary() {
+    await this.ensureReady();
+    let allAttendance = {};
+
+    // 1. Tải toàn bộ nhánh /attendance.json từ Firebase Realtime Database
+    const url = this.getFirebaseUrl();
+    if (url) {
+      try {
+        const res = await fetch(`${url}/attendance.json`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data === 'object') {
+            allAttendance = data;
+          }
+        }
+      } catch (err) {
+        console.warn('[Firebase] Lỗi tải tổng hợp attendance từ Cloud:', err);
+      }
+    }
+
+    // 2. Bổ sung dữ liệu offline nếu có
+    const local = this.getLocal('attendance', []);
+    if (local && local.length > 0) {
+      local.forEach(item => {
+        if (!item || !item.massSetId || !item.memberName) return;
+        if (!allAttendance[item.massSetId]) {
+          allAttendance[item.massSetId] = {};
+        }
+        const mockKey = `local_${item.memberName}_${Date.parse(item.viewedAt || 0)}`;
+        if (!allAttendance[item.massSetId][mockKey]) {
+          allAttendance[item.massSetId][mockKey] = item;
+        }
+      });
+    }
+
+    // 3. Tính toán thống kê theo từng Bộ Lễ và Bảng Xếp Hạng Ca Viên Toàn Đoàn
+    const massSets = await this.getAllMassSets();
+    const massStats = [];
+    const memberMap = {};
+    let totalAllViews = 0;
+
+    // Khởi tạo các ca viên từ roster nếu có
+    const roster = await this.getRoster();
+    roster.forEach(m => {
+      if (m && m.name) {
+        const n = String(m.name).trim();
+        if (n && n !== 'Admin' && n !== 'Chọn tên') {
+          memberMap[n] = {
+            name: n,
+            voice: m.voice || 'Ca Viên',
+            totalViews: 0,
+            massSetsAttended: {},
+            lastActive: m.lastVisitAt || null
+          };
+        }
+      }
+    });
+
+    const now = new Date();
+    const currentSunday = new Date(now);
+    currentSunday.setDate(now.getDate() + (7 - now.getDay()) % 7);
+    currentSunday.setHours(23, 59, 59, 999);
+
+    massSets.forEach(ms => {
+      const msId = ms.id;
+      const msEntries = allAttendance[msId] ? Object.values(allAttendance[msId]) : [];
+      let msTotalViews = 0;
+      const msViewersMap = {};
+
+      msEntries.forEach(entry => {
+        if (!entry || !entry.memberName) return;
+        const name = String(entry.memberName).trim();
+        if (!name || name === 'Admin' || name === 'Chọn tên') return;
+
+        msTotalViews++;
+        totalAllViews++;
+
+        if (!msViewersMap[name]) {
+          msViewersMap[name] = { name, count: 0, lastViewed: entry.viewedAt };
+        }
+        msViewersMap[name].count++;
+        if (entry.viewedAt && (!msViewersMap[name].lastViewed || new Date(entry.viewedAt) > new Date(msViewersMap[name].lastViewed))) {
+          msViewersMap[name].lastViewed = entry.viewedAt;
+        }
+
+        // Cập nhật Leaderboard
+        if (!memberMap[name]) {
+          memberMap[name] = {
+            name,
+            voice: 'Ca Viên',
+            totalViews: 0,
+            massSetsAttended: {},
+            lastActive: null
+          };
+        }
+        memberMap[name].totalViews++;
+        memberMap[name].massSetsAttended[msId] = true;
+        if (entry.viewedAt && (!memberMap[name].lastActive || new Date(entry.viewedAt) > new Date(memberMap[name].lastActive))) {
+          memberMap[name].lastActive = entry.viewedAt;
+        }
+      });
+
+      const uniqueCount = Object.keys(msViewersMap).length;
+      const isFuture = ms.date && new Date(ms.date) > currentSunday && !ms.active;
+
+      massStats.push({
+        id: msId,
+        title: ms.title || 'Bộ Lễ',
+        date: ms.date || '',
+        active: !!ms.active,
+        isFuture,
+        totalViews: msTotalViews,
+        uniqueCount,
+        viewersList: Object.values(msViewersMap).sort((a, b) => b.count - a.count)
+      });
+    });
+
+    // Sắp xếp bộ lễ: Mới nhất lên đầu
+    massStats.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+    // Hoàn thiện Leaderboard ca viên
+    const leaderboard = Object.values(memberMap).map(m => {
+      const massCount = Object.keys(m.massSetsAttended || {}).length;
+      return {
+        name: m.name,
+        voice: m.voice,
+        totalViews: m.totalViews,
+        massSetsCount: massCount,
+        lastActive: m.lastActive
+      };
+    });
+
+    // Sắp xếp: Xem nhiều nhất lên đầu
+    leaderboard.sort((a, b) => b.totalViews - a.totalViews || b.massSetsCount - a.massSetsCount);
+
+    // Gán danh hiệu chuyên cần
+    leaderboard.forEach((m, idx) => {
+      if (idx === 0 && m.totalViews > 0) {
+        m.rankBadge = '🥇 Quán quân chuyên cần';
+        m.badgeColor = '#eab308';
+      } else if (idx === 1 && m.totalViews > 0) {
+        m.rankBadge = '🥈 Siêu tích cực';
+        m.badgeColor = '#94a3b8';
+      } else if (idx === 2 && m.totalViews > 0) {
+        m.rankBadge = '🥉 Rất chăm chỉ';
+        m.badgeColor = '#d97706';
+      } else if (m.totalViews >= 5) {
+        m.rankBadge = '⭐ Tích cực luyện tập';
+        m.badgeColor = '#6b3fa0';
+      } else if (m.totalViews > 0) {
+        m.rankBadge = '✓ Có vào xem bài';
+        m.badgeColor = '#16a34a';
+      } else {
+        m.rankBadge = '💤 Chưa vào học bài';
+        m.badgeColor = '#94a3b8';
+      }
+    });
+
+    return {
+      totalAllViews,
+      massStats,
+      leaderboard,
+      topMember: leaderboard.length && leaderboard[0].totalViews > 0 ? leaderboard[0] : null
+    };
   }
 
   // --- CÁC BÀI ĐÃ SOẠN TRONG NĂM (CHUẨN SOANBOLE SCREENSHOT 3) ---
