@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="vi" data-theme="light">
 <head>
+  <script>
+    // Tự động chuyển hướng từ tên miền github.io sang tên miền chính thức Google Firebase
+    if (window.location.hostname.includes('github.io')) {
+      const cleanPath = window.location.pathname.replace(/^\/[^/]+/, '') || '/';
+      window.location.replace('https://cadoan-dohwa.web.app' + cleanPath + window.location.search + window.location.hash);
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Ca Đoàn Dohwa – Soạn Bộ Lễ & Phân Công Phụng Vụ</title>
@@ -698,14 +705,14 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/firebase-config.js?v=2026_26"></script>
-  <script src="js/store.js?v=2026_26"></script>
-  <script src="js/liturgical-helper.js?v=2026_26"></script>
-  <script src="js/player.js?v=2026_26"></script>
-  <script src="js/pdf-viewer.js?v=2026_26"></script>
-  <script src="js/soan-le.js?v=2026_26"></script>
-  <script src="js/thong-ke.js?v=2026_26"></script>
-  <script src="js/app.js?v=2026_26"></script>
+  <script src="js/firebase-config.js?v=2026_27"></script>
+  <script src="js/store.js?v=2026_27"></script>
+  <script src="js/liturgical-helper.js?v=2026_27"></script>
+  <script src="js/player.js?v=2026_27"></script>
+  <script src="js/pdf-viewer.js?v=2026_27"></script>
+  <script src="js/soan-le.js?v=2026_27"></script>
+  <script src="js/thong-ke.js?v=2026_27"></script>
+  <script src="js/app.js?v=2026_27"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {

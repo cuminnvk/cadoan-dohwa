@@ -413,7 +413,8 @@ class DohwaApp {
             ${massSets.map((m, idx) => {
               const r = m.liturgicalRoles || {};
               const readersSummary = [r.reader1, r.psalmist, r.reader2, r.petitions].filter(Boolean).join(', ') || '---';
-              const isCur = m.active || (this.currentMassSet && this.currentMassSet.id === m.id);
+              // Chỉ bộ lễ có m.active = true mới là bộ lễ hiện tại của ca đoàn (tránh trùng 2 bộ lễ)
+              const isCur = !!m.active;
               const isFuture = m.date && new Date(m.date) > currentSunday && !m.active;
 
               let statusHtml = '<span style="color:var(--text-muted); font-size:0.75rem;">—</span>';
@@ -511,11 +512,16 @@ class DohwaApp {
     if (!ms) ms = this.currentMassSet;
     if (!ms) return;
 
-    const baseUrl = window.location.origin + window.location.pathname;
+    // Luôn ưu tiên tên miền Firebase Hosting chính thức (không dùng domain github.io chứa tên cá nhân)
+    let baseUrl = 'https://cadoan-dohwa.web.app';
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      baseUrl = window.location.origin + window.location.pathname;
+    }
+
     // Tự động tạo link ngắn gọn đẹp: ví dụ https://cadoan-dohwa.web.app/?cn=30
     const numMatch = (ms.title || '').match(/(?:Chúa Nhật|CN)\s*(\d+)/i);
     const shortParam = numMatch ? `cn=${numMatch[1]}` : `massId=${encodeURIComponent(ms.id)}`;
-    const directUrl = `${baseUrl}?${shortParam}`;
+    const directUrl = `${baseUrl.replace(/\/+$/, '')}/?${shortParam}`;
     const shareUrl = directUrl;
 
     // Xóa cache link rút gọn dagd cũ nếu có để tránh tái sử dụng link bị cảnh báo
