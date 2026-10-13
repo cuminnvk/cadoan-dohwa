@@ -325,6 +325,40 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.baidoc-reading-body p {
+  margin-bottom: 14px;
+}
+
+.baidoc-reading-body sup {
+  font-size: 0.72rem;
+  color: #b91c1c;
+  font-weight: 800;
+  vertical-align: super;
+  margin-right: 3px;
+}
+
+.baidoc-reading-body .response {
+  font-weight: 800;
+  color: #b91c1c;
+  margin: 10px 0;
+}
+
+.baidoc-reading-body .response .pre {
+  color: #dc2626;
+  margin-right: 6px;
+  font-weight: 900;
+}
+
+.baidoc-reading-body .leading {
+  margin: 8px 0 12px 18px;
+  color: var(--text-main);
+}
+
+.baidoc-reading-body .leading span {
+  display: inline-block;
+}
+
+
 /* ==========================================================
    STICKY BOTTOM MUSIC PLAYER (MẶC ĐỊNH ẨN)
 ========================================================== */

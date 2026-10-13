@@ -209,135 +209,877 @@ function getLiturgicalBookTitle(ref, readingType) {
 /**
  * KHO BÀI ĐỌC PHỤNG VỤ CHUẨN KHO OFFLINE
  */
-const OFFLINE_LITURGY_STORE = {
-  '2026-09-26': {
-    title: 'Chúa Nhật 25 Thường Niên - Năm A',
-    bd1: {
-      ref: 'Is 55, 6-9',
-      bookTitle: 'Bài trích sách ngôn sứ I-sai-a.',
-      lead: 'Tư tưởng của Ta không phải là tư tưởng của các ngươi.',
-      content: `Hãy tìm Đức Chúa khi Người còn cho gặp, kêu cầu Người lúc Người ở kề bên. Kẻ gian ác, hãy bỏ đường lối mình, người bất lương, hãy bỏ tư tưởng mình, mà trở về với Đức Chúa - và Người sẽ xót thương, về với Thiên Chúa chúng ta, vì Người rộng lòng tha thứ.<br><br>Thật vậy, tư tưởng của Ta không phải là tư tưởng của các ngươi, và đường lối các ngươi không phải là đường lối của Ta - sấm ngôn của Đức Chúa. Trời cao hơn đất chừng nào, thì đường lối của Ta cũng cao hơn đường lối các ngươi, và tư tưởng của Ta cũng cao hơn tư tưởng các ngươi chừng ấy.`
-    },
-    tv: {
-      ref: 'Thánh Vịnh 144, 2-3. 8-9. 17-18',
-      dap: 'Chúa gần gũi mọi kẻ kêu cầu Người.',
-      pdfName: 'Dap_Ca_Chua_Nhat_25_A.pdf'
-    },
-    bd2: {
-      ref: 'Pl 1, 20c-24. 27a',
-      bookTitle: 'Bài trích thư của Thánh Phaolô Tông đồ gửi tín hữu Phi-líp-phê.',
-      lead: 'Đối với tôi, sống là Đức Kitô và chết là một mối lợi.',
-      content: `Thưa anh em, dù tôi sống hay tôi chết, Đức Kitô cũng sẽ được vẻ vang nơi thân xác tôi. Vì đối với tôi, sống là Đức Kitô, và chết là một mối lợi. Nếu sống ở đời này mà công việc của tôi sinh hoa kết quả, thì tôi không biết nên chọn đàng nào.<br><br>Tôi bị giằng co giữa hai đàng: ước ao của tôi là ra đi để được ở với Đức Kitô, điều này tốt hơn bội phần; nhưng ở lại trong thân xác thì cần thiết hơn cho anh em.<br><br>Chỉ có một điều là anh em phải ăn ở làm sao cho xứng với Tin Mừng của Đức Kitô.`
-    },
-    tm: {
-      ref: 'Mt 20, 1-16a',
-      bookTitle: 'Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.',
-      lead: 'Hay mắt bạn ganh tị vì tôi nhân lành?',
-      alleluia: 'Chúa nói: Lời Thầy là Thần Khí và là Sự Sống. Thầy mới có những lời đem lại sự sống đời đời.',
-      content: `Khi ấy, Đức Giê-su kể cho các môn đệ dụ ngôn này: "Nước Trời giống như chuyện gia chủ kia, vừa tảng sáng đã ra mướn thợ vào làm vườn nho cho mình. Sau khi đã thoả thuận với thợ là mỗi ngày một quan tiền, ông sai họ vào vườn nho làm việc.<br><br>Khoảng giờ thứ ba, ông trở ra, thấy có những người khác ở không, đang đứng ngoài chợ. Ông cũng bảo họ: 'Cả các anh nữa, hãy đi vào vườn nho, tôi sẽ trả cho các anh hợp lẽ công bằng.' Họ liền đi. Khoảng giờ thứ sáu, rồi giờ thứ chín, ông lại trở ra và cũng làm như vậy.<br><br>Khoảng giờ thứ mười một, ông trở ra, thấy còn có những người khác đứng đó, ông nói với họ: 'Sao các anh đứng đây suốt ngày không làm gì hết?' Họ đáp: 'Vì không ai mướn chúng tôi.' Ông bảo họ: 'Cả các anh nữa, hãy đi vào vườn nho!'<br><br>Chiều đến, ông chủ vườn nho bảo người quản lý: 'Anh gọi thợ lại mà trả công cho họ, cứ bắt đầu từ người vào sau chót tới người đầu tiên.' Vậy những người mới vào làm lúc giờ thứ mười một tiến lại, và mỗi người được lãnh một quan tiền. Khi những người vào làm trước nhất tiến lại, họ tưởng là sẽ được lãnh nhiều hơn, thế nhưng mỗi người cũng chỉ lãnh được một quan tiền. Vừa lãnh xong, họ liền cằn nhằn với gia chủ: 'Mấy người sau chót này chỉ làm có một giờ, thế mà ông lại coi họ ngang hàng với chúng tôi là những người đã phải làm việc nặng nhọc suốt ngày, lại còn bị nắng nôi thiêu đốt!' Nhưng gia chủ trả lời cho một người trong bọn họ: 'Này bạn, tôi đâu có bất công với bạn! Bạn đã chẳng thoả thuận với tôi là một quan tiền sao? Cầm lấy phần của bạn mà đi đi! Còn tôi, tôi muốn cho người sau chót này cũng được bằng bạn đó. Chẳng lẽ tôi lại không có quyền tùy ý định đoạt về những gì là của tôi sao? Hay vì thấy tôi tốt bụng, mà bạn đâm ra ghen tức?'<br><br>Thế là những kẻ đứng chót sẽ được lên hàng đầu, còn những kẻ đứng đầu sẽ phải xuống hàng chót."`
-    },
-    lnth: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 25 THƯỜNG NIÊN - NĂM A
-Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ đầy lòng quảng đại và bao dung, đường lối Người vượt xa mọi tính toán nhân loại. Với niềm tin tưởng và phó thác, chúng ta cùng tha thiết dâng lời nguyện xin:
-1. Cầu cho Hội Thánh: Xin Chúa gìn giữ Đức Giáo Hoàng, các Đức Giám Mục và các Linh Mục, để các ngài luôn là những mục tử nhân lành dẫn dắt đoàn chiên Chúa theo tinh thần Tin Mừng.
-Xướng: Chúng con cầu xin Chúa.
-Đáp: Xin Chúa nhậm lời chúng con.
-2. Cầu cho thế giới: Xin Chúa ban ơn bình an cho các dân tộc, xoa dịu những nỗi đau của các nạn nhân chiến tranh, đói nghèo, bệnh tật và thiên tai.
-Xướng: Chúng con cầu xin Chúa.
-Đáp: Xin Chúa nhậm lời chúng con.
-3. Cầu cho những người đang gặp thử thách gian truân: Xin Chúa nâng đỡ những ai đang ngã lòng, thất vọng, để họ luôn tìm thấy niềm an ủi và cậy trông nơi lòng Chúa xót thương.
-Xướng: Chúng con cầu xin Chúa.
-Đáp: Xin Chúa nhậm lời chúng con.
-4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ: Xin Chúa ban cho mỗi ca viên lòng nhiệt thành mến Chúa, biết dùng tiếng hát để phụng sự Thánh Lễ và loan báo tình yêu Chúa trong tinh thần hiệp nhất yêu thương.
-Xướng: Chúng con cầu xin Chúa.
-Đáp: Xin Chúa nhậm lời chúng con.
-Chủ tế: Lạy Chúa, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, nhờ Đức Kitô, Chúa chúng con. - Amen.`
+/**
+ * KHO BÀI ĐỌC PHỤNG VỤ CHUẨN XÁC 100% TỪ NHÓM PHIÊN DỊCH CÁC GIỜ KINH PHỤNG VỤ (KTCGKPV)
+ * Nguồn chính thức: https://ktcgkpv.org/readings/mass-reading
+ * Toàn bộ bản văn Kinh Thánh Bài đọc 1, Bài đọc 2, Tin Mừng và Đáp ca chuẩn mực.
+ */
+const KTCGKPV_LITURGY_STORE = {
+  "2026-11-09": {
+  "date": "2026-11-09",
+  "title": "Thánh Lễ",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Ed 47,1-2.8-9.12",
+    "bookTitle": "Bài trích sách ngôn sứ Ê-dê-ki-en.",
+    "lead": "Tôi đã thấy dòng nước từ cửa đông Đền Thờ tuôn ra, và tất cả những ai được nước ấy thanh tẩy đều hưởng ơn cứu độ.",
+    "content": "<p><sup>1</sup> Bấy giờ, thiên sứ dẫn tôi trở lại phía cửa Đền Thờ, và này : có nước vọt ra từ dưới ngưỡng cửa Đền Thờ và chảy về phía đông, vì mặt tiền Đền Thờ quay về phía đông. Nước từ phía dưới bên phải Đền Thờ chảy xuống phía nam bàn thờ. <sup>2</sup> Người ấy đưa tôi ra theo lối cổng bắc và dẫn tôi đi vòng quanh theo lối bên ngoài, đến cổng ngoài quay mặt về phía đông, và này : nước từ phía bên phải chảy ra.</p><p><sup>8</sup> Người ấy bảo tôi : “Nước này chảy về miền đất phía đông, xuống vùng A-ra-ba, rồi đổ ra biển Chết và làm cho nước biển hoá lành. <sup>9</sup> Sông chảy đến đâu thì mọi sinh vật lúc nhúc ở đó sẽ được sống. Sẽ có rất nhiều cá, vì nước này chảy tới đâu, thì nó chữa lành ; sông này chảy đến đâu, thì ở đó có sự sống. <sup>12</sup> Trên hai bờ sông sẽ mọc lên mọi giống cây ăn trái, lá không bao giờ tàn, trái không bao giờ hết : mỗi tháng các cây đó sẽ sinh trái mới nhờ có nước chảy ra từ thánh điện. Trái dùng làm lương thực còn lá để làm thuốc.”</p>"
   },
-  '2026-10-04': {
-    title: 'Chúa Nhật 26 Thường Niên - Năm A',
-    bd1: {
-      ref: 'Ed 18, 25-28',
-      bookTitle: 'Bài trích sách ngôn sứ Ê-dê-ki-en.',
-      lead: 'Nếu kẻ gian ác từ bỏ điều dữ nó đã phạm, nó sẽ cứu được mạng sống mình.',
-      content: `Đức Chúa phán thế này: Các ngươi lại nói: 'Đường lối của Chúa không ngay thẳng!' Vậy hỡi nhà Ít-ra-en, hãy nghe đây: Có phải đường lối của Ta không ngay thẳng hay đường lối của các ngươi mới không ngay thẳng? Khi người công chính từ bỏ lẽ công chính của mình mà phạm tội ác và phải chết, thì chính vì tội ác nó phạm mà nó phải chết. Còn nếu kẻ gian ác từ bỏ điều dữ nó đã phạm mà thi hành điều chính trực công minh, thì nó sẽ cứu được mạng sống mình.`
-    },
-    tv: {
-      ref: 'Thánh Vịnh 24, 4-5. 6-7. 8-9',
-      dap: 'Lạy Chúa, xin nhớ lại lòng thương xót của Ngài.',
-      pdfName: 'Dap_Ca_Chua_Nhat_25_A.pdf'
-    },
-    bd2: {
-      ref: 'Pl 2, 1-11',
-      bookTitle: 'Bài trích thư của Thánh Phaolô Tông đồ gửi tín hữu Phi-líp-phê.',
-      lead: 'Anh em hãy có cùng một tâm tình như chính Đức Kitô Giêsu.',
-      content: `Thưa anh em, nếu quả thật sự liên kết với Đức Kitô đem lại cho anh em một niềm an ủi, nếu tình bác ái khích lệ anh em, nếu anh em được hiệp thông trong Thần Khí, nếu anh em có lòng thương xót và cảm thông, thì xin anh em hãy làm cho niềm vui của tôi được trọn vẹn, là hãy có cùng một cảm nghĩ, cùng một lòng mến, cùng một tâm hồn, cùng một ý hướng.`
-    },
-    tm: {
-      ref: 'Mt 21, 28-32',
-      bookTitle: 'Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.',
-      lead: 'Nó hối hận và đã đi làm.',
-      alleluia: 'Chúa nói: Chiên của Tôi thì nghe tiếng Tôi, Tôi biết chúng và chúng theo Tôi.',
-      content: `Khi ấy, Đức Giê-su nói với các thượng tế và kỳ mục trong dân rằng: "Các ông nghĩ sao: Một người kia có hai đứa con trai. Ông ta đến nói với đứa thứ nhất: 'Này con, hôm nay con hãy đi làm vườn nho.' Nó đáp: 'Con không muốn đâu!' Nhưng sau đó, nó hối hận, nên lại đi. Ông ta đến gặp đứa thứ hai và cũng bảo như vậy. Nó đáp: 'Thưa ngài, vâng, con đi!' nhưng rồi lại không đi. Trong hai người con đó, ai đã làm theo ý muốn của người cha?" Họ đáp: "Người thứ nhất."`
-    },
-    lnth: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 26 THƯỜNG NIÊN - NĂM A
-Chủ tế: Anh chị em thân mến, Thiên Chúa luôn yêu thương mời gọi chúng ta cộng tác xây dựng Nước Trời bằng đời sống hoán cải chân thành. Với tâm tình tin tưởng, chúng ta cùng dâng lời cầu xin:
-1. Cầu cho các vị chủ chăn trong Hội Thánh: Xin Chúa ban cho các ngài sức mạnh và lòng nhân ái, để luôn nêu gương sáng vâng phục Thánh ý Chúa và tận tụy phục vụ đoàn chiên.
-      Xướng: Chúng con cầu xin Chúa.
-      Đáp: Xin Chúa nhậm lời chúng con.
-      Chủ tế: Lạy Chúa, xin nhậm lời cầu tha thiết của chúng con và ban ơn giúp chúng con luôn trung thành thực thi ý Chúa. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
-    },
-    '2026-10-18': {
-      title: 'Chúa Nhật 28 Thường Niên - Năm A',
-      bd1: {
-        ref: 'Is 25, 6-10a',
-        bookTitle: 'Bài trích sách ngôn sứ I-sai-a.',
-        lead: 'Đức Chúa sẽ thết đãi muôn dân một bữa tiệc và lau sạch nước mắt trên mọi khuôn mặt.',
-        content: `Ngày ấy, trên núi này, Đức Chúa các đạo binh sẽ thiết đãi muôn dân một bữa tiệc đầy thịt béo và rượu ngon. Trên núi này, Người sẽ xé bỏ chiếc khăn tang trùm trên muôn dân và tấm màn che phủ mọi nước. Người sẽ vĩnh viễn tiêu diệt tử thần, và Thiên Chúa là Đức Chúa sẽ lau sạch nước mắt trên mọi khuôn mặt.`
-      },
-      tv: {
-        ref: 'Thánh Vịnh 22, 1-3a. 3b-4. 5. 6',
-        dap: 'Trong nhà Chúa, tôi sẽ định cư suốt chuỗi ngày dài miên viễn.',
-        pdfName: 'Dap_Ca_Chua_Nhat_25_A.pdf'
-      },
-      bd2: {
-        ref: 'Pl 4, 12-14. 19-20',
-        bookTitle: 'Bài trích thư của Thánh Phaolô Tông đồ gửi tín hữu Phi-líp-phê.',
-        lead: 'Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi.',
-        content: `Thưa anh em, tôi đã tập quen với mọi hoàn cảnh: no hay đói, dư dật hay thiếu thốn. Với Đấng ban sức mạnh cho tôi, tôi có thể làm được mọi sự. Tuy nhiên, anh em đã chia sẻ nỗi gian truân với tôi, như thế là điều tốt. Thiên Chúa của tôi sẽ thỏa mãn mọi nhu cầu của anh em một cách huy hoàng phong phú, theo sự giàu sang của Người trong Đức Kitô Giêsu.`
-      },
-      tm: {
-        ref: 'Mt 22, 1-14',
-        bookTitle: 'Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.',
-        lead: 'Hãy đi ra các ngả đường, gặp ai cũng mời vào tiệc cưới.',
-        alleluia: 'Xin Cha của Đức Giêsu Kitô, Chúa chúng ta, soi trí mở lòng, cho chúng ta biết thế nào là niềm hy vọng mà ơn Người kêu gọi đem lại cho chúng ta.',
-        content: `Khi ấy, Đức Giêsu lại dùng dụ ngôn mà nói với các thượng tế và kỳ mục rằng: "Nước Trời cũng giống như chuyện một vua kia mở tiệc cưới cho con mình. Nhà vua sai đầy tớ đi thỉnh các quan khách đã được mời trước, nhưng họ không chịu đến. Vua lại sai những đầy tớ khác đi và dặn họ: 'Hãy thưa với quan khách đã được mời rằng: Này cỗ bàn, ta đã dọn xong, bò tơ và thú béo đã hạ rồi, mọi sự đã sẵn. Mời quý vị đến dự tiệc cưới!' Nhưng quan khách không thèm đếm xỉa tới, lại bỏ đi: kẻ thì đi thăm trại, người thì đi buôn bán... Bấy giờ vua bảo đầy tớ: 'Tiệc cưới đã sẵn sàng rồi, mà quan khách đã được mời lại không xứng đáng. Vậy các ngươi đi ra các ngả đường, gặp ai cũng mời vào tiệc cưới.' Đầy tớ liền đi ra các nẻo đường, gặp ai, bất luận xấu tốt, cũng tập họp cả lại, nên phòng tiệc cưới đầy những thực khách. Bấy giờ vua tiến vào quan sát thực khách, thấy ở đó có một người không mang y phục lễ cưới, mới hỏi người ấy: 'Này bạn, làm sao bạn vào đây mà lại không có y phục lễ cưới?' Người ấy câm miệng không nói được gì. Bấy giờ vua bảo những người phục dịch: 'Trói chân tay nó lại, quăng nó ra chỗ tối tăm bên ngoài: ở đó, người ta sẽ phải khóc lóc nghiến răng!' Vì kẻ được gọi thì nhiều, mà người được chọn thì ít."`
-      },
-      lnth: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 28 THƯỜNG NIÊN - NĂM A
-Chủ tế: Anh chị em thân mến, Thiên Chúa là Cha nhân từ luôn rộng mở bàn tiệc ân sủng đón mời tất cả chúng ta vào chia sẻ niềm vui Nước Trời. Trong tâm tình tri ân và ước muốn sống xứng đáng với ơn gọi người Kitô hữu, chúng ta cùng tha thiết dâng lời nguyện xin:
+  "tv": {
+    "ref": "Tv 45,2-3.5-6.8-9a (Đ. c.5)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Một dòng sông chảy ra bao nhánh<br />đem niềm vui cho thành của Chúa Trời :<br />đây chính là đền thánh Đấng Tối Cao.</span></p><p class=\"leading\"><sup>2</sup><span>Thiên Chúa là nơi ta ẩn náu,<br />là sức mạnh của ta.<br />Người luôn luôn sẵn sàng giúp đỡ<br />khi ta phải ngặt nghèo.</span><sup>3</sup><span>Nên dầu cho địa cầu chuyển động,<br />núi đồi có sập xuống biển sâu,<br />ta cũng chẳng sợ gì.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Một dòng sông chảy ra bao nhánh<br />đem niềm vui cho thành của Chúa Trời :<br />đây chính là đền thánh Đấng Tối Cao.</span></p><p class=\"leading\"><sup>5</sup><span>Một dòng sông chảy ra bao nhánh<br />đem niềm vui cho thành của Chúa Trời :<br />đây chính là đền thánh Đấng Tối Cao.</span><sup>6</sup><span>Thiên Chúa ngự giữa thành,<br />thành không lay chuyển ;<br />ngay từ rạng đông, Thiên Chúa thương trợ giúp.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Một dòng sông chảy ra bao nhánh<br />đem niềm vui cho thành của Chúa Trời :<br />đây chính là đền thánh Đấng Tối Cao.</span></p><p class=\"leading\"><sup>8</sup><span>Chính Chúa Tể càn khôn ở cùng ta luôn mãi,<br />Thiên Chúa nhà Gia-cóp là thành bảo vệ ta.</span><sup>9</sup><span>Đến mà xem công trình của Chúa,<br />Đấng gieo kinh hãi trên mặt địa cầu.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Một dòng sông chảy ra bao nhánh<br />đem niềm vui cho thành của Chúa Trời :<br />đây chính là đền thánh Đấng Tối Cao.</span></p>"
+  },
+  "bd2": {
+    "ref": "",
+    "bookTitle": "Bài trích Thư Tông Đồ.",
+    "lead": "",
+    "content": ""
+  },
+  "tm": {
+    "ref": "Ga 2,13-22",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Gio-an.",
+    "lead": "Đền thờ Đức Giê-su muốn nói là chính thân thể Người.",
+    "alleluiaRef": "x. 2 Sb 7,16",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Đức Chúa phán : Ta đã chọn và thánh hoá nhà này, để Danh Ta ngự nơi đây đến muôn đời. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Đức Chúa phán : Ta đã chọn và thánh hoá nhà này, để Danh Ta ngự nơi đây đến muôn đời. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>13</sup> Gần đến lễ Vượt Qua của người Do-thái, Đức Giê-su lên thành Giê-ru-sa-lem. <sup>14</sup> Người thấy trong Đền Thờ có những kẻ bán chiên, bò, bồ câu, và những người đang ngồi đổi tiền. <sup>15</sup> Người liền lấy dây làm roi mà xua đuổi tất cả chiên cũng như bò, ra khỏi Đền Thờ ; còn tiền của những người đổi bạc, Người đổ tung ra, và lật nhào bàn ghế của họ. <sup>16</sup> Người nói với những kẻ bán bồ câu : “Đem tất cả những thứ này ra khỏi đây, đừng biến nhà Cha tôi thành nơi buôn bán.” <sup>17</sup> Các môn đệ của Người nhớ lại lời đã chép trong Kinh Thánh : Vì nhiệt tâm lo việc nhà Chúa, mà tôi đây sẽ phải thiệt thân.</p><p><sup>18</sup> Người Do-thái hỏi Đức Giê-su : “Ông lấy dấu lạ nào chứng tỏ cho chúng tôi thấy là ông có quyền làm như thế ?” <sup>19</sup> Đức Giê-su đáp : “Các ông cứ phá huỷ Đền Thờ này đi ; nội ba ngày, tôi sẽ xây dựng lại.” <sup>20</sup> Người Do-thái nói : “Đền Thờ này phải mất bốn mươi sáu năm mới xây xong, thế mà nội trong ba ngày ông xây lại được sao ?” <sup>21</sup> Nhưng Đền Thờ Đức Giê-su muốn nói ở đây là chính thân thể Người. <sup>22</sup> Vậy, khi Người từ cõi chết trỗi dậy, các môn đệ nhớ lại Người đã nói điều đó, họ tin vào Kinh Thánh và lời Đức Giê-su đã nói.</p>"
+  }
+},
+  "2026-11-15": {
+  "date": "2026-11-15",
+  "title": "Lễ Các Thánh Tử Đạo Việt Nam",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "2 Mcb 7,1.20-23.27b-29",
+    "bookTitle": "Bài trích sách Ma-ca-bê quyển thứ hai.",
+    "lead": "Bà mẹ là người đáng khâm phục, vì bà can đảm chịu đựng nhờ niềm trông cậy bà đặt nơi Đức Chúa.",
+    "content": "<p><sup>1</sup> Hồi ấy, có bảy anh em bị bắt cùng với bà mẹ. Vua An-ti-ô-khô cho lấy roi và gân bò mà đánh họ, để bắt họ ăn thịt heo là thức ăn luật Mô-sê cấm.</p><p><sup>20</sup> Bà mẹ là người rất mực xứng đáng cho ta khâm phục và kính cẩn ghi nhớ. Bà thấy bảy người con trai phải chết nội trong có một ngày, thế mà bà vẫn can đảm chịu đựng nhờ niềm trông cậy bà đặt nơi Đức Chúa. <sup>21</sup> Bà dùng tiếng mẹ đẻ mà khuyến khích từng người một, lòng bà đầy tâm tình cao thượng ; lời lẽ của bà tuy là của một người phụ nữ, nhưng lại sôi sục một chí khí nam nhi ; bà nói với các con : <sup>22</sup> “Mẹ không rõ các con đã thành hình trong lòng mẹ thế nào. Không phải mẹ ban cho các con thần khí và sự sống. Cũng không phải mẹ sắp đặt các phần cơ thể cho mỗi người trong các con. <sup>23</sup> Chính Đấng Tạo Hoá càn khôn đã nắn đúc nên loài người, và đã sáng tạo nguồn gốc muôn loài. Chính Người do lòng thương xót, cũng sẽ trả lại cho các con thần khí và sự sống, bởi vì bây giờ các con trọng Luật Lệ của Người hơn bản thân mình.”</p><p><sup>27b</sup> Bà nói với người con út : “Con ơi, con hãy thương mẹ : chín tháng cưu mang, ba năm bú mớm, mẹ đã nuôi nấng dạy dỗ con đến ngần này tuổi đầu. <sup>28</sup> Mẹ xin con hãy nhìn xem trời đất và muôn loài trong đó, mà nhận biết rằng Thiên Chúa đã làm nên tất cả từ hư vô, và loài người cũng được tạo thành như vậy. <sup>29</sup> Con đừng sợ tên đao phủ này ; nhưng hãy tỏ ra xứng đáng với các anh con, mà chấp nhận cái chết, để đến ngày Chúa thương xót, Người sẽ trả con và các anh con cho mẹ.”</p>"
+  },
+  "tv": {
+    "ref": "Tv 125,1-2ab.2cd-3.4-5.6 (Đ. c.5)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"leading\"><sup>1</sup><span>Khi Chúa dẫn tù nhân Xi-on trở về,<br />ta tưởng mình như giữa giấc mơ.</span><sup>2ab</sup><span>Vang vang ngoài miệng câu cười nói,<br />rộn rã trên môi khúc nhạc mừng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"leading\"><sup>2cd</sup><span>Bấy giờ trong dân ngoại, người ta bàn tán :<br />“Việc Chúa làm cho họ, vĩ đại thay !”</span><sup>3</sup><span>Việc Chúa làm cho ta, ôi vĩ đại !<br />Ta thấy mình chan chứa một niềm vui.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"leading\"><sup>4</sup><span>Lạy Chúa, xin dẫn tù nhân chúng con về,<br />như mưa dẫn nước về suối cạn miền Nam.</span><sup>5</sup><span>Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"leading\"><sup>6</sup><span>Họ ra đi, đi mà nức nở,<br />mang hạt giống vãi gieo ;<br />lúc trở về, về reo hớn hở,<br />vai nặng gánh lúa vàng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p>"
+  },
+  "bd2": {
+    "ref": "Rm 8,31b-39",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Rô-ma.",
+    "lead": "Dù sự chết hay sự sống cũng không tách được chúng ta ra khỏi tình yêu của Thiên Chúa.",
+    "content": "<p><sup>31b</sup> Thưa anh em, có Thiên Chúa bênh đỡ chúng ta, ai còn chống lại được chúng ta ? <sup>32</sup> Đến như chính Con Một, Thiên Chúa cũng chẳng tiếc, nhưng đã trao nộp vì hết thảy chúng ta. Một khi đã ban Người Con đó, lẽ nào Thiên Chúa lại chẳng rộng ban tất cả cho chúng ta ? <sup>33</sup> Ai sẽ buộc tội những người Thiên Chúa đã chọn ? Chẳng lẽ Thiên Chúa, Đấng làm cho nên công chính ? <sup>34</sup> Ai sẽ kết án họ ? Chẳng lẽ Đức Giê-su Ki-tô, Đấng đã chết, hơn nữa, đã sống lại, và đang ngự bên hữu Thiên Chúa mà chuyển cầu cho chúng ta ?</p><p><sup>35</sup> Ai có thể tách chúng ta ra khỏi tình yêu của Đức Ki-tô ? Phải chăng là gian truân, khốn khổ, đói rách, hiểm nguy, bắt bớ, gươm giáo ? <sup>36</sup> Như có lời chép : Chính vì Ngài mà mỗi ngày chúng con bị giết, bị coi như bầy cừu để sát sinh.</p><p><sup>37</sup> Nhưng trong mọi thử thách ấy, chúng ta toàn thắng nhờ Đấng đã yêu mến chúng ta.</p><p><sup>38</sup> Đúng thế, tôi tin chắc rằng : cho dầu là sự chết hay sự sống, thiên thần hay ma vương quỷ lực, hiện tại hay tương lai, hoặc bất cứ sức mạnh nào, <sup>39</sup> trời cao hay vực thẳm, hay bất cứ một loài thọ tạo nào khác, không có gì tách được chúng ta ra khỏi tình yêu của Thiên Chúa thể hiện nơi Đức Ki-tô Giê-su, Chúa chúng ta.</p>"
+  },
+  "tm": {
+    "ref": "Lc 9,23-26",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Lu-ca.",
+    "lead": "Ai liều mất mạng sống mình vì tôi, thì sẽ cứu được mạng sống ấy.",
+    "alleluiaRef": "Mt 5,10",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a.Phúc thay ai bị bách hại vì sống công chính,vì Nước Trời là của họ. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p><p>Ha-lê-lui-a. Ha-lê-lui-a.</p><p>Phúc thay ai bị bách hại vì sống công chính,</p><p>vì Nước Trời là của họ. Ha-lê-lui-a.</p></p>",
+    "content": "<p><sup>23</sup> Khi ấy, Đức Giê-su nói với mọi người rằng : “Ai muốn theo tôi, phải từ bỏ chính mình, vác thập giá mình hằng ngày mà theo. <sup>24</sup> Quả vậy, ai muốn cứu mạng sống mình, thì sẽ mất ; còn ai liều mất mạng sống mình vì tôi, thì sẽ cứu được mạng sống ấy. <sup>25</sup> Vì người nào được cả thế giới mà phải đánh mất chính mình hay là thiệt thân, thì nào có lợi gì ? <sup>26</sup> Ai xấu hổ vì tôi và những lời của tôi, thì Con Người cũng sẽ xấu hổ vì kẻ ấy, khi Người ngự đến trong vinh quang của mình, của Chúa Cha và các thánh thiên thần.”</p>"
+  }
+},
+  "2026-10-18": {
+  "date": "2026-10-18",
+  "title": "Chúa Nhật Tuần XXIX - Mùa Thường Niên",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 45,1.4-6",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Đức Chúa đã cầm lấy tay phải vua Ky-rô để bắt các dân tộc suy phục ông.",
+    "content": "<p class=\"poem\"><sup>1</sup><span>Đức Chúa phán với kẻ Người đã xức dầu, với vua Ky-rô<br />- Ta đã cầm lấy tay phải nó,<br />để bắt các dân tộc suy phục nó,<br />Ta tước khí giới của các vua,<br />mở toang các cửa thành trước mặt nó,<br />khiến các cổng không còn đóng kín nữa.</span><br /><sup>4</sup><span>Vì lợi ích của tôi tớ Ta là Gia-cóp,<br />và của người Ta đã chọn là Ít-ra-en,<br />Ta đã gọi ngươi đích danh, đã ban cho ngươi một tước hiệu,<br />dù ngươi không biết Ta.</span><br /><sup>5</sup><span>Ta là Đức Chúa, không còn chúa nào khác ;<br />chẳng có ai là Thiên Chúa, ngoại trừ Ta.<br />Dù ngươi không biết Ta, Ta đã trang bị cho ngươi đầy đủ,</span><br /><sup>6</sup><span>để từ Đông sang Tây, thiên hạ biết rằng<br />chẳng có thần nào khác, ngoại trừ Ta.<br />Ta là Đức Chúa, không còn chúa nào khác.<br /></span></p>"
+  },
+  "tv": {
+    "ref": "Tv 95,1 và 3.4-5.7-8a.8b-10ac (Đ. c.7b)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p><p class=\"leading\"><sup>1</sup><span>Hát lên mừng Chúa một bài ca mới,<br />hát lên mừng Chúa, hỡi toàn thể địa cầu !</span><sup>3</sup><span>kể cho muôn dân biết Người thật là vinh hiển,<br />cho mọi nước hay những kỳ công của Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p><p class=\"leading\"><sup>4</sup><span>Chúa thật cao cả, xứng muôn lời ca tụng,<br />khả tôn khả uý hơn chư thần,</span><sup>5</sup><span>vì chư thần các nước thảy đều hư ảo,<br />còn Đức Chúa, Người sáng tạo trời cao.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p><p class=\"leading\"><sup>7</sup><span>Hãy dâng Chúa, hỡi các dân các nước,<br />dâng Chúa quyền lực và vinh quang,</span><sup>8a</sup><span>hãy dâng Chúa vinh quang xứng danh Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p><p class=\"leading\"><sup>8b</sup><span>Hãy bưng lễ vật, bước vào tiền đình Chúa,</span><sup>9</sup><span>và thờ lạy Chúa uy nghiêm thánh thiện,<br />toàn thể địa cầu, hãy run sợ trước Thánh Nhan.</span><sup>10ac</sup><span>Hãy nói với chư dân : Chúa là Vua hiển trị,<br />Người xét xử muôn nước theo đường ngay thẳng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Tx 1,1-5b",
+    "bookTitle": "Khởi đầu thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Thê-xa-lô-ni-ca.",
+    "lead": "Chúng tôi nhớ đến lòng tin, lòng mến và lòng trông cậy của anh em.",
+    "content": "<p><sup>1</sup> Chúng tôi là Phao-lô, Xin-va-nô và Ti-mô-thê, kính gửi Hội Thánh Thê-xa-lô-ni-ca ở trong Thiên Chúa Cha, và trong Chúa Giê-su Ki-tô. Chúc anh em được ân sủng và bình an.</p><p><sup>2</sup> Chúng tôi hằng tạ ơn Thiên Chúa về tất cả anh em. Chúng tôi nhắc đến anh em trong lời cầu nguyện, <sup>3</sup> và trước mặt Thiên Chúa là Cha chúng ta, chúng tôi không ngừng nhớ đến những việc anh em làm vì lòng tin, những nỗi khó nhọc anh em gánh vác vì lòng mến, và những gì anh em kiên nhẫn chịu đựng vì trông đợi Chúa chúng ta là Đức Giê-su Ki-tô.</p><p><sup>4</sup> Thưa anh em là những người được Thiên Chúa thương mến, chúng tôi biết rằng Thiên Chúa đã chọn anh em, <sup>5b</sup> vì khi chúng tôi loan báo Tin Mừng cho anh em, thì không phải chỉ có lời chúng tôi nói, mà còn có quyền năng, có Thánh Thần, và một niềm xác tín sâu xa.</p>"
+  },
+  "tm": {
+    "ref": "Mt 22,15-21",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Của Xê-da, trả về Xê-da ; của Thiên Chúa, trả về Thiên Chúa.",
+    "alleluiaRef": "Pl 2,15d.16a",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Giữa thế gian, anh em phải chiếu sáng như những vì sao trên vòng trời, là làm sáng tỏ lời ban sự sống. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Giữa thế gian, anh em phải chiếu sáng như những vì sao trên vòng trời, là làm sáng tỏ lời ban sự sống. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>15</sup> Khi ấy, những người Pha-ri-sêu đi bàn bạc với nhau, tìm cách làm cho Đức Giê-su phải lỡ lời mà mắc bẫy. <sup>16</sup> Họ sai các môn đệ của họ cùng đi với những người phe Hê-rô-đê, đến nói với Đức Giê-su rằng : “Thưa Thầy, chúng tôi biết Thầy là người chân thật và cứ sự thật mà dạy đường lối của Thiên Chúa. Thầy cũng chẳng vị nể ai, vì Thầy không cứ bề ngoài mà đánh giá người ta. <sup>17</sup> Vậy xin Thầy cho biết ý kiến : có được phép nộp thuế cho Xê-da hay không ?”</p><p><sup>18</sup> Nhưng Đức Giê-su biết họ có ác ý, nên Người nói : “Tại sao các người lại thử tôi, hỡi những kẻ đạo đức giả ! <sup>19</sup> Cho tôi xem đồng tiền nộp thuế !” Họ liền đưa cho Người một quan tiền. <sup>20</sup> Người hỏi họ : “Hình và danh hiệu này là của ai đây ?” <sup>21</sup> Họ đáp : “Của Xê-da.” Bấy giờ, Người bảo họ : “Thế thì của Xê-da, trả về Xê-da ; của Thiên Chúa, trả về Thiên Chúa.”</p>"
+  }
+},
+  "2026-10-11": {
+  "date": "2026-10-11",
+  "title": "Chúa Nhật Tuần XXVIII - Mùa Thường Niên",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 25,6-10a",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Đức Chúa sẽ đãi một bữa tiệc và sẽ lau khô dòng lệ trên khuôn mặt mọi người.",
+    "content": "<p class=\"poem\"><sup>6</sup><span>Ngày ấy, trên núi này,<br />Đức Chúa các đạo binh sẽ đãi muôn dân một bữa tiệc :<br />tiệc thịt béo, tiệc rượu ngon,<br />thịt béo ngậy, rượu ngon tinh chế.</span><br /><sup>7</sup><span>Trên núi này, Người sẽ xé bỏ chiếc khăn che phủ mọi dân,<br />và tấm màn trùm lên muôn nước.</span><br /><sup>8</sup><span>Người sẽ vĩnh viễn tiêu diệt tử thần.<br />Đức Chúa là Chúa Thượng sẽ lau khô dòng lệ<br />trên khuôn mặt mọi người,<br />và trên toàn cõi đất, Người sẽ xoá sạch<br />nỗi ô nhục của dân Người. Đức Chúa phán như vậy.</span><br /><sup>9</sup><span>Ngày ấy, người ta sẽ nói : “Đây là Thiên Chúa chúng ta,<br />chúng ta từng trông đợi Người,<br />và đã được Người thương cứu độ.<br />Chính Người là Đức Chúa chúng ta từng đợi trông.<br />Nào ta cùng hoan hỷ vui mừng bởi được Người cứu độ.”</span><br /><sup>10a</sup><span>Vì bàn tay Đức Chúa sẽ lại đặt trên núi này.<br /></span></p>"
+  },
+  "tv": {
+    "ref": "Tv 22,1-3a.3b-4.5.6 (Đ. c.6cd)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa là mục tử chăn dắt tôi, tôi chẳng thiếu thốn gì.</span><sup>2</sup><span>Trong đồng cỏ xanh tươi, Người cho tôi nằm nghỉ.<br />Người đưa tôi tới dòng nước trong lành</span><sup>3a</sup><span>và bổ sức cho tôi.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"leading\"><sup>3b</sup><span>Người dẫn tôi trên đường ngay nẻo chính<br />vì danh dự của Người.</span><sup>4</sup><span>Lạy Chúa, dầu qua lũng âm u<br />con sợ gì nguy khốn, vì có Chúa ở cùng.<br />Côn trượng Ngài bảo vệ, con vững dạ an tâm.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"leading\"><sup>5</sup><span>Chúa dọn sẵn cho con bữa tiệc<br />ngay trước mặt quân thù.<br />Đầu con, Chúa xức đượm dầu thơm,<br />ly rượu con đầy tràn chan chứa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"leading\"><sup>6</sup><span>Lòng nhân hậu và tình thương Chúa<br />ấp ủ tôi suốt cả cuộc đời,<br />và tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 4,12-14.19-20",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Với Đấng ban sức mạnh cho tôi, tôi chịu được hết.",
+    "content": "<p><sup>12</sup> Thưa anh em, tôi sống thiếu thốn cũng được, mà sống dư dật cũng được. Trong mọi hoàn cảnh, no hay đói, dư dật hay túng bấn, tôi đã tập quen cả. <sup>13</sup> Với Đấng ban sức mạnh cho tôi, tôi chịu được hết. <sup>14</sup> Tuy nhiên, anh em đã chia sẻ với tôi, khi tôi gặp cơn quẫn bách, như thế là phải. <sup>19</sup> Thiên Chúa của tôi sẽ thoả mãn mọi nhu cầu của anh em một cách tuyệt vời, theo sự giàu sang của Người trong Đức Ki-tô Giê-su. <sup>20</sup> Xin tôn vinh Thiên Chúa là Cha chúng ta, đến muôn thuở muôn đời ! A-men.</p>"
+  },
+  "tm": {
+    "ref": "Mt 22,1-14",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Gặp ai, anh em cũng mời hết vào tiệc cưới.",
+    "alleluiaRef": "x. Ep 1,17-18",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Xin Thân Phụ Đức Giê-su Ki-tô, Chúa chúng ta, soi trí mở lòng cho chúng ta thấy rõ, đâu là niềm hy vọng, mà ơn Người kêu gọi đem lại cho chúng ta. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Xin Thân Phụ Đức Giê-su Ki-tô, Chúa chúng ta, soi trí mở lòng cho chúng ta thấy rõ, đâu là niềm hy vọng, mà ơn Người kêu gọi đem lại cho chúng ta. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, Đức Giê-su dùng dụ ngôn mà nói với các thượng tế và kỳ mục trong dân rằng : <sup>2</sup> “Nước Trời cũng giống như chuyện một vua kia mở tiệc cưới cho con mình. <sup>3</sup> Nhà vua sai đầy tớ đi thỉnh các quan khách đã được mời trước, xin họ đến dự tiệc, nhưng họ không chịu đến. <sup>4</sup> Nhà vua lại sai những đầy tớ khác đi, và dặn họ : ‘Hãy thưa với quan khách đã được mời rằng : Này cỗ bàn, ta đã dọn xong, bò tơ và thú béo đã hạ rồi, mọi sự đã sẵn. Mời quý vị đến dự tiệc cưới !’ <sup>5</sup> Nhưng quan khách không thèm đếm xỉa tới, lại bỏ đi : kẻ thì đi thăm nông trại, người thì đi buôn, <sup>6</sup> còn những kẻ khác lại bắt các đầy tớ của vua mà hành hạ và giết chết. <sup>7</sup> Nhà vua liền nổi cơn thịnh nộ, sai quân đi tru diệt bọn sát nhân ấy và thiêu huỷ thành phố của chúng. <sup>8</sup> Rồi nhà vua bảo đầy tớ : ‘Tiệc cưới đã sẵn sàng rồi, mà những kẻ đã được mời lại không xứng đáng. <sup>9</sup> Vậy các ngươi đi ra các ngả đường, gặp ai cũng mời hết vào tiệc cưới.’ <sup>10</sup> Đầy tớ liền đi ra các nẻo đường, gặp ai, bất luận xấu tốt, cũng tập hợp cả lại, nên phòng tiệc cưới đã đầy thực khách.</p><p><sup>11</sup> “Bấy giờ nhà vua tiến vào quan sát khách dự tiệc, thấy ở đó có một người không mặc y phục lễ cưới, <sup>12</sup> mới hỏi người ấy : ‘Này bạn, làm sao bạn vào đây mà lại không có y phục lễ cưới ?’ Người ấy câm miệng không nói được gì. <sup>13</sup> Nhà vua liền bảo những người phục dịch : ‘Trói chân tay nó lại, quăng nó ra chỗ tối tăm bên ngoài, ở đó người ta sẽ phải khóc lóc nghiến răng ! <sup>14</sup> Vì kẻ được gọi thì nhiều, mà người được chọn thì ít’.”</p>"
+  }
+},
+  "2026-11-01": {
+  "date": "2026-11-01",
+  "title": "Đại Lễ Các Thánh Nam Nữ",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Kh 7,2-4.9-14",
+    "bookTitle": "Bài trích sách Khải huyền của thánh Gio-an tông đồ.",
+    "lead": "Tôi thấy : Kìa một đoàn người thật đông không tài nào đếm nổi, thuộc mọi dân, mọi chi tộc, mọi nước và mọi ngôn ngữ.",
+    "content": "<p><sup>2</sup> Tôi là Gio-an, tôi thấy một thiên thần mang ấn của Thiên Chúa hằng sống, từ phía mặt trời mọc đi lên. Thiên thần ấy lớn tiếng gọi bốn thiên thần khác, là những vị được quyền phá hại đất liền và biển cả. <sup>3</sup> Thiên thần ấy nói : “Xin đừng phá hại đất liền, biển cả và cây cối, trước khi chúng tôi đóng ấn trên trán các tôi tớ của Thiên Chúa chúng ta”. <sup>4</sup> Rồi tôi nghe nói đến con số những người được đóng ấn : một trăm bốn mươi bốn ngàn người thuộc mọi chi tộc con cái Ít-ra-en.</p><p><sup>9</sup> Sau đó, tôi thấy : một đoàn người thật đông không tài nào đếm nổi, thuộc mọi dân, mọi chi tộc, mọi nước và mọi ngôn ngữ. Họ đứng trước ngai và trước Con Chiên, mình mặc áo trắng, tay cầm nhành lá thiên tuế. <sup>10</sup> Họ lớn tiếng tung hô : “Chính Thiên Chúa chúng ta, Đấng ngự trên ngai, và chính Con Chiên đã cứu độ chúng ta.” <sup>11</sup> Tất cả các thiên thần đều đứng chung quanh ngai, chung quanh các Kỳ Mục và bốn Con Vật. Họ đều sấp mặt xuống, phủ phục trước ngai và thờ lạy Thiên Chúa mà tung hô <sup>12</sup> rằng :</p><p class=\"poem\"><sup></sup><span>“A-men ! Xin kính dâng Thiên Chúa chúng ta<br />lời chúc tụng và vinh quang, sự khôn ngoan và lời tạ ơn,<br />danh dự, uy quyền và sức mạnh,<br />đến muôn thuở muôn đời ! A-men !”</span></p><p><sup>13</sup> Một trong các Kỳ Mục lên tiếng hỏi tôi : “Những người mặc áo trắng kia là ai vậy ? Họ từ đâu đến ?” <sup>14</sup> Tôi trả lời : “Thưa Ngài, Ngài biết đó.” Vị ấy bảo tôi : “Họ là những người đã đến, sau khi trải qua cơn thử thách lớn lao. Họ đã giặt sạch và tẩy trắng áo mình trong máu Con Chiên.”</p>"
+  },
+  "tv": {
+    "ref": "Tv 23,1-2.3-4ab.5-6 (Đ. x. c.6)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, đây chính là dòng dõi<br />những kẻ tìm kiếm thánh nhan Ngài.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa làm chủ trái đất cùng muôn vật muôn loài,<br />làm chủ hoàn cầu với toàn thể dân cư.</span><sup>2</sup><span>Nền trái đất, Người dựng trên biển cả,<br />đặt vững vàng trên làn nước mênh mông.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, đây chính là dòng dõi<br />những kẻ tìm kiếm thánh nhan Ngài.</span></p><p class=\"leading\"><sup>3</sup><span>Ai được lên núi Chúa ?<br />Ai được ở trong đền thánh của Người ?</span><sup>4ab</sup><span>Đó là kẻ tay sạch lòng thanh,<br />chẳng mê theo ngẫu tượng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, đây chính là dòng dõi<br />những kẻ tìm kiếm thánh nhan Ngài.</span></p><p class=\"leading\"><sup>5</sup><span>Người ấy sẽ được Chúa ban phúc lành,<br />được Thiên Chúa cứu độ thưởng công xứng đáng.</span><sup>6</sup><span>Đây chính là dòng dõi những kẻ kiếm tìm Người,<br />tìm thánh nhan Thiên Chúa nhà Gia-cóp.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, đây chính là dòng dõi<br />những kẻ tìm kiếm thánh nhan Ngài.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Ga 3,1-3",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Gio-an tông đồ.",
+    "lead": "Thiên Chúa thế nào, chúng ta sẽ thấy Người như vậy.",
+    "content": "<p class=\"poem\"><sup>1</sup><span>Anh em thân mến,<br />anh em hãy xem Chúa Cha yêu chúng ta dường nào :<br />Người yêu đến nỗi<br />cho chúng ta được gọi là con Thiên Chúa<br />- mà thực sự chúng ta là con Thiên Chúa.<br />Sở dĩ thế gian không nhận biết chúng ta,<br />là vì thế gian đã không biết Người.</span><br /><sup>2</sup><span>Anh em thân mến, hiện giờ chúng ta là con Thiên Chúa ;<br />nhưng chúng ta sẽ như thế nào, điều ấy chưa được bày tỏ.<br />Chúng ta biết rằng khi Đức Ki-tô xuất hiện,<br />chúng ta sẽ nên giống như Người,<br />vì Người thế nào, chúng ta sẽ thấy Người như vậy.</span><br /><sup>3</sup><span>Phàm ai đặt hy vọng như thế vào Đức Ki-tô<br />thì làm cho mình nên thanh sạch<br />như Người là Đấng thanh sạch.</span></p>"
+  },
+  "tm": {
+    "ref": "Mt 5,1-12a",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Anh em hãy vui mừng hớn hở, vì phần thưởng dành cho anh em ở trên trời thật lớn lao.",
+    "alleluiaRef": "Mt 11,28",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Tất cả những ai đang vất vả mang gánh nặng nề, hãy đến cùng tôi, tôi sẽ cho nghỉ ngơi bồi dưỡng. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Tất cả những ai đang vất vả mang gánh nặng nề, hãy đến cùng tôi, tôi sẽ cho nghỉ ngơi bồi dưỡng. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, thấy đám đông, Đức Giê-su lên núi. Người ngồi xuống, các môn đệ đến gần bên. <sup>2</sup> Người lên tiếng dạy họ rằng :</p><p class=\"poem\"><sup>3</sup><span>“Phúc thay ai có tâm hồn nghèo khó,<br />vì Nước Trời là của họ.</span><br /><sup>4</sup><span>Phúc thay ai hiền lành,<br />vì họ sẽ được Đất Hứa làm gia nghiệp.</span><br /><sup>5</sup><span>Phúc thay ai sầu khổ,<br />vì họ sẽ được Thiên Chúa ủi an.</span><br /><sup>6</sup><span>Phúc thay ai khát khao nên người công chính,<br />vì họ sẽ được Thiên Chúa cho thoả lòng.</span><br /><sup>7</sup><span>Phúc thay ai xót thương người,<br />vì họ sẽ được Thiên Chúa xót thương.</span><br /><sup>8</sup><span>Phúc thay ai có tâm hồn trong sạch,<br />vì họ sẽ được nhìn thấy Thiên Chúa.</span><br /><sup>9</sup><span>Phúc thay ai xây dựng hoà bình,<br />vì họ sẽ được gọi là con Thiên Chúa.</span><br /><sup>10</sup><span>Phúc thay ai bị bách hại vì sống công chính,<br />vì Nước Trời là của họ.</span><br /><sup>11</sup><span>Phúc thay anh em khi vì Thầy mà bị người ta sỉ vả, bách hại<br />và vu khống đủ điều xấu xa.</span><br /><sup>12a</sup><span>Anh em hãy vui mừng hớn hở,<br />vì phần thưởng dành cho anh em ở trên trời thật lớn lao.”</span></p>"
+  }
+},
+  "2026-11-08": {
+  "date": "2026-11-08",
+  "title": "Chúa Nhật Tuần XXXII - Mùa Thường Niên",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Kn 6,12-16",
+    "bookTitle": "Bài trích sách Khôn ngoan.",
+    "lead": "Ai tìm kiếm Đức Khôn Ngoan, thì Đức Khôn Ngoan cho gặp.",
+    "content": "<p class=\"poem\"><sup>12</sup><span>Đức Khôn Ngoan sáng chói, và không hề tàn tạ.<br />Ai mến chuộng Đức Khôn Ngoan,<br />thì Đức Khôn Ngoan dễ dàng cho chiêm ngưỡng.<br />Ai tìm kiếm Đức Khôn Ngoan,<br />thì Đức Khôn Ngoan cho gặp.</span><br /><sup>13</sup><span>Ai khao khát Đức Khôn Ngoan,<br />thì Đức Khôn Ngoan đi bước trước mà tỏ mình cho biết.</span><br /><sup>14</sup><span>Ai từ sáng sớm đã tìm Đức Khôn Ngoan,<br />thì không phải nhọc nhằn vất vả.<br />Họ sẽ thấy Đức Khôn Ngoan ngồi ngay trước cửa nhà.</span><br /><sup>15</sup><span>Để tâm suy niệm về Đức Khôn Ngoan<br />là đạt được sự minh mẫn toàn hảo.<br />Ai vì Đức Khôn Ngoan mà thức khuya dậy sớm,<br />sẽ mau trút được mọi lo âu.</span><br /><sup>16</sup><span>Vì những ai xứng đáng với Đức Khôn Ngoan,<br />thì Đức Khôn Ngoan rảo quanh tìm kiếm.<br />Trên các nẻo đường họ đi,<br />Đức Khôn Ngoan niềm nở xuất hiện.<br />Mỗi khi họ suy tưởng điều gì,<br />Đức Khôn Ngoan đều đến với họ.<br /></span></p>"
+  },
+  "tv": {
+    "ref": "Tv 62,2.3-4.5-6.7-8 (Đ. x. c.2)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p><p class=\"leading\"><sup>2</sup><span>Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />ngay từ rạng đông con tìm kiếm Chúa.<br />Linh hồn con đã khát khao Ngài,<br />tấm thân này mòn mỏi đợi trông,<br />như mảnh đất hoang khô cằn, không giọt nước.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p><p class=\"leading\"><sup>3</sup><span>Nên con đến ngắm nhìn Ngài trong nơi thánh điện,<br />để thấy uy lực và vinh quang của Ngài.</span><sup>4</sup><span>Bởi ân tình Ngài quý hơn mạng sống,<br />miệng lưỡi này xin ca ngợi tán dương.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p><p class=\"leading\"><sup>5</sup><span>Suốt cả đời con, nguyện dâng lời chúc tụng,<br />và giơ tay cầu khẩn danh Ngài.</span><sup>6</sup><span>Lòng thoả thuê như khách vừa dự tiệc,<br />môi miệng con rộn rã khúc hoan ca.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p><p class=\"leading\"><sup>7</sup><span>Con tưởng nhớ Chúa trên giường ngủ,<br />suốt năm canh thầm thĩ với Ngài.</span><sup>8</sup><span>Quả thật Ngài đã thương trợ giúp,<br />nương bóng Ngài, con hớn hở reo vui.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Tx 4,13-18",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Thê-xa-lô-ni-ca.",
+    "lead": "Những người đã an giấc trong Đức Giê-su, sẽ được Thiên Chúa đưa về cùng Đức Giê-su.",
+    "content": "<p><sup>13</sup> Thưa anh em, về những ai đã an giấc ngàn thu, chúng tôi không muốn để anh em chẳng hay biết gì, hầu anh em khỏi buồn phiền như những người khác, là những người không có niềm hy vọng. <sup>14</sup> Vì nếu chúng ta tin rằng Đức Giê-su đã chết và đã sống lại, thì chúng ta cũng tin rằng những người đã an giấc trong Đức Giê-su, sẽ được Thiên Chúa đưa về cùng Đức Giê-su. <sup>15</sup> Dựa vào lời của Chúa, chúng tôi nói với anh em điều này, là chúng ta, những người đang sống, những người còn lại vào ngày Chúa quang lâm, chúng ta sẽ chẳng đi trước những người đã an giấc ngàn thu đâu. <sup>16</sup> Vì khi hiệu lệnh ban ra, khi tiếng tổng lãnh thiên thần và tiếng kèn của Thiên Chúa vang lên, thì chính Chúa sẽ từ trời ngự xuống, và những người đã chết trong Đức Ki-tô sẽ sống lại trước tiên ; <sup>17</sup> rồi đến chúng ta, là những người đang sống, những người còn lại, chúng ta sẽ được đem đi trên đám mây cùng với họ, để nghênh đón Chúa trên không trung. Như thế, chúng ta sẽ được ở cùng Chúa mãi mãi. <sup>18</sup> Vậy anh em hãy dùng những lời ấy mà an ủi nhau.</p>"
+  },
+  "tm": {
+    "ref": "Mt 25,1-13",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Chú rể kia rồi, ra đón đi !",
+    "alleluiaRef": "Mt 24,42a.44",
+    "alleluia": "Ha-lê-lui-a Ha-lê-lui-a. Anh em hãy canh thức và hãy sẵn sàng, vì chính giờ phút anh em không ngờ, thì Con Người sẽ đến. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a Ha-lê-lui-a. Anh em hãy canh thức và hãy sẵn sàng, vì chính giờ phút anh em không ngờ, thì Con Người sẽ đến. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, Đức Giê-su kể cho các môn đệ nghe dụ ngôn này : “Nước Trời sẽ giống như chuyện mười trinh nữ cầm đèn ra đón chú rể. <sup>2</sup> Trong mười cô đó, có năm cô dại và năm cô khôn. <sup>3</sup> Quả vậy, các cô dại mang đèn mà không mang dầu theo. <sup>4</sup> Còn những cô khôn thì vừa mang đèn vừa mang chai dầu theo. <sup>5</sup> Vì chú rể đến chậm, nên các cô thiếp đi, rồi ngủ cả. <sup>6</sup> Nửa đêm, có tiếng la lên : ‘Chú rể kia rồi, ra đón đi !’ <sup>7</sup> Bấy giờ tất cả các trinh nữ ấy đều thức dậy, và sửa soạn đèn. <sup>8</sup> Các cô dại nói với các cô khôn rằng : ‘Xin các chị cho chúng em chút dầu, vì đèn của chúng em sắp tắt rồi !’ <sup>9</sup> Các cô khôn đáp : ‘Sợ không đủ cho chúng em và cho các chị đâu, các chị ra hàng mà mua lấy thì hơn.’ <sup>10</sup> Đang lúc các cô đi mua, thì chú rể tới, và những cô đã sẵn sàng được đi theo chú rể vào dự tiệc cưới. Rồi người ta đóng cửa lại. <sup>11</sup> Sau cùng, mấy trinh nữ kia cũng đến gọi : ‘Thưa Ngài, thưa Ngài ! mở cửa cho chúng tôi với !’ <sup>12</sup> Nhưng Người đáp : ‘Tôi bảo thật các cô, tôi không biết các cô là ai cả !’ <sup>13</sup> Vậy anh em hãy canh thức, vì anh em không biết ngày nào, giờ nào.”</p>"
+  }
+},
+  "2026-11-02": {
+  "date": "2026-11-02",
+  "title": "Lễ Các Đẳng Linh Hồn",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "G 19,1.23-27a",
+    "bookTitle": "Bài trích sách Gióp.",
+    "lead": "Tôi biết rằng Đấng bênh vực tôi vẫn sống.",
+    "content": "<p><sup>1</sup> Bấy giờ, ông Gióp lên tiếng nói :</p><p class=\"poem\"><sup>23</sup><span>“Ôi, những lời tôi nói đây, phải chi có người chép lại,<br />phải chi có người ghi vào sách,</span><br /><sup>24</sup><span>có người đục bằng sắt, trám bằng chì,<br />tạc vào đá cho đến muôn đời !</span><br /><sup>25</sup><span>Tôi biết rằng Đấng bênh vực tôi vẫn sống,<br />và sau cùng, Người sẽ đứng lên trên cõi đất.</span><br /><sup>26</sup><span>Sau khi da tôi đây bị tiêu huỷ,<br />thì với tấm thân này, tôi sẽ được ngắm nhìn Thiên Chúa.</span><br /><sup>27a</sup><span>Chính tôi sẽ được ngắm nhìn Người,<br />Đấng mắt tôi nhìn thấy không phải người xa lạ.”<br /></span></p>"
+  },
+  "tv": {
+    "ref": "Tv 26,1.4.7 và 8b và 9a.13-14 (Đ. c.13)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa là nguồn ánh sáng và ơn cứu độ của tôi,<br />tôi còn sợ người nào ?<br />Chúa là thành luỹ bảo vệ đời tôi,<br />tôi khiếp gì ai nữa ?</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p><p class=\"leading\"><sup>4</sup><span>Một điều tôi kiếm tôi xin,<br />là luôn được ở trong đền Chúa tôi<br />mọi ngày trong suốt cuộc đời,<br />để chiêm ngưỡng Chúa tuyệt vời cao sang,<br />ngắm xem thánh điện huy hoàng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p><p class=\"leading\"><sup>7</sup><span>Lạy Chúa, cúi xin Ngài nghe tiếng con kêu,<br />xin thương tình đáp lại.</span><sup>8b</sup><span>Lạy Chúa, con tìm thánh nhan Ngài,</span><sup>9a</sup><span>xin Ngài đừng ẩn mặt.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p><p class=\"leading\"><sup>13</sup><span>Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span><sup>14</sup><span>Hãy cậy trông vào Chúa,<br />mạnh bạo lên, can đảm lên nào !<br />Hãy cậy trông vào Chúa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p>"
+  },
+  "bd2": {
+    "ref": "Rm 5,5-11",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Rô-ma.",
+    "lead": "Chúng ta đã được nên công chính nhờ Máu Đức Ki-tô đổ ra, hẳn sẽ được Người cứu khỏi cơn thịnh nộ của Thiên Chúa.",
+    "content": "<p><sup>5</sup> Thưa anh em, trông cậy không làm chúng ta phải thất vọng, vì Thiên Chúa đã đổ tình yêu của Người vào lòng chúng ta, nhờ Thánh Thần mà Người ban cho chúng ta. <sup>6</sup> Quả vậy, khi chúng ta không có sức làm được gì vì còn là hạng người vô đạo, thì theo đúng kỳ hạn, Đức Ki-tô đã chết vì chúng ta. <sup>7</sup> Hầu như không ai chết vì người công chính, hoạ may có ai dám chết vì một người lương thiện chăng. <sup>8</sup> Thế mà Đức Ki-tô đã chết vì chúng ta, ngay khi chúng ta còn là những người tội lỗi ; đó là bằng chứng Thiên Chúa yêu thương chúng ta. <sup>9</sup> Phương chi bây giờ chúng ta đã được nên công chính nhờ máu Đức Ki-tô đổ ra, hẳn chúng ta sẽ được Người cứu khỏi cơn thịnh nộ của Thiên Chúa. <sup>10</sup> Thật vậy, nếu ngay khi chúng ta còn thù nghịch với Thiên Chúa, Thiên Chúa đã để cho Con của Người phải chết mà cho chúng ta được hoà giải với Người, phương chi bây giờ chúng ta đã được hoà giải rồi, hẳn chúng ta sẽ được cứu nhờ sự sống của Người Con ấy. <sup>11</sup> Nhưng không phải chỉ có thế, chúng ta còn có Thiên Chúa là niềm tự hào, nhờ Đức Giê-su Ki-tô, Chúa chúng ta, Đấng nay đã hoà giải chúng ta với Thiên Chúa.</p>"
+  },
+  "tm": {
+    "ref": "Ga 6,37-40",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Gio-an.",
+    "lead": "Ai tin vào người Con, thì được sống muôn đời, và tôi sẽ cho họ sống lại trong ngày sau hết.",
+    "alleluiaRef": "Ga 6,40",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Ý của Cha tôi là tất cả những ai tin vào người Con, thì được sống muôn đời, và tôi sẽ cho họ sống lại trong ngày sau hết. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Ý của Cha tôi là tất cả những ai tin vào người Con, thì được sống muôn đời, và tôi sẽ cho họ sống lại trong ngày sau hết. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>37</sup> Khi ấy, Đức Giê-su nói với dân chúng rằng : “Tất cả những người Chúa Cha ban cho tôi đều sẽ đến với tôi, và ai đến với tôi, tôi sẽ không loại ra ngoài, <sup>38</sup> vì tôi tự trời mà xuống, không phải để làm theo ý tôi, nhưng để làm theo ý Đấng đã sai tôi. <sup>39</sup> Mà ý của Đấng đã sai tôi là tất cả những kẻ Người đã ban cho tôi, tôi sẽ không để mất một ai, nhưng sẽ cho họ sống lại trong ngày sau hết. <sup>40</sup> Thật vậy, ý của Cha tôi là tất cả những ai thấy người Con và tin vào người Con, thì được sống muôn đời, và tôi sẽ cho họ sống lại trong ngày sau hết.”</p>"
+  }
+},
+  "2026-10-25": {
+  "date": "2026-10-25",
+  "title": "Chúa Nhật Tuần XXX - Mùa Thường Niên",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Xh 22,20-26",
+    "bookTitle": "Bài trích sách Xuất hành.",
+    "lead": "Nếu các ngươi ức hiếp mẹ goá con côi, thì cơn giận Ta sẽ bốc lên chống lại các ngươi.",
+    "content": "<p><sup>20</sup> Đức Chúa phán thế này : Người ngoại kiều, ngươi không được ngược đãi và áp bức, vì chính các ngươi đã là ngoại kiều ở đất Ai-cập. <sup>21</sup> Mẹ goá con côi, các ngươi không được ức hiếp. <sup>22</sup> Nếu ngươi ức hiếp mà nó kêu cứu Ta, ắt Ta sẽ nghe tiếng nó kêu cứu. <sup>23</sup> Cơn giận Ta sẽ bốc lên, Ta sẽ cho gươm chém giết các ngươi : thế là vợ các ngươi sẽ thành goá bụa, và con các ngươi sẽ thành côi cút.</p><p><sup>24</sup> Nếu ngươi cho một người trong dân Ta, một người nghèo ở với ngươi vay tiền, thì ngươi không được xử với nó như chủ nợ, không được bắt nó trả lãi.</p><p><sup>25</sup> Nếu ngươi giữ áo choàng của người khác làm đồ cầm, thì ngươi phải trả lại cho nó trước khi mặt trời lặn. <sup>26</sup> Nó chỉ có cái đó để đắp, để làm áo che thân ; nó sẽ lấy gì mà ngủ ? Nó mà kêu cứu Ta, Ta sẽ nghe nó, vì Ta vốn nhân từ.</p>"
+  },
+  "tv": {
+    "ref": "Tv 17,2-3a.3bc-4.47 và 51ab (Đ. c.2)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Con yêu mến Ngài, lạy Chúa là sức mạnh của con.</span></p><p class=\"leading\"><sup>2</sup><span>Con yêu mến Ngài,<br />lạy Chúa là sức mạnh của con ;</span><sup>3a</sup><span>lạy Chúa là núi đá, là thành luỹ,<br />là Đấng giải thoát con.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Con yêu mến Ngài, lạy Chúa là sức mạnh của con.</span></p><p class=\"leading\"><sup>3bc</sup><span>Lạy Thiên Chúa con thờ, là núi đá cho con trú ẩn,<br />là khiên mộc, là Đấng cứu độ quyền năng,<br />là thành trì bảo vệ.</span><sup>4</sup><span>Tôi kêu cầu Chúa<br />là Đấng xứng muôn lời ngợi khen,<br />và tôi được cứu thoát khỏi quân thù.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Con yêu mến Ngài, lạy Chúa là sức mạnh của con.</span></p><p class=\"leading\"><sup>47</sup><span>Đức Chúa vạn vạn tuế !<br />Chúc tụng Người là núi đá cho tôi trú ẩn.<br />Tôn vinh Thiên Chúa là Đấng cứu độ tôi,</span><sup>51ab</sup><span>Chúa ban nhiều chiến thắng lớn lao<br />cho Đức Vua chính Người đã lập.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Con yêu mến Ngài, lạy Chúa là sức mạnh của con.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Tx 1,5c-10",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Thê-xa-lô-ni-ca.",
+    "lead": "Anh em đã từ bỏ ngẫu tượng, để phụng sự Thiên Chúa và chờ đợi Con của Người.",
+    "content": "<p><sup>5c</sup> Thưa anh em, anh em biết, khi ở với anh em, chúng tôi đã sống thế nào để mưu ích cho anh em ; <sup>6</sup> còn anh em, anh em đã bắt chước chúng tôi và noi gương Chúa, khi đón nhận lời Chúa giữa bao nỗi gian truân với niềm vui do Thánh Thần ban : <sup>7</sup> bởi vậy anh em đã nên gương cho mọi tín hữu ở miền Ma-kê-đô-ni-a và miền A-khai-a. <sup>8</sup> Quả thế, từ nơi anh em, lời Chúa đã vang ra, không những ở Ma-kê-đô-ni-a và A-khai-a, mà đâu đâu người ta cũng nghe biết lòng tin anh em đặt vào Thiên Chúa, khiến chúng tôi không cần phải nói gì thêm nữa. <sup>9</sup> Khi nói về chúng tôi, người ta kể lại chúng tôi đã được anh em tiếp đón làm sao, và anh em đã từ bỏ ngẫu tượng mà quay về với Thiên Chúa thế nào, để phụng sự Thiên Chúa hằng sống, Thiên Chúa thật, <sup>10</sup> và chờ đợi Con của Người từ trời ngự đến, người Con mà Thiên Chúa đã cho trỗi dậy từ cõi chết, là Đức Giê-su, Đấng cứu chúng ta thoát cơn thịnh nộ đang đến.</p>"
+  },
+  "tm": {
+    "ref": "Mt 22,34-40",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Ngươi phải yêu mến Đức Chúa, Thiên Chúa của ngươi, và yêu người thân cận như chính mình.",
+    "alleluiaRef": "Ga 14,23",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Ai yêu mến Thầy, thì sẽ giữ lời Thầy. Cha Thầy sẽ yêu mến người ấy. Cha Thầy và Thầy sẽ đến với người ấy. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Ai yêu mến Thầy, thì sẽ giữ lời Thầy. Cha Thầy sẽ yêu mến người ấy. Cha Thầy và Thầy sẽ đến với người ấy. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>34</sup> Khi ấy, nghe tin Đức Giê-su đã làm cho nhóm Xa-đốc phải câm miệng, thì những người Pha-ri-sêu họp nhau lại. <sup>35</sup> Rồi một người thông luật trong nhóm hỏi Đức Giê-su để thử Người rằng : <sup>36</sup> “Thưa Thầy, trong sách Luật Mô-sê, điều răn nào là điều răn trọng nhất ?” <sup>37</sup> Đức Giê-su đáp : “Ngươi phải yêu mến Đức Chúa, Thiên Chúa của ngươi, hết lòng, hết linh hồn và hết trí khôn ngươi. <sup>38</sup> Đó là điều răn trọng nhất và điều răn thứ nhất. <sup>39</sup> Còn điều răn thứ hai, cũng giống điều răn ấy, là : Ngươi phải yêu người thân cận như chính mình. <sup>40</sup> Tất cả Luật Mô-sê và các sách ngôn sứ đều tuỳ thuộc vào hai điều răn ấy.”</p>"
+  }
+},
+  "2026-11-22": {
+  "date": "2026-11-22",
+  "title": "Chúa Nhật 34 Thường Niên - Chúa Kitô Vua Vũ Trụ",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Ed 34,11-12.15-17",
+    "bookTitle": "Bài trích sách ngôn sứ Ê-dê-ki-en.",
+    "lead": "Phần các ngươi, hỡi chiên của Ta, này Ta sẽ xét xử giữa chiên với chiên.",
+    "content": "<p><sup>11</sup> Đức Chúa là Chúa Thượng phán thế này : “Đây, chính Ta sẽ chăm sóc chiên của Ta và thân hành kiểm điểm. <sup>12</sup> Như mục tử kiểm điểm đàn vật của mình vào ngày người ấy ở giữa đàn chiên bị tản mác thế nào, thì Ta cũng sẽ kiểm điểm chiên của Ta như vậy. Ta sẽ kéo chúng ra khỏi mọi nơi chúng đã bị tản mác, vào ngày mây đen mù mịt. <sup>15</sup> Chính Ta sẽ chăn dắt chiên của Ta, chính Ta sẽ cho chúng nằm nghỉ - sấm ngôn của Đức Chúa là Chúa Thượng. <sup>16</sup> Con nào bị mất, Ta sẽ đi tìm ; con nào đi lạc, Ta sẽ đưa về ; con nào bị thương, Ta sẽ băng bó ; con nào bệnh tật, Ta sẽ làm cho mạnh ; con nào béo mập, con nào khoẻ mạnh, Ta sẽ canh chừng. Ta sẽ theo lẽ chính trực mà chăn dắt chúng.</p><p><sup>17</sup> “Phần các ngươi, hỡi chiên của Ta, -Đức Chúa là Chúa Thượng phán-, này Ta sẽ xét xử giữa chiên với chiên, giữa cừu với dê.”</p>"
+  },
+  "tv": {
+    "ref": "Tv 22,1-2a.2b-3.5.6 (Đ. c.1)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span><sup>2a</sup><span>Trong đồng cỏ xanh tươi,<br />Người cho tôi nằm nghỉ.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>2b</sup><span>Người đưa tôi tới dòng nước trong lành</span><sup>3</sup><span>và bổ sức cho tôi.<br />Người dẫn tôi trên đường ngay nẻo chính<br />vì danh dự của Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>5</sup><span>Chúa dọn sẵn cho con bữa tiệc<br />ngay trước mặt quân thù.<br />Đầu con, Chúa xức đượm dầu thơm,<br />ly rượu con đầy tràn chan chứa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>6</sup><span>Lòng nhân hậu và tình thương Chúa<br />ấp ủ tôi suốt cả cuộc đời,<br />và tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Cr 15,20-26.28",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Cô-rin-tô.",
+    "lead": "Đức Ki-tô trao vương quyền lại cho Thiên Chúa là Cha, và như vậy, Thiên Chúa có toàn quyền trên muôn loài.",
+    "content": "<p><sup>20</sup> Thưa anh em, Đức Ki-tô đã trỗi dậy từ cõi chết, mở đường cho những ai đã an giấc ngàn thu. <sup>21</sup> Vì nếu tại một người mà nhân loại phải chết, thì cũng nhờ một người mà kẻ chết được sống lại. <sup>22</sup> Quả thế, như mọi người vì liên đới với A-đam mà phải chết, thì mọi người nhờ liên đới với Đức Ki-tô, cũng được Thiên Chúa cho sống. <sup>23</sup> Nhưng mỗi người theo thứ tự của mình : mở đường là Đức Ki-tô, rồi khi Đức Ki-tô quang lâm thì đến lượt những kẻ thuộc về Người. <sup>24</sup> Sau đó mọi sự đều hoàn tất, khi Người đã tiêu diệt hết mọi quản thần, mọi quyền thần và mọi dũng thần, rồi trao vương quyền lại cho Thiên Chúa là Cha.</p><p><sup>25</sup> Thật vậy, Đức Ki-tô phải nắm vương quyền cho đến khi Thiên Chúa đặt mọi thù địch dưới chân Người. <sup>26</sup> Thù địch cuối cùng bị tiêu diệt là sự chết. <sup>28</sup> Lúc muôn loài đã quy phục Đức Ki-tô, thì chính Người, vì là Con, cũng sẽ quy phục Đấng bắt muôn loài phải quy phục Người ; và như vậy, Thiên Chúa có toàn quyền trên muôn loài.</p>"
+  },
+  "tm": {
+    "ref": "Mt 25,31-46",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Con Người sẽ ngự lên ngai vinh hiển của Người, và Người sẽ tách biệt họ với nhau.",
+    "alleluiaRef": "Mc 11,9.10",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúc tụng Đấng ngự đến nhân danh Đức Chúa ! Chúc tụng triều đại đang tới, triều đại vua Đa-vít tổ phụ chúng ta. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúc tụng Đấng ngự đến nhân danh Đức Chúa ! Chúc tụng triều đại đang tới, triều đại vua Đa-vít tổ phụ chúng ta. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>31</sup> Khi ấy, Đức Giê-su nói với các môn đệ rằng : “Khi Con Người đến trong vinh quang của Người, có tất cả các thiên sứ theo hầu, bấy giờ Người sẽ ngự lên ngai vinh hiển của Người. <sup>32</sup> Các dân thiên hạ sẽ được tập hợp trước mặt Người, và Người sẽ tách biệt họ với nhau, như mục tử tách biệt chiên với dê. <sup>33</sup> Người sẽ cho chiên đứng bên phải Người, còn dê ở bên trái. <sup>34</sup> Bấy giờ Đức Vua sẽ phán cùng những người ở bên phải rằng : ‘Nào những kẻ Cha Ta chúc phúc, hãy đến thừa hưởng Vương Quốc dọn sẵn cho các ngươi ngay từ thuở tạo thiên lập địa. <sup>35</sup> Vì xưa Ta đói, các ngươi đã cho ăn ; Ta khát, các ngươi đã cho uống ; Ta là khách lạ, các ngươi đã tiếp rước ; <sup>36</sup> Ta trần truồng, các ngươi đã cho mặc ; Ta đau yếu, các ngươi đã thăm viếng ; Ta ngồi tù, các ngươi đến hỏi han.’ <sup>37</sup> Bấy giờ những người công chính sẽ thưa rằng : ‘Lạy Chúa, có bao giờ chúng con đã thấy Chúa đói mà cho ăn, khát mà cho uống ; <sup>38</sup> có bao giờ đã thấy Chúa là khách lạ mà tiếp rước ; hoặc trần truồng mà cho mặc ? <sup>39</sup> Có bao giờ chúng con đã thấy Chúa đau yếu hoặc ngồi tù, mà đến hỏi han đâu ?’ <sup>40</sup> Đức Vua sẽ đáp lại rằng : ‘Ta bảo thật các ngươi : mỗi lần các ngươi làm như thế cho một trong những anh em bé nhỏ nhất của Ta đây, là các ngươi đã làm cho chính Ta vậy.’ <sup>41</sup> Rồi Đức Vua sẽ phán cùng những người ở bên trái rằng : ‘Quân bị nguyền rủa kia, đi đi cho khuất mắt Ta mà vào lửa đời đời, nơi dành sẵn cho tên Ác Quỷ và các sứ thần của nó. <sup>42</sup> Vì xưa Ta đói, các ngươi đã không cho ăn ; Ta khát, các ngươi đã không cho uống ; <sup>43</sup> Ta là khách lạ, các ngươi đã không tiếp rước ; Ta trần truồng, các ngươi đã không cho mặc ; Ta đau yếu và ngồi tù, các ngươi đã chẳng thăm viếng.’ <sup>44</sup> Bấy giờ những người ấy cũng sẽ thưa rằng : ‘Lạy Chúa, có bao giờ chúng con đã thấy Chúa đói, khát, hoặc là khách lạ, hoặc trần truồng, đau yếu hay ngồi tù, mà không phục vụ Chúa đâu ?’ <sup>45</sup> Bấy giờ Người sẽ đáp lại họ rằng : ‘Ta bảo thật các ngươi : mỗi lần các ngươi không làm như thế cho một trong những người bé nhỏ nhất đây, là các ngươi đã không làm cho chính Ta vậy.’ <sup>46</sup> Thế là họ ra đi để chịu cực hình muôn kiếp, còn những người công chính ra đi để hưởng sự sống muôn đời.”</p>"
+  }
+},
+  "2026-09-20": {
+  "date": "2026-09-20",
+  "title": "Chúa Nhật Tuần XXV - Mùa Thường Niên (Năm A)",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 55,6-9",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Tư tưởng của Ta không phải là tư tưởng của các ngươi.",
+    "content": "<p><sup>6</sup> Hãy tìm Đức Chúa khi Người còn cho gặp, kêu cầu Người lúc Người ở kề bên. <sup>7</sup> Kẻ gian ác, hãy bỏ đường lối mình, người bất lương, hãy bỏ tư tưởng mình, mà trở về với Đức Chúa - và Người sẽ xót thương, về với Thiên Chúa chúng ta, vì Người rộng lòng tha thứ.</p><p><sup>8</sup> Thật vậy, tư tưởng của Ta không phải là tư tưởng của các ngươi, và đường lối các ngươi không phải là đường lối của Ta - sấm ngôn của Đức Chúa. <sup>9</sup> Trời cao hơn đất chừng nào, thì đường lối của Ta cũng cao hơn đường lối các ngươi, và tư tưởng của Ta cũng cao hơn tư tưởng các ngươi chừng ấy.</p>"
+  },
+  "tv": {
+    "ref": "Tv 144,2-3.8-9.17-18 (Đ. c.18a)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>2</sup><span>Ngày lại ngày, con xin chúc tụng Chúa,<br />mãi ngợi khen Danh Thánh tới muôn đời.</span><sup>3</sup><span>Chúa thật cao cả, xứng muôn lời ca tụng,<br />sự cao cả của Người khôn thấu khôn dò.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>8</sup><span>Chúa là Đấng từ bi nhân hậu,<br />Người chậm giận và giàu tình thương.</span><sup>9</sup><span>Chúa nhân ái đối với mọi người,<br />hằng âu yếm mọi loài Người đã dựng nên.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>17</sup><span>Chúa công minh trong mọi đường lối Chúa,<br />đầy yêu thương trong mọi việc Người làm.</span><sup>18</sup><span>Chúa gần gũi mọi kẻ kêu cầu Người,<br />mọi kẻ thành tâm kêu cầu Chúa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 1,20c-24.27a",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Đối với tôi, sống là Đức Ki-tô và chết là một mối lợi.",
+    "content": "<p><sup>20c</sup> Thưa anh em, dù tôi sống hay tôi chết, Đức Ki-tô cũng sẽ được vẻ vang nơi thân xác tôi. <sup>21</sup> Vì đối với tôi, sống là Đức Ki-tô, và chết là một mối lợi. <sup>22</sup> Nếu sống ở đời này mà công việc của tôi sinh hoa kết quả, thì tôi không biết nên chọn đàng nào. <sup>23</sup> Tôi bị giằng co giữa hai đàng: ước ao của tôi là ra đi để được ở với Đức Ki-tô, điều này tốt hơn bội phần; <sup>24</sup> nhưng ở lại trong thân xác thì cần thiết hơn cho anh em.</p><p><sup>27a</sup> Chỉ có một điều là anh em phải ăn ở làm sao cho xứng với Tin Mừng của Đức Ki-tô.</p>"
+  },
+  "tm": {
+    "ref": "Mt 20,1-16a",
+    "bookTitle": "Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Hay vì thấy tôi tốt bụng mà bạn đâm ra ghen tức?",
+    "alleluiaRef": "x. Cv 16,14b",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Lạy Chúa, xin mở lòng chúng con, để chúng con chú ý lắng nghe lời Con Chúa. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Lạy Chúa, xin mở lòng chúng con, để chúng con chú ý lắng nghe lời Con Chúa. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, Đức Giê-su kể cho các môn đệ dụ ngôn này: \"Nước Trời giống như chuyện gia chủ kia, vừa tảng sáng đã ra mướn thợ vào làm vườn nho cho mình. <sup>2</sup> Sau khi đã thoả thuận với thợ là mỗi ngày một quan tiền, ông sai họ vào vườn nho làm việc.</p><p><sup>3</sup> Khoảng giờ thứ ba, ông trở ra, thấy có những người khác ở không, đang đứng ngoài chợ. <sup>4</sup> Ông cũng bảo họ: 'Cả các anh nữa, hãy đi vào vườn nho, tôi sẽ trả cho các anh hợp lẽ công bằng.' <sup>5</sup> Họ liền đi. Khoảng giờ thứ sáu, rồi giờ thứ chín, ông lại trở ra và cũng làm như vậy.</p><p><sup>6</sup> Khoảng giờ thứ mười một, ông trở ra, thấy còn có những người khác đứng đó, ông nói với họ: 'Sao các anh đứng đây suốt ngày không làm gì hết?' <sup>7</sup> Họ đáp: 'Vì không ai mướn chúng tôi.' Ông bảo họ: 'Cả các anh nữa, hãy đi vào vườn nho!'</p><p><sup>8</sup> Chiều đến, ông chủ vườn nho bảo người quản lý: 'Anh gọi thợ lại mà trả công cho họ, cứ bắt đầu từ người vào sau chót tới người đầu tiên.' <sup>9</sup> Vậy những người mới vào làm lúc giờ thứ mười một tiến lại, và mỗi người được lãnh một quan tiền. <sup>10</sup> Khi những người vào làm trước nhất tiến lại, họ tưởng là sẽ được lãnh nhiều hơn, thế nhưng mỗi người cũng chỉ lãnh được một quan tiền. <sup>11</sup> Vừa lãnh xong, họ liền cằn nhằn với gia chủ: <sup>12</sup> 'Mấy người sau chót này chỉ làm có một giờ, thế mà ông lại coi họ ngang hàng với chúng tôi là những người đã phải làm việc nặng nhọc suốt ngày, lại còn bị nắng nôi thiêu đốt!' <sup>13</sup> Nhưng gia chủ trả lời cho một người trong bọn họ: 'Này bạn, tôi đâu có bất công với bạn! Bạn đã chẳng thoả thuận với tôi là một quan tiền sao? <sup>14</sup> Cầm lấy phần của bạn mà đi đi! Còn tôi, tôi muốn cho người sau chót này cũng được bằng bạn đó. <sup>15</sup> Chẳng lẽ tôi lại không có quyền tuỳ ý định đoạt về những gì là của tôi sao? Hay vì thấy tôi tốt bụng, mà bạn đâm ra ghen tức?'</p><p><sup>16a</sup> Thế là những kẻ đứng chót sẽ được lên hàng đầu, còn những kẻ đứng đầu sẽ phải xuống hàng chót.\"</p>"
+  }
+},
+  "2026-09-27": {
+  "date": "2026-09-27",
+  "title": "Chúa Nhật Tuần XXVI - Mùa Thường Niên (Năm A)",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Ed 18,25-28",
+    "bookTitle": "Bài trích sách ngôn sứ Ê-dê-ki-en.",
+    "lead": "Nếu kẻ gian ác từ bỏ điều dữ nó đã phạm, nó sẽ cứu được mạng sống mình.",
+    "content": "<p><sup>25</sup> Đức Chúa phán thế này: Các ngươi lại nói: 'Đường lối của Chúa không ngay thẳng!' Vậy hỡi nhà Ít-ra-en, hãy nghe đây: Có phải đường lối của Ta không ngay thẳng hay đường lối của các ngươi mới không ngay thẳng? <sup>26</sup> Khi người công chính từ bỏ lẽ công chính của mình mà phạm tội ác và phải chết, thì chính vì tội ác nó phạm mà nó phải chết. <sup>27</sup> Còn nếu kẻ gian ác từ bỏ điều dữ nó đã phạm mà thi hành điều chính trực công minh, thì nó sẽ cứu được mạng sống mình. <sup>28</sup> Nó đã thấy và từ bỏ mọi tội ác nó phạm, thì chắc chắn nó sẽ sống, nó không phải chết.</p>"
+  },
+  "tv": {
+    "ref": "Tv 24,4bc-5.6-7.8-9 (Đ. c.6a)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin nhớ lại tình thương của Ngài.</span></p><p class=\"leading\"><sup>4bc</sup><span>Lạy Chúa, đường nẻo Ngài, xin dạy cho con biết,<br />lối đi của Ngài, xin chỉ bảo con.</span><sup>5</sup><span>Xin dẫn con đi theo đường chân lý của Ngài và bảo ban dạy dỗ,<br />vì chính Ngài là Thiên Chúa cứu độ con.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin nhớ lại tình thương của Ngài.</span></p><p class=\"leading\"><sup>6</sup><span>Lạy Chúa, xin nhớ lại nghĩa nặng với tình sâu<br />Ngài đã từng biểu lộ từ muôn thuở muôn đời.</span><sup>7</sup><span>Tuổi xuân trót dại bao lầm lỗi, xin Ngài đừng nhớ đến,<br />nhưng xin lấy lượng từ bi mà nhớ đến con.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin nhớ lại tình thương của Ngài.</span></p><p class=\"leading\"><sup>8</sup><span>Chúa là Đấng nhân từ chính trực,<br />chỉ lối cho tội nhân,</span><sup>9</sup><span>dẫn kẻ khiêm nhu đi trong đường công chính,<br />dạy cho biết đường lối của Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin nhớ lại tình thương của Ngài.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 2,1-11",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Anh em hãy có cùng những tâm tình như chính Đức Ki-tô Giê-su.",
+    "content": "<p><sup>1</sup> Thưa anh em, nếu quả thật sự liên kết với Đức Ki-tô đem lại cho anh em một niềm an ủi, nếu tình bác ái khích lệ anh em, nếu anh em được hiệp thông trong Thần Khí, nếu anh em có lòng thương xót và cảm thông, <sup>2</sup> thì xin anh em hãy làm cho niềm vui của tôi được trọn vẹn, là hãy có cùng một cảm nghĩ, cùng một lòng mến, cùng một tâm hồn, cùng một ý hướng. <sup>3</sup> Đừng làm chi vì ganh tị hay vì hư danh, nhưng hãy lấy lòng khiêm nhường mà coi người khác hơn mình. <sup>4</sup> Mỗi người đừng tìm lợi ích cho riêng mình, nhưng hãy tìm lợi ích cho người khác. <sup>5</sup> Giữa anh em với nhau, anh em hãy có cùng một tâm tình như chính Đức Ki-tô Giê-su.</p><p><sup>6</sup> Đức Giê-su Ki-tô vốn dĩ là Thiên Chúa mà không nghĩ phải nhất quyết duy trì địa vị ngang hàng với Thiên Chúa, <sup>7</sup> nhưng đã hoàn toàn trút bỏ vinh quang mặc lấy thân nô lệ, trở nên giống phàm nhân sống như một người trần thế. <sup>8</sup> Người lại còn hạ mình, vâng lời cho đến nỗi bằng lòng chịu chết, chết trên cây thập tự. <sup>9</sup> Chính vì thế, Thiên Chúa đã siêu tôn Người và tặng ban danh hiệu trổi vượt trên muôn ngàn danh hiệu, <sup>10</sup> như vậy, khi vừa nghe danh thánh Giê-su, cả trên trời dưới đất và trong nơi âm phủ, muôn vật phải bái quỳ, <sup>11</sup> và để tôn vinh Thiên Chúa Cha, mọi loài phải mở miệng tuyên xưng rằng: \"Đức Giê-su Ki-tô là Chúa\".</p>"
+  },
+  "tm": {
+    "ref": "Mt 21,28-32",
+    "bookTitle": "Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Nó hối hận và đã đi làm. Những người thu thuế và những cô gái điếm vào Nước Thiên Chúa trước các ông.",
+    "alleluiaRef": "Ga 10,27",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói: Chiên của Tôi thì nghe tiếng Tôi, Tôi biết chúng và chúng theo Tôi. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói: Chiên của Tôi thì nghe tiếng Tôi, Tôi biết chúng và chúng theo Tôi. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>28</sup> Khi ấy, Đức Giê-su nói với các thượng tế và kỳ mục trong dân rằng: \"Các ông nghĩ sao: Một người kia có hai đứa con trai. Ông ta đến nói với đứa thứ nhất: 'Này con, hôm nay con hãy đi làm vườn nho.' <sup>29</sup> Nó đáp: 'Con không muốn đâu!' Nhưng sau đó, nó hối hận, nên lại đi. <sup>30</sup> Ông ta đến gặp đứa thứ hai và cũng bảo như vậy. Nó đáp: 'Thưa ngài, vâng, con đi!' nhưng rồi lại không đi. <sup>31</sup> Trong hai người con đó, ai đã làm theo ý muốn của người cha?\" Họ đáp: \"Người thứ nhất.\"</p><p>Đức Giê-su nói với họ: \"Tôi bảo thật các ông: những người thu thuế và những cô gái điếm vào Nước Thiên Chúa trước các ông. <sup>32</sup> Vì ông Gio-an đã đến chỉ đường công chính cho các ông, mà các ông không tin ông ấy; còn những người thu thuế và những cô gái điếm lại tin. Phần các ông, khi đã thấy vậy rồi, các ông vẫn không chịu hối hận mà tin ông ấy.\"</p>"
+  }
+},
+  "2026-10-04": {
+  "date": "2026-10-04",
+  "title": "Chúa Nhật Tuần XXVII - Mùa Thường Niên (Năm A)",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 5,1-7",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.",
+    "content": "<p><sup>1</sup> Tôi xin hát tặng bạn tôi, bài hát của bạn tôi về vườn nho của mình. Bạn tôi có một vườn nho trên sườn đồi màu mỡ. <sup>2</sup> Bạn cuốc đất, nhặt đá, trồng những gốc nho quý, xây một tháp canh ở giữa, và khoét bồn đạp nho. Bạn những mong nó sinh trái tốt, nó lại sinh trái chua.</p><p><sup>3</sup> Giờ đây, hỡi dân cư Giê-ru-sa-lem và người Giu-đa, hãy làm trọng tài phân xử giữa tôi và vườn nho của tôi! <sup>4</sup> Có gì phải làm cho vườn nho của tôi mà tôi đã không làm? Sao tôi những mong nó sinh trái tốt, nó lại sinh trái chua?</p><p><sup>5</sup> Giờ đây, tôi cho các người biết tôi sẽ làm gì cho vườn nho của tôi: dỡ hàng rào để cho nó bị tàn phá, phá bức tường để cho nó bị giẫm đạp. <sup>6</sup> Tôi sẽ biến nó thành mảnh đất hoang vu, không cắt tỉa, không vun xới; gai góc sẽ mọc lên; và tôi sẽ truyền cho mây đừng đổ mưa xuống trên nó. <sup>7</sup> Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en; chồi cây Người vui thích chính là người Giu-đa. Người những mong họ giữ lẽ công bằng, mà chỉ thấy đầu rơi máu chảy; những mong họ làm điều chính trực, mà chỉ nghe tiếng than khóc kêu gào.</p>"
+  },
+  "tv": {
+    "ref": "Tv 79,9 và 12.13-14.15-16.19-20 (Đ. Is 5,7a)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p><p class=\"leading\"><sup>9</sup><span>Gốc nho này, Chúa bứng từ Ai-cập,<br />đuổi chư dân, lấy đất mà trồng,</span><sup>12</sup><span>cành vươn dài ra tận bờ Biển Cả,<br />chồi đâm sâu tới tận vùng Sông Cả.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p><p class=\"leading\"><sup>13</sup><span>Bức tường rào, sao Ngài phá đổ,<br />cho khách qua đường bứt trộm ăn?</span><sup>14</sup><span>Heo rừng vào phá phách,<br />thú nội tha hồ cắn trộm lan tràn!</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p><p class=\"leading\"><sup>15</sup><span>Lạy Chúa các đạo binh, xin trở lại,<br />từ trời cao nhìn ngắm và đoái thương:</span><sup>16</sup><span>vườn nho này, xin Ngài nâng đỡ,<br />bảo vệ chồi tay hữu Ngài đã trồng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p><p class=\"leading\"><sup>19</sup><span>Chúng con nguyền chẳng xa rời Chúa nữa,<br />xin ban sức sống, chúng con sẽ cầu khẩn Danh Ngài.</span><sup>20</sup><span>Lạy Chúa các đạo binh, xin phục hồi chúng con,<br />toả ánh tôn nhan rạng ngời để chúng con được ơn cứu độ.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 4,6-9",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Hãy thi hành những điều đó, và Thiên Chúa là nguồn bình an sẽ ở với anh em.",
+    "content": "<p><sup>6</sup> Thưa anh em, anh em đừng lo lắng gì cả. Nhưng trong mọi hoàn cảnh, anh em cứ đem lời cầu xin, van nài và tạ ơn mà dãi bày trước mặt Thiên Chúa những điều anh em sở nguyện. <sup>7</sup> Và bình an của Thiên Chúa, bình an vượt lên trên mọi hiểu biết, sẽ giữ gìn lòng trí anh em trong Đức Ki-tô Giê-su.</p><p><sup>8</sup> Ngoài ra, thưa anh em, những gì là chân thật, cao quý, những gì là chính trực, tinh tuyền, những gì là đáng mến và đem lại danh thơm tiếng tốt, những gì là đức hạnh, đáng khen, thì xin anh em hãy để ý đến. <sup>9</sup> Những gì anh em đã học hỏi, đã lãnh nhận, đã nghe, đã thấy ở nơi tôi, thì hãy đem ra thực hành, và Thiên Chúa là nguồn bình an sẽ ở với anh em.</p>"
+  },
+  "tm": {
+    "ref": "Mt 21,33-43",
+    "bookTitle": "Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Chủ sẽ cho các tá điền khác mướn vườn nho.",
+    "alleluiaRef": "x. Ga 15,16",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói: Chính Thầy đã chọn anh em, và cắt cử anh em để anh em ra đi, sinh được hoa trái, và hoa trái của anh em tồn tại. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói: Chính Thầy đã chọn anh em, và cắt cử anh em để anh em ra đi, sinh được hoa trái, và hoa trái của anh em tồn tại. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>33</sup> Khi ấy, Đức Giê-su nói với các thượng tế và kỳ mục trong dân rằng: \"Các ông hãy nghe một dụ ngôn khác: Có gia chủ kia trồng được một vườn nho; chung quanh vườn, ông rào giậu; trong vườn, ông khoét bồn đạp nho, và dựng một tháp canh. Xong đâu đấy, ông cho tá điền canh tác, rồi trẩy đi phương xa. <sup>34</sup> Gần đến mùa hái nho, ông sai đầy tớ đến gặp các tá điền để thu hoa lợi. <sup>35</sup> Nhưng bọn tá điền bắt các đầy tớ ông: chúng đánh người này, giết người kia, ném đá người khác. <sup>36</sup> Ông lại sai một số đầy tớ khác đông hơn trước, nhưng bọn tá điền cũng xử với họ y như vậy. <sup>37</sup> Sau cùng, ông sai chính con trai mình đến gặp chúng, vì nghĩ rằng: 'Chúng sẽ nể con ta.' <sup>38</sup> Nhưng bọn tá điền vừa thấy người con, thì bảo nhau: 'Đứa thừa tự đây rồi! Nào ta giết quách nó đi, và đoạt lấy gia tài nó!' <sup>39</sup> Thế là chúng bắt lấy cậu, lôi ra ngoài vườn nho mà giết.</p><p><sup>40</sup> Vậy khi ông chủ vườn nho đến, ông sẽ làm gì bọn tá điền kia?\" <sup>41</sup> Họ đáp: \"Ác giả ác báo, ông sẽ tru diệt bọn hung ác đó, và sang nhượng vườn nho cho các tá điền khác, những người biết nộp hoa lợi cho ông đúng mùa.\" <sup>42</sup> Đức Giê-su nói với họ: \"Kinh Thánh có câu: 'Tảng đá thợ xây nhà loại bỏ lại trở nên tảng đá góc tường. Đó chính là công trình của Chúa, công trình kỳ diệu trước mắt chúng ta!' Các ông chưa bao giờ đọc câu đó sao?</p><p><sup>43</sup> Bởi đó, tôi nói cho các ông hay: Nước Thiên Chúa, Thiên Chúa sẽ lấy đi không cho các ông nữa, mà ban cho một dân tộc biết làm cho Nước ấy sinh hoa lợi.\"</p>"
+  }
+},
+  "cn31": {
+  "date": "cn31",
+  "title": "Chúa Nhật Tuần XXXI - Mùa Thường Niên (Năm A)",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Ml 1,14b-2,2b.8-10",
+    "bookTitle": "Bài trích sách ngôn sứ Ma-la-khi.",
+    "lead": "Các ngươi đã đi trệch đường và làm cho nhiều người lảo đảo trên đường Luật Dạy.",
+    "content": "<p><sup>1,14b</sup> Đức Chúa các đạo binh phán: Ta là một Đại Vương, và Danh Ta được kính sợ giữa chư dân. <sup>2,1</sup> Giờ đây, hỡi các tư tế, lệnh này dành cho các ngươi: <sup>2</sup> Nếu các ngươi không nghe, nếu các ngươi không tha thiết làm vinh Danh Ta, thì Ta sẽ sai lời chúc dữ đến các ngươi, và Ta sẽ biến phúc lành của các ngươi thành lời chúc dữ.</p><p><sup>8</sup> Đức Chúa các đạo binh phán: Các ngươi đã đi trệch đường và làm cho nhiều người lảo đảo trên đường Luật Dạy; các ngươi đã huỷ hoại giao ước của Lê-vi. <sup>9</sup> Vì thế, chính Ta sẽ làm cho các ngươi phải đáng khinh và hèn hạ trước mặt toàn dân, bởi vì các ngươi không tuân giữ đường lối Ta, và khi áp dụng Luật Dạy, các ngươi lại thiên vị.</p><p><sup>10</sup> Tất cả chúng ta chẳng có cùng một Cha sao? Chẳng phải cùng một Thiên Chúa đã dựng nên chúng ta sao? Thế sao chúng ta lại phản bội nhau mà xúc phạm đến giao ước của cha ông chúng ta?</p>"
+  },
+  "tv": {
+    "ref": "Tv 130,1.2.3 (Đ. c.2bc)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin giữ linh hồn con trong bình an của Chúa.</span></p><p class=\"leading\"><sup>1</sup><span>Lòng con chẳng dám tự cao,<br />mắt con chẳng dám tự hào, Chúa ơi!<br />Đường cao vọng, chẳng đời nào bước,<br />việc diệu kỳ, vượt sức, chẳng cầu.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin giữ linh hồn con trong bình an của Chúa.</span></p><p class=\"leading\"><sup>2</sup><span>Hồn con, con vẫn giữ yên,<br />dịu dàng, thanh thản như con thơ ngủ trong lòng mẹ,<br />hồn con tựa đứa trẻ mới rời bầu vú mẹ.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin giữ linh hồn con trong bình an của Chúa.</span></p><p class=\"leading\"><sup>3</sup><span>Hỡi Ít-ra-en, hãy cậy trông vào Chúa,<br />tự bây giờ cho đến mãi muôn đời.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin giữ linh hồn con trong bình an của Chúa.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Tx 2,7b-9.13",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Thê-xa-lô-ni-ca.",
+    "lead": "Chúng tôi muốn chia sẻ với anh em không những Tin Mừng của Thiên Chúa, mà cả mạng sống chúng tôi nữa.",
+    "content": "<p><sup>7b</sup> Thưa anh em, chúng tôi đã cư xử dịu dàng giữa anh em, như mẹ hiền ấp ủ con thơ. <sup>8</sup> Vì yêu thương anh em thiết tha, chúng tôi sẵn sàng chia sẻ với anh em không những Tin Mừng của Thiên Chúa, mà cả mạng sống chúng tôi nữa, bởi vì anh em đã trở nên những người rất thân thiết đối với chúng tôi. <sup>9</sup> Thưa anh em, anh em hẳn còn nhớ sự lao đao vất vả của chúng tôi: đêm ngày làm việc để khỏi trở nên gánh nặng cho một ai trong anh em, suốt thời gian chúng tôi rao giảng Tin Mừng của Thiên Chúa cho anh em.</p><p><sup>13</sup> Bởi thế, chúng tôi không ngừng tạ ơn Thiên Chúa, vì khi anh em đón nhận Lời Thiên Chúa mà chúng tôi đã truyền giảng, anh em đã đón nhận không phải như lời của người phàm, nhưng như Lời Thiên Chúa, đúng theo bản tính Lời ấy, Lời đang hoạt động nơi anh em là những tín hữu.</p>"
+  },
+  "tm": {
+    "ref": "Mt 23,1-12",
+    "bookTitle": "Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Họ nói mà không làm.",
+    "alleluiaRef": "Mt 23,9a.10b",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Anh em chỉ có một Cha là Cha trên trời; anh em chỉ có một Thầy là Đức Ki-tô. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Anh em chỉ có một Cha là Cha trên trời; anh em chỉ có một Thầy là Đức Ki-tô. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Bấy giờ, Đức Giê-su nói với đám đông và các môn đệ Người rằng: <sup>2</sup> \"Các kinh sư và các người Pha-ri-sêu ngồi trên toà ông Mô-sê mà giảng dạy. <sup>3</sup> Vậy, tất cả những gì họ nói, anh em hãy làm, hãy giữ, còn những việc họ làm, thì đừng có làm theo, vì họ nói mà không làm. <sup>4</sup> Họ bó những gánh nặng mà chất lên vai người ta, nhưng chính họ lại không buồn động ngón tay vào. <sup>5</sup> Họ làm mọi việc cốt để cho thiên hạ thấy: họ nới rộng thẻ kinh, may dài tua áo. <sup>6</sup> Họ thích ngồi chỗ danh dự trong đám tiệc, chiếm hàng ghế đầu trong hội đường, <sup>7</sup> thích được người ta chào hỏi ở những nơi công cộng và được gọi là 'thầy'.</p><p><sup>8</sup> Phần anh em, thì đừng để ai gọi mình là 'thầy', vì anh em chỉ có một Thầy, còn tất cả anh em đều là anh em với nhau. <sup>9</sup> Anh em cũng đừng gọi ai dưới đất này là cha của anh em, vì anh em chỉ có một Cha là Cha trên trời. <sup>10</sup> Anh em cũng đừng để ai gọi mình là người chỉ đạo, vì anh em chỉ có một Đấng chỉ đạo là Đức Ki-tô. <sup>11</sup> Trong anh em, người nào lớn hơn cả phải làm người phục vụ anh em. <sup>12</sup> Ai tôn mình lên sẽ bị hạ xuống, còn ai hạ mình xuống sẽ được tôn lên.\"</p>"
+  }
+},
+  "2026-09-26": {
+  "date": "2026-09-20",
+  "title": "Chúa Nhật Tuần XXV - Mùa Thường Niên (Năm A)",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 55,6-9",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Tư tưởng của Ta không phải là tư tưởng của các ngươi.",
+    "content": "<p><sup>6</sup> Hãy tìm Đức Chúa khi Người còn cho gặp, kêu cầu Người lúc Người ở kề bên. <sup>7</sup> Kẻ gian ác, hãy bỏ đường lối mình, người bất lương, hãy bỏ tư tưởng mình, mà trở về với Đức Chúa - và Người sẽ xót thương, về với Thiên Chúa chúng ta, vì Người rộng lòng tha thứ.</p><p><sup>8</sup> Thật vậy, tư tưởng của Ta không phải là tư tưởng của các ngươi, và đường lối các ngươi không phải là đường lối của Ta - sấm ngôn của Đức Chúa. <sup>9</sup> Trời cao hơn đất chừng nào, thì đường lối của Ta cũng cao hơn đường lối các ngươi, và tư tưởng của Ta cũng cao hơn tư tưởng các ngươi chừng ấy.</p>"
+  },
+  "tv": {
+    "ref": "Tv 144,2-3.8-9.17-18 (Đ. c.18a)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>2</sup><span>Ngày lại ngày, con xin chúc tụng Chúa,<br />mãi ngợi khen Danh Thánh tới muôn đời.</span><sup>3</sup><span>Chúa thật cao cả, xứng muôn lời ca tụng,<br />sự cao cả của Người khôn thấu khôn dò.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>8</sup><span>Chúa là Đấng từ bi nhân hậu,<br />Người chậm giận và giàu tình thương.</span><sup>9</sup><span>Chúa nhân ái đối với mọi người,<br />hằng âu yếm mọi loài Người đã dựng nên.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>17</sup><span>Chúa công minh trong mọi đường lối Chúa,<br />đầy yêu thương trong mọi việc Người làm.</span><sup>18</sup><span>Chúa gần gũi mọi kẻ kêu cầu Người,<br />mọi kẻ thành tâm kêu cầu Chúa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 1,20c-24.27a",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Đối với tôi, sống là Đức Ki-tô và chết là một mối lợi.",
+    "content": "<p><sup>20c</sup> Thưa anh em, dù tôi sống hay tôi chết, Đức Ki-tô cũng sẽ được vẻ vang nơi thân xác tôi. <sup>21</sup> Vì đối với tôi, sống là Đức Ki-tô, và chết là một mối lợi. <sup>22</sup> Nếu sống ở đời này mà công việc của tôi sinh hoa kết quả, thì tôi không biết nên chọn đàng nào. <sup>23</sup> Tôi bị giằng co giữa hai đàng: ước ao của tôi là ra đi để được ở với Đức Ki-tô, điều này tốt hơn bội phần; <sup>24</sup> nhưng ở lại trong thân xác thì cần thiết hơn cho anh em.</p><p><sup>27a</sup> Chỉ có một điều là anh em phải ăn ở làm sao cho xứng với Tin Mừng của Đức Ki-tô.</p>"
+  },
+  "tm": {
+    "ref": "Mt 20,1-16a",
+    "bookTitle": "Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Hay vì thấy tôi tốt bụng mà bạn đâm ra ghen tức?",
+    "alleluiaRef": "x. Cv 16,14b",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Lạy Chúa, xin mở lòng chúng con, để chúng con chú ý lắng nghe lời Con Chúa. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Lạy Chúa, xin mở lòng chúng con, để chúng con chú ý lắng nghe lời Con Chúa. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, Đức Giê-su kể cho các môn đệ dụ ngôn này: \"Nước Trời giống như chuyện gia chủ kia, vừa tảng sáng đã ra mướn thợ vào làm vườn nho cho mình. <sup>2</sup> Sau khi đã thoả thuận với thợ là mỗi ngày một quan tiền, ông sai họ vào vườn nho làm việc.</p><p><sup>3</sup> Khoảng giờ thứ ba, ông trở ra, thấy có những người khác ở không, đang đứng ngoài chợ. <sup>4</sup> Ông cũng bảo họ: 'Cả các anh nữa, hãy đi vào vườn nho, tôi sẽ trả cho các anh hợp lẽ công bằng.' <sup>5</sup> Họ liền đi. Khoảng giờ thứ sáu, rồi giờ thứ chín, ông lại trở ra và cũng làm như vậy.</p><p><sup>6</sup> Khoảng giờ thứ mười một, ông trở ra, thấy còn có những người khác đứng đó, ông nói với họ: 'Sao các anh đứng đây suốt ngày không làm gì hết?' <sup>7</sup> Họ đáp: 'Vì không ai mướn chúng tôi.' Ông bảo họ: 'Cả các anh nữa, hãy đi vào vườn nho!'</p><p><sup>8</sup> Chiều đến, ông chủ vườn nho bảo người quản lý: 'Anh gọi thợ lại mà trả công cho họ, cứ bắt đầu từ người vào sau chót tới người đầu tiên.' <sup>9</sup> Vậy những người mới vào làm lúc giờ thứ mười một tiến lại, và mỗi người được lãnh một quan tiền. <sup>10</sup> Khi những người vào làm trước nhất tiến lại, họ tưởng là sẽ được lãnh nhiều hơn, thế nhưng mỗi người cũng chỉ lãnh được một quan tiền. <sup>11</sup> Vừa lãnh xong, họ liền cằn nhằn với gia chủ: <sup>12</sup> 'Mấy người sau chót này chỉ làm có một giờ, thế mà ông lại coi họ ngang hàng với chúng tôi là những người đã phải làm việc nặng nhọc suốt ngày, lại còn bị nắng nôi thiêu đốt!' <sup>13</sup> Nhưng gia chủ trả lời cho một người trong bọn họ: 'Này bạn, tôi đâu có bất công với bạn! Bạn đã chẳng thoả thuận với tôi là một quan tiền sao? <sup>14</sup> Cầm lấy phần của bạn mà đi đi! Còn tôi, tôi muốn cho người sau chót này cũng được bằng bạn đó. <sup>15</sup> Chẳng lẽ tôi lại không có quyền tuỳ ý định đoạt về những gì là của tôi sao? Hay vì thấy tôi tốt bụng, mà bạn đâm ra ghen tức?'</p><p><sup>16a</sup> Thế là những kẻ đứng chót sẽ được lên hàng đầu, còn những kẻ đứng đầu sẽ phải xuống hàng chót.\"</p>"
+  }
+},
+  "cn25": {
+  "date": "2026-09-20",
+  "title": "Chúa Nhật Tuần XXV - Mùa Thường Niên (Năm A)",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 55,6-9",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Tư tưởng của Ta không phải là tư tưởng của các ngươi.",
+    "content": "<p><sup>6</sup> Hãy tìm Đức Chúa khi Người còn cho gặp, kêu cầu Người lúc Người ở kề bên. <sup>7</sup> Kẻ gian ác, hãy bỏ đường lối mình, người bất lương, hãy bỏ tư tưởng mình, mà trở về với Đức Chúa - và Người sẽ xót thương, về với Thiên Chúa chúng ta, vì Người rộng lòng tha thứ.</p><p><sup>8</sup> Thật vậy, tư tưởng của Ta không phải là tư tưởng của các ngươi, và đường lối các ngươi không phải là đường lối của Ta - sấm ngôn của Đức Chúa. <sup>9</sup> Trời cao hơn đất chừng nào, thì đường lối của Ta cũng cao hơn đường lối các ngươi, và tư tưởng của Ta cũng cao hơn tư tưởng các ngươi chừng ấy.</p>"
+  },
+  "tv": {
+    "ref": "Tv 144,2-3.8-9.17-18 (Đ. c.18a)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>2</sup><span>Ngày lại ngày, con xin chúc tụng Chúa,<br />mãi ngợi khen Danh Thánh tới muôn đời.</span><sup>3</sup><span>Chúa thật cao cả, xứng muôn lời ca tụng,<br />sự cao cả của Người khôn thấu khôn dò.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>8</sup><span>Chúa là Đấng từ bi nhân hậu,<br />Người chậm giận và giàu tình thương.</span><sup>9</sup><span>Chúa nhân ái đối với mọi người,<br />hằng âu yếm mọi loài Người đã dựng nên.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p><p class=\"leading\"><sup>17</sup><span>Chúa công minh trong mọi đường lối Chúa,<br />đầy yêu thương trong mọi việc Người làm.</span><sup>18</sup><span>Chúa gần gũi mọi kẻ kêu cầu Người,<br />mọi kẻ thành tâm kêu cầu Chúa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa gần gũi mọi kẻ kêu cầu Người.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 1,20c-24.27a",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Đối với tôi, sống là Đức Ki-tô và chết là một mối lợi.",
+    "content": "<p><sup>20c</sup> Thưa anh em, dù tôi sống hay tôi chết, Đức Ki-tô cũng sẽ được vẻ vang nơi thân xác tôi. <sup>21</sup> Vì đối với tôi, sống là Đức Ki-tô, và chết là một mối lợi. <sup>22</sup> Nếu sống ở đời này mà công việc của tôi sinh hoa kết quả, thì tôi không biết nên chọn đàng nào. <sup>23</sup> Tôi bị giằng co giữa hai đàng: ước ao của tôi là ra đi để được ở với Đức Ki-tô, điều này tốt hơn bội phần; <sup>24</sup> nhưng ở lại trong thân xác thì cần thiết hơn cho anh em.</p><p><sup>27a</sup> Chỉ có một điều là anh em phải ăn ở làm sao cho xứng với Tin Mừng của Đức Ki-tô.</p>"
+  },
+  "tm": {
+    "ref": "Mt 20,1-16a",
+    "bookTitle": "Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Hay vì thấy tôi tốt bụng mà bạn đâm ra ghen tức?",
+    "alleluiaRef": "x. Cv 16,14b",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Lạy Chúa, xin mở lòng chúng con, để chúng con chú ý lắng nghe lời Con Chúa. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Lạy Chúa, xin mở lòng chúng con, để chúng con chú ý lắng nghe lời Con Chúa. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, Đức Giê-su kể cho các môn đệ dụ ngôn này: \"Nước Trời giống như chuyện gia chủ kia, vừa tảng sáng đã ra mướn thợ vào làm vườn nho cho mình. <sup>2</sup> Sau khi đã thoả thuận với thợ là mỗi ngày một quan tiền, ông sai họ vào vườn nho làm việc.</p><p><sup>3</sup> Khoảng giờ thứ ba, ông trở ra, thấy có những người khác ở không, đang đứng ngoài chợ. <sup>4</sup> Ông cũng bảo họ: 'Cả các anh nữa, hãy đi vào vườn nho, tôi sẽ trả cho các anh hợp lẽ công bằng.' <sup>5</sup> Họ liền đi. Khoảng giờ thứ sáu, rồi giờ thứ chín, ông lại trở ra và cũng làm như vậy.</p><p><sup>6</sup> Khoảng giờ thứ mười một, ông trở ra, thấy còn có những người khác đứng đó, ông nói với họ: 'Sao các anh đứng đây suốt ngày không làm gì hết?' <sup>7</sup> Họ đáp: 'Vì không ai mướn chúng tôi.' Ông bảo họ: 'Cả các anh nữa, hãy đi vào vườn nho!'</p><p><sup>8</sup> Chiều đến, ông chủ vườn nho bảo người quản lý: 'Anh gọi thợ lại mà trả công cho họ, cứ bắt đầu từ người vào sau chót tới người đầu tiên.' <sup>9</sup> Vậy những người mới vào làm lúc giờ thứ mười một tiến lại, và mỗi người được lãnh một quan tiền. <sup>10</sup> Khi những người vào làm trước nhất tiến lại, họ tưởng là sẽ được lãnh nhiều hơn, thế nhưng mỗi người cũng chỉ lãnh được một quan tiền. <sup>11</sup> Vừa lãnh xong, họ liền cằn nhằn với gia chủ: <sup>12</sup> 'Mấy người sau chót này chỉ làm có một giờ, thế mà ông lại coi họ ngang hàng với chúng tôi là những người đã phải làm việc nặng nhọc suốt ngày, lại còn bị nắng nôi thiêu đốt!' <sup>13</sup> Nhưng gia chủ trả lời cho một người trong bọn họ: 'Này bạn, tôi đâu có bất công với bạn! Bạn đã chẳng thoả thuận với tôi là một quan tiền sao? <sup>14</sup> Cầm lấy phần của bạn mà đi đi! Còn tôi, tôi muốn cho người sau chót này cũng được bằng bạn đó. <sup>15</sup> Chẳng lẽ tôi lại không có quyền tuỳ ý định đoạt về những gì là của tôi sao? Hay vì thấy tôi tốt bụng, mà bạn đâm ra ghen tức?'</p><p><sup>16a</sup> Thế là những kẻ đứng chót sẽ được lên hàng đầu, còn những kẻ đứng đầu sẽ phải xuống hàng chót.\"</p>"
+  }
+},
+  "cn26": {
+  "date": "2026-09-27",
+  "title": "Chúa Nhật Tuần XXVI - Mùa Thường Niên (Năm A)",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Ed 18,25-28",
+    "bookTitle": "Bài trích sách ngôn sứ Ê-dê-ki-en.",
+    "lead": "Nếu kẻ gian ác từ bỏ điều dữ nó đã phạm, nó sẽ cứu được mạng sống mình.",
+    "content": "<p><sup>25</sup> Đức Chúa phán thế này: Các ngươi lại nói: 'Đường lối của Chúa không ngay thẳng!' Vậy hỡi nhà Ít-ra-en, hãy nghe đây: Có phải đường lối của Ta không ngay thẳng hay đường lối của các ngươi mới không ngay thẳng? <sup>26</sup> Khi người công chính từ bỏ lẽ công chính của mình mà phạm tội ác và phải chết, thì chính vì tội ác nó phạm mà nó phải chết. <sup>27</sup> Còn nếu kẻ gian ác từ bỏ điều dữ nó đã phạm mà thi hành điều chính trực công minh, thì nó sẽ cứu được mạng sống mình. <sup>28</sup> Nó đã thấy và từ bỏ mọi tội ác nó phạm, thì chắc chắn nó sẽ sống, nó không phải chết.</p>"
+  },
+  "tv": {
+    "ref": "Tv 24,4bc-5.6-7.8-9 (Đ. c.6a)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin nhớ lại tình thương của Ngài.</span></p><p class=\"leading\"><sup>4bc</sup><span>Lạy Chúa, đường nẻo Ngài, xin dạy cho con biết,<br />lối đi của Ngài, xin chỉ bảo con.</span><sup>5</sup><span>Xin dẫn con đi theo đường chân lý của Ngài và bảo ban dạy dỗ,<br />vì chính Ngài là Thiên Chúa cứu độ con.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin nhớ lại tình thương của Ngài.</span></p><p class=\"leading\"><sup>6</sup><span>Lạy Chúa, xin nhớ lại nghĩa nặng với tình sâu<br />Ngài đã từng biểu lộ từ muôn thuở muôn đời.</span><sup>7</sup><span>Tuổi xuân trót dại bao lầm lỗi, xin Ngài đừng nhớ đến,<br />nhưng xin lấy lượng từ bi mà nhớ đến con.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin nhớ lại tình thương của Ngài.</span></p><p class=\"leading\"><sup>8</sup><span>Chúa là Đấng nhân từ chính trực,<br />chỉ lối cho tội nhân,</span><sup>9</sup><span>dẫn kẻ khiêm nhu đi trong đường công chính,<br />dạy cho biết đường lối của Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, xin nhớ lại tình thương của Ngài.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 2,1-11",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Anh em hãy có cùng những tâm tình như chính Đức Ki-tô Giê-su.",
+    "content": "<p><sup>1</sup> Thưa anh em, nếu quả thật sự liên kết với Đức Ki-tô đem lại cho anh em một niềm an ủi, nếu tình bác ái khích lệ anh em, nếu anh em được hiệp thông trong Thần Khí, nếu anh em có lòng thương xót và cảm thông, <sup>2</sup> thì xin anh em hãy làm cho niềm vui của tôi được trọn vẹn, là hãy có cùng một cảm nghĩ, cùng một lòng mến, cùng một tâm hồn, cùng một ý hướng. <sup>3</sup> Đừng làm chi vì ganh tị hay vì hư danh, nhưng hãy lấy lòng khiêm nhường mà coi người khác hơn mình. <sup>4</sup> Mỗi người đừng tìm lợi ích cho riêng mình, nhưng hãy tìm lợi ích cho người khác. <sup>5</sup> Giữa anh em với nhau, anh em hãy có cùng một tâm tình như chính Đức Ki-tô Giê-su.</p><p><sup>6</sup> Đức Giê-su Ki-tô vốn dĩ là Thiên Chúa mà không nghĩ phải nhất quyết duy trì địa vị ngang hàng với Thiên Chúa, <sup>7</sup> nhưng đã hoàn toàn trút bỏ vinh quang mặc lấy thân nô lệ, trở nên giống phàm nhân sống như một người trần thế. <sup>8</sup> Người lại còn hạ mình, vâng lời cho đến nỗi bằng lòng chịu chết, chết trên cây thập tự. <sup>9</sup> Chính vì thế, Thiên Chúa đã siêu tôn Người và tặng ban danh hiệu trổi vượt trên muôn ngàn danh hiệu, <sup>10</sup> như vậy, khi vừa nghe danh thánh Giê-su, cả trên trời dưới đất và trong nơi âm phủ, muôn vật phải bái quỳ, <sup>11</sup> và để tôn vinh Thiên Chúa Cha, mọi loài phải mở miệng tuyên xưng rằng: \"Đức Giê-su Ki-tô là Chúa\".</p>"
+  },
+  "tm": {
+    "ref": "Mt 21,28-32",
+    "bookTitle": "Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Nó hối hận và đã đi làm. Những người thu thuế và những cô gái điếm vào Nước Thiên Chúa trước các ông.",
+    "alleluiaRef": "Ga 10,27",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói: Chiên của Tôi thì nghe tiếng Tôi, Tôi biết chúng và chúng theo Tôi. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói: Chiên của Tôi thì nghe tiếng Tôi, Tôi biết chúng và chúng theo Tôi. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>28</sup> Khi ấy, Đức Giê-su nói với các thượng tế và kỳ mục trong dân rằng: \"Các ông nghĩ sao: Một người kia có hai đứa con trai. Ông ta đến nói với đứa thứ nhất: 'Này con, hôm nay con hãy đi làm vườn nho.' <sup>29</sup> Nó đáp: 'Con không muốn đâu!' Nhưng sau đó, nó hối hận, nên lại đi. <sup>30</sup> Ông ta đến gặp đứa thứ hai và cũng bảo như vậy. Nó đáp: 'Thưa ngài, vâng, con đi!' nhưng rồi lại không đi. <sup>31</sup> Trong hai người con đó, ai đã làm theo ý muốn của người cha?\" Họ đáp: \"Người thứ nhất.\"</p><p>Đức Giê-su nói với họ: \"Tôi bảo thật các ông: những người thu thuế và những cô gái điếm vào Nước Thiên Chúa trước các ông. <sup>32</sup> Vì ông Gio-an đã đến chỉ đường công chính cho các ông, mà các ông không tin ông ấy; còn những người thu thuế và những cô gái điếm lại tin. Phần các ông, khi đã thấy vậy rồi, các ông vẫn không chịu hối hận mà tin ông ấy.\"</p>"
+  }
+},
+  "cn27": {
+  "date": "2026-10-04",
+  "title": "Chúa Nhật Tuần XXVII - Mùa Thường Niên (Năm A)",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 5,1-7",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.",
+    "content": "<p><sup>1</sup> Tôi xin hát tặng bạn tôi, bài hát của bạn tôi về vườn nho của mình. Bạn tôi có một vườn nho trên sườn đồi màu mỡ. <sup>2</sup> Bạn cuốc đất, nhặt đá, trồng những gốc nho quý, xây một tháp canh ở giữa, và khoét bồn đạp nho. Bạn những mong nó sinh trái tốt, nó lại sinh trái chua.</p><p><sup>3</sup> Giờ đây, hỡi dân cư Giê-ru-sa-lem và người Giu-đa, hãy làm trọng tài phân xử giữa tôi và vườn nho của tôi! <sup>4</sup> Có gì phải làm cho vườn nho của tôi mà tôi đã không làm? Sao tôi những mong nó sinh trái tốt, nó lại sinh trái chua?</p><p><sup>5</sup> Giờ đây, tôi cho các người biết tôi sẽ làm gì cho vườn nho của tôi: dỡ hàng rào để cho nó bị tàn phá, phá bức tường để cho nó bị giẫm đạp. <sup>6</sup> Tôi sẽ biến nó thành mảnh đất hoang vu, không cắt tỉa, không vun xới; gai góc sẽ mọc lên; và tôi sẽ truyền cho mây đừng đổ mưa xuống trên nó. <sup>7</sup> Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en; chồi cây Người vui thích chính là người Giu-đa. Người những mong họ giữ lẽ công bằng, mà chỉ thấy đầu rơi máu chảy; những mong họ làm điều chính trực, mà chỉ nghe tiếng than khóc kêu gào.</p>"
+  },
+  "tv": {
+    "ref": "Tv 79,9 và 12.13-14.15-16.19-20 (Đ. Is 5,7a)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p><p class=\"leading\"><sup>9</sup><span>Gốc nho này, Chúa bứng từ Ai-cập,<br />đuổi chư dân, lấy đất mà trồng,</span><sup>12</sup><span>cành vươn dài ra tận bờ Biển Cả,<br />chồi đâm sâu tới tận vùng Sông Cả.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p><p class=\"leading\"><sup>13</sup><span>Bức tường rào, sao Ngài phá đổ,<br />cho khách qua đường bứt trộm ăn?</span><sup>14</sup><span>Heo rừng vào phá phách,<br />thú nội tha hồ cắn trộm lan tràn!</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p><p class=\"leading\"><sup>15</sup><span>Lạy Chúa các đạo binh, xin trở lại,<br />từ trời cao nhìn ngắm và đoái thương:</span><sup>16</sup><span>vườn nho này, xin Ngài nâng đỡ,<br />bảo vệ chồi tay hữu Ngài đã trồng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p><p class=\"leading\"><sup>19</sup><span>Chúng con nguyền chẳng xa rời Chúa nữa,<br />xin ban sức sống, chúng con sẽ cầu khẩn Danh Ngài.</span><sup>20</sup><span>Lạy Chúa các đạo binh, xin phục hồi chúng con,<br />toả ánh tôn nhan rạng ngời để chúng con được ơn cứu độ.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Vườn nho của Đức Chúa các đạo binh là nhà Ít-ra-en.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 4,6-9",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Hãy thi hành những điều đó, và Thiên Chúa là nguồn bình an sẽ ở với anh em.",
+    "content": "<p><sup>6</sup> Thưa anh em, anh em đừng lo lắng gì cả. Nhưng trong mọi hoàn cảnh, anh em cứ đem lời cầu xin, van nài và tạ ơn mà dãi bày trước mặt Thiên Chúa những điều anh em sở nguyện. <sup>7</sup> Và bình an của Thiên Chúa, bình an vượt lên trên mọi hiểu biết, sẽ giữ gìn lòng trí anh em trong Đức Ki-tô Giê-su.</p><p><sup>8</sup> Ngoài ra, thưa anh em, những gì là chân thật, cao quý, những gì là chính trực, tinh tuyền, những gì là đáng mến và đem lại danh thơm tiếng tốt, những gì là đức hạnh, đáng khen, thì xin anh em hãy để ý đến. <sup>9</sup> Những gì anh em đã học hỏi, đã lãnh nhận, đã nghe, đã thấy ở nơi tôi, thì hãy đem ra thực hành, và Thiên Chúa là nguồn bình an sẽ ở với anh em.</p>"
+  },
+  "tm": {
+    "ref": "Mt 21,33-43",
+    "bookTitle": "Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Chủ sẽ cho các tá điền khác mướn vườn nho.",
+    "alleluiaRef": "x. Ga 15,16",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói: Chính Thầy đã chọn anh em, và cắt cử anh em để anh em ra đi, sinh được hoa trái, và hoa trái của anh em tồn tại. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói: Chính Thầy đã chọn anh em, và cắt cử anh em để anh em ra đi, sinh được hoa trái, và hoa trái của anh em tồn tại. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>33</sup> Khi ấy, Đức Giê-su nói với các thượng tế và kỳ mục trong dân rằng: \"Các ông hãy nghe một dụ ngôn khác: Có gia chủ kia trồng được một vườn nho; chung quanh vườn, ông rào giậu; trong vườn, ông khoét bồn đạp nho, và dựng một tháp canh. Xong đâu đấy, ông cho tá điền canh tác, rồi trẩy đi phương xa. <sup>34</sup> Gần đến mùa hái nho, ông sai đầy tớ đến gặp các tá điền để thu hoa lợi. <sup>35</sup> Nhưng bọn tá điền bắt các đầy tớ ông: chúng đánh người này, giết người kia, ném đá người khác. <sup>36</sup> Ông lại sai một số đầy tớ khác đông hơn trước, nhưng bọn tá điền cũng xử với họ y như vậy. <sup>37</sup> Sau cùng, ông sai chính con trai mình đến gặp chúng, vì nghĩ rằng: 'Chúng sẽ nể con ta.' <sup>38</sup> Nhưng bọn tá điền vừa thấy người con, thì bảo nhau: 'Đứa thừa tự đây rồi! Nào ta giết quách nó đi, và đoạt lấy gia tài nó!' <sup>39</sup> Thế là chúng bắt lấy cậu, lôi ra ngoài vườn nho mà giết.</p><p><sup>40</sup> Vậy khi ông chủ vườn nho đến, ông sẽ làm gì bọn tá điền kia?\" <sup>41</sup> Họ đáp: \"Ác giả ác báo, ông sẽ tru diệt bọn hung ác đó, và sang nhượng vườn nho cho các tá điền khác, những người biết nộp hoa lợi cho ông đúng mùa.\" <sup>42</sup> Đức Giê-su nói với họ: \"Kinh Thánh có câu: 'Tảng đá thợ xây nhà loại bỏ lại trở nên tảng đá góc tường. Đó chính là công trình của Chúa, công trình kỳ diệu trước mắt chúng ta!' Các ông chưa bao giờ đọc câu đó sao?</p><p><sup>43</sup> Bởi đó, tôi nói cho các ông hay: Nước Thiên Chúa, Thiên Chúa sẽ lấy đi không cho các ông nữa, mà ban cho một dân tộc biết làm cho Nước ấy sinh hoa lợi.\"</p>"
+  }
+},
+  "cn28": {
+  "date": "2026-10-11",
+  "title": "Chúa Nhật Tuần XXVIII - Mùa Thường Niên",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 25,6-10a",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Đức Chúa sẽ đãi một bữa tiệc và sẽ lau khô dòng lệ trên khuôn mặt mọi người.",
+    "content": "<p class=\"poem\"><sup>6</sup><span>Ngày ấy, trên núi này,<br />Đức Chúa các đạo binh sẽ đãi muôn dân một bữa tiệc :<br />tiệc thịt béo, tiệc rượu ngon,<br />thịt béo ngậy, rượu ngon tinh chế.</span><br /><sup>7</sup><span>Trên núi này, Người sẽ xé bỏ chiếc khăn che phủ mọi dân,<br />và tấm màn trùm lên muôn nước.</span><br /><sup>8</sup><span>Người sẽ vĩnh viễn tiêu diệt tử thần.<br />Đức Chúa là Chúa Thượng sẽ lau khô dòng lệ<br />trên khuôn mặt mọi người,<br />và trên toàn cõi đất, Người sẽ xoá sạch<br />nỗi ô nhục của dân Người. Đức Chúa phán như vậy.</span><br /><sup>9</sup><span>Ngày ấy, người ta sẽ nói : “Đây là Thiên Chúa chúng ta,<br />chúng ta từng trông đợi Người,<br />và đã được Người thương cứu độ.<br />Chính Người là Đức Chúa chúng ta từng đợi trông.<br />Nào ta cùng hoan hỷ vui mừng bởi được Người cứu độ.”</span><br /><sup>10a</sup><span>Vì bàn tay Đức Chúa sẽ lại đặt trên núi này.<br /></span></p>"
+  },
+  "tv": {
+    "ref": "Tv 22,1-3a.3b-4.5.6 (Đ. c.6cd)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa là mục tử chăn dắt tôi, tôi chẳng thiếu thốn gì.</span><sup>2</sup><span>Trong đồng cỏ xanh tươi, Người cho tôi nằm nghỉ.<br />Người đưa tôi tới dòng nước trong lành</span><sup>3a</sup><span>và bổ sức cho tôi.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"leading\"><sup>3b</sup><span>Người dẫn tôi trên đường ngay nẻo chính<br />vì danh dự của Người.</span><sup>4</sup><span>Lạy Chúa, dầu qua lũng âm u<br />con sợ gì nguy khốn, vì có Chúa ở cùng.<br />Côn trượng Ngài bảo vệ, con vững dạ an tâm.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"leading\"><sup>5</sup><span>Chúa dọn sẵn cho con bữa tiệc<br />ngay trước mặt quân thù.<br />Đầu con, Chúa xức đượm dầu thơm,<br />ly rượu con đầy tràn chan chứa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"leading\"><sup>6</sup><span>Lòng nhân hậu và tình thương Chúa<br />ấp ủ tôi suốt cả cuộc đời,<br />và tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Này tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p>"
+  },
+  "bd2": {
+    "ref": "Pl 4,12-14.19-20",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Phi-líp-phê.",
+    "lead": "Với Đấng ban sức mạnh cho tôi, tôi chịu được hết.",
+    "content": "<p><sup>12</sup> Thưa anh em, tôi sống thiếu thốn cũng được, mà sống dư dật cũng được. Trong mọi hoàn cảnh, no hay đói, dư dật hay túng bấn, tôi đã tập quen cả. <sup>13</sup> Với Đấng ban sức mạnh cho tôi, tôi chịu được hết. <sup>14</sup> Tuy nhiên, anh em đã chia sẻ với tôi, khi tôi gặp cơn quẫn bách, như thế là phải. <sup>19</sup> Thiên Chúa của tôi sẽ thoả mãn mọi nhu cầu của anh em một cách tuyệt vời, theo sự giàu sang của Người trong Đức Ki-tô Giê-su. <sup>20</sup> Xin tôn vinh Thiên Chúa là Cha chúng ta, đến muôn thuở muôn đời ! A-men.</p>"
+  },
+  "tm": {
+    "ref": "Mt 22,1-14",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Gặp ai, anh em cũng mời hết vào tiệc cưới.",
+    "alleluiaRef": "x. Ep 1,17-18",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Xin Thân Phụ Đức Giê-su Ki-tô, Chúa chúng ta, soi trí mở lòng cho chúng ta thấy rõ, đâu là niềm hy vọng, mà ơn Người kêu gọi đem lại cho chúng ta. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Xin Thân Phụ Đức Giê-su Ki-tô, Chúa chúng ta, soi trí mở lòng cho chúng ta thấy rõ, đâu là niềm hy vọng, mà ơn Người kêu gọi đem lại cho chúng ta. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, Đức Giê-su dùng dụ ngôn mà nói với các thượng tế và kỳ mục trong dân rằng : <sup>2</sup> “Nước Trời cũng giống như chuyện một vua kia mở tiệc cưới cho con mình. <sup>3</sup> Nhà vua sai đầy tớ đi thỉnh các quan khách đã được mời trước, xin họ đến dự tiệc, nhưng họ không chịu đến. <sup>4</sup> Nhà vua lại sai những đầy tớ khác đi, và dặn họ : ‘Hãy thưa với quan khách đã được mời rằng : Này cỗ bàn, ta đã dọn xong, bò tơ và thú béo đã hạ rồi, mọi sự đã sẵn. Mời quý vị đến dự tiệc cưới !’ <sup>5</sup> Nhưng quan khách không thèm đếm xỉa tới, lại bỏ đi : kẻ thì đi thăm nông trại, người thì đi buôn, <sup>6</sup> còn những kẻ khác lại bắt các đầy tớ của vua mà hành hạ và giết chết. <sup>7</sup> Nhà vua liền nổi cơn thịnh nộ, sai quân đi tru diệt bọn sát nhân ấy và thiêu huỷ thành phố của chúng. <sup>8</sup> Rồi nhà vua bảo đầy tớ : ‘Tiệc cưới đã sẵn sàng rồi, mà những kẻ đã được mời lại không xứng đáng. <sup>9</sup> Vậy các ngươi đi ra các ngả đường, gặp ai cũng mời hết vào tiệc cưới.’ <sup>10</sup> Đầy tớ liền đi ra các nẻo đường, gặp ai, bất luận xấu tốt, cũng tập hợp cả lại, nên phòng tiệc cưới đã đầy thực khách.</p><p><sup>11</sup> “Bấy giờ nhà vua tiến vào quan sát khách dự tiệc, thấy ở đó có một người không mặc y phục lễ cưới, <sup>12</sup> mới hỏi người ấy : ‘Này bạn, làm sao bạn vào đây mà lại không có y phục lễ cưới ?’ Người ấy câm miệng không nói được gì. <sup>13</sup> Nhà vua liền bảo những người phục dịch : ‘Trói chân tay nó lại, quăng nó ra chỗ tối tăm bên ngoài, ở đó người ta sẽ phải khóc lóc nghiến răng ! <sup>14</sup> Vì kẻ được gọi thì nhiều, mà người được chọn thì ít’.”</p>"
+  }
+},
+  "cn29": {
+  "date": "2026-10-18",
+  "title": "Chúa Nhật Tuần XXIX - Mùa Thường Niên",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Is 45,1.4-6",
+    "bookTitle": "Bài trích sách ngôn sứ I-sai-a.",
+    "lead": "Đức Chúa đã cầm lấy tay phải vua Ky-rô để bắt các dân tộc suy phục ông.",
+    "content": "<p class=\"poem\"><sup>1</sup><span>Đức Chúa phán với kẻ Người đã xức dầu, với vua Ky-rô<br />- Ta đã cầm lấy tay phải nó,<br />để bắt các dân tộc suy phục nó,<br />Ta tước khí giới của các vua,<br />mở toang các cửa thành trước mặt nó,<br />khiến các cổng không còn đóng kín nữa.</span><br /><sup>4</sup><span>Vì lợi ích của tôi tớ Ta là Gia-cóp,<br />và của người Ta đã chọn là Ít-ra-en,<br />Ta đã gọi ngươi đích danh, đã ban cho ngươi một tước hiệu,<br />dù ngươi không biết Ta.</span><br /><sup>5</sup><span>Ta là Đức Chúa, không còn chúa nào khác ;<br />chẳng có ai là Thiên Chúa, ngoại trừ Ta.<br />Dù ngươi không biết Ta, Ta đã trang bị cho ngươi đầy đủ,</span><br /><sup>6</sup><span>để từ Đông sang Tây, thiên hạ biết rằng<br />chẳng có thần nào khác, ngoại trừ Ta.<br />Ta là Đức Chúa, không còn chúa nào khác.<br /></span></p>"
+  },
+  "tv": {
+    "ref": "Tv 95,1 và 3.4-5.7-8a.8b-10ac (Đ. c.7b)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p><p class=\"leading\"><sup>1</sup><span>Hát lên mừng Chúa một bài ca mới,<br />hát lên mừng Chúa, hỡi toàn thể địa cầu !</span><sup>3</sup><span>kể cho muôn dân biết Người thật là vinh hiển,<br />cho mọi nước hay những kỳ công của Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p><p class=\"leading\"><sup>4</sup><span>Chúa thật cao cả, xứng muôn lời ca tụng,<br />khả tôn khả uý hơn chư thần,</span><sup>5</sup><span>vì chư thần các nước thảy đều hư ảo,<br />còn Đức Chúa, Người sáng tạo trời cao.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p><p class=\"leading\"><sup>7</sup><span>Hãy dâng Chúa, hỡi các dân các nước,<br />dâng Chúa quyền lực và vinh quang,</span><sup>8a</sup><span>hãy dâng Chúa vinh quang xứng danh Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p><p class=\"leading\"><sup>8b</sup><span>Hãy bưng lễ vật, bước vào tiền đình Chúa,</span><sup>9</sup><span>và thờ lạy Chúa uy nghiêm thánh thiện,<br />toàn thể địa cầu, hãy run sợ trước Thánh Nhan.</span><sup>10ac</sup><span>Hãy nói với chư dân : Chúa là Vua hiển trị,<br />Người xét xử muôn nước theo đường ngay thẳng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Hãy dâng Chúa quyền lực và vinh quang.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Tx 1,1-5b",
+    "bookTitle": "Khởi đầu thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Thê-xa-lô-ni-ca.",
+    "lead": "Chúng tôi nhớ đến lòng tin, lòng mến và lòng trông cậy của anh em.",
+    "content": "<p><sup>1</sup> Chúng tôi là Phao-lô, Xin-va-nô và Ti-mô-thê, kính gửi Hội Thánh Thê-xa-lô-ni-ca ở trong Thiên Chúa Cha, và trong Chúa Giê-su Ki-tô. Chúc anh em được ân sủng và bình an.</p><p><sup>2</sup> Chúng tôi hằng tạ ơn Thiên Chúa về tất cả anh em. Chúng tôi nhắc đến anh em trong lời cầu nguyện, <sup>3</sup> và trước mặt Thiên Chúa là Cha chúng ta, chúng tôi không ngừng nhớ đến những việc anh em làm vì lòng tin, những nỗi khó nhọc anh em gánh vác vì lòng mến, và những gì anh em kiên nhẫn chịu đựng vì trông đợi Chúa chúng ta là Đức Giê-su Ki-tô.</p><p><sup>4</sup> Thưa anh em là những người được Thiên Chúa thương mến, chúng tôi biết rằng Thiên Chúa đã chọn anh em, <sup>5b</sup> vì khi chúng tôi loan báo Tin Mừng cho anh em, thì không phải chỉ có lời chúng tôi nói, mà còn có quyền năng, có Thánh Thần, và một niềm xác tín sâu xa.</p>"
+  },
+  "tm": {
+    "ref": "Mt 22,15-21",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Của Xê-da, trả về Xê-da ; của Thiên Chúa, trả về Thiên Chúa.",
+    "alleluiaRef": "Pl 2,15d.16a",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Giữa thế gian, anh em phải chiếu sáng như những vì sao trên vòng trời, là làm sáng tỏ lời ban sự sống. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Giữa thế gian, anh em phải chiếu sáng như những vì sao trên vòng trời, là làm sáng tỏ lời ban sự sống. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>15</sup> Khi ấy, những người Pha-ri-sêu đi bàn bạc với nhau, tìm cách làm cho Đức Giê-su phải lỡ lời mà mắc bẫy. <sup>16</sup> Họ sai các môn đệ của họ cùng đi với những người phe Hê-rô-đê, đến nói với Đức Giê-su rằng : “Thưa Thầy, chúng tôi biết Thầy là người chân thật và cứ sự thật mà dạy đường lối của Thiên Chúa. Thầy cũng chẳng vị nể ai, vì Thầy không cứ bề ngoài mà đánh giá người ta. <sup>17</sup> Vậy xin Thầy cho biết ý kiến : có được phép nộp thuế cho Xê-da hay không ?”</p><p><sup>18</sup> Nhưng Đức Giê-su biết họ có ác ý, nên Người nói : “Tại sao các người lại thử tôi, hỡi những kẻ đạo đức giả ! <sup>19</sup> Cho tôi xem đồng tiền nộp thuế !” Họ liền đưa cho Người một quan tiền. <sup>20</sup> Người hỏi họ : “Hình và danh hiệu này là của ai đây ?” <sup>21</sup> Họ đáp : “Của Xê-da.” Bấy giờ, Người bảo họ : “Thế thì của Xê-da, trả về Xê-da ; của Thiên Chúa, trả về Thiên Chúa.”</p>"
+  }
+},
+  "cn30": {
+  "date": "2026-10-25",
+  "title": "Chúa Nhật Tuần XXX - Mùa Thường Niên",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Xh 22,20-26",
+    "bookTitle": "Bài trích sách Xuất hành.",
+    "lead": "Nếu các ngươi ức hiếp mẹ goá con côi, thì cơn giận Ta sẽ bốc lên chống lại các ngươi.",
+    "content": "<p><sup>20</sup> Đức Chúa phán thế này : Người ngoại kiều, ngươi không được ngược đãi và áp bức, vì chính các ngươi đã là ngoại kiều ở đất Ai-cập. <sup>21</sup> Mẹ goá con côi, các ngươi không được ức hiếp. <sup>22</sup> Nếu ngươi ức hiếp mà nó kêu cứu Ta, ắt Ta sẽ nghe tiếng nó kêu cứu. <sup>23</sup> Cơn giận Ta sẽ bốc lên, Ta sẽ cho gươm chém giết các ngươi : thế là vợ các ngươi sẽ thành goá bụa, và con các ngươi sẽ thành côi cút.</p><p><sup>24</sup> Nếu ngươi cho một người trong dân Ta, một người nghèo ở với ngươi vay tiền, thì ngươi không được xử với nó như chủ nợ, không được bắt nó trả lãi.</p><p><sup>25</sup> Nếu ngươi giữ áo choàng của người khác làm đồ cầm, thì ngươi phải trả lại cho nó trước khi mặt trời lặn. <sup>26</sup> Nó chỉ có cái đó để đắp, để làm áo che thân ; nó sẽ lấy gì mà ngủ ? Nó mà kêu cứu Ta, Ta sẽ nghe nó, vì Ta vốn nhân từ.</p>"
+  },
+  "tv": {
+    "ref": "Tv 17,2-3a.3bc-4.47 và 51ab (Đ. c.2)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Con yêu mến Ngài, lạy Chúa là sức mạnh của con.</span></p><p class=\"leading\"><sup>2</sup><span>Con yêu mến Ngài,<br />lạy Chúa là sức mạnh của con ;</span><sup>3a</sup><span>lạy Chúa là núi đá, là thành luỹ,<br />là Đấng giải thoát con.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Con yêu mến Ngài, lạy Chúa là sức mạnh của con.</span></p><p class=\"leading\"><sup>3bc</sup><span>Lạy Thiên Chúa con thờ, là núi đá cho con trú ẩn,<br />là khiên mộc, là Đấng cứu độ quyền năng,<br />là thành trì bảo vệ.</span><sup>4</sup><span>Tôi kêu cầu Chúa<br />là Đấng xứng muôn lời ngợi khen,<br />và tôi được cứu thoát khỏi quân thù.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Con yêu mến Ngài, lạy Chúa là sức mạnh của con.</span></p><p class=\"leading\"><sup>47</sup><span>Đức Chúa vạn vạn tuế !<br />Chúc tụng Người là núi đá cho tôi trú ẩn.<br />Tôn vinh Thiên Chúa là Đấng cứu độ tôi,</span><sup>51ab</sup><span>Chúa ban nhiều chiến thắng lớn lao<br />cho Đức Vua chính Người đã lập.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Con yêu mến Ngài, lạy Chúa là sức mạnh của con.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Tx 1,5c-10",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Thê-xa-lô-ni-ca.",
+    "lead": "Anh em đã từ bỏ ngẫu tượng, để phụng sự Thiên Chúa và chờ đợi Con của Người.",
+    "content": "<p><sup>5c</sup> Thưa anh em, anh em biết, khi ở với anh em, chúng tôi đã sống thế nào để mưu ích cho anh em ; <sup>6</sup> còn anh em, anh em đã bắt chước chúng tôi và noi gương Chúa, khi đón nhận lời Chúa giữa bao nỗi gian truân với niềm vui do Thánh Thần ban : <sup>7</sup> bởi vậy anh em đã nên gương cho mọi tín hữu ở miền Ma-kê-đô-ni-a và miền A-khai-a. <sup>8</sup> Quả thế, từ nơi anh em, lời Chúa đã vang ra, không những ở Ma-kê-đô-ni-a và A-khai-a, mà đâu đâu người ta cũng nghe biết lòng tin anh em đặt vào Thiên Chúa, khiến chúng tôi không cần phải nói gì thêm nữa. <sup>9</sup> Khi nói về chúng tôi, người ta kể lại chúng tôi đã được anh em tiếp đón làm sao, và anh em đã từ bỏ ngẫu tượng mà quay về với Thiên Chúa thế nào, để phụng sự Thiên Chúa hằng sống, Thiên Chúa thật, <sup>10</sup> và chờ đợi Con của Người từ trời ngự đến, người Con mà Thiên Chúa đã cho trỗi dậy từ cõi chết, là Đức Giê-su, Đấng cứu chúng ta thoát cơn thịnh nộ đang đến.</p>"
+  },
+  "tm": {
+    "ref": "Mt 22,34-40",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Ngươi phải yêu mến Đức Chúa, Thiên Chúa của ngươi, và yêu người thân cận như chính mình.",
+    "alleluiaRef": "Ga 14,23",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Ai yêu mến Thầy, thì sẽ giữ lời Thầy. Cha Thầy sẽ yêu mến người ấy. Cha Thầy và Thầy sẽ đến với người ấy. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Ai yêu mến Thầy, thì sẽ giữ lời Thầy. Cha Thầy sẽ yêu mến người ấy. Cha Thầy và Thầy sẽ đến với người ấy. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>34</sup> Khi ấy, nghe tin Đức Giê-su đã làm cho nhóm Xa-đốc phải câm miệng, thì những người Pha-ri-sêu họp nhau lại. <sup>35</sup> Rồi một người thông luật trong nhóm hỏi Đức Giê-su để thử Người rằng : <sup>36</sup> “Thưa Thầy, trong sách Luật Mô-sê, điều răn nào là điều răn trọng nhất ?” <sup>37</sup> Đức Giê-su đáp : “Ngươi phải yêu mến Đức Chúa, Thiên Chúa của ngươi, hết lòng, hết linh hồn và hết trí khôn ngươi. <sup>38</sup> Đó là điều răn trọng nhất và điều răn thứ nhất. <sup>39</sup> Còn điều răn thứ hai, cũng giống điều răn ấy, là : Ngươi phải yêu người thân cận như chính mình. <sup>40</sup> Tất cả Luật Mô-sê và các sách ngôn sứ đều tuỳ thuộc vào hai điều răn ấy.”</p>"
+  }
+},
+  "cac-thanh": {
+  "date": "2026-11-01",
+  "title": "Đại Lễ Các Thánh Nam Nữ",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Kh 7,2-4.9-14",
+    "bookTitle": "Bài trích sách Khải huyền của thánh Gio-an tông đồ.",
+    "lead": "Tôi thấy : Kìa một đoàn người thật đông không tài nào đếm nổi, thuộc mọi dân, mọi chi tộc, mọi nước và mọi ngôn ngữ.",
+    "content": "<p><sup>2</sup> Tôi là Gio-an, tôi thấy một thiên thần mang ấn của Thiên Chúa hằng sống, từ phía mặt trời mọc đi lên. Thiên thần ấy lớn tiếng gọi bốn thiên thần khác, là những vị được quyền phá hại đất liền và biển cả. <sup>3</sup> Thiên thần ấy nói : “Xin đừng phá hại đất liền, biển cả và cây cối, trước khi chúng tôi đóng ấn trên trán các tôi tớ của Thiên Chúa chúng ta”. <sup>4</sup> Rồi tôi nghe nói đến con số những người được đóng ấn : một trăm bốn mươi bốn ngàn người thuộc mọi chi tộc con cái Ít-ra-en.</p><p><sup>9</sup> Sau đó, tôi thấy : một đoàn người thật đông không tài nào đếm nổi, thuộc mọi dân, mọi chi tộc, mọi nước và mọi ngôn ngữ. Họ đứng trước ngai và trước Con Chiên, mình mặc áo trắng, tay cầm nhành lá thiên tuế. <sup>10</sup> Họ lớn tiếng tung hô : “Chính Thiên Chúa chúng ta, Đấng ngự trên ngai, và chính Con Chiên đã cứu độ chúng ta.” <sup>11</sup> Tất cả các thiên thần đều đứng chung quanh ngai, chung quanh các Kỳ Mục và bốn Con Vật. Họ đều sấp mặt xuống, phủ phục trước ngai và thờ lạy Thiên Chúa mà tung hô <sup>12</sup> rằng :</p><p class=\"poem\"><sup></sup><span>“A-men ! Xin kính dâng Thiên Chúa chúng ta<br />lời chúc tụng và vinh quang, sự khôn ngoan và lời tạ ơn,<br />danh dự, uy quyền và sức mạnh,<br />đến muôn thuở muôn đời ! A-men !”</span></p><p><sup>13</sup> Một trong các Kỳ Mục lên tiếng hỏi tôi : “Những người mặc áo trắng kia là ai vậy ? Họ từ đâu đến ?” <sup>14</sup> Tôi trả lời : “Thưa Ngài, Ngài biết đó.” Vị ấy bảo tôi : “Họ là những người đã đến, sau khi trải qua cơn thử thách lớn lao. Họ đã giặt sạch và tẩy trắng áo mình trong máu Con Chiên.”</p>"
+  },
+  "tv": {
+    "ref": "Tv 23,1-2.3-4ab.5-6 (Đ. x. c.6)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, đây chính là dòng dõi<br />những kẻ tìm kiếm thánh nhan Ngài.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa làm chủ trái đất cùng muôn vật muôn loài,<br />làm chủ hoàn cầu với toàn thể dân cư.</span><sup>2</sup><span>Nền trái đất, Người dựng trên biển cả,<br />đặt vững vàng trên làn nước mênh mông.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, đây chính là dòng dõi<br />những kẻ tìm kiếm thánh nhan Ngài.</span></p><p class=\"leading\"><sup>3</sup><span>Ai được lên núi Chúa ?<br />Ai được ở trong đền thánh của Người ?</span><sup>4ab</sup><span>Đó là kẻ tay sạch lòng thanh,<br />chẳng mê theo ngẫu tượng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, đây chính là dòng dõi<br />những kẻ tìm kiếm thánh nhan Ngài.</span></p><p class=\"leading\"><sup>5</sup><span>Người ấy sẽ được Chúa ban phúc lành,<br />được Thiên Chúa cứu độ thưởng công xứng đáng.</span><sup>6</sup><span>Đây chính là dòng dõi những kẻ kiếm tìm Người,<br />tìm thánh nhan Thiên Chúa nhà Gia-cóp.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Chúa, đây chính là dòng dõi<br />những kẻ tìm kiếm thánh nhan Ngài.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Ga 3,1-3",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Gio-an tông đồ.",
+    "lead": "Thiên Chúa thế nào, chúng ta sẽ thấy Người như vậy.",
+    "content": "<p class=\"poem\"><sup>1</sup><span>Anh em thân mến,<br />anh em hãy xem Chúa Cha yêu chúng ta dường nào :<br />Người yêu đến nỗi<br />cho chúng ta được gọi là con Thiên Chúa<br />- mà thực sự chúng ta là con Thiên Chúa.<br />Sở dĩ thế gian không nhận biết chúng ta,<br />là vì thế gian đã không biết Người.</span><br /><sup>2</sup><span>Anh em thân mến, hiện giờ chúng ta là con Thiên Chúa ;<br />nhưng chúng ta sẽ như thế nào, điều ấy chưa được bày tỏ.<br />Chúng ta biết rằng khi Đức Ki-tô xuất hiện,<br />chúng ta sẽ nên giống như Người,<br />vì Người thế nào, chúng ta sẽ thấy Người như vậy.</span><br /><sup>3</sup><span>Phàm ai đặt hy vọng như thế vào Đức Ki-tô<br />thì làm cho mình nên thanh sạch<br />như Người là Đấng thanh sạch.</span></p>"
+  },
+  "tm": {
+    "ref": "Mt 5,1-12a",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Anh em hãy vui mừng hớn hở, vì phần thưởng dành cho anh em ở trên trời thật lớn lao.",
+    "alleluiaRef": "Mt 11,28",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Tất cả những ai đang vất vả mang gánh nặng nề, hãy đến cùng tôi, tôi sẽ cho nghỉ ngơi bồi dưỡng. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Tất cả những ai đang vất vả mang gánh nặng nề, hãy đến cùng tôi, tôi sẽ cho nghỉ ngơi bồi dưỡng. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, thấy đám đông, Đức Giê-su lên núi. Người ngồi xuống, các môn đệ đến gần bên. <sup>2</sup> Người lên tiếng dạy họ rằng :</p><p class=\"poem\"><sup>3</sup><span>“Phúc thay ai có tâm hồn nghèo khó,<br />vì Nước Trời là của họ.</span><br /><sup>4</sup><span>Phúc thay ai hiền lành,<br />vì họ sẽ được Đất Hứa làm gia nghiệp.</span><br /><sup>5</sup><span>Phúc thay ai sầu khổ,<br />vì họ sẽ được Thiên Chúa ủi an.</span><br /><sup>6</sup><span>Phúc thay ai khát khao nên người công chính,<br />vì họ sẽ được Thiên Chúa cho thoả lòng.</span><br /><sup>7</sup><span>Phúc thay ai xót thương người,<br />vì họ sẽ được Thiên Chúa xót thương.</span><br /><sup>8</sup><span>Phúc thay ai có tâm hồn trong sạch,<br />vì họ sẽ được nhìn thấy Thiên Chúa.</span><br /><sup>9</sup><span>Phúc thay ai xây dựng hoà bình,<br />vì họ sẽ được gọi là con Thiên Chúa.</span><br /><sup>10</sup><span>Phúc thay ai bị bách hại vì sống công chính,<br />vì Nước Trời là của họ.</span><br /><sup>11</sup><span>Phúc thay anh em khi vì Thầy mà bị người ta sỉ vả, bách hại<br />và vu khống đủ điều xấu xa.</span><br /><sup>12a</sup><span>Anh em hãy vui mừng hớn hở,<br />vì phần thưởng dành cho anh em ở trên trời thật lớn lao.”</span></p>"
+  }
+},
+  "cac-dang": {
+  "date": "2026-11-02",
+  "title": "Lễ Các Đẳng Linh Hồn",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "G 19,1.23-27a",
+    "bookTitle": "Bài trích sách Gióp.",
+    "lead": "Tôi biết rằng Đấng bênh vực tôi vẫn sống.",
+    "content": "<p><sup>1</sup> Bấy giờ, ông Gióp lên tiếng nói :</p><p class=\"poem\"><sup>23</sup><span>“Ôi, những lời tôi nói đây, phải chi có người chép lại,<br />phải chi có người ghi vào sách,</span><br /><sup>24</sup><span>có người đục bằng sắt, trám bằng chì,<br />tạc vào đá cho đến muôn đời !</span><br /><sup>25</sup><span>Tôi biết rằng Đấng bênh vực tôi vẫn sống,<br />và sau cùng, Người sẽ đứng lên trên cõi đất.</span><br /><sup>26</sup><span>Sau khi da tôi đây bị tiêu huỷ,<br />thì với tấm thân này, tôi sẽ được ngắm nhìn Thiên Chúa.</span><br /><sup>27a</sup><span>Chính tôi sẽ được ngắm nhìn Người,<br />Đấng mắt tôi nhìn thấy không phải người xa lạ.”<br /></span></p>"
+  },
+  "tv": {
+    "ref": "Tv 26,1.4.7 và 8b và 9a.13-14 (Đ. c.13)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa là nguồn ánh sáng và ơn cứu độ của tôi,<br />tôi còn sợ người nào ?<br />Chúa là thành luỹ bảo vệ đời tôi,<br />tôi khiếp gì ai nữa ?</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p><p class=\"leading\"><sup>4</sup><span>Một điều tôi kiếm tôi xin,<br />là luôn được ở trong đền Chúa tôi<br />mọi ngày trong suốt cuộc đời,<br />để chiêm ngưỡng Chúa tuyệt vời cao sang,<br />ngắm xem thánh điện huy hoàng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p><p class=\"leading\"><sup>7</sup><span>Lạy Chúa, cúi xin Ngài nghe tiếng con kêu,<br />xin thương tình đáp lại.</span><sup>8b</sup><span>Lạy Chúa, con tìm thánh nhan Ngài,</span><sup>9a</sup><span>xin Ngài đừng ẩn mặt.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p><p class=\"leading\"><sup>13</sup><span>Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span><sup>14</sup><span>Hãy cậy trông vào Chúa,<br />mạnh bạo lên, can đảm lên nào !<br />Hãy cậy trông vào Chúa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Tôi vững vàng tin tưởng<br />sẽ được thấy ân lộc Chúa ban<br />trong cõi đất dành cho kẻ sống.</span></p>"
+  },
+  "bd2": {
+    "ref": "Rm 5,5-11",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Rô-ma.",
+    "lead": "Chúng ta đã được nên công chính nhờ Máu Đức Ki-tô đổ ra, hẳn sẽ được Người cứu khỏi cơn thịnh nộ của Thiên Chúa.",
+    "content": "<p><sup>5</sup> Thưa anh em, trông cậy không làm chúng ta phải thất vọng, vì Thiên Chúa đã đổ tình yêu của Người vào lòng chúng ta, nhờ Thánh Thần mà Người ban cho chúng ta. <sup>6</sup> Quả vậy, khi chúng ta không có sức làm được gì vì còn là hạng người vô đạo, thì theo đúng kỳ hạn, Đức Ki-tô đã chết vì chúng ta. <sup>7</sup> Hầu như không ai chết vì người công chính, hoạ may có ai dám chết vì một người lương thiện chăng. <sup>8</sup> Thế mà Đức Ki-tô đã chết vì chúng ta, ngay khi chúng ta còn là những người tội lỗi ; đó là bằng chứng Thiên Chúa yêu thương chúng ta. <sup>9</sup> Phương chi bây giờ chúng ta đã được nên công chính nhờ máu Đức Ki-tô đổ ra, hẳn chúng ta sẽ được Người cứu khỏi cơn thịnh nộ của Thiên Chúa. <sup>10</sup> Thật vậy, nếu ngay khi chúng ta còn thù nghịch với Thiên Chúa, Thiên Chúa đã để cho Con của Người phải chết mà cho chúng ta được hoà giải với Người, phương chi bây giờ chúng ta đã được hoà giải rồi, hẳn chúng ta sẽ được cứu nhờ sự sống của Người Con ấy. <sup>11</sup> Nhưng không phải chỉ có thế, chúng ta còn có Thiên Chúa là niềm tự hào, nhờ Đức Giê-su Ki-tô, Chúa chúng ta, Đấng nay đã hoà giải chúng ta với Thiên Chúa.</p>"
+  },
+  "tm": {
+    "ref": "Ga 6,37-40",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Gio-an.",
+    "lead": "Ai tin vào người Con, thì được sống muôn đời, và tôi sẽ cho họ sống lại trong ngày sau hết.",
+    "alleluiaRef": "Ga 6,40",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Ý của Cha tôi là tất cả những ai tin vào người Con, thì được sống muôn đời, và tôi sẽ cho họ sống lại trong ngày sau hết. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúa nói : Ý của Cha tôi là tất cả những ai tin vào người Con, thì được sống muôn đời, và tôi sẽ cho họ sống lại trong ngày sau hết. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>37</sup> Khi ấy, Đức Giê-su nói với dân chúng rằng : “Tất cả những người Chúa Cha ban cho tôi đều sẽ đến với tôi, và ai đến với tôi, tôi sẽ không loại ra ngoài, <sup>38</sup> vì tôi tự trời mà xuống, không phải để làm theo ý tôi, nhưng để làm theo ý Đấng đã sai tôi. <sup>39</sup> Mà ý của Đấng đã sai tôi là tất cả những kẻ Người đã ban cho tôi, tôi sẽ không để mất một ai, nhưng sẽ cho họ sống lại trong ngày sau hết. <sup>40</sup> Thật vậy, ý của Cha tôi là tất cả những ai thấy người Con và tin vào người Con, thì được sống muôn đời, và tôi sẽ cho họ sống lại trong ngày sau hết.”</p>"
+  }
+},
+  "cn32": {
+  "date": "2026-11-08",
+  "title": "Chúa Nhật Tuần XXXII - Mùa Thường Niên",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Kn 6,12-16",
+    "bookTitle": "Bài trích sách Khôn ngoan.",
+    "lead": "Ai tìm kiếm Đức Khôn Ngoan, thì Đức Khôn Ngoan cho gặp.",
+    "content": "<p class=\"poem\"><sup>12</sup><span>Đức Khôn Ngoan sáng chói, và không hề tàn tạ.<br />Ai mến chuộng Đức Khôn Ngoan,<br />thì Đức Khôn Ngoan dễ dàng cho chiêm ngưỡng.<br />Ai tìm kiếm Đức Khôn Ngoan,<br />thì Đức Khôn Ngoan cho gặp.</span><br /><sup>13</sup><span>Ai khao khát Đức Khôn Ngoan,<br />thì Đức Khôn Ngoan đi bước trước mà tỏ mình cho biết.</span><br /><sup>14</sup><span>Ai từ sáng sớm đã tìm Đức Khôn Ngoan,<br />thì không phải nhọc nhằn vất vả.<br />Họ sẽ thấy Đức Khôn Ngoan ngồi ngay trước cửa nhà.</span><br /><sup>15</sup><span>Để tâm suy niệm về Đức Khôn Ngoan<br />là đạt được sự minh mẫn toàn hảo.<br />Ai vì Đức Khôn Ngoan mà thức khuya dậy sớm,<br />sẽ mau trút được mọi lo âu.</span><br /><sup>16</sup><span>Vì những ai xứng đáng với Đức Khôn Ngoan,<br />thì Đức Khôn Ngoan rảo quanh tìm kiếm.<br />Trên các nẻo đường họ đi,<br />Đức Khôn Ngoan niềm nở xuất hiện.<br />Mỗi khi họ suy tưởng điều gì,<br />Đức Khôn Ngoan đều đến với họ.<br /></span></p>"
+  },
+  "tv": {
+    "ref": "Tv 62,2.3-4.5-6.7-8 (Đ. x. c.2)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p><p class=\"leading\"><sup>2</sup><span>Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />ngay từ rạng đông con tìm kiếm Chúa.<br />Linh hồn con đã khát khao Ngài,<br />tấm thân này mòn mỏi đợi trông,<br />như mảnh đất hoang khô cằn, không giọt nước.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p><p class=\"leading\"><sup>3</sup><span>Nên con đến ngắm nhìn Ngài trong nơi thánh điện,<br />để thấy uy lực và vinh quang của Ngài.</span><sup>4</sup><span>Bởi ân tình Ngài quý hơn mạng sống,<br />miệng lưỡi này xin ca ngợi tán dương.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p><p class=\"leading\"><sup>5</sup><span>Suốt cả đời con, nguyện dâng lời chúc tụng,<br />và giơ tay cầu khẩn danh Ngài.</span><sup>6</sup><span>Lòng thoả thuê như khách vừa dự tiệc,<br />môi miệng con rộn rã khúc hoan ca.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p><p class=\"leading\"><sup>7</sup><span>Con tưởng nhớ Chúa trên giường ngủ,<br />suốt năm canh thầm thĩ với Ngài.</span><sup>8</sup><span>Quả thật Ngài đã thương trợ giúp,<br />nương bóng Ngài, con hớn hở reo vui.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Lạy Thiên Chúa, Ngài là Chúa con thờ,<br />linh hồn con đã khao khát Chúa.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Tx 4,13-18",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Thê-xa-lô-ni-ca.",
+    "lead": "Những người đã an giấc trong Đức Giê-su, sẽ được Thiên Chúa đưa về cùng Đức Giê-su.",
+    "content": "<p><sup>13</sup> Thưa anh em, về những ai đã an giấc ngàn thu, chúng tôi không muốn để anh em chẳng hay biết gì, hầu anh em khỏi buồn phiền như những người khác, là những người không có niềm hy vọng. <sup>14</sup> Vì nếu chúng ta tin rằng Đức Giê-su đã chết và đã sống lại, thì chúng ta cũng tin rằng những người đã an giấc trong Đức Giê-su, sẽ được Thiên Chúa đưa về cùng Đức Giê-su. <sup>15</sup> Dựa vào lời của Chúa, chúng tôi nói với anh em điều này, là chúng ta, những người đang sống, những người còn lại vào ngày Chúa quang lâm, chúng ta sẽ chẳng đi trước những người đã an giấc ngàn thu đâu. <sup>16</sup> Vì khi hiệu lệnh ban ra, khi tiếng tổng lãnh thiên thần và tiếng kèn của Thiên Chúa vang lên, thì chính Chúa sẽ từ trời ngự xuống, và những người đã chết trong Đức Ki-tô sẽ sống lại trước tiên ; <sup>17</sup> rồi đến chúng ta, là những người đang sống, những người còn lại, chúng ta sẽ được đem đi trên đám mây cùng với họ, để nghênh đón Chúa trên không trung. Như thế, chúng ta sẽ được ở cùng Chúa mãi mãi. <sup>18</sup> Vậy anh em hãy dùng những lời ấy mà an ủi nhau.</p>"
+  },
+  "tm": {
+    "ref": "Mt 25,1-13",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Chú rể kia rồi, ra đón đi !",
+    "alleluiaRef": "Mt 24,42a.44",
+    "alleluia": "Ha-lê-lui-a Ha-lê-lui-a. Anh em hãy canh thức và hãy sẵn sàng, vì chính giờ phút anh em không ngờ, thì Con Người sẽ đến. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a Ha-lê-lui-a. Anh em hãy canh thức và hãy sẵn sàng, vì chính giờ phút anh em không ngờ, thì Con Người sẽ đến. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>1</sup> Khi ấy, Đức Giê-su kể cho các môn đệ nghe dụ ngôn này : “Nước Trời sẽ giống như chuyện mười trinh nữ cầm đèn ra đón chú rể. <sup>2</sup> Trong mười cô đó, có năm cô dại và năm cô khôn. <sup>3</sup> Quả vậy, các cô dại mang đèn mà không mang dầu theo. <sup>4</sup> Còn những cô khôn thì vừa mang đèn vừa mang chai dầu theo. <sup>5</sup> Vì chú rể đến chậm, nên các cô thiếp đi, rồi ngủ cả. <sup>6</sup> Nửa đêm, có tiếng la lên : ‘Chú rể kia rồi, ra đón đi !’ <sup>7</sup> Bấy giờ tất cả các trinh nữ ấy đều thức dậy, và sửa soạn đèn. <sup>8</sup> Các cô dại nói với các cô khôn rằng : ‘Xin các chị cho chúng em chút dầu, vì đèn của chúng em sắp tắt rồi !’ <sup>9</sup> Các cô khôn đáp : ‘Sợ không đủ cho chúng em và cho các chị đâu, các chị ra hàng mà mua lấy thì hơn.’ <sup>10</sup> Đang lúc các cô đi mua, thì chú rể tới, và những cô đã sẵn sàng được đi theo chú rể vào dự tiệc cưới. Rồi người ta đóng cửa lại. <sup>11</sup> Sau cùng, mấy trinh nữ kia cũng đến gọi : ‘Thưa Ngài, thưa Ngài ! mở cửa cho chúng tôi với !’ <sup>12</sup> Nhưng Người đáp : ‘Tôi bảo thật các cô, tôi không biết các cô là ai cả !’ <sup>13</sup> Vậy anh em hãy canh thức, vì anh em không biết ngày nào, giờ nào.”</p>"
+  }
+},
+  "tu-dao": {
+  "date": "2026-11-15",
+  "title": "Lễ Các Thánh Tử Đạo Việt Nam",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "2 Mcb 7,1.20-23.27b-29",
+    "bookTitle": "Bài trích sách Ma-ca-bê quyển thứ hai.",
+    "lead": "Bà mẹ là người đáng khâm phục, vì bà can đảm chịu đựng nhờ niềm trông cậy bà đặt nơi Đức Chúa.",
+    "content": "<p><sup>1</sup> Hồi ấy, có bảy anh em bị bắt cùng với bà mẹ. Vua An-ti-ô-khô cho lấy roi và gân bò mà đánh họ, để bắt họ ăn thịt heo là thức ăn luật Mô-sê cấm.</p><p><sup>20</sup> Bà mẹ là người rất mực xứng đáng cho ta khâm phục và kính cẩn ghi nhớ. Bà thấy bảy người con trai phải chết nội trong có một ngày, thế mà bà vẫn can đảm chịu đựng nhờ niềm trông cậy bà đặt nơi Đức Chúa. <sup>21</sup> Bà dùng tiếng mẹ đẻ mà khuyến khích từng người một, lòng bà đầy tâm tình cao thượng ; lời lẽ của bà tuy là của một người phụ nữ, nhưng lại sôi sục một chí khí nam nhi ; bà nói với các con : <sup>22</sup> “Mẹ không rõ các con đã thành hình trong lòng mẹ thế nào. Không phải mẹ ban cho các con thần khí và sự sống. Cũng không phải mẹ sắp đặt các phần cơ thể cho mỗi người trong các con. <sup>23</sup> Chính Đấng Tạo Hoá càn khôn đã nắn đúc nên loài người, và đã sáng tạo nguồn gốc muôn loài. Chính Người do lòng thương xót, cũng sẽ trả lại cho các con thần khí và sự sống, bởi vì bây giờ các con trọng Luật Lệ của Người hơn bản thân mình.”</p><p><sup>27b</sup> Bà nói với người con út : “Con ơi, con hãy thương mẹ : chín tháng cưu mang, ba năm bú mớm, mẹ đã nuôi nấng dạy dỗ con đến ngần này tuổi đầu. <sup>28</sup> Mẹ xin con hãy nhìn xem trời đất và muôn loài trong đó, mà nhận biết rằng Thiên Chúa đã làm nên tất cả từ hư vô, và loài người cũng được tạo thành như vậy. <sup>29</sup> Con đừng sợ tên đao phủ này ; nhưng hãy tỏ ra xứng đáng với các anh con, mà chấp nhận cái chết, để đến ngày Chúa thương xót, Người sẽ trả con và các anh con cho mẹ.”</p>"
+  },
+  "tv": {
+    "ref": "Tv 125,1-2ab.2cd-3.4-5.6 (Đ. c.5)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"leading\"><sup>1</sup><span>Khi Chúa dẫn tù nhân Xi-on trở về,<br />ta tưởng mình như giữa giấc mơ.</span><sup>2ab</sup><span>Vang vang ngoài miệng câu cười nói,<br />rộn rã trên môi khúc nhạc mừng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"leading\"><sup>2cd</sup><span>Bấy giờ trong dân ngoại, người ta bàn tán :<br />“Việc Chúa làm cho họ, vĩ đại thay !”</span><sup>3</sup><span>Việc Chúa làm cho ta, ôi vĩ đại !<br />Ta thấy mình chan chứa một niềm vui.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"leading\"><sup>4</sup><span>Lạy Chúa, xin dẫn tù nhân chúng con về,<br />như mưa dẫn nước về suối cạn miền Nam.</span><sup>5</sup><span>Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p><p class=\"leading\"><sup>6</sup><span>Họ ra đi, đi mà nức nở,<br />mang hạt giống vãi gieo ;<br />lúc trở về, về reo hớn hở,<br />vai nặng gánh lúa vàng.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Ai nghẹn ngào ra đi gieo giống,<br />mùa gặt mai sau khấp khởi mừng.</span></p>"
+  },
+  "bd2": {
+    "ref": "Rm 8,31b-39",
+    "bookTitle": "Bài trích thư của thánh Phao-lô tông đồ gửi tín hữu Rô-ma.",
+    "lead": "Dù sự chết hay sự sống cũng không tách được chúng ta ra khỏi tình yêu của Thiên Chúa.",
+    "content": "<p><sup>31b</sup> Thưa anh em, có Thiên Chúa bênh đỡ chúng ta, ai còn chống lại được chúng ta ? <sup>32</sup> Đến như chính Con Một, Thiên Chúa cũng chẳng tiếc, nhưng đã trao nộp vì hết thảy chúng ta. Một khi đã ban Người Con đó, lẽ nào Thiên Chúa lại chẳng rộng ban tất cả cho chúng ta ? <sup>33</sup> Ai sẽ buộc tội những người Thiên Chúa đã chọn ? Chẳng lẽ Thiên Chúa, Đấng làm cho nên công chính ? <sup>34</sup> Ai sẽ kết án họ ? Chẳng lẽ Đức Giê-su Ki-tô, Đấng đã chết, hơn nữa, đã sống lại, và đang ngự bên hữu Thiên Chúa mà chuyển cầu cho chúng ta ?</p><p><sup>35</sup> Ai có thể tách chúng ta ra khỏi tình yêu của Đức Ki-tô ? Phải chăng là gian truân, khốn khổ, đói rách, hiểm nguy, bắt bớ, gươm giáo ? <sup>36</sup> Như có lời chép : Chính vì Ngài mà mỗi ngày chúng con bị giết, bị coi như bầy cừu để sát sinh.</p><p><sup>37</sup> Nhưng trong mọi thử thách ấy, chúng ta toàn thắng nhờ Đấng đã yêu mến chúng ta.</p><p><sup>38</sup> Đúng thế, tôi tin chắc rằng : cho dầu là sự chết hay sự sống, thiên thần hay ma vương quỷ lực, hiện tại hay tương lai, hoặc bất cứ sức mạnh nào, <sup>39</sup> trời cao hay vực thẳm, hay bất cứ một loài thọ tạo nào khác, không có gì tách được chúng ta ra khỏi tình yêu của Thiên Chúa thể hiện nơi Đức Ki-tô Giê-su, Chúa chúng ta.</p>"
+  },
+  "tm": {
+    "ref": "Lc 9,23-26",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Lu-ca.",
+    "lead": "Ai liều mất mạng sống mình vì tôi, thì sẽ cứu được mạng sống ấy.",
+    "alleluiaRef": "Mt 5,10",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a.Phúc thay ai bị bách hại vì sống công chính,vì Nước Trời là của họ. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p><p>Ha-lê-lui-a. Ha-lê-lui-a.</p><p>Phúc thay ai bị bách hại vì sống công chính,</p><p>vì Nước Trời là của họ. Ha-lê-lui-a.</p></p>",
+    "content": "<p><sup>23</sup> Khi ấy, Đức Giê-su nói với mọi người rằng : “Ai muốn theo tôi, phải từ bỏ chính mình, vác thập giá mình hằng ngày mà theo. <sup>24</sup> Quả vậy, ai muốn cứu mạng sống mình, thì sẽ mất ; còn ai liều mất mạng sống mình vì tôi, thì sẽ cứu được mạng sống ấy. <sup>25</sup> Vì người nào được cả thế giới mà phải đánh mất chính mình hay là thiệt thân, thì nào có lợi gì ? <sup>26</sup> Ai xấu hổ vì tôi và những lời của tôi, thì Con Người cũng sẽ xấu hổ vì kẻ ấy, khi Người ngự đến trong vinh quang của mình, của Chúa Cha và các thánh thiên thần.”</p>"
+  }
+},
+  "kito-vua": {
+  "date": "2026-11-22",
+  "title": "Chúa Nhật 34 Thường Niên - Chúa Kitô Vua Vũ Trụ",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Ed 34,11-12.15-17",
+    "bookTitle": "Bài trích sách ngôn sứ Ê-dê-ki-en.",
+    "lead": "Phần các ngươi, hỡi chiên của Ta, này Ta sẽ xét xử giữa chiên với chiên.",
+    "content": "<p><sup>11</sup> Đức Chúa là Chúa Thượng phán thế này : “Đây, chính Ta sẽ chăm sóc chiên của Ta và thân hành kiểm điểm. <sup>12</sup> Như mục tử kiểm điểm đàn vật của mình vào ngày người ấy ở giữa đàn chiên bị tản mác thế nào, thì Ta cũng sẽ kiểm điểm chiên của Ta như vậy. Ta sẽ kéo chúng ra khỏi mọi nơi chúng đã bị tản mác, vào ngày mây đen mù mịt. <sup>15</sup> Chính Ta sẽ chăn dắt chiên của Ta, chính Ta sẽ cho chúng nằm nghỉ - sấm ngôn của Đức Chúa là Chúa Thượng. <sup>16</sup> Con nào bị mất, Ta sẽ đi tìm ; con nào đi lạc, Ta sẽ đưa về ; con nào bị thương, Ta sẽ băng bó ; con nào bệnh tật, Ta sẽ làm cho mạnh ; con nào béo mập, con nào khoẻ mạnh, Ta sẽ canh chừng. Ta sẽ theo lẽ chính trực mà chăn dắt chúng.</p><p><sup>17</sup> “Phần các ngươi, hỡi chiên của Ta, -Đức Chúa là Chúa Thượng phán-, này Ta sẽ xét xử giữa chiên với chiên, giữa cừu với dê.”</p>"
+  },
+  "tv": {
+    "ref": "Tv 22,1-2a.2b-3.5.6 (Đ. c.1)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span><sup>2a</sup><span>Trong đồng cỏ xanh tươi,<br />Người cho tôi nằm nghỉ.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>2b</sup><span>Người đưa tôi tới dòng nước trong lành</span><sup>3</sup><span>và bổ sức cho tôi.<br />Người dẫn tôi trên đường ngay nẻo chính<br />vì danh dự của Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>5</sup><span>Chúa dọn sẵn cho con bữa tiệc<br />ngay trước mặt quân thù.<br />Đầu con, Chúa xức đượm dầu thơm,<br />ly rượu con đầy tràn chan chứa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>6</sup><span>Lòng nhân hậu và tình thương Chúa<br />ấp ủ tôi suốt cả cuộc đời,<br />và tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Cr 15,20-26.28",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Cô-rin-tô.",
+    "lead": "Đức Ki-tô trao vương quyền lại cho Thiên Chúa là Cha, và như vậy, Thiên Chúa có toàn quyền trên muôn loài.",
+    "content": "<p><sup>20</sup> Thưa anh em, Đức Ki-tô đã trỗi dậy từ cõi chết, mở đường cho những ai đã an giấc ngàn thu. <sup>21</sup> Vì nếu tại một người mà nhân loại phải chết, thì cũng nhờ một người mà kẻ chết được sống lại. <sup>22</sup> Quả thế, như mọi người vì liên đới với A-đam mà phải chết, thì mọi người nhờ liên đới với Đức Ki-tô, cũng được Thiên Chúa cho sống. <sup>23</sup> Nhưng mỗi người theo thứ tự của mình : mở đường là Đức Ki-tô, rồi khi Đức Ki-tô quang lâm thì đến lượt những kẻ thuộc về Người. <sup>24</sup> Sau đó mọi sự đều hoàn tất, khi Người đã tiêu diệt hết mọi quản thần, mọi quyền thần và mọi dũng thần, rồi trao vương quyền lại cho Thiên Chúa là Cha.</p><p><sup>25</sup> Thật vậy, Đức Ki-tô phải nắm vương quyền cho đến khi Thiên Chúa đặt mọi thù địch dưới chân Người. <sup>26</sup> Thù địch cuối cùng bị tiêu diệt là sự chết. <sup>28</sup> Lúc muôn loài đã quy phục Đức Ki-tô, thì chính Người, vì là Con, cũng sẽ quy phục Đấng bắt muôn loài phải quy phục Người ; và như vậy, Thiên Chúa có toàn quyền trên muôn loài.</p>"
+  },
+  "tm": {
+    "ref": "Mt 25,31-46",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Con Người sẽ ngự lên ngai vinh hiển của Người, và Người sẽ tách biệt họ với nhau.",
+    "alleluiaRef": "Mc 11,9.10",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúc tụng Đấng ngự đến nhân danh Đức Chúa ! Chúc tụng triều đại đang tới, triều đại vua Đa-vít tổ phụ chúng ta. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúc tụng Đấng ngự đến nhân danh Đức Chúa ! Chúc tụng triều đại đang tới, triều đại vua Đa-vít tổ phụ chúng ta. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>31</sup> Khi ấy, Đức Giê-su nói với các môn đệ rằng : “Khi Con Người đến trong vinh quang của Người, có tất cả các thiên sứ theo hầu, bấy giờ Người sẽ ngự lên ngai vinh hiển của Người. <sup>32</sup> Các dân thiên hạ sẽ được tập hợp trước mặt Người, và Người sẽ tách biệt họ với nhau, như mục tử tách biệt chiên với dê. <sup>33</sup> Người sẽ cho chiên đứng bên phải Người, còn dê ở bên trái. <sup>34</sup> Bấy giờ Đức Vua sẽ phán cùng những người ở bên phải rằng : ‘Nào những kẻ Cha Ta chúc phúc, hãy đến thừa hưởng Vương Quốc dọn sẵn cho các ngươi ngay từ thuở tạo thiên lập địa. <sup>35</sup> Vì xưa Ta đói, các ngươi đã cho ăn ; Ta khát, các ngươi đã cho uống ; Ta là khách lạ, các ngươi đã tiếp rước ; <sup>36</sup> Ta trần truồng, các ngươi đã cho mặc ; Ta đau yếu, các ngươi đã thăm viếng ; Ta ngồi tù, các ngươi đến hỏi han.’ <sup>37</sup> Bấy giờ những người công chính sẽ thưa rằng : ‘Lạy Chúa, có bao giờ chúng con đã thấy Chúa đói mà cho ăn, khát mà cho uống ; <sup>38</sup> có bao giờ đã thấy Chúa là khách lạ mà tiếp rước ; hoặc trần truồng mà cho mặc ? <sup>39</sup> Có bao giờ chúng con đã thấy Chúa đau yếu hoặc ngồi tù, mà đến hỏi han đâu ?’ <sup>40</sup> Đức Vua sẽ đáp lại rằng : ‘Ta bảo thật các ngươi : mỗi lần các ngươi làm như thế cho một trong những anh em bé nhỏ nhất của Ta đây, là các ngươi đã làm cho chính Ta vậy.’ <sup>41</sup> Rồi Đức Vua sẽ phán cùng những người ở bên trái rằng : ‘Quân bị nguyền rủa kia, đi đi cho khuất mắt Ta mà vào lửa đời đời, nơi dành sẵn cho tên Ác Quỷ và các sứ thần của nó. <sup>42</sup> Vì xưa Ta đói, các ngươi đã không cho ăn ; Ta khát, các ngươi đã không cho uống ; <sup>43</sup> Ta là khách lạ, các ngươi đã không tiếp rước ; Ta trần truồng, các ngươi đã không cho mặc ; Ta đau yếu và ngồi tù, các ngươi đã chẳng thăm viếng.’ <sup>44</sup> Bấy giờ những người ấy cũng sẽ thưa rằng : ‘Lạy Chúa, có bao giờ chúng con đã thấy Chúa đói, khát, hoặc là khách lạ, hoặc trần truồng, đau yếu hay ngồi tù, mà không phục vụ Chúa đâu ?’ <sup>45</sup> Bấy giờ Người sẽ đáp lại họ rằng : ‘Ta bảo thật các ngươi : mỗi lần các ngươi không làm như thế cho một trong những người bé nhỏ nhất đây, là các ngươi đã không làm cho chính Ta vậy.’ <sup>46</sup> Thế là họ ra đi để chịu cực hình muôn kiếp, còn những người công chính ra đi để hưởng sự sống muôn đời.”</p>"
+  }
+},
+  "cn34": {
+  "date": "2026-11-22",
+  "title": "Chúa Nhật 34 Thường Niên - Chúa Kitô Vua Vũ Trụ",
+  "source": "Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)",
+  "sourceUrl": "https://ktcgkpv.org/readings/mass-reading",
+  "bd1": {
+    "ref": "Ed 34,11-12.15-17",
+    "bookTitle": "Bài trích sách ngôn sứ Ê-dê-ki-en.",
+    "lead": "Phần các ngươi, hỡi chiên của Ta, này Ta sẽ xét xử giữa chiên với chiên.",
+    "content": "<p><sup>11</sup> Đức Chúa là Chúa Thượng phán thế này : “Đây, chính Ta sẽ chăm sóc chiên của Ta và thân hành kiểm điểm. <sup>12</sup> Như mục tử kiểm điểm đàn vật của mình vào ngày người ấy ở giữa đàn chiên bị tản mác thế nào, thì Ta cũng sẽ kiểm điểm chiên của Ta như vậy. Ta sẽ kéo chúng ra khỏi mọi nơi chúng đã bị tản mác, vào ngày mây đen mù mịt. <sup>15</sup> Chính Ta sẽ chăn dắt chiên của Ta, chính Ta sẽ cho chúng nằm nghỉ - sấm ngôn của Đức Chúa là Chúa Thượng. <sup>16</sup> Con nào bị mất, Ta sẽ đi tìm ; con nào đi lạc, Ta sẽ đưa về ; con nào bị thương, Ta sẽ băng bó ; con nào bệnh tật, Ta sẽ làm cho mạnh ; con nào béo mập, con nào khoẻ mạnh, Ta sẽ canh chừng. Ta sẽ theo lẽ chính trực mà chăn dắt chúng.</p><p><sup>17</sup> “Phần các ngươi, hỡi chiên của Ta, -Đức Chúa là Chúa Thượng phán-, này Ta sẽ xét xử giữa chiên với chiên, giữa cừu với dê.”</p>"
+  },
+  "tv": {
+    "ref": "Tv 22,1-2a.2b-3.5.6 (Đ. c.1)",
+    "content": "<p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>1</sup><span>Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span><sup>2a</sup><span>Trong đồng cỏ xanh tươi,<br />Người cho tôi nằm nghỉ.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>2b</sup><span>Người đưa tôi tới dòng nước trong lành</span><sup>3</sup><span>và bổ sức cho tôi.<br />Người dẫn tôi trên đường ngay nẻo chính<br />vì danh dự của Người.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>5</sup><span>Chúa dọn sẵn cho con bữa tiệc<br />ngay trước mặt quân thù.<br />Đầu con, Chúa xức đượm dầu thơm,<br />ly rượu con đầy tràn chan chứa.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p><p class=\"leading\"><sup>6</sup><span>Lòng nhân hậu và tình thương Chúa<br />ấp ủ tôi suốt cả cuộc đời,<br />và tôi được ở đền Người<br />những ngày tháng, những năm dài triền miên.</span></p><p class=\"response\"><span class=\"pre\">Đ.</span><span class=\"body\">Chúa là mục tử chăn dắt tôi,<br />tôi chẳng thiếu thốn gì.</span></p>"
+  },
+  "bd2": {
+    "ref": "1 Cr 15,20-26.28",
+    "bookTitle": "Bài trích thư thứ nhất của thánh Phao-lô tông đồ gửi tín hữu Cô-rin-tô.",
+    "lead": "Đức Ki-tô trao vương quyền lại cho Thiên Chúa là Cha, và như vậy, Thiên Chúa có toàn quyền trên muôn loài.",
+    "content": "<p><sup>20</sup> Thưa anh em, Đức Ki-tô đã trỗi dậy từ cõi chết, mở đường cho những ai đã an giấc ngàn thu. <sup>21</sup> Vì nếu tại một người mà nhân loại phải chết, thì cũng nhờ một người mà kẻ chết được sống lại. <sup>22</sup> Quả thế, như mọi người vì liên đới với A-đam mà phải chết, thì mọi người nhờ liên đới với Đức Ki-tô, cũng được Thiên Chúa cho sống. <sup>23</sup> Nhưng mỗi người theo thứ tự của mình : mở đường là Đức Ki-tô, rồi khi Đức Ki-tô quang lâm thì đến lượt những kẻ thuộc về Người. <sup>24</sup> Sau đó mọi sự đều hoàn tất, khi Người đã tiêu diệt hết mọi quản thần, mọi quyền thần và mọi dũng thần, rồi trao vương quyền lại cho Thiên Chúa là Cha.</p><p><sup>25</sup> Thật vậy, Đức Ki-tô phải nắm vương quyền cho đến khi Thiên Chúa đặt mọi thù địch dưới chân Người. <sup>26</sup> Thù địch cuối cùng bị tiêu diệt là sự chết. <sup>28</sup> Lúc muôn loài đã quy phục Đức Ki-tô, thì chính Người, vì là Con, cũng sẽ quy phục Đấng bắt muôn loài phải quy phục Người ; và như vậy, Thiên Chúa có toàn quyền trên muôn loài.</p>"
+  },
+  "tm": {
+    "ref": "Mt 25,31-46",
+    "bookTitle": "<span class=\"holycross\">&#x2720;</span>Tin Mừng Chúa Giê-su Ki-tô theo thánh Mát-thêu.",
+    "lead": "Con Người sẽ ngự lên ngai vinh hiển của Người, và Người sẽ tách biệt họ với nhau.",
+    "alleluiaRef": "Mc 11,9.10",
+    "alleluia": "Ha-lê-lui-a. Ha-lê-lui-a. Chúc tụng Đấng ngự đến nhân danh Đức Chúa ! Chúc tụng triều đại đang tới, triều đại vua Đa-vít tổ phụ chúng ta. Ha-lê-lui-a.",
+    "alleluiaHtml": "<p>Ha-lê-lui-a. Ha-lê-lui-a. Chúc tụng Đấng ngự đến nhân danh Đức Chúa ! Chúc tụng triều đại đang tới, triều đại vua Đa-vít tổ phụ chúng ta. Ha-lê-lui-a.</p>",
+    "content": "<p><sup>31</sup> Khi ấy, Đức Giê-su nói với các môn đệ rằng : “Khi Con Người đến trong vinh quang của Người, có tất cả các thiên sứ theo hầu, bấy giờ Người sẽ ngự lên ngai vinh hiển của Người. <sup>32</sup> Các dân thiên hạ sẽ được tập hợp trước mặt Người, và Người sẽ tách biệt họ với nhau, như mục tử tách biệt chiên với dê. <sup>33</sup> Người sẽ cho chiên đứng bên phải Người, còn dê ở bên trái. <sup>34</sup> Bấy giờ Đức Vua sẽ phán cùng những người ở bên phải rằng : ‘Nào những kẻ Cha Ta chúc phúc, hãy đến thừa hưởng Vương Quốc dọn sẵn cho các ngươi ngay từ thuở tạo thiên lập địa. <sup>35</sup> Vì xưa Ta đói, các ngươi đã cho ăn ; Ta khát, các ngươi đã cho uống ; Ta là khách lạ, các ngươi đã tiếp rước ; <sup>36</sup> Ta trần truồng, các ngươi đã cho mặc ; Ta đau yếu, các ngươi đã thăm viếng ; Ta ngồi tù, các ngươi đến hỏi han.’ <sup>37</sup> Bấy giờ những người công chính sẽ thưa rằng : ‘Lạy Chúa, có bao giờ chúng con đã thấy Chúa đói mà cho ăn, khát mà cho uống ; <sup>38</sup> có bao giờ đã thấy Chúa là khách lạ mà tiếp rước ; hoặc trần truồng mà cho mặc ? <sup>39</sup> Có bao giờ chúng con đã thấy Chúa đau yếu hoặc ngồi tù, mà đến hỏi han đâu ?’ <sup>40</sup> Đức Vua sẽ đáp lại rằng : ‘Ta bảo thật các ngươi : mỗi lần các ngươi làm như thế cho một trong những anh em bé nhỏ nhất của Ta đây, là các ngươi đã làm cho chính Ta vậy.’ <sup>41</sup> Rồi Đức Vua sẽ phán cùng những người ở bên trái rằng : ‘Quân bị nguyền rủa kia, đi đi cho khuất mắt Ta mà vào lửa đời đời, nơi dành sẵn cho tên Ác Quỷ và các sứ thần của nó. <sup>42</sup> Vì xưa Ta đói, các ngươi đã không cho ăn ; Ta khát, các ngươi đã không cho uống ; <sup>43</sup> Ta là khách lạ, các ngươi đã không tiếp rước ; Ta trần truồng, các ngươi đã không cho mặc ; Ta đau yếu và ngồi tù, các ngươi đã chẳng thăm viếng.’ <sup>44</sup> Bấy giờ những người ấy cũng sẽ thưa rằng : ‘Lạy Chúa, có bao giờ chúng con đã thấy Chúa đói, khát, hoặc là khách lạ, hoặc trần truồng, đau yếu hay ngồi tù, mà không phục vụ Chúa đâu ?’ <sup>45</sup> Bấy giờ Người sẽ đáp lại họ rằng : ‘Ta bảo thật các ngươi : mỗi lần các ngươi không làm như thế cho một trong những người bé nhỏ nhất đây, là các ngươi đã không làm cho chính Ta vậy.’ <sup>46</sup> Thế là họ ra đi để chịu cực hình muôn kiếp, còn những người công chính ra đi để hưởng sự sống muôn đời.”</p>"
+  }
+},
+};
 
-1. Cầu cho Hội Thánh: Xin Chúa ban cho Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Thánh lòng nhiệt thành truyền giáo, để Hội Thánh không ngừng rao giảng Tin Mừng và mời gọi muôn dân đến hiệp thông trong bàn tiệc Lời Chúa và Thánh Thể.
-Xướng: Chúng con cầu xin Chúa.
-Đáp: Xin Chúa nhậm lời chúng con.
+const OFFLINE_LITURGY_STORE = KTCGKPV_LITURGY_STORE;
 
-2. Cầu cho hòa bình thế giới và các dân tộc: Xin Chúa lau sạch nước mắt khổ đau của những người nghèo khó, bệnh tật, các nạn nhân chiến tranh và thiên tai, ban cho nhân loại được sống trong an bình, công lý và tình huynh đệ ấm áp.
-Xướng: Chúng con cầu xin Chúa.
-Đáp: Xin Chúa nhậm lời chúng con.
-
-3. Cầu cho những người đang khước từ lời mời gọi của Chúa: Xin ơn Chúa đánh động tâm trí họ, giúp họ nhận ra sự hư ảo trần thế để can đảm từ bỏ tội lỗi, quay về đón nhận lòng thương xót Chúa và mặc lấy y phục thánh thiện.
-Xướng: Chúng con cầu xin Chúa.
-Đáp: Xin Chúa nhậm lời chúng con.
-
-4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: "Tôi có thể làm được mọi sự trong Đấng ban sức mạnh cho tôi": Xin Chúa ban ơn trợ lực để mỗi ca viên luôn hiệp nhất yêu thương, mặc lấy tâm tình đức tin, cậy, mến và say mê dùng lời ca tiếng hát phục vụ bàn thánh.
-Xướng: Chúng con cầu xin Chúa.
-Đáp: Xin Chúa nhậm lời chúng con.
-
-Chủ tế: Lạy Chúa là Vua muôn loài, xin thương chấp nhận những ước nguyện chân thành của cộng đoàn chúng con, và gìn giữ chúng con luôn trung kiên trong ân sủng cho đến ngày được vào dự tiệc cưới muôn đời trên thiên quốc. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
-    }
-  };
 
   /**
    * KHO MẪU LỜI NGUYỆN TÍN HỮU CHUẨN PHỤNG VỤ ĐA DẠNG CÁC MÙA & LỄ TRỌNG
    */
   const LITURGICAL_PRAYERS_CATALOG = [
+    {
+      id: 'cn30_tn_a',
+      title: 'Chúa Nhật 30 Thường Niên - Năm A',
+      subtitle: 'Giới răn Trọng nhất: Mến Chúa và Yêu người (Xh 22, 1 Tx 1, Mt 22)',
+      text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 30 THƯỜNG NIÊN - NĂM A
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Tình Yêu, Người tha thiết mời gọi chúng ta sống trọn vẹn giới răn mến Chúa trên hết mọi sự và yêu thương tha nhân như chính mình. Với tâm tình con thảo và cậy trông sâu xa, chúng ta cùng hiệp ý dâng lời nguyện xin:
+
+1. Cầu cho Hội Thánh: Xin Chúa soi sáng và ban muôn ơn lành trên Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Chúa, để Hội Thánh luôn là chứng tá sống động và ngời sáng của lòng bác ái Tin Mừng giữa trần gian.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho thế giới và những người cùng khổ: "Người ngoại kiều, ngươi không được ngược đãi; Mẹ goá con côi, các ngươi không được ức hiếp": Xin Chúa mở rộng lòng các nhà lãnh đạo quốc gia và mọi người, biết bảo vệ người yếu thế, đẩy lùi nghèo đói và bất công xã hội.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những tâm hồn đang sống trong ích kỷ, oán hờn và chia rẽ: Xin Lời Chúa đánh động và biến đổi tâm can họ, giúp họ nhận ra sự cao quý của lòng vị tha và can đảm tha thứ để cùng nhau xây dựng tình huynh đệ ấm áp.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: Xin Chúa ban cho mỗi ca viên lòng nhiệt thành mến Chúa chân thật, biết hiệp nhất yêu thương nhau và dùng tiếng hát phụng vụ bàn thánh để lan toả tình yêu Chúa đến mọi người.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Thiên Chúa toàn năng nhân ái, Chúa đã dạy rằng tất cả Lề Luật và các sách ngôn sứ đều tuỳ thuộc vào giới răn yêu thương. Xin thương chấp nhận những lời chúng con tha thiết nài van, và ban ơn trợ lực để chúng con biết thực thi đức ái trọn vẹn mỗi ngày. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
+    },
+    {
+      id: 'cn29_tn_a',
+      title: 'Chúa Nhật 29 Thường Niên - Năm A',
+      subtitle: 'Của Xê-da trả Xê-da, của Thiên Chúa trả Thiên Chúa (Is 45, 1 Tx 1, Mt 22)',
+      text: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 29 THƯỜNG NIÊN - NĂM A
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Chủ Tể tuyệt đối của càn khôn vạn vật. Đức Giêsu dạy chúng ta chu toàn bổn phận công dân trần thế nhưng luôn tôn thờ và đặt Thiên Chúa ở vị trí tối thượng trong cuộc đời. Trong niềm cậy trông son sắt, chúng ta cùng tha thiết dâng lời nguyện xin:
+
+1. Cầu cho Hội Thánh và công cuộc Loan Báo Tin Mừng: Xin Chúa ban ơn khôn ngoan và sức mạnh cho các vị chủ chăn cùng mọi Kitô hữu, để Hội Thánh không ngừng can đảm loan báo chân lý cứu độ cho muôn dân.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho các nhà lãnh đạo quốc gia: Xin Chúa soi sáng tâm trí những người nắm quyền bính, biết tôn trọng tự do lương tâm, tự do tôn giáo, và hết lòng phục vụ cho công lý, tự do và sự thịnh vượng của toàn dân.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những người đang bị áp bức hoặc gặp cảnh bất công: Xin Chúa bênh vực và chở che những người cô thế cô thân, xoa dịu những nỗi đau và ban cho họ niềm hy vọng nơi lòng thương xót Chúa.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và cộng đoàn giáo xứ: Xin Chúa gìn giữ mỗi ca viên luôn trung kiên trong đức tin, biết dâng trọn tâm hồn và khả năng để làm sáng Danh Chúa qua từng lời ca tiếng hát nơi thánh đường.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa là Vua muôn vua và Chúa các chúa, xin đoái nhìn những ước nguyện chân thành chúng con vừa dâng lên, và giúp chúng con luôn biết sống xứng đáng là con thảo của Chúa giữa lòng xã hội. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`
+    },
     {
       id: 'cn28_tn_a',
       title: 'Chúa Nhật 28 Thường Niên - Năm A',
@@ -709,6 +1451,136 @@ function parseRawLnthText(raw) {
  * Đối chiếu từ: HĐGMVN, TGP Sài Gòn, Dòng Đa Minh, TGP Hà Nội, GP Xuân Lộc
  */
 const AI_LITURGICAL_SYNTHESIS = {
+  'cn30_tn_a': {
+    standard: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 30 THƯỜNG NIÊN - NĂM A
+(Bản tổng hợp chuẩn mực: HĐGMVN & TGP Sài Gòn)
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Tình Yêu, Người tha thiết mời gọi chúng ta sống trọn vẹn giới răn mến Chúa trên hết mọi sự và yêu thương tha nhân như chính mình. Với tâm tình con thảo và cậy trông sâu xa, chúng ta cùng hiệp ý dâng lời nguyện xin:
+
+1. Cầu cho Hội Thánh: Xin Chúa soi sáng và ban muôn ơn lành trên Đức Giáo Hoàng, các Đức Giám Mục, Linh Mục và toàn thể Dân Chúa, để Hội Thánh luôn là chứng tá sống động và ngời sáng của lòng bác ái Tin Mừng giữa trần gian.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho thế giới và những người cùng khổ: "Người ngoại kiều, ngươi không được ngược đãi; Mẹ goá con côi, các ngươi không được ức hiếp": Xin Chúa mở rộng lòng các nhà lãnh đạo quốc gia và mọi người, biết bảo vệ người yếu thế, đẩy lùi nghèo đói và bất công xã hội.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những tâm hồn đang sống trong ích kỷ, oán hờn và chia rẽ: Xin Lời Chúa đánh động và biến đổi tâm can họ, giúp họ nhận ra sự cao quý của lòng vị tha và can đảm tha thứ để cùng nhau xây dựng tình huynh đệ ấm áp.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và Cộng đoàn giáo xứ chúng ta: Xin Chúa ban cho mỗi ca viên lòng nhiệt thành mến Chúa chân thật, biết hiệp nhất yêu thương nhau và dùng tiếng hát phụng vụ bàn thánh để lan toả tình yêu Chúa đến mọi người.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Thiên Chúa toàn năng nhân ái, Chúa đã dạy rằng tất cả Lề Luật và các sách ngôn sứ đều tuỳ thuộc vào giới răn yêu thương. Xin thương chấp nhận những lời chúng con tha thiết nài van, và ban ơn trợ lực để chúng con biết thực thi đức ái trọn vẹn mỗi ngày. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+    pastoral: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 30 THƯỜNG NIÊN - NĂM A
+(Bản mục vụ sâu sắc: Dòng Đa Minh & TGP Hà Nội)
+Chủ tế: Anh chị em thân mến, lắng nghe Lời Chúa dạy về hai giới răn mến Chúa và yêu người, chúng ta cùng tha thiết dâng lên Thiên Chúa lời nguyện cầu chân thành:
+
+1. "Ngươi phải yêu mến Đức Chúa, Thiên Chúa của ngươi hết lòng": Xin cho mọi Kitô hữu luôn đặt Chúa lên trên mọi danh lợi trần thế và trung kiên phụng sự Người bằng trọn cả cuộc đời.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+2. "Ngươi phải yêu người thân cận như chính mình": Xin Chúa ban cho nhân loại quả tim biết rung cảm trước nỗi khổ của tha nhân, biết chia cơm sẻ áo cho những người cơ nhỡ bần cùng.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho các gia đình Kitô hữu: Xin Chúa thánh hoá các tổ ấm gia đình, giúp các bậc cha mẹ luôn biết nêu gương sáng yêu thương, quảng đại và bao dung cho con cái noi theo.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa: Xin Chúa liên kết mọi ca viên trong tinh thần khiêm hạ và bác ái, để tiếng hát của chúng con xuất phát từ trái tim mến Chúa chân thành.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa là Cha chí thánh, xin gìn giữ chúng con trong tình yêu của Chúa và ban ơn giúp chúng con luôn biết yêu thương anh chị em mình như chính Chúa đã yêu thương chúng con. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+    choir: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 30 THƯỜNG NIÊN - NĂM A
+(Bản đồng hành Ca Đoàn & Giới Trẻ - Chuẩn Phụng Vụ)
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Tình Yêu. Trong niềm vui được hiệp thông bên bàn tiệc Lời Chúa và Thánh Thể, chúng ta cùng hân hoan dâng lên Người những ước nguyện tha thiết:
+
+1. Cầu cho Hội Thánh hoàn vũ: Xin Chúa ban cho các vị mục tử dồi dào ơn thánh để các ngài luôn dẫn dắt Dân Chúa bằng chính đời sống hy sinh phục vụ vô vị lợi.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho người trẻ và thanh thiếu niên: Xin Chúa khơi dậy nơi tâm hồn người trẻ lý tưởng sống bác ái, biết mở rộng vòng tay giúp đỡ người bất hạnh và can đảm xây dựng nền văn minh tình thương.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những nạn nhân chiến tranh và thiên tai: Xin Chúa xoa dịu những đau thương mất mát của họ và gửi đến những bàn tay nhân ái kịp thời cứu trợ ủi an.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa: Xin Chúa thánh hoá tiếng hát của từng ca viên, để sự phục vụ của ca đoàn luôn tràn đầy niềm vui, sự hiệp nhất và lòng nhiệt thành mến Chúa.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa Giêsu, xin thắp lên trong trái tim chúng con ngọn lửa tình yêu của Chúa, Đấng hằng sống và hiển trị muôn đời. - Amen.`
+  },
+  'cn29_tn_a': {
+    standard: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 29 THƯỜNG NIÊN - NĂM A
+(Bản tổng hợp chuẩn mực: HĐGMVN & TGP Sài Gòn)
+Chủ tế: Anh chị em thân mến, Thiên Chúa là Chủ Tể tuyệt đối của càn khôn vạn vật. Đức Giêsu dạy chúng ta chu toàn bổn phận công dân trần thế nhưng luôn tôn thờ và đặt Thiên Chúa ở vị trí tối thượng trong cuộc đời. Trong niềm cậy trông son sắt, chúng ta cùng tha thiết dâng lời nguyện xin:
+
+1. Cầu cho Hội Thánh và công cuộc Loan Báo Tin Mừng: Xin Chúa ban ơn khôn ngoan và sức mạnh cho các vị chủ chăn cùng mọi Kitô hữu, để Hội Thánh không ngừng can đảm loan báo chân lý cứu độ cho muôn dân.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho các nhà lãnh đạo quốc gia: Xin Chúa soi sáng tâm trí những người nắm quyền bính, biết tôn trọng tự do lương tâm, tự do tôn giáo, và hết lòng phục vụ cho công lý, tự do và sự thịnh vượng của toàn dân.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những người đang bị áp bức hoặc gặp cảnh bất công: Xin Chúa bênh vực và chở che những người cô thế cô thân, xoa dịu những nỗi đau và ban cho họ niềm hy vọng nơi lòng thương xót Chúa.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa và cộng đoàn giáo xứ: Xin Chúa gìn giữ mỗi ca viên luôn trung kiên trong đức tin, biết dâng trọn tâm hồn và khả năng để làm sáng Danh Chúa qua từng lời ca tiếng hát nơi thánh đường.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa là Vua muôn vua và Chúa các chúa, xin đoái nhìn những ước nguyện chân thành chúng con vừa dâng lên, và giúp chúng con luôn biết sống xứng đáng là con thảo của Chúa giữa lòng xã hội. Chúng con cầu xin nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+    pastoral: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 29 THƯỜNG NIÊN - NĂM A
+(Bản mục vụ sâu sắc: Dòng Đa Minh & TGP Hà Nội)
+Chủ tế: Anh chị em thân mến, "Của Xê-da trả về Xê-da, của Thiên Chúa trả về Thiên Chúa". Với ý thức bổn phận làm con cái Chúa giữa lòng trần thế, chúng ta cùng tha thiết dâng lời cầu nguyện:
+
+1. Cầu cho các vị mục tử trong Hội Thánh: Xin Chúa ban cho các ngài tinh thần ngôn sứ không sợ hãi trước cường quyền trần thế, luôn can đảm bảo vệ Chân Lý Tin Mừng.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho sự bình an và phát triển của quê hương đất nước: Xin Chúa chúc lành cho dân tộc chúng con, đẩy lùi thói tham nhũng bất công, đem lại tự do ấm no cho mọi người dân.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những người đang bị giam cầm vì niềm tin và công lý: Xin Chúa là Đấng giải thoát nâng đỡ tinh thần họ và ban cho họ ơn kiên vững đến cùng.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho toàn thể Ca viên Ca Đoàn Dohwa: Xin Chúa giúp chúng con luôn biết đặt Chúa làm trung tâm đời sống mình, hăng say phục vụ Chúa và tha nhân với trọn niềm tín thác.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Thiên Chúa toàn năng hằng sống, xin lắng nghe và chấp nhận những ước nguyện chân thành của chúng con, nhờ Đức Kitô, Chúa chúng con. - Amen.`,
+    choir: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 29 THƯỜNG NIÊN - NĂM A
+(Bản đồng hành Ca Đoàn & Giới Trẻ - Chuẩn Phụng Vụ)
+Chủ tế: Anh chị em thân mến, tạ ơn Chúa đã quy tụ chúng ta nơi đây. Đức Kitô mời gọi chúng ta trao dâng trọn vẹn cuộc đời cho Thiên Chúa. Trong niềm hân hoan tin tưởng, chúng ta cùng tha thiết nguyện xin:
+
+1. Cầu cho ngày Khánh Nhật Truyền Giáo: Xin Chúa thúc đẩy tâm hồn mỗi Kitô hữu nhiệt tâm làm chứng cho Tin Mừng bằng chính đời sống lương thiện bác ái hằng ngày.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+2. Cầu cho giới trí thức và sinh viên học sinh: Xin Chúa soi sáng tâm trí người trẻ để luôn biết dùng tài năng tri thức xây dựng xã hội tốt đẹp và tôn vinh Đấng Tạo Hóa.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+3. Cầu cho những người già yếu neo đơn: Xin Chúa nâng đỡ tuổi già của họ và khơi dậy nơi tâm hồn các tín hữu lòng hiếu thảo chăm sóc phụng dưỡng.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+4. Cầu cho Ca Đoàn Dohwa: Xin Chúa thánh hoá từng nốt nhạc tiếng ca của ca đoàn, để mỗi giờ phụng vụ là một lời tạ ơn sốt sắng dâng lên Thiên Chúa.
+Xướng: Chúng con cầu xin Chúa.
+Đáp: Xin Chúa nhậm lời chúng con.
+
+Chủ tế: Lạy Chúa, xin thương đón nhận lời ca tiếng hát và những thỉnh cầu của chúng con, Đấng hằng sống và hiển trị muôn đời. - Amen.`
+  },
   'cn28_tn_a': {
     standard: `LỜI NGUYỆN TÍN HỮU – CHÚA NHẬT 28 THƯỜNG NIÊN - NĂM A
 (Bản tổng hợp chuẩn mực: HĐGMVN & TGP Sài Gòn)
@@ -1024,71 +1896,169 @@ class BaiDocViewer {
    * RENDER BÀI ĐỌC (BÀI ĐỌC 1, BÀI ĐỌC 2, TIN MỪNG)
    * Hiển thị đầy đủ Tiêu đề bài trích chuẩn Phụng vụ
    */
+  /**
+   * TÌM DỮ LIỆU BÀI ĐỌC PHỤNG VỤ CHUẨN KTCGKPV CHO BỘ LỄ:
+   * 1. Ưu tiên ms.readings nếu có
+   * 2. Tìm theo ms.date trong KTCGKPV_LITURGY_STORE
+   * 3. Phân tích tự động số tuần Thường Niên hoặc Lễ Trọng từ title/id/URL (cn30, cn29, cn28, cac-thanh...)
+   */
+  getLiturgyDataForMass(ms) {
+    if (!ms) ms = this.currentMassSet || window.dohwaApp?.currentMassSet || {};
+
+    // 1. Direct ms.readings nếu được gán cụ thể
+    if (ms.readings && (ms.readings.bd1 || ms.readings.tm)) {
+      return ms.readings;
+    }
+
+    // 2. Khớp theo chính xác ngày ms.date
+    const dateStr = ms.date || '';
+    if (dateStr && KTCGKPV_LITURGY_STORE[dateStr]) {
+      return KTCGKPV_LITURGY_STORE[dateStr];
+    }
+
+    // 3. Quét từ khoá từ ms.id, ms.title, ms.weekName và URL query (?cn=30...)
+    const searchParam = (typeof window !== 'undefined' && window.location ? window.location.search : '') || '';
+    const textToScan = `${ms.id || ''} ${ms.title || ''} ${ms.weekName || ''} ${searchParam}`.toLowerCase();
+
+    // Chúa Nhật 30 Thường Niên
+    if (/(chúa\s*nhật\s*30|cn[\s-]*30|tuần\s*xxx\b|cn=30)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-10-25'] || KTCGKPV_LITURGY_STORE['cn30'];
+    }
+    // Chúa Nhật 29 Thường Niên
+    if (/(chúa\s*nhật\s*29|cn[\s-]*29|tuần\s*xxix\b|cn=29)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-10-18'] || KTCGKPV_LITURGY_STORE['cn29'];
+    }
+    // Chúa Nhật 28 Thường Niên
+    if (/(chúa\s*nhật\s*28|cn[\s-]*28|tuần\s*xxviii\b|cn=28)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-10-11'] || KTCGKPV_LITURGY_STORE['cn28'];
+    }
+    // Lễ Các Thánh (01/11)
+    if (/(các\s*thánh|all\s*saints)/i.test(textToScan) && !/tử\s*đạo/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-11-01'] || KTCGKPV_LITURGY_STORE['cac-thanh'];
+    }
+    // Lễ Các Đẳng Linh Hồn (02/11)
+    if (/(các\s*đẳng|linh\s*hồn|all\s*souls)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-11-02'] || KTCGKPV_LITURGY_STORE['cac-dang'];
+    }
+    // Chúa Nhật 32 Thường Niên
+    if (/(chúa\s*nhật\s*32|cn[\s-]*32|tuần\s*xxxii\b|cn=32)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-11-08'] || KTCGKPV_LITURGY_STORE['cn32'];
+    }
+    // Lễ Cung Hiến Đền Thờ La-tê-ra-nô
+    if (/(la-tê-ra-nô|lateran)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-11-09'];
+    }
+    // Các Thánh Tử Đạo Việt Nam (15/11)
+    if (/(tử\s*đạo|martyr)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-11-15'] || KTCGKPV_LITURGY_STORE['tu-dao'];
+    }
+    // Chúa Nhật 34 Thường Niên - Lễ Chúa Kitô Vua Vũ Trụ (22/11)
+    if (/(kitô\s*vua|kito\s*vua|vua\s*vũ\s*trụ|chúa\s*nhật\s*34|cn[\s-]*34|cn=34)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-11-22'] || KTCGKPV_LITURGY_STORE['kito-vua'];
+    }
+    // Chúa Nhật 31 Thường Niên
+    if (/(chúa\s*nhật\s*31|cn[\s-]*31|tuần\s*xxxi\b|cn=31)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['cn31'];
+    }
+    // Chúa Nhật 27 Thường Niên
+    if (/(chúa\s*nhật\s*27|cn[\s-]*27|tuần\s*xxvii\b|cn=27)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-10-04'] || KTCGKPV_LITURGY_STORE['cn27'];
+    }
+    // Chúa Nhật 26 Thường Niên
+    if (/(chúa\s*nhật\s*26|cn[\s-]*26|tuần\s*xxvi\b|cn=26)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-09-27'] || KTCGKPV_LITURGY_STORE['cn26'];
+    }
+    // Chúa Nhật 25 Thường Niên
+    if (/(chúa\s*nhật\s*25|cn[\s-]*25|tuần\s*xxv\b|cn=25)/i.test(textToScan)) {
+      return KTCGKPV_LITURGY_STORE['2026-09-20'] || KTCGKPV_LITURGY_STORE['cn25'];
+    }
+
+    // 4. Mặc định: Chúa Nhật 30 Thường Niên Năm A (tuần cử hành hiện tại)
+    return KTCGKPV_LITURGY_STORE['2026-10-25'] || Object.values(KTCGKPV_LITURGY_STORE)[0];
+  }
+
+  /**
+   * RENDER BÀI ĐỌC (BÀI ĐỌC 1, BÀI ĐỌC 2, TIN MỪNG)
+   * Hiển thị đầy đủ Tiêu đề bài trích chuẩn Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ (ktcgkpv.org)
+   */
   async renderReading(container, ms, tabKey) {
     const isBd1 = tabKey === 'bd1';
     const isTm = tabKey === 'tm';
-    const dateStr = ms.date || '2026-09-26';
 
-    const offlineData = OFFLINE_LITURGY_STORE[dateStr] || OFFLINE_LITURGY_STORE['2026-09-26'];
+    const liturgyData = this.getLiturgyDataForMass(ms);
     let reading = null;
     let badgeText = 'BÀI ĐỌC I';
     let endText = 'Đó là Lời Chúa. — Tạ ơn Chúa.';
 
     if (isBd1) {
-      reading = offlineData?.bd1;
+      reading = liturgyData?.bd1;
       badgeText = 'BÀI ĐỌC I';
       endText = 'Đó là Lời Chúa. — Tạ ơn Chúa.';
     } else if (isTm) {
-      reading = offlineData?.tm;
+      reading = liturgyData?.tm;
       badgeText = 'TIN MỪNG';
       endText = 'Đó là Lời Chúa. — Lạy Chúa Kitô, ngợi khen Chúa.';
     } else {
-      reading = offlineData?.bd2;
+      reading = liturgyData?.bd2;
       badgeText = 'BÀI ĐỌC II';
       endText = 'Đó là Lời Chúa. — Tạ ơn Chúa.';
     }
 
-    if (reading) {
+    if (reading && reading.content) {
       const bookTitle = reading.bookTitle || getLiturgicalBookTitle(reading.ref, tabKey);
       container.innerHTML = `
         <div style="padding:6px 0;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">
-            <span style="font-size:0.8rem; background:rgba(14,165,233,0.12); color:#0284c7; font-weight:800; padding:4px 12px; border-radius:6px; text-transform:uppercase; letter-spacing:0.5px;">
-              ${badgeText}
-            </span>
-            <span style="font-size:0.95rem; font-weight:800; color:var(--text-muted); font-family:monospace; background:var(--bg-card-subtle); padding:3px 10px; border-radius:6px; border:1px solid var(--border);">
-              ${reading.ref}
-            </span>
+          <!-- BANNER NGUỒN CHUẨN KTCGKPV -->
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; padding:6px 12px; background:linear-gradient(135deg, rgba(2,132,199,0.08), rgba(99,102,241,0.06)); border:1px solid rgba(2,132,199,0.2); border-radius:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:0.8rem; background:#0284c7; color:#fff; font-weight:800; padding:3px 10px; border-radius:6px; text-transform:uppercase; letter-spacing:0.5px;">
+                ${badgeText}
+              </span>
+              <span style="font-size:0.95rem; font-weight:800; color:var(--text-main); font-family:monospace; background:var(--bg-card-subtle); padding:2px 8px; border-radius:6px; border:1px solid var(--border);">
+                ${reading.ref}
+              </span>
+            </div>
+            <a href="https://ktcgkpv.org/readings/mass-reading" target="_blank" rel="noopener" style="font-size:0.75rem; color:#0369a1; text-decoration:none; font-weight:700; display:inline-flex; align-items:center; gap:4px;">
+              📖 Bản dịch chuẩn: ktcgkpv.org ↗
+            </a>
           </div>
 
           <!-- TIÊU ĐỀ BÀI TRÍCH CHUẨN SÁCH BÀI ĐỌC PHỤNG VỤ -->
-          <div style="font-family:'Times New Roman',serif; font-size:1.28rem; font-weight:800; color:#b91c1c; margin:12px 0 8px; line-height:1.4;">
+          <div style="font-family:'Times New Roman',serif; font-size:1.28rem; font-weight:800; color:#b91c1c; margin:10px 0 8px; line-height:1.4;">
             ${bookTitle}
           </div>
 
           ${reading.lead ? `
-            <div style="font-style:italic; color:#475569; font-size:0.96rem; margin-bottom:16px; padding:10px 14px; background:rgba(0,0,0,0.03); border-left:4px solid #b91c1c; border-radius:0 8px 8px 0; font-family:'Times New Roman',serif;">
+            <div style="font-style:italic; color:#475569; font-size:0.96rem; margin-bottom:14px; padding:10px 14px; background:rgba(0,0,0,0.03); border-left:4px solid #b91c1c; border-radius:0 8px 8px 0; font-family:'Times New Roman',serif; line-height:1.5;">
               "${reading.lead}"
             </div>
           ` : ''}
 
-          ${isTm && reading.alleluia ? `
-            <div style="margin-bottom:16px; padding:10px 14px; background:#fef3c7; border:1px solid #fde68a; border-radius:8px; font-size:0.92rem; color:#92400e; font-family:'Times New Roman',serif;">
-              <strong>Alleluia:</strong> ${reading.alleluia}
+          ${isTm && (reading.alleluia || reading.alleluiaHtml) ? `
+            <div style="margin-bottom:16px; padding:10px 14px; background:#fef3c7; border:1px solid #fde68a; border-radius:8px; font-size:0.95rem; color:#92400e; font-family:'Times New Roman',serif; line-height:1.6;">
+              <div style="font-weight:800; color:#b45309; margin-bottom:4px; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.5px;">
+                ✨ Tung Hô Tin Mừng (${reading.alleluiaRef || 'Alleluia'}):
+              </div>
+              <div>${reading.alleluiaHtml || reading.alleluia}</div>
             </div>
           ` : ''}
 
-          <div style="font-family:'Times New Roman',serif; font-size:1.15rem; line-height:2.2; color:var(--text-main); border-top:1px solid var(--border); padding-top:16px; text-align:justify;">
+          <!-- BẢN VĂN KINH THÁNH CHUẨN KTCGKPV -->
+          <div class="baidoc-reading-body" style="font-family:'Times New Roman',serif; font-size:1.15rem; line-height:2.2; color:var(--text-main); border-top:1px solid var(--border); padding-top:16px; text-align:justify;">
             ${reading.content}
           </div>
 
+          <!-- ĐÁP LỄ & XÁC NHẬN NGUỒN CHÍNH THỨC -->
           <div style="margin-top:22px; padding-top:14px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="font-weight:800; color:#6d28d9; font-family:'Times New Roman',serif; font-size:1.08rem;">
               ${endText}
             </span>
-            <a href="https://ktcgkpv.org/readings/mass-reading" target="_blank" rel="noopener" style="font-size:0.75rem; color:var(--text-muted); text-decoration:none;">
-              🔗 Nguồn: ktcgkpv.org ↗
-            </a>
+            <div style="font-size:0.75rem; color:var(--text-muted); display:inline-flex; align-items:center; gap:4px;">
+              <span>Trích Sách Bài Đọc Thánh Lễ — </span>
+              <a href="https://ktcgkpv.org/readings/mass-reading" target="_blank" rel="noopener" style="color:#0284c7; text-decoration:none; font-weight:700;">
+                Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ ↗
+              </a>
+            </div>
           </div>
         </div>
       `;
@@ -1099,23 +2069,26 @@ class BaiDocViewer {
       <div style="text-align:center; padding:36px 16px; color:var(--text-muted)">
         <div style="font-size:2.8rem; margin-bottom:8px;">📖</div>
         <h3 style="color:var(--text-main); font-weight:800; margin-bottom:6px;">${isBd1 ? 'Bài Đọc 1' : isTm ? 'Tin Mừng' : 'Bài Đọc 2'}</h3>
-        <p style="margin-top:8px; font-size:0.9rem;">Dữ liệu bài đọc đang được cập nhật từ Lịch Phụng Vụ hoặc ngày lễ này không có bài đọc tương ứng.</p>
-        <a href="https://ktcgkpv.org/readings/mass-reading" target="_blank" rel="noopener" style="display:inline-block; margin-top:14px; font-size:0.85rem; color:#0ea5e9; font-weight:700;">Mở trang KTCGKPV ↗</a>
+        <p style="margin-top:8px; font-size:0.9rem;">Dữ liệu bài đọc đang được cập nhật từ Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ.</p>
+        <a href="https://ktcgkpv.org/readings/mass-reading" target="_blank" rel="noopener" style="display:inline-block; margin-top:14px; font-size:0.85rem; color:#0ea5e9; font-weight:700;">Mở trang ktcgkpv.org ↗</a>
       </div>
     `;
   }
 
   /**
    * RENDER THÁNH VỊNH:
-   * Chỉ hiển thị trực tiếp PHIÊN BẢN PDF CỦA THÁNH VỊNH ĐÁP CA (Không hiện text câu chữ thô)
+   * Cho phép chuyển đổi linh hoạt giữa:
+   * 1. Lời Kinh Phụng Vụ (KTCGKPV): Bản văn Đáp ca chuẩn mực cho Người đọc sách
+   * 2. Bản Nhạc Sheet PDF: Dành cho Ca đoàn & Ca viên tập hát
    */
   renderThanhVinh(container, ms) {
+    const liturgyData = this.getLiturgyDataForMass(ms);
+    const tvData = liturgyData?.tv;
     const songs = ms.songs || [];
     const dapCaSong = songs.find(s => s.role === 'dap_ca' || s.roleLabel?.includes('Đáp Ca') || s.roleLabel?.includes('Thánh Vịnh')) || songs[2];
 
     let pdfUrl = dapCaSong?.pdfData;
-    let pdfName = dapCaSong?.pdfName || 'Dap_Ca_Chua_Nhat_25_A.pdf';
-
+    let pdfName = dapCaSong?.pdfName || '';
     if (!pdfUrl) {
       if (pdfName) {
         pdfUrl = pdfName.startsWith('sheets/') ? pdfName : `sheets/${pdfName}`;
@@ -1125,44 +2098,57 @@ class BaiDocViewer {
       }
     }
 
-    const songTitle = dapCaSong?.title || 'Thánh Vịnh Đáp Ca';
+    const songTitle = dapCaSong?.title || (tvData?.ref ? `Thánh Vịnh Đáp Ca (${tvData.ref})` : 'Thánh Vịnh Đáp Ca');
+    const currentMode = this.tvMode || 'text';
 
     container.innerHTML = `
       <div style="display:flex; flex-direction:column; width:100%; height:100%;">
-        <!-- THANH CÔNG CỤ XEM & TẢI PDF THÁNH VỊNH -->
+        <!-- THANH ĐIỀU HƯỚNG CHỌN XEM LỜI KINH HOẶC BẢN NHẠC PDF -->
         <div style="background:var(--bg-card-subtle,#f8fafc); border:1px solid var(--border,#e2e8f0); border-radius:10px; padding:10px 14px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:1.3rem;">🎶</span>
             <div>
-              <div style="font-size:0.95rem; font-weight:800; color:var(--text-main);">${songTitle}</div>
-              <div style="font-size:0.75rem; color:var(--text-muted); font-family:monospace;">Bản nhạc PDF: ${pdfName}</div>
+              <div style="font-size:0.95rem; font-weight:800; color:var(--text-main);">${escapeHtml(songTitle)}</div>
+              ${tvData?.ref ? `<div style="font-size:0.75rem; color:#0284c7; font-weight:700;">${tvData.ref} (Bản dịch KTCGKPV)</div>` : ''}
             </div>
           </div>
-          <div style="display:flex; gap:8px; align-items:center;">
-            <a href="${pdfUrl}" target="_blank" rel="noopener" class="action-btn btn-view" style="text-decoration:none; padding:6px 12px; font-size:0.82rem; font-weight:700; display:inline-flex; align-items:center; gap:4px;">
-              ↗️ Mở Trang Mới
-            </a>
-            <button type="button" class="action-btn btn-view" onclick="window.dohwaPDFViewer && window.dohwaPDFViewer.open('${pdfUrl}', '${escapeHtml(songTitle)}', '${pdfName}')" style="padding:6px 12px; font-size:0.82rem; font-weight:700; background:#6d28d9; color:#fff; border:none; display:inline-flex; align-items:center; gap:4px; cursor:pointer;">
-              ⛶ Toàn Màn Hình
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <button type="button" id="tvToggleTextBtn" class="action-btn" onclick="window.baiDocViewer.toggleTvMode('text')" style="padding:6px 14px; font-size:0.82rem; font-weight:800; background:${currentMode === 'pdf' ? 'var(--bg-card,#fff)' : '#0284c7'}; color:${currentMode === 'pdf' ? 'var(--text-main,#334155)' : '#fff'}; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
+              📜 Lời Kinh Phụng Vụ
             </button>
-            <a href="${pdfUrl}" download="${pdfName}" class="action-btn btn-pdf" style="text-decoration:none; padding:6px 14px; font-size:0.82rem; font-weight:800; background:#0284c7; color:#fff; display:inline-flex; align-items:center; gap:4px;">
-              📥 Tải PDF Về Máy
-            </a>
+            <button type="button" id="tvTogglePdfBtn" class="action-btn" onclick="window.baiDocViewer.toggleTvMode('pdf')" style="padding:6px 14px; font-size:0.82rem; font-weight:800; background:${currentMode === 'pdf' ? '#6d28d9' : 'var(--bg-card,#fff)'}; color:${currentMode === 'pdf' ? '#fff' : 'var(--text-main,#334155)'}; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
+              🎼 Bản Nhạc Sheet PDF
+            </button>
           </div>
         </div>
 
-        <!-- KHUNG NHÚNG BẢN NHẠC PDF CHUẨN -->
-        <div style="flex:1; min-height:510px; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#525659; position:relative;">
-          <object data="${pdfUrl}" type="application/pdf" width="100%" height="100%" style="min-height:510px; display:block;">
-            <iframe src="${pdfUrl}" width="100%" height="100%" style="border:none; min-height:510px;">
-              <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; min-height:360px; background:#fff; padding:24px; text-align:center;">
-                <div style="font-size:3.5rem; margin-bottom:10px;">📄</div>
-                <h4 style="font-weight:800; color:#1e293b; margin-bottom:6px;">${songTitle}</h4>
-                <p style="color:#64748b; font-size:0.88rem; margin-bottom:16px;">Trình duyệt của bạn đang bảo mật hoặc không hỗ trợ đọc trực tiếp trong khung.</p>
-                <div style="display:flex; gap:10px; justify-content:center;">
-                  <a href="${pdfUrl}" target="_blank" rel="noopener" class="btn btn-outline" style="padding:8px 16px; font-weight:700;">↗️ Mở Trong Tab Mới</a>
-                  <a href="${pdfUrl}" download="${pdfName}" class="btn btn-primary" style="padding:8px 18px; font-weight:800; background:#0284c7;">📥 Tải Bản PDF Về Máy</a>
-                </div>
+        <!-- NỘI DUNG 1: LỜI KINH PHỤNG VỤ KTCGKPV -->
+        <div id="tvTextContent" style="display:${currentMode === 'pdf' ? 'none' : 'block'}; padding:6px 0;">
+          ${tvData && tvData.content ? `
+            <div style="background:linear-gradient(135deg, rgba(2,132,199,0.06), rgba(99,102,241,0.04)); border:1px solid rgba(2,132,199,0.18); border-radius:8px; padding:8px 14px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+              <span style="font-weight:800; color:#0284c7; font-size:0.95rem;">THÁNH VỊNH ĐÁP CA — ${tvData.ref}</span>
+              <a href="https://ktcgkpv.org/readings/mass-reading" target="_blank" rel="noopener" style="font-size:0.75rem; color:#0369a1; text-decoration:none; font-weight:700;">ktcgkpv.org ↗</a>
+            </div>
+            <div class="baidoc-reading-body" style="font-family:'Times New Roman',serif; font-size:1.15rem; line-height:2.2; color:var(--text-main); text-align:justify;">
+              ${tvData.content}
+            </div>
+          ` : `
+            <div style="text-align:center; padding:24px; color:var(--text-muted);">
+              Đang hiển thị bản nhạc PDF bên dưới.
+            </div>
+          `}
+        </div>
+
+        <!-- NỘI DUNG 2: KHUNG NHÚNG BẢN NHẠC PDF -->
+        <div id="tvPdfContent" style="display:${currentMode === 'pdf' ? 'block' : 'none'}; flex:1; min-height:510px; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#525659; position:relative;">
+          <div style="background:#1e293b; padding:8px 12px; display:flex; justify-content:flex-end; gap:8px;">
+            <a href="${pdfUrl}" target="_blank" rel="noopener" class="action-btn btn-view" style="text-decoration:none; padding:5px 10px; font-size:0.78rem; font-weight:700; color:#fff;">↗️ Tab Mới</a>
+            <a href="${pdfUrl}" download="${pdfName}" class="action-btn btn-pdf" style="text-decoration:none; padding:5px 12px; font-size:0.78rem; font-weight:800; background:#0284c7; color:#fff;">📥 Tải Về</a>
+          </div>
+          <object data="${pdfUrl}" type="application/pdf" width="100%" height="100%" style="min-height:470px; display:block;">
+            <iframe src="${pdfUrl}" width="100%" height="100%" style="border:none; min-height:470px;">
+              <div style="padding:20px; text-align:center; background:#fff;">
+                <p>Xem bản nhạc: <a href="${pdfUrl}" target="_blank">${pdfName}</a></p>
               </div>
             </iframe>
           </object>
@@ -1171,17 +2157,24 @@ class BaiDocViewer {
     `;
   }
 
-  /**
-   * RENDER LỜI NGUYỆN TÍN HỮU:
-   * Có nút [🌐 Lấy Từ Web] nổi bật
-   */
-  /**
-   * RENDER LỜI NGUYỆN TÍN HỮU:
-   * Phân quyền chặt chẽ giữa Admin và Ca viên:
-   * - Admin: Luôn thấy mẫu/bản soạn, có công cụ biên tập, lấy từ web, và nút [🚀 Áp Dụng Mẫu Này Cho Cả Đoàn].
-   * - Ca viên: Khi Admin CHƯA bấm áp dụng -> Hiển thị thông báo phụng vụ lịch sự "Lời nguyện đang được chuẩn bị".
-   *            Khi Admin ĐÃ bấm áp dụng -> Xem được bản chính thức và có nút [In A4] & [Copy].
-   */
+  toggleTvMode(mode) {
+    this.tvMode = mode;
+    const textEl = document.getElementById('tvTextContent');
+    const pdfEl = document.getElementById('tvPdfContent');
+    const btnText = document.getElementById('tvToggleTextBtn');
+    const btnPdf = document.getElementById('tvTogglePdfBtn');
+    if (textEl && pdfEl) {
+      textEl.style.display = mode === 'pdf' ? 'none' : 'block';
+      pdfEl.style.display = mode === 'pdf' ? 'block' : 'none';
+    }
+    if (btnText && btnPdf) {
+      btnText.style.background = mode === 'pdf' ? 'var(--bg-card,#fff)' : '#0284c7';
+      btnText.style.color = mode === 'pdf' ? 'var(--text-main,#334155)' : '#fff';
+      btnPdf.style.background = mode === 'pdf' ? '#6d28d9' : 'var(--bg-card,#fff)';
+      btnPdf.style.color = mode === 'pdf' ? '#fff' : 'var(--text-main,#334155)';
+    }
+  }
+
   renderLoiNguyen(container, ms) {
     const isAdmin = !!(
       window.dohwaStore?.isAdmin?.() ||

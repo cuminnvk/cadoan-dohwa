@@ -36,10 +36,12 @@ class DohwaApp {
     if (window.location.hash) {
       const hash = window.location.hash.replace('#', '');
       if (hash === 'baidoc') {
-        if (window.openMassBaiDoc) window.openMassBaiDoc('mass-cn-25-tn-a');
+        const msId = this.currentMassSet?.id || 'mass-cn-25-tn-a';
+        if (window.openMassBaiDoc) window.openMassBaiDoc(msId);
       } else if (hash === 'baidoc-lnth') {
+        const msId = this.currentMassSet?.id || 'mass-cn-25-tn-a';
         if (window.openMassBaiDoc) {
-          window.openMassBaiDoc('mass-cn-25-tn-a');
+          window.openMassBaiDoc(msId);
           if (window.baiDocViewer) window.baiDocViewer.switchTab('lnth');
         }
       } else if (hash === 'aidaxem') {
