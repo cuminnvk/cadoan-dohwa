@@ -153,12 +153,12 @@ class DohwaApp {
   // --- TẢI VÀ RENDER THẺ BỘ LỄ HIỆN TẠI ---
   async loadCurrentMassSet() {
     if (window.dohwaStore) {
-      // Kiểm tra tham số trên URL (?massId=... hoặc ?id=... hoặc ?mass=...)
+      // Kiểm tra tham số trên URL (?cn=... hoặc ?mass=... hoặc ?massId=... hoặc ?id=...)
       const urlParams = new URLSearchParams(window.location.search);
-      let targetId = urlParams.get('massId') || urlParams.get('id') || urlParams.get('mass');
+      let targetId = urlParams.get('cn') || urlParams.get('mass') || urlParams.get('massId') || urlParams.get('id');
 
       if (!targetId) {
-        const match = window.location.href.match(/[?&#](?:massId|id|mass)=([^&?#]+)/i);
+        const match = window.location.href.match(/[?&#](?:cn|mass|massId|id)=([^&?#]+)/i);
         if (match) targetId = match[1];
       }
 
@@ -512,7 +512,10 @@ class DohwaApp {
     if (!ms) return;
 
     const baseUrl = window.location.origin + window.location.pathname;
-    const directUrl = `${baseUrl}?massId=${encodeURIComponent(ms.id)}`;
+    // Tự động tạo link ngắn gọn đẹp: ví dụ https://cadoan-dohwa.web.app/?cn=30
+    const numMatch = (ms.title || '').match(/(?:Chúa Nhật|CN)\s*(\d+)/i);
+    const shortParam = numMatch ? `cn=${numMatch[1]}` : `massId=${encodeURIComponent(ms.id)}`;
+    const directUrl = `${baseUrl}?${shortParam}`;
     const shareUrl = directUrl;
 
     // Xóa cache link rút gọn dagd cũ nếu có để tránh tái sử dụng link bị cảnh báo

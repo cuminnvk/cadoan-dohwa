@@ -408,19 +408,26 @@ class DohwaStore {
   async getMassSet(id) {
     if (!id) return null;
     await this.ensureReady();
-    let ms = null;
-    if (this.db) {
-      try {
-        ms = await this.get('mass_sets', id);
-      } catch (e) {}
-    }
-    if (!ms) {
-      const all = this.getLocal('mass_sets', []);
-      ms = all.find(m => m && m.id === id);
-    }
-    if (ms) return ms;
+    id = String(id).trim();
 
-    // Nếu máy chưa có (ví dụ ca viên mở link chia sẻ bộ lễ mới), tải trực tiếp từ Firebase Cloud
+    let all = await this.getAllMassSets();
+
+    // 1. Tìm chính xác theo id
+    let found = all.find(m => m && m.id === id);
+    if (found) return found;
+
+    // 2. Tìm theo số Chúa Nhật (ví dụ ?cn=30 hoặc ?mass=30)
+    const numMatch = id.match(/\d+/);
+    if (numMatch) {
+      const num = numMatch[0];
+      found = all.find(m => m && (
+        (m.title && m.title.match(new RegExp(`(?:Chúa Nhật|CN)\\s*${num}\\b`, 'i'))) ||
+        (m.id && m.id.includes(num))
+      ));
+      if (found) return found;
+    }
+
+    // 3. Nếu máy chưa có, tìm trực tiếp trên Firebase Cloud
     const url = this.getFirebaseUrl();
     if (url) {
       try {
@@ -429,7 +436,14 @@ class DohwaStore {
           const cloudMass = await res.json();
           if (cloudMass) {
             const arr = Array.isArray(cloudMass) ? cloudMass : Object.values(cloudMass);
-            const found = arr.find(m => m && m.id === id);
+            found = arr.find(m => m && m.id === id);
+            if (!found && numMatch) {
+              const num = numMatch[0];
+              found = arr.find(m => m && (
+                (m.title && m.title.match(new RegExp(`(?:Chúa Nhật|CN)\\s*${num}\\b`, 'i'))) ||
+                (m.id && m.id.includes(num))
+              ));
+            }
             if (found) {
               let localAll = this.getLocal('mass_sets', []);
               if (!localAll.some(m => m && m.id === found.id)) {
