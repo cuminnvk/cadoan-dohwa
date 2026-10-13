@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cadoan-dohwa-v33';
+const CACHE_NAME = 'cadoan-dohwa-v34';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -10,6 +10,7 @@ const ASSETS_TO_CACHE = [
   './js/liturgical-helper.js',
   './js/player.js',
   './js/pdf-viewer.js',
+  './js/phan-cong.js',
   './js/soan-le.js',
   './js/thong-ke.js',
   './js/app.js'

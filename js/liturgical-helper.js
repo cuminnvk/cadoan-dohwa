@@ -1823,6 +1823,7 @@ class BaiDocViewer {
     this.currentMassSet = null;
     this.activeTab = 'bd1';
     this.activeFetchTab = 'catalog';
+    this.tvMode = 'pdf';
   }
 
   async openForMassSet(massSetOrId) {
@@ -2099,31 +2100,51 @@ class BaiDocViewer {
     }
 
     const songTitle = dapCaSong?.title || (tvData?.ref ? `Thánh Vịnh Đáp Ca (${tvData.ref})` : 'Thánh Vịnh Đáp Ca');
-    const currentMode = this.tvMode || 'text';
+    const currentMode = this.tvMode || 'pdf';
 
     container.innerHTML = `
       <div style="display:flex; flex-direction:column; width:100%; height:100%;">
-        <!-- THANH ĐIỀU HƯỚNG CHỌN XEM LỜI KINH HOẶC BẢN NHẠC PDF -->
+        <!-- THANH ĐIỀU HƯỚNG CHỌN XEM BẢN NHẠC PDF HOẶC LỜI KINH -->
         <div style="background:var(--bg-card-subtle,#f8fafc); border:1px solid var(--border,#e2e8f0); border-radius:10px; padding:10px 14px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:1.3rem;">🎶</span>
             <div>
               <div style="font-size:0.95rem; font-weight:800; color:var(--text-main);">${escapeHtml(songTitle)}</div>
-              ${tvData?.ref ? `<div style="font-size:0.75rem; color:#0284c7; font-weight:700;">${tvData.ref} (Bản dịch KTCGKPV)</div>` : ''}
+              ${tvData?.ref ? `<div style="font-size:0.75rem; color:#0284c7; font-weight:700;">${tvData.ref} (Bản dịch chuẩn KTCGKPV)</div>` : ''}
             </div>
           </div>
           <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-            <button type="button" id="tvToggleTextBtn" class="action-btn" onclick="window.baiDocViewer.toggleTvMode('text')" style="padding:6px 14px; font-size:0.82rem; font-weight:800; background:${currentMode === 'pdf' ? 'var(--bg-card,#fff)' : '#0284c7'}; color:${currentMode === 'pdf' ? 'var(--text-main,#334155)' : '#fff'}; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
-              📜 Lời Kinh Phụng Vụ
-            </button>
-            <button type="button" id="tvTogglePdfBtn" class="action-btn" onclick="window.baiDocViewer.toggleTvMode('pdf')" style="padding:6px 14px; font-size:0.82rem; font-weight:800; background:${currentMode === 'pdf' ? '#6d28d9' : 'var(--bg-card,#fff)'}; color:${currentMode === 'pdf' ? '#fff' : 'var(--text-main,#334155)'}; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
+            <button type="button" id="tvTogglePdfBtn" class="action-btn" onclick="window.baiDocViewer.toggleTvMode('pdf')" style="padding:6px 14px; font-size:0.82rem; font-weight:800; background:${currentMode === 'text' ? 'var(--bg-card,#fff)' : '#6d28d9'}; color:${currentMode === 'text' ? 'var(--text-main,#334155)' : '#fff'}; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
               🎼 Bản Nhạc Sheet PDF
+            </button>
+            <button type="button" id="tvToggleTextBtn" class="action-btn" onclick="window.baiDocViewer.toggleTvMode('text')" style="padding:6px 14px; font-size:0.82rem; font-weight:800; background:${currentMode === 'text' ? '#0284c7' : 'var(--bg-card,#fff)'}; color:${currentMode === 'text' ? '#fff' : 'var(--text-main,#334155)'}; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
+              📜 Lời Kinh Phụng Vụ
             </button>
           </div>
         </div>
 
-        <!-- NỘI DUNG 1: LỜI KINH PHỤNG VỤ KTCGKPV -->
-        <div id="tvTextContent" style="display:${currentMode === 'pdf' ? 'none' : 'block'}; padding:6px 0;">
+        <!-- ƯU TIÊN 1: KHUNG HIỂN THỊ BẢN NHẠC SHEET PDF TRƯỚC HẾT -->
+        <div id="tvPdfContent" style="display:${currentMode === 'text' ? 'none' : 'block'}; flex:1; min-height:520px; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#525659; position:relative; margin-bottom:16px;">
+          <div style="background:#1e293b; padding:8px 12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <span style="font-size:0.8rem; color:#cbd5e1; font-weight:700;">📄 Bản nhạc chuẩn phụng vụ ca đoàn</span>
+            <div style="display:flex; gap:6px;">
+              <a href="${pdfUrl}" target="_blank" rel="noopener" class="action-btn btn-view" style="text-decoration:none; padding:5px 12px; font-size:0.78rem; font-weight:700; color:#fff;">↗️ Tab Mới</a>
+              <button type="button" class="action-btn btn-view" onclick="window.dohwaPDFViewer && window.dohwaPDFViewer.open('${pdfUrl}', '${escapeHtml(songTitle)}', '${pdfName}')" style="padding:5px 12px; font-size:0.78rem; font-weight:700; background:#6d28d9; color:#fff; border:none; display:inline-flex; align-items:center; gap:4px; cursor:pointer;">⛶ Toàn Màn Hình</button>
+              <a href="${pdfUrl}" download="${pdfName}" class="action-btn btn-pdf" style="text-decoration:none; padding:5px 12px; font-size:0.78rem; font-weight:800; background:#0284c7; color:#fff;">📥 Tải Về</a>
+            </div>
+          </div>
+          <object data="${pdfUrl}" type="application/pdf" width="100%" height="100%" style="min-height:480px; display:block;">
+            <iframe src="${pdfUrl}" width="100%" height="100%" style="border:none; min-height:480px;">
+              <div style="padding:24px; text-align:center; background:#fff;">
+                <p style="margin-bottom:12px; font-weight:700;">Bản nhạc: ${pdfName}</p>
+                <a href="${pdfUrl}" target="_blank" class="action-btn btn-primary">Mở Bản Nhạc PDF</a>
+              </div>
+            </iframe>
+          </object>
+        </div>
+
+        <!-- TIẾP THEO: LỜI KINH PHỤNG VỤ KTCGKPV NGAY DƯỚI BẢN NHẠC HOẶC KHI CHỌN TAB LỜI KINH -->
+        <div id="tvTextContent" style="display:${currentMode === 'text' ? 'block' : 'block'}; padding:12px 0 6px; border-top:1.5px dashed var(--border);">
           ${tvData && tvData.content ? `
             <div style="background:linear-gradient(135deg, rgba(2,132,199,0.06), rgba(99,102,241,0.04)); border:1px solid rgba(2,132,199,0.18); border-radius:8px; padding:8px 14px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
               <span style="font-weight:800; color:#0284c7; font-size:0.95rem;">THÁNH VỊNH ĐÁP CA — ${tvData.ref}</span>
@@ -2133,25 +2154,10 @@ class BaiDocViewer {
               ${tvData.content}
             </div>
           ` : `
-            <div style="text-align:center; padding:24px; color:var(--text-muted);">
-              Đang hiển thị bản nhạc PDF bên dưới.
+            <div style="text-align:center; padding:16px; color:var(--text-muted); font-size:0.85rem;">
+              Lời kinh đang được cập nhật từ Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ.
             </div>
           `}
-        </div>
-
-        <!-- NỘI DUNG 2: KHUNG NHÚNG BẢN NHẠC PDF -->
-        <div id="tvPdfContent" style="display:${currentMode === 'pdf' ? 'block' : 'none'}; flex:1; min-height:510px; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#525659; position:relative;">
-          <div style="background:#1e293b; padding:8px 12px; display:flex; justify-content:flex-end; gap:8px;">
-            <a href="${pdfUrl}" target="_blank" rel="noopener" class="action-btn btn-view" style="text-decoration:none; padding:5px 10px; font-size:0.78rem; font-weight:700; color:#fff;">↗️ Tab Mới</a>
-            <a href="${pdfUrl}" download="${pdfName}" class="action-btn btn-pdf" style="text-decoration:none; padding:5px 12px; font-size:0.78rem; font-weight:800; background:#0284c7; color:#fff;">📥 Tải Về</a>
-          </div>
-          <object data="${pdfUrl}" type="application/pdf" width="100%" height="100%" style="min-height:470px; display:block;">
-            <iframe src="${pdfUrl}" width="100%" height="100%" style="border:none; min-height:470px;">
-              <div style="padding:20px; text-align:center; background:#fff;">
-                <p>Xem bản nhạc: <a href="${pdfUrl}" target="_blank">${pdfName}</a></p>
-              </div>
-            </iframe>
-          </object>
         </div>
       </div>
     `;
@@ -2163,15 +2169,22 @@ class BaiDocViewer {
     const pdfEl = document.getElementById('tvPdfContent');
     const btnText = document.getElementById('tvToggleTextBtn');
     const btnPdf = document.getElementById('tvTogglePdfBtn');
-    if (textEl && pdfEl) {
-      textEl.style.display = mode === 'pdf' ? 'none' : 'block';
-      pdfEl.style.display = mode === 'pdf' ? 'block' : 'none';
+    if (pdfEl && textEl) {
+      if (mode === 'text') {
+        pdfEl.style.display = 'none';
+        textEl.style.display = 'block';
+        textEl.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        pdfEl.style.display = 'block';
+        textEl.style.display = 'block';
+        pdfEl.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     if (btnText && btnPdf) {
-      btnText.style.background = mode === 'pdf' ? 'var(--bg-card,#fff)' : '#0284c7';
-      btnText.style.color = mode === 'pdf' ? 'var(--text-main,#334155)' : '#fff';
-      btnPdf.style.background = mode === 'pdf' ? '#6d28d9' : 'var(--bg-card,#fff)';
-      btnPdf.style.color = mode === 'pdf' ? '#fff' : 'var(--text-main,#334155)';
+      btnText.style.background = mode === 'text' ? '#0284c7' : 'var(--bg-card,#fff)';
+      btnText.style.color = mode === 'text' ? '#fff' : 'var(--text-main,#334155)';
+      btnPdf.style.background = mode === 'text' ? 'var(--bg-card,#fff)' : '#6d28d9';
+      btnPdf.style.color = mode === 'text' ? 'var(--text-main,#334155)' : '#fff';
     }
   }
 

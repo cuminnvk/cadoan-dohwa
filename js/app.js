@@ -60,6 +60,8 @@ class DohwaApp {
         } else {
           this.switchTab('tab-hientai');
         }
+      } else if (hash === 'phancong') {
+        this.switchTab('tab-phancong');
       } else if (document.getElementById(hash)) {
         this.switchTab(hash);
       }
@@ -145,6 +147,10 @@ class DohwaApp {
     } else if (tabId === 'tab-thongke') {
       if (this.currentMassSet && window.dohwaThongKe) {
         window.dohwaThongKe.loadStats(this.currentMassSet.id);
+      }
+    } else if (tabId === 'tab-phancong') {
+      if (window.dohwaPhanCong) {
+        window.dohwaPhanCong.render();
       }
     }
 

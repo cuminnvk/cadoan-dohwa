@@ -63,6 +63,9 @@
     <button class="top-tab-btn" data-tab="tab-kho">
       <span>📚</span> <span>Kho Bộ Lễ</span>
     </button>
+    <button class="top-tab-btn" data-tab="tab-phancong">
+      <span>📋</span> <span>Phân Công Phụng Vụ</span>
+    </button>
     <button class="top-tab-btn admin-only-tab" data-tab="tab-soanle" style="display:none;">
       <span>✍️</span> <span>Soạn Bộ Lễ</span>
     </button>
@@ -334,6 +337,13 @@
     </section>
 
     <!-- ========================================== -->
+    <!-- TAB: PHÂN CÔNG PHỤNG VỤ & XOAY VÒNG BÀI ĐỌC -->
+    <!-- ========================================== -->
+    <section id="tab-phancong" class="tab-pane">
+      <!-- Render động bởi DohwaPhanCong -->
+    </section>
+
+    <!-- ========================================== -->
     <!-- TAB 4: THỐNG KÊ CHUYÊN CẦN -->
     <!-- ========================================== -->
     <section id="tab-thongke" class="tab-pane">
@@ -445,13 +455,13 @@
         <button id="baiDocModalClose" onclick="window.baiDocViewer && baiDocViewer.close()" style="background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--text-muted); padding:4px 10px;">&times;</button>
       </div>
 
-      <!-- 5 TAB PHỤNG VỤ CHUẨN: BÀI ĐỌC 1, THÁNH VỊNH (PDF), BÀI ĐỌC 2, TIN MỪNG, LỜI NGUYỆN TH -->
+      <!-- 5 TAB PHỤNG VỤ: BÀI ĐỌC 1, BÀI ĐỌC 2, LỜI NGUYỆN TH, THÁNH VỊNH, TIN MỪNG -->
       <div class="baidoc-tabs">
         <button class="baidoc-tab-btn active" data-tab="bd1" onclick="window.baiDocViewer.switchTab('bd1')">Bài đọc 1</button>
-        <button class="baidoc-tab-btn" data-tab="tv" onclick="window.baiDocViewer.switchTab('tv')">Thánh Vịnh (PDF)</button>
         <button class="baidoc-tab-btn" data-tab="bd2" onclick="window.baiDocViewer.switchTab('bd2')">Bài đọc 2</button>
-        <button class="baidoc-tab-btn" data-tab="tm" onclick="window.baiDocViewer.switchTab('tm')">Tin Mừng</button>
         <button class="baidoc-tab-btn" data-tab="lnth" onclick="window.baiDocViewer.switchTab('lnth')">Lời nguyện TH</button>
+        <button class="baidoc-tab-btn" data-tab="tv" onclick="window.baiDocViewer.switchTab('tv')">Thánh Vịnh (Bản nhạc)</button>
+        <button class="baidoc-tab-btn" data-tab="tm" onclick="window.baiDocViewer.switchTab('tm')">Tin Mừng</button>
       </div>
 
       <div class="baidoc-content" id="baiDocContent">
@@ -588,6 +598,10 @@
       <span class="nav-icon">📚</span>
       <span>Kho Lễ</span>
     </button>
+    <button class="nav-item" data-tab="tab-phancong">
+      <span class="nav-icon">📋</span>
+      <span>Phân Công</span>
+    </button>
     <button class="nav-item admin-only-tab" data-tab="tab-soanle" style="display:none;">
       <span class="nav-icon">✍️</span>
       <span>Soạn Lễ</span>
@@ -705,14 +719,15 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/firebase-config.js?v=2026_28"></script>
-  <script src="js/store.js?v=2026_28"></script>
-  <script src="js/liturgical-helper.js?v=2026_28"></script>
-  <script src="js/player.js?v=2026_28"></script>
-  <script src="js/pdf-viewer.js?v=2026_28"></script>
-  <script src="js/soan-le.js?v=2026_28"></script>
-  <script src="js/thong-ke.js?v=2026_28"></script>
-  <script src="js/app.js?v=2026_28"></script>
+  <script src="js/firebase-config.js?v=2026_29"></script>
+  <script src="js/store.js?v=2026_29"></script>
+  <script src="js/liturgical-helper.js?v=2026_29"></script>
+  <script src="js/player.js?v=2026_29"></script>
+  <script src="js/pdf-viewer.js?v=2026_29"></script>
+  <script src="js/phan-cong.js?v=2026_29"></script>
+  <script src="js/soan-le.js?v=2026_29"></script>
+  <script src="js/thong-ke.js?v=2026_29"></script>
+  <script src="js/app.js?v=2026_29"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
