@@ -468,6 +468,8 @@ class DohwaStore {
         try { await this.put('mass_sets', m); } catch (e) {}
       }
     }
+    // Tự động đẩy lên Firebase Cloud để toàn bộ ca viên nhận được bộ lễ hiện tại mới
+    this.pushMassSetsToCloud(all).catch(() => {});
   }
 
   async saveMassSet(massSet) {

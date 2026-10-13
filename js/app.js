@@ -157,6 +157,11 @@ class DohwaApp {
       const urlParams = new URLSearchParams(window.location.search);
       let targetId = urlParams.get('massId') || urlParams.get('id') || urlParams.get('mass');
 
+      if (!targetId) {
+        const match = window.location.href.match(/[?&#](?:massId|id|mass)=([^&?#]+)/i);
+        if (match) targetId = match[1];
+      }
+
       if (!targetId && window.location.hash) {
         const h = window.location.hash.replace('#', '');
         if (h.startsWith('mass=')) {
@@ -167,6 +172,8 @@ class DohwaApp {
       }
 
       if (targetId) {
+        // Loại bỏ tham số tracking của Facebook/Zalo nếu bị dính (vd: ?fbclid=... hoặc &fbclid=...)
+        targetId = decodeURIComponent(String(targetId).split('?')[0].split('&')[0].trim());
         this.currentMassSet = await window.dohwaStore.getMassSet(targetId);
       }
 
@@ -412,10 +419,15 @@ class DohwaApp {
               let statusHtml = '<span style="color:var(--text-muted); font-size:0.75rem;">—</span>';
               if (isCur) {
                 statusHtml = '<span class="kho-badge-active">✓ Hiện tại</span>';
+              } else if (isAdmin) {
+                statusHtml = `
+                  <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+                    <button class="action-btn-sm" onclick="window.dohwaApp.setActiveMass('${m.id}')" title="Chọn làm bộ lễ hiện tại cho cả đoàn">📌 Chọn</button>
+                    ${isFuture ? '<span style="background:rgba(217,119,6,0.12); color:#b45309; padding:1px 6px; border-radius:4px; font-weight:700; font-size:0.68rem; white-space:nowrap;">🔒 Soạn sẵn</span>' : ''}
+                  </div>
+                `;
               } else if (isFuture) {
                 statusHtml = '<span style="background:rgba(217,119,6,0.12); color:#b45309; padding:2px 6px; border-radius:6px; font-weight:700; font-size:0.72rem; white-space:nowrap;" title="Chưa mở công khai, chỉ xem khi có link">🔒 Soạn sẵn</span>';
-              } else if (isAdmin) {
-                statusHtml = `<button class="action-btn-sm" onclick="window.dohwaApp.setActiveMass('${m.id}')" title="Chọn làm bộ lễ hiện tại">📌 Chọn</button>`;
               }
 
               return `
@@ -501,50 +513,12 @@ class DohwaApp {
 
     const baseUrl = window.location.origin + window.location.pathname;
     const directUrl = `${baseUrl}?massId=${encodeURIComponent(ms.id)}`;
+    const shareUrl = directUrl;
 
-    // Kiểm tra cache link rút gọn đã tạo trước đó
-    const cacheKey = `dohwa_short_${ms.id}`;
-    let shareUrl = localStorage.getItem(cacheKey);
-
-    if (!shareUrl || !shareUrl.startsWith('https://da.gd/')) {
-      try {
-        // Đặt tên slug rút gọn dễ nhớ (ví dụ: dohwa-25 hoặc dohwa-cn25)
-        let candidateSlug = 'dohwa';
-        if (ms.id === 'mass-cn-25-tn-a') {
-          candidateSlug = 'dohwa-25';
-        } else {
-          const cleanId = ms.id.replace(/[^a-zA-Z0-9]/g, '').slice(-6).toLowerCase();
-          candidateSlug = `dohwa-${cleanId}`;
-        }
-
-        // Thử tạo link rút gọn với slug ưu tiên
-        let shortRes = await fetch(`https://da.gd/s?url=${encodeURIComponent(directUrl)}&shorturl=${encodeURIComponent(candidateSlug)}`);
-        let shortText = shortRes.ok ? (await shortRes.text()).trim() : '';
-        
-        if (shortText.startsWith('https://da.gd/')) {
-          shareUrl = shortText;
-        } else {
-          // Nếu slug đã bị trùng thì tạo ngẫu nhiên
-          let randomRes = await fetch(`https://da.gd/s?url=${encodeURIComponent(directUrl)}`);
-          if (randomRes.ok) {
-            let randText = (await randomRes.text()).trim();
-            if (randText.startsWith('https://da.gd/')) {
-              shareUrl = randText;
-            }
-          }
-        }
-
-        if (shareUrl && shareUrl.startsWith('https://da.gd/')) {
-          localStorage.setItem(cacheKey, shareUrl);
-        }
-      } catch (e) {
-        console.warn('Lỗi tạo link rút gọn:', e);
-      }
-    }
-
-    if (!shareUrl) {
-      shareUrl = directUrl;
-    }
+    // Xóa cache link rút gọn dagd cũ nếu có để tránh tái sử dụng link bị cảnh báo
+    try {
+      localStorage.removeItem(`dohwa_short_${ms.id}`);
+    } catch (e) {}
 
     const dateFormatted = this.formatDisplayDate(ms.date);
     const r = ms.liturgicalRoles || {};
@@ -571,7 +545,7 @@ class DohwaApp {
       await navigator.clipboard.writeText(text);
       const toast = document.createElement('div');
       toast.className = 'dohwa-toast';
-      toast.textContent = `📋 Đã sao chép link rút gọn: ${shareUrl}`;
+      toast.textContent = `📋 Đã sao chép link xem bộ lễ trực tiếp!`;
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 2500);
     } catch(e) {}
