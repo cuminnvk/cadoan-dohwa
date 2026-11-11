@@ -21,6 +21,9 @@ class DohwaPlayer {
     this.repeatMode = 'all'; // Mặc định luôn lặp lại toàn bộ lễ
     this.wakeLock = null;
     this.sleepClockInterval = null;
+    this.progressTimer = null;
+    this.isDraggingSeek = false;
+    this.playbackRate = 1.0;
     this.lastSleepTap = 0;
 
     this.initElements();
@@ -31,6 +34,9 @@ class DohwaPlayer {
     this.playerBar = document.getElementById('stickyPlayer');
     this.titleEl = document.getElementById('playerTitle');
     this.artistEl = document.getElementById('playerArtist');
+    this.timeEl = document.getElementById('playerTimeDisplay');
+    this.seekInput = document.getElementById('playerSeekInput');
+    this.speedBtn = document.getElementById('playerSpeedBtn');
     this.playBtn = document.getElementById('playerPlayBtn');
     this.prevBtn = document.getElementById('playerPrevBtn');
     this.nextBtn = document.getElementById('playerNextBtn');
@@ -52,6 +58,23 @@ class DohwaPlayer {
     }
     if (this.closeBtn) {
       this.closeBtn.addEventListener('click', () => this.stop());
+    }
+    if (this.seekInput) {
+      this.seekInput.addEventListener('mousedown', () => { this.isDraggingSeek = true; });
+      this.seekInput.addEventListener('touchstart', () => { this.isDraggingSeek = true; }, { passive: true });
+      this.seekInput.addEventListener('input', (e) => {
+        this.isDraggingSeek = true;
+        const pct = parseFloat(e.target.value) || 0;
+        const dur = this.getDurationSeconds();
+        if (dur > 0 && this.timeEl) {
+          this.timeEl.textContent = `${this.formatSeconds((pct / 100) * dur)} / ${this.formatSeconds(dur)}`;
+        }
+      });
+      this.seekInput.addEventListener('change', (e) => {
+        const pct = parseFloat(e.target.value) || 0;
+        this.seekToPercent(pct);
+        this.isDraggingSeek = false;
+      });
     }
 
     // Lắng nghe audio element kết thúc
@@ -203,6 +226,8 @@ class DohwaPlayer {
       navigator.mediaSession.setActionHandler('pause', () => this.togglePlay());
       navigator.mediaSession.setActionHandler('previoustrack', () => this.playPrevious());
       navigator.mediaSession.setActionHandler('nexttrack', () => this.playNext());
+      navigator.mediaSession.setActionHandler('seekbackward', () => this.seekRelative(-10));
+      navigator.mediaSession.setActionHandler('seekforward', () => this.seekRelative(10));
     } catch (e) {
       console.warn('MediaSession error:', e);
     }
@@ -322,14 +347,19 @@ class DohwaPlayer {
           onReady: (event) => {
             try {
               event.target.setVolume(100);
+              if (this.playbackRate !== 1.0 && event.target.setPlaybackRate) {
+                event.target.setPlaybackRate(this.playbackRate);
+              }
               event.target.playVideo();
             } catch (e) {}
             this.isPlaying = true;
+            this.startProgressTimer();
             this.updatePlayBtnState();
           },
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.PLAYING) {
               this.isPlaying = true;
+              this.startProgressTimer();
               if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
             } else if (event.data === YT.PlayerState.PAUSED) {
               this.isPlaying = false;
@@ -361,14 +391,123 @@ class DohwaPlayer {
     }
 
     this.audioElement.src = url;
+    this.audioElement.playbackRate = this.playbackRate || 1.0;
     this.audioElement.play().then(() => {
       this.isPlaying = true;
+      this.startProgressTimer();
       this.updatePlayBtnState();
     }).catch(e => {
       console.warn('Audio play error:', e);
       this.isPlaying = false;
       this.updatePlayBtnState();
     });
+  }
+
+  // --- THANH TUA NHẠC (SEEKBAR), THỜI LƯỢNG & CHỈNH TỐC ĐỘ TẬP HÁT ---
+  formatSeconds(sec) {
+    if (!sec || !isFinite(sec) || sec < 0) return '00:00';
+    const total = Math.floor(sec);
+    const m = Math.floor(total / 60);
+    const s = total % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+
+  getCurrentSeconds() {
+    try {
+      if (this.isYouTubeMode && this.ytPlayer && typeof this.ytPlayer.getCurrentTime === 'function') {
+        return this.ytPlayer.getCurrentTime() || 0;
+      }
+      if (!this.isYouTubeMode && this.audioElement) {
+        return this.audioElement.currentTime || 0;
+      }
+    } catch (e) {}
+    return 0;
+  }
+
+  getDurationSeconds() {
+    try {
+      if (this.isYouTubeMode && this.ytPlayer && typeof this.ytPlayer.getDuration === 'function') {
+        return this.ytPlayer.getDuration() || 0;
+      }
+      if (!this.isYouTubeMode && this.audioElement) {
+        return this.audioElement.duration || 0;
+      }
+    } catch (e) {}
+    return 0;
+  }
+
+  startProgressTimer() {
+    this.stopProgressTimer();
+    this.progressTimer = setInterval(() => {
+      if (!this.isPlaying || this.isDraggingSeek) return;
+      const cur = this.getCurrentSeconds();
+      const dur = this.getDurationSeconds();
+      if (this.timeEl) {
+        this.timeEl.textContent = `${this.formatSeconds(cur)} / ${this.formatSeconds(dur)}`;
+      }
+      if (this.seekInput && dur > 0) {
+        this.seekInput.value = String(Math.min(100, (cur / dur) * 100));
+      }
+    }, 500);
+  }
+
+  stopProgressTimer() {
+    if (this.progressTimer) {
+      clearInterval(this.progressTimer);
+      this.progressTimer = null;
+    }
+  }
+
+  seekToPercent(pct) {
+    const dur = this.getDurationSeconds();
+    if (!dur || dur <= 0) return;
+    const targetSec = Math.max(0, Math.min(dur - 1, (pct / 100) * dur));
+    this.seekToSeconds(targetSec);
+  }
+
+  seekToSeconds(targetSec) {
+    try {
+      if (this.isYouTubeMode && this.ytPlayer && typeof this.ytPlayer.seekTo === 'function') {
+        this.ytPlayer.seekTo(targetSec, true);
+      } else if (!this.isYouTubeMode && this.audioElement) {
+        this.audioElement.currentTime = targetSec;
+      }
+      const dur = this.getDurationSeconds();
+      if (this.timeEl) {
+        this.timeEl.textContent = `${this.formatSeconds(targetSec)} / ${this.formatSeconds(dur)}`;
+      }
+      if (this.seekInput && dur > 0) {
+        this.seekInput.value = String(Math.min(100, (targetSec / dur) * 100));
+      }
+    } catch (e) {}
+  }
+
+  seekRelative(deltaSec) {
+    const dur = this.getDurationSeconds();
+    if (!dur || dur <= 0) return;
+    const cur = this.getCurrentSeconds();
+    const target = Math.max(0, Math.min(dur - 1, cur + deltaSec));
+    this.seekToSeconds(target);
+  }
+
+  cyclePlaybackSpeed() {
+    const speeds = [1.0, 0.85, 0.75, 1.15];
+    const idx = speeds.indexOf(this.playbackRate);
+    this.playbackRate = speeds[(idx + 1) % speeds.length];
+
+    if (this.speedBtn) {
+      this.speedBtn.textContent = `${this.playbackRate}x`;
+      this.speedBtn.style.background = this.playbackRate !== 1.0 ? 'var(--primary-light)' : 'transparent';
+    }
+
+    try {
+      if (this.isYouTubeMode && this.ytPlayer && typeof this.ytPlayer.setPlaybackRate === 'function') {
+        this.ytPlayer.setPlaybackRate(this.playbackRate);
+      }
+      if (this.audioElement) {
+        this.audioElement.playbackRate = this.playbackRate;
+      }
+    } catch (e) {}
   }
 
   // --- XỬ LÝ HẾT BÀI: TỰ ĐỘNG CHUYỂN BÀI & LẶP LẠI BỘ LỄ ---
@@ -473,6 +612,9 @@ class DohwaPlayer {
   stop() {
     this.isPlaying = false;
     this.currentSong = null;
+    this.stopProgressTimer();
+    if (this.seekInput) this.seekInput.value = '0';
+    if (this.timeEl) this.timeEl.textContent = '00:00 / 00:00';
 
     if (this.isYouTubeMode && this.ytPlayer && this.ytPlayer.stopVideo) {
       try { this.ytPlayer.stopVideo(); } catch(e) {}

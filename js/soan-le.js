@@ -10,6 +10,8 @@
 class DohwaSoanLe {
   constructor() {
     this.uploadedSongs = [];
+    this.editingMassId = null;
+    this.editingMassMeta = null;
     this.rosterDebounceTimer = null;
     this.defaultRoles = [
       { key: 'duc_me',  label: 'Kính Đức Mẹ' },
@@ -327,23 +329,97 @@ class DohwaSoanLe {
     }
   }
 
+  isExcludedAdminName(name) {
+    if (!name) return true;
+    const clean = String(name).trim().toLowerCase();
+    if (!clean) return true;
+    if (clean === 'admin' || clean === 'admin web' || clean === 'peter nguyễn' ||
+        clean === 'chọn tên' || clean === 'chưa phân công' || clean === 'chua phan cong') {
+      return true;
+    }
+    return clean.startsWith('admin') || clean.endsWith('admin');
+  }
+
   async autoSuggestDuties() {
     let roster = [];
+    let massSets = [];
     if (window.dohwaStore) {
       roster = await window.dohwaStore.getRoster();
+      massSets = await window.dohwaStore.getAllMassSets();
     }
-    const available = (roster || []).filter(m => m.canRead !== false);
+    const available = (roster || []).filter(m => m && m.canRead !== false && !this.isExcludedAdminName(m.name));
     if (!available.length) {
-      alert('Chưa có danh sách ca viên. Vui lòng vào Cài Đặt lưu danh sách ca viên trước khi gợi ý xoay vòng!');
+      alert('Chưa có danh sách ca viên hợp lệ. Vui lòng vào Cài Đặt lưu danh sách ca viên trước khi gợi ý xoay vòng!');
       return;
     }
 
-    const shuffled = [...available].sort(() => Math.random() - 0.5);
+    // Tính toán lịch sử đọc sách từ các bộ lễ đã lưu để ưu tiên người chưa đọc hoặc nghỉ lâu nhất
+    const statsMap = new Map();
+    available.forEach(m => {
+      statsMap.set(m.name.trim(), { total: 0, lastDate: null, weeksAgo: Infinity });
+    });
+
+    const dateInp = document.getElementById('soanMassDate');
+    const targetDateMs = (dateInp && dateInp.value) ? new Date(dateInp.value).getTime() : Date.now();
+
+    const sortedMasses = [...(massSets || [])]
+      .filter(m => m && m.id !== this.editingMassId)
+      .sort((a, b) => (new Date(a.date || 0).getTime()) - (new Date(b.date || 0).getTime()));
+
+    sortedMasses.forEach(m => {
+      if (!m.liturgicalRoles) return;
+      const r = m.liturgicalRoles;
+      const names = [r.reader1, r.psalmist || r.dapca, r.reader2, r.petitions || r.loinguyen];
+      names.forEach(rawName => {
+        const n = (rawName || '').trim();
+        if (!n || this.isExcludedAdminName(n)) return;
+        if (!statsMap.has(n)) {
+          statsMap.set(n, { total: 0, lastDate: null, weeksAgo: Infinity });
+        }
+        const st = statsMap.get(n);
+        st.total++;
+        if (m.date) st.lastDate = m.date;
+      });
+    });
+
+    // Tìm bộ lễ ngay trước ngày đang soạn để tránh lặp lại người vừa đọc tuần trước
+    const pastMasses = sortedMasses
+      .filter(m => m.date && new Date(m.date).getTime() <= targetDateMs)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const lastMass = pastMasses[0];
+    const justReadNames = new Set();
+    if (lastMass && lastMass.liturgicalRoles) {
+      const lr = lastMass.liturgicalRoles;
+      [lr.reader1, lr.psalmist || lr.dapca, lr.reader2, lr.petitions || lr.loinguyen].forEach(n => {
+        if (n && !this.isExcludedAdminName(n)) justReadNames.add(n.trim());
+      });
+    }
+
+    const scored = available.map(m => {
+      const name = m.name.trim();
+      const st = statsMap.get(name) || { total: 0, lastDate: null, weeksAgo: Infinity };
+      if (st.lastDate) {
+        const diffDays = Math.floor((targetDateMs - new Date(st.lastDate).getTime()) / (1000 * 60 * 60 * 24));
+        st.weeksAgo = diffDays <= 4 ? 0 : Math.max(1, Math.round(diffDays / 7));
+      }
+      let score = 0;
+      if (st.total === 0 || st.weeksAgo === Infinity) {
+        score = 1000 + Math.random() * 2;
+      } else if (justReadNames.has(name)) {
+        score = -500 + Math.random();
+      } else {
+        score = (st.weeksAgo * 15) - (st.total * 3) + (Math.random() * 2);
+      }
+      return { member: m, score };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
 
     this.liturgicalRoles.forEach((role, idx) => {
       const sel = document.getElementById(`soan-role-select-${role.key}`);
       const inp = document.getElementById(`soan-role-${role.key}`);
-      const person = shuffled[idx % shuffled.length];
+      const candidate = scored[idx % scored.length];
+      const person = candidate ? candidate.member : null;
 
       if (person) {
         if (sel) sel.value = person.name;
@@ -356,9 +432,9 @@ class DohwaSoanLe {
 
     const toast = document.createElement('div');
     toast.className = 'dohwa-toast';
-    toast.textContent = '✨ Đã tự động gợi ý phân công 4 người đọc sách!';
+    toast.textContent = '✨ Đã gợi ý xoay vòng công bằng (ưu tiên người nghỉ lâu nhất & loại trừ Admin)!';
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2500);
+    setTimeout(() => toast.remove(), 2800);
   }
 
   // --- THUẬT TOÁN NHẬN DIỆN FILE PDF ---
@@ -549,6 +625,98 @@ class DohwaSoanLe {
     this.renderUploadedSlots();
   }
 
+  // --- CHẾ ĐỘ CHỈNH SỬA BỘ LỄ ĐÃ LƯU ---
+  async loadMassSetForEdit(ms) {
+    if (!ms) return;
+    this.editingMassId = ms.id;
+    this.editingMassMeta = { ...ms };
+
+    const titleEl = document.getElementById('soanMassTitle');
+    const dateEl = document.getElementById('soanMassDate');
+    const seasonEl = document.getElementById('soanMassSeason');
+    const activeCb = document.getElementById('soanSetActive');
+    const saveBtn = document.getElementById('saveMassSetBtn');
+
+    if (titleEl) titleEl.value = ms.title || '';
+    if (dateEl) dateEl.value = ms.date || '';
+    if (seasonEl) seasonEl.value = ms.season || 'Mùa Thường Niên';
+    if (activeCb) activeCb.checked = !!ms.active;
+    if (saveBtn) saveBtn.innerHTML = '💾 Cập Nhật Bộ Lễ Này';
+
+    await this.renderDutyInputs();
+
+    const r = ms.liturgicalRoles || {};
+    this.liturgicalRoles.forEach(role => {
+      const val = r[role.key] || '';
+      const sel = document.getElementById(`soan-role-select-${role.key}`);
+      const inp = document.getElementById(`soan-role-${role.key}`);
+      if (sel) {
+        if (Array.from(sel.options).some(o => o.value === val)) {
+          sel.value = val;
+          if (inp) { inp.style.display = 'none'; inp.value = val; }
+        } else if (val) {
+          sel.value = '__custom__';
+          if (inp) { inp.style.display = 'block'; inp.value = val; }
+        } else {
+          sel.value = '';
+          if (inp) { inp.style.display = 'none'; inp.value = ''; }
+        }
+      }
+    });
+
+    this.uploadedSongs = (ms.songs && ms.songs.length)
+      ? ms.songs.map(s => ({ ...s }))
+      : [];
+    if (!this.uploadedSongs.length) {
+      this.initDefaultSongs();
+    }
+    this.renderUploadedSlots();
+    this.renderEditModeBanner();
+  }
+
+  cancelEditMode() {
+    this.editingMassId = null;
+    this.editingMassMeta = null;
+    const saveBtn = document.getElementById('saveMassSetBtn');
+    if (saveBtn) saveBtn.innerHTML = '💾 Lưu Bộ Lễ Này';
+
+    const banner = document.getElementById('soanEditModeBanner');
+    if (banner) banner.remove();
+
+    const dateInput = document.getElementById('soanMassDate');
+    if (dateInput) {
+      const nextSun = this.getNextSundayDate();
+      dateInput.value = nextSun;
+      this.handleDateChange(nextSun);
+    }
+    this.initDefaultSongs();
+    this.renderUploadedSlots();
+  }
+
+  renderEditModeBanner() {
+    let banner = document.getElementById('soanEditModeBanner');
+    if (!this.editingMassId) {
+      if (banner) banner.remove();
+      return;
+    }
+    const parent = document.querySelector('#tab-soanle .soanle-left-col');
+    if (!parent) return;
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'soanEditModeBanner';
+      parent.insertBefore(banner, parent.firstChild);
+    }
+    banner.style.cssText = 'background:#fffbeb; border:1.5px solid #f59e0b; border-radius:12px; padding:10px 14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;';
+    banner.innerHTML = `
+      <div style="font-size:0.82rem; font-weight:700; color:#92400e;">
+        ✏️ Đang sửa: <strong>${this.editingMassMeta?.title || this.editingMassId}</strong>
+      </div>
+      <button type="button" class="btn-xs btn-outline" onclick="window.dohwaSoanLe.cancelEditMode()" style="font-size:0.75rem; font-weight:700; color:#dc2626; border-color:#fca5a5; background:#fff; padding:3px 10px; border-radius:6px; cursor:pointer;">
+        ✕ Hủy sửa / Soạn lễ mới
+      </button>
+    `;
+  }
+
   // --- LƯU BỘ LỄ ---
   async saveCurrentMassSet() {
     const titleInput = document.getElementById('soanMassTitle');
@@ -594,19 +762,21 @@ class DohwaSoanLe {
     }
 
     const validSongs = this.uploadedSongs.filter(s => s.title.trim() || s.pdfName || (s.youtubeUrl && s.youtubeUrl.trim()));
+    const isEditing = !!this.editingMassId;
+    const prevMeta = this.editingMassMeta || {};
 
     const massSet = {
-      id: 'mass-' + Date.now(),
+      id: isEditing ? this.editingMassId : ('mass-' + Date.now()),
       title,
       weekName: title,
       date: date || new Date().toISOString().split('T')[0],
       season,
       liturgicalRoles,
       active: isActive,
-      createdAt: new Date().toISOString(),
+      createdAt: prevMeta.createdAt || new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      loiNguyenPublished: false,
-      loiNguyenText: '',
+      loiNguyenPublished: prevMeta.loiNguyenPublished !== undefined ? prevMeta.loiNguyenPublished : false,
+      loiNguyenText: prevMeta.loiNguyenText || '',
       songs: validSongs.length ? validSongs : this.uploadedSongs
     };
 
@@ -614,9 +784,12 @@ class DohwaSoanLe {
       await window.dohwaStore.saveMassSet(massSet);
     }
 
+    const actionLabel = isEditing ? 'Cập nhật' : 'Lưu mới';
+    this.cancelEditMode();
+
     const toast = document.createElement('div');
     toast.className = 'dohwa-toast';
-    toast.textContent = `💾 Đã lưu thành công "${title}"!`;
+    toast.textContent = `💾 ${actionLabel} thành công "${title}"!`;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 2500);
 
@@ -624,6 +797,7 @@ class DohwaSoanLe {
       window.dohwaApp.currentMassSet = massSet;
       await window.dohwaApp.loadCurrentMassSet();
       await window.dohwaApp.loadMassSetsArchive();
+      await window.dohwaApp.renderBaiDaSoanTrongNam();
       window.dohwaApp.switchTab('tab-hientai');
     }
   }

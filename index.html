@@ -16,9 +16,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/style.css?v=2026_05">
-  <link rel="stylesheet" href="css/components.css?v=2026_05">
+  <link rel="stylesheet" href="css/style.css?v=2026_31">
+  <link rel="stylesheet" href="css/components.css?v=2026_31">
 </head>
 <body>
 
@@ -533,16 +534,22 @@
     </div>
   </div>
 
-  <!-- STICKY BOTTOM MUSIC PLAYER (TRÌNH PHÁT NHẠC THUẦN TÚY - HOÀN TOÀN ẨN VIDEO) -->
+  <!-- STICKY BOTTOM MUSIC PLAYER (TRÌNH PHÁT NHẠC THUẦN TÚY - KÈM THANH TUA NHẠC & TỐC ĐỘ TẬP HÁT) -->
   <div class="sticky-player" id="stickyPlayer" style="display:none;">
+    <input type="range" id="playerSeekInput" class="player-seekbar" min="0" max="100" value="0" step="0.2" title="Kéo để tua đến đoạn cần tập">
     <div class="player-song-meta">
       <div class="player-thumb" id="playerThumb" style="font-size:1.3rem;">🎶</div>
       <div class="player-text">
         <div class="player-title" id="playerTitle" style="font-weight:800; color:var(--text-main);">Tên bài hát</div>
-        <div class="player-artist" id="playerArtist" style="font-size:0.75rem; color:var(--text-muted);">Thánh Ca • Ca Đoàn Do Hwa</div>
+        <div style="display:flex; align-items:center; gap:6px; overflow:hidden;">
+          <span id="playerTimeDisplay" style="font-size:0.72rem; font-weight:800; color:var(--primary); font-variant-numeric:tabular-nums; flex-shrink:0;">00:00 / 00:00</span>
+          <span class="player-artist" id="playerArtist" style="font-size:0.74rem; color:var(--text-muted);">• Thánh Ca</span>
+        </div>
       </div>
     </div>
     <div class="player-controls">
+      <button type="button" class="btn-xs" id="playerSpeedBtn" onclick="window.dohwaPlayer.cyclePlaybackSpeed()" style="padding:4px 7px; border-radius:6px; font-weight:800; font-size:0.74rem; color:var(--primary); border-color:var(--border);" title="Đổi tốc độ nhạc để tập hát (0.75x / 0.85x / 1x / 1.15x)">1x</button>
+      <button class="btn-icon" id="playerRewindBtn" onclick="window.dohwaPlayer.seekRelative(-10)" title="Tua lùi 10 giây để nghe lại">⏪</button>
       <button class="btn-icon" id="playerPrevBtn" title="Bài trước">⏮</button>
       <button class="btn-icon" id="playerPlayBtn" style="background:var(--primary); color:#fff; border-radius:50%; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(14,165,233,0.4);" title="Phát / Tạm dừng">▶</button>
       <button class="btn-icon" id="playerNextBtn" title="Bài tiếp">⏭</button>
@@ -643,9 +650,16 @@
   <!-- ========================================== -->
   <!-- MODAL CHỌN TÊN CA VIÊN VÀO PHÒNG (MEMBER GATE - SOANBOLE STYLE) -->
   <!-- ========================================== -->
-  <div class="caidat-overlay" id="sbMemberGateOverlay" style="display:flex; z-index:100001; background:rgba(15,10,25,0.88); backdrop-filter:blur(14px);">
-    <div style="width:min(480px,94vw); max-height:88vh; overflow-y:auto; background:var(--bg-card,#fff); border-radius:20px; padding:22px; box-shadow:0 20px 60px rgba(0,0,0,0.38); text-align:center;">
+  <div class="caidat-overlay" id="sbMemberGateOverlay" style="display:none; z-index:100001; background:rgba(15,10,25,0.88); backdrop-filter:blur(14px);">
+    <div style="width:min(480px,94vw); max-height:88vh; overflow-y:auto; background:var(--bg-card,#fff); border-radius:20px; padding:22px; box-shadow:0 20px 60px rgba(0,0,0,0.38); text-align:center; position:relative;">
       
+      <!-- NÚT ĐÓNG KHI ĐÃ CÓ TÊN (TRÁNH KẸT KHI BẤM NHẦM VÀO BADGE TÊN) -->
+      <div id="memberGateCloseWrap" style="display:none; justify-content:flex-end; margin-bottom:8px;">
+        <button type="button" onclick="window.dohwaApp.closeMemberGateModal()" style="background:var(--bg-card-subtle,#f1f5f9); border:1px solid var(--border,#cbd5e1); color:var(--text-main,#334155); border-radius:8px; padding:4px 10px; font-size:0.78rem; font-weight:700; cursor:pointer;">
+          ✕ Đóng (Giữ tên hiện tại)
+        </button>
+      </div>
+
       <!-- NÚT ĐĂNG NHẬP ADMIN NỔI BẬT TO RÕ NGAY ĐẦU MODAL -->
       <div style="margin-bottom:14px;">
         <button type="button" class="btn btn-primary" onclick="window.dohwaApp.openAdminLoginModal();" style="width:100%; background:linear-gradient(135deg, #78350f, #d97706); border:none; padding:11px 16px; font-weight:800; font-size:0.92rem; border-radius:12px; box-shadow:0 4px 14px rgba(217,119,6,0.38); display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
@@ -719,15 +733,15 @@
   </div>
 
   <!-- JAVASCRIPT MODULES -->
-  <script src="js/firebase-config.js?v=2026_29"></script>
-  <script src="js/store.js?v=2026_29"></script>
-  <script src="js/liturgical-helper.js?v=2026_29"></script>
-  <script src="js/player.js?v=2026_29"></script>
-  <script src="js/pdf-viewer.js?v=2026_29"></script>
-  <script src="js/phan-cong.js?v=2026_29"></script>
-  <script src="js/soan-le.js?v=2026_29"></script>
-  <script src="js/thong-ke.js?v=2026_29"></script>
-  <script src="js/app.js?v=2026_29"></script>
+  <script src="js/firebase-config.js?v=2026_31"></script>
+  <script src="js/store.js?v=2026_31"></script>
+  <script src="js/liturgical-helper.js?v=2026_31"></script>
+  <script src="js/player.js?v=2026_31"></script>
+  <script src="js/pdf-viewer.js?v=2026_31"></script>
+  <script src="js/phan-cong.js?v=2026_31"></script>
+  <script src="js/soan-le.js?v=2026_31"></script>
+  <script src="js/thong-ke.js?v=2026_31"></script>
+  <script src="js/app.js?v=2026_31"></script>
 
   <script>
     if (window.location.protocol.startsWith('http') && 'serviceWorker' in navigator) {

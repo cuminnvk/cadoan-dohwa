@@ -253,7 +253,7 @@ class DohwaApp {
               ${s.composer ? `<span class="massset-song-composer">- ${s.composer}</span>` : ''}
             </div>
             <div style="display:flex; gap:6px; flex-shrink:0;">
-              <button type="button" class="btn-xs btn-outline" style="color:#0284c7; border-color:#bae6fd; background:#f0f9ff; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem;" onclick="window.dohwaPDFViewer.open('${s.pdfData||''}','${(s.title||'').replace(/'/g, "\\'")}','${s.pdfName||''}')">📄 Pdf</button>
+              <button type="button" class="btn-xs btn-outline" style="color:#0284c7; border-color:#bae6fd; background:#f0f9ff; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem;" onclick="window.dohwaPDFViewer.open('${s.pdfData || s.pdfKey || ''}','${(s.title||'').replace(/'/g, "\\'")}','${s.pdfName||''}','${s.pdfKey||''}')">📄 Pdf</button>
               ${s.youtubeUrl ? `<button type="button" class="btn-xs btn-outline" style="color:#dc2626; border-color:#fca5a5; background:#fef2f2; padding:2px 8px; border-radius:6px; font-weight:700; font-size:0.78rem; display:inline-flex; align-items:center; gap:3px;" onclick="window.dohwaPlayer.playMassSet(window.dohwaApp.findMassSet('${m.id}'), '${s.id}')">▶ Nghe</button>` : ''}
             </div>
           </div>
@@ -631,7 +631,7 @@ class DohwaApp {
             </div>
           </div>
           <div class="song-actions" style="display:flex; gap:6px;">
-            <button class="action-btn btn-view" style="font-size:0.78rem; padding:4px 8px;" onclick="window.dohwaPDFViewer.open('${s.pdfData || ''}', '${s.title}', '${s.pdfName || ''}')">📄 Pdf</button>
+            <button class="action-btn btn-view" style="font-size:0.78rem; padding:4px 8px;" onclick="window.dohwaPDFViewer.open('${s.pdfData || s.pdfKey || ''}', '${(s.title || '').replace(/'/g, "\\'")}', '${s.pdfName || ''}', '${s.pdfKey || ''}')">📄 Pdf</button>
             ${s.youtubeUrl ? `<button class="action-btn btn-play" style="font-size:0.78rem; padding:4px 8px;" onclick="window.dohwaPlayer.playSong(window.dohwaApp.findSongInMass('${ms.id}', '${s.id}'))">▶ Nghe</button>` : ''}
           </div>
         </div>
@@ -651,8 +651,9 @@ class DohwaApp {
       const found = this.currentMassSet.songs.find(s => s.id === songId);
       if (found) return found;
     }
-    if (this.archiveMassSets && this.archiveMassSets.length) {
-      const ms = this.archiveMassSets.find(m => m.id === msId);
+    const list = this.allMassSets || this.archiveMassSets || [];
+    if (list.length) {
+      const ms = list.find(m => m && m.id === msId);
       if (ms && ms.songs) {
         const found = ms.songs.find(s => s.id === songId);
         if (found) return found;
@@ -667,8 +668,9 @@ class DohwaApp {
 
   findMassSet(id) {
     if (this.currentMassSet && this.currentMassSet.id === id) return this.currentMassSet;
-    if (this.archiveMassSets && this.archiveMassSets.length) {
-      const found = this.archiveMassSets.find(m => m.id === id);
+    const list = this.allMassSets || this.archiveMassSets || [];
+    if (list.length) {
+      const found = list.find(m => m && m.id === id);
       if (found) return found;
     }
     return this.currentMassSet;
@@ -682,14 +684,17 @@ class DohwaApp {
     if (!ms) ms = this.currentMassSet;
     if (!ms || !ms.songs) return;
 
-    const songsWithPdf = ms.songs.filter(s => s.pdfData || s.pdfName);
+    const songsWithPdf = ms.songs.filter(s => s.pdfData || s.pdfKey || s.pdfName);
     if (!songsWithPdf.length) {
       alert('Bộ lễ này chưa có file PDF nào!');
       return;
     }
 
-    songsWithPdf.forEach(s => {
+    for (const s of songsWithPdf) {
       let url = s.pdfData;
+      if (!url && s.pdfKey && window.dohwaStore?.getPdfBlob) {
+        url = await window.dohwaStore.getPdfBlob(s.pdfKey, s);
+      }
       if (!url && s.pdfName) {
         url = s.pdfName.startsWith('sheets/') ? s.pdfName : `sheets/${s.pdfName}`;
       }
@@ -701,7 +706,7 @@ class DohwaApp {
         a.click();
         setTimeout(() => a.remove(), 100);
       }
-    });
+    }
   }
 
   viewAttendance(msId) {
@@ -721,32 +726,8 @@ class DohwaApp {
     if (!ms) ms = this.currentMassSet;
     if (!ms) return;
 
-    const titleEl = document.getElementById('soanMassTitle');
-    const dateEl = document.getElementById('soanMassDate');
-    const seasonEl = document.getElementById('soanMassSeason');
-
-    if (titleEl) titleEl.value = ms.title;
-    if (dateEl) dateEl.value = ms.date;
-    if (seasonEl) seasonEl.value = ms.season || 'Mùa Thường Niên';
-
-    const r = ms.liturgicalRoles || {};
-    if (window.dohwaSoanLe) {
-      window.dohwaSoanLe.liturgicalRoles.forEach(role => {
-        const val = r[role.key] || '';
-        const sel = document.getElementById(`soan-role-select-${role.key}`);
-        const inp = document.getElementById(`soan-role-${role.key}`);
-        if (sel) {
-          if (Array.from(sel.options).some(o => o.value === val)) {
-            sel.value = val;
-          } else if (val) {
-            sel.value = '__custom__';
-            if (inp) { inp.style.display = 'block'; inp.value = val; }
-          }
-        }
-      });
-
-      window.dohwaSoanLe.uploadedSongs = [...(ms.songs || [])];
-      window.dohwaSoanLe.renderUploadedSlots();
+    if (window.dohwaSoanLe && typeof window.dohwaSoanLe.loadMassSetForEdit === 'function') {
+      await window.dohwaSoanLe.loadMassSetForEdit(ms);
     }
 
     this.switchTab('tab-soanle');
@@ -774,7 +755,8 @@ class DohwaApp {
     const modal = document.getElementById('sbMemberGateOverlay');
     const badge = document.getElementById('userHeaderBadge');
     const isAdmin = window.dohwaStore?.isAdmin();
-    const session = window.dohwaStore?.getUserSession();
+    let session = window.dohwaStore?.getUserSession();
+    const curDev = window.dohwaStore?.getDeviceId();
 
     // 1. Nếu là Admin: luôn được vào thẳng
     if (isAdmin || (session && (session.memberId === 'admin' || session.isAdmin))) {
@@ -786,21 +768,53 @@ class DohwaApp {
     // 2. Lấy danh sách ca viên hiện tại
     const roster = await window.dohwaStore.getRoster();
 
-    // 3. Nếu đã có session ca viên: kiểm tra ca viên đó có tồn tại trong danh sách thật và không bị khóa
-    if (session && session.memberId) {
-      const current = roster.find(m => m.id === session.memberId);
+    // 3. Tự động khôi phục session nếu thiết bị này (curDev) đã từng chọn tên trong roster
+    if ((!session || !session.name) && curDev && Array.isArray(roster)) {
+      const matchedByDevice = roster.find(m => m && !m.banned && m.lockDeviceId === curDev);
+      if (matchedByDevice) {
+        session = {
+          memberId: matchedByDevice.id,
+          name: matchedByDevice.name,
+          voice: matchedByDevice.voice || 'Ca viên',
+          deviceId: curDev
+        };
+        window.dohwaStore.setUserSession(session);
+      }
+    }
+
+    // 4. Nếu đã có session ca viên: kiểm tra theo ID hoặc theo Tên (tránh bị văng khi Admin cập nhật lại danh sách)
+    if (session && (session.memberId || session.name)) {
+      const sNameLower = String(session.name || '').trim().toLowerCase();
+      const current = roster.find(m =>
+        m && (
+          (session.memberId && m.id === session.memberId) ||
+          (sNameLower && String(m.name || '').trim().toLowerCase() === sNameLower)
+        )
+      );
       if (current && !current.banned) {
-        // Hợp lệ: Cho phép truy cập bộ lễ
+        // Tự động đồng bộ lại session với ID & bè hát mới nhất
+        if (session.memberId !== current.id || session.name !== current.name || session.voice !== current.voice) {
+          session = {
+            memberId: current.id,
+            name: current.name,
+            voice: current.voice || 'Ca viên',
+            deviceId: curDev || session.deviceId
+          };
+          window.dohwaStore.setUserSession(session);
+        }
         if (modal) modal.style.display = 'none';
         if (badge) badge.innerHTML = `👤 <span>${current.name}</span>`;
         return true;
-      } else {
-        // Tên này đã bị xóa hoặc bị khóa: hủy session và bắt chọn lại
+      } else if (current && current.banned) {
+        // Chỉ hủy session khi tên này bị Admin khóa quyền truy cập
+        window.dohwaStore.setUserSession(null);
+      } else if (roster.length > 0) {
+        // Tên đã bị xóa khỏi danh sách ca đoàn: bắt chọn lại
         window.dohwaStore.setUserSession(null);
       }
     }
 
-    // 4. CHƯA CHỌN TÊN HOẶC CHƯA CÓ QUYỀN: BẮT BUỘC HIỂN THỊ CỔNG CHỌN TÊN (GATE) CHẶN TOÀN BỘ WEB
+    // 5. CHƯA CHỌN TÊN: HIỂN THỊ CỔNG CHỌN TÊN (GATE)
     this.openMemberGateModal();
     return false;
   }
@@ -808,8 +822,21 @@ class DohwaApp {
   async openMemberGateModal() {
     const modal = document.getElementById('sbMemberGateOverlay');
     if (!modal) return;
+    const closeWrap = document.getElementById('memberGateCloseWrap');
+    const session = window.dohwaStore?.getUserSession();
+    const isAdmin = window.dohwaStore?.isAdmin();
+    if (closeWrap) {
+      closeWrap.style.display = (isAdmin || (session && session.name)) ? 'flex' : 'none';
+    }
+    const errEl = document.getElementById('memberGateError');
+    if (errEl) errEl.style.display = 'none';
     modal.style.display = 'flex';
     await this.renderMemberGateGrid();
+  }
+
+  closeMemberGateModal() {
+    const modal = document.getElementById('sbMemberGateOverlay');
+    if (modal) modal.style.display = 'none';
   }
 
   async renderMemberGateGrid() {
@@ -818,6 +845,7 @@ class DohwaApp {
     if (!grid) return;
     const roster = await window.dohwaStore.getRoster();
     const curDev = window.dohwaStore.getDeviceId();
+    const currentSession = window.dohwaStore.getUserSession();
 
     if (!roster || roster.length === 0) {
       grid.innerHTML = `
@@ -838,8 +866,8 @@ class DohwaApp {
     if (subNotice) subNotice.style.display = 'block';
 
     grid.innerHTML = roster.map(m => {
-      const isCurrentDev = m.lockDeviceId === curDev;
-      const isLockedOther = m.claimed && m.lockDeviceId && m.lockDeviceId !== curDev;
+      const isCurrentDev = (m.lockDeviceId && m.lockDeviceId === curDev) ||
+        (currentSession && (currentSession.memberId === m.id || String(currentSession.name || '').trim().toLowerCase() === String(m.name || '').trim().toLowerCase()));
       const isBanned = !!m.banned;
 
       let btnStyle = `padding:10px 8px; border-radius:10px; font-weight:700; font-size:0.85rem; border:1px solid; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px; transition:all 0.2s;`;
@@ -850,15 +878,14 @@ class DohwaApp {
         btnStyle += `background:#fef2f2; border-color:#fecaca; color:#991b1b; opacity:0.6; cursor:not-allowed;`;
         disabled = true;
         note = '🚫 Đã bị cấm';
-      } else if (isLockedOther) {
-        btnStyle += `background:#f1f5f9; border-color:#cbd5e1; color:#64748b; opacity:0.75; cursor:not-allowed;`;
-        disabled = true;
-        note = '🔒 Máy khác đã nhận';
       } else if (isCurrentDev) {
         btnStyle += `background:rgba(107,63,160,0.12); border-color:var(--primary); color:var(--primary); font-weight:800;`;
         note = '✓ Thiết bị này';
       } else {
         btnStyle += `background:var(--bg-card,#fff); border-color:var(--border); color:var(--text-main);`;
+        if (m.voice && m.voice !== 'Ca viên') {
+          note = `🎵 ${m.voice}`;
+        }
       }
 
       return `
@@ -1452,9 +1479,9 @@ class DohwaApp {
           <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">${roster.length} thành viên</span>
         </div>
         <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">
-          Mỗi dòng một tên. Khi bạn xóa tên ai khỏi khung này và bấm <strong>"Lưu Danh Sách"</strong>, tên người đó sẽ bị xóa hoàn toàn khỏi ca đoàn:
+          Mỗi dòng một tên (hỗ trợ gán bè nhanh: <code>Tên - Soprano</code>, <code>Tên - Alto</code>, <code>Tên - Tenor</code>, <code>Tên - Bass</code>). Khi xóa tên ai khỏi khung này và bấm <strong>"Lưu Danh Sách"</strong>, tên người đó sẽ bị xóa khỏi ca đoàn:
         </p>
-        <textarea id="settingRosterBatchInput" class="form-control" rows="6" style="width:100%; font-size:0.88rem; font-family:inherit; resize:vertical; padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-bottom:10px;" placeholder="Đôn Đôn&#10;Hồ Hoàng&#10;Kính Nguyễn...">${defaultBatchText}</textarea>
+        <textarea id="settingRosterBatchInput" class="form-control" rows="6" style="width:100%; font-size:0.88rem; font-family:inherit; resize:vertical; padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-bottom:10px;" placeholder="Đôn Đôn - Soprano&#10;Hồ Hoàng - Tenor&#10;Kính Nguyễn - Bass...">${defaultBatchText}</textarea>
         
         <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
           <button type="button" class="btn-xs btn-outline" onclick="window.dohwaApp.clearEntireRoster()" style="color:#ef4444; border-color:#fca5a5; font-size:0.8rem; padding:8px 14px; font-weight:800; border-radius:8px; background:#fff; cursor:pointer;" title="Xóa sạch toàn bộ danh sách cũ để dán danh sách mới">
@@ -1480,6 +1507,7 @@ class DohwaApp {
             <thead>
               <tr style="background:var(--bg-card-subtle); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:1; color:var(--text-muted); font-size:0.78rem;">
                 <th style="padding:8px 10px; text-align:left;">Họ và Tên</th>
+                <th style="padding:8px 8px; text-align:center;">Bè Hát</th>
                 <th style="padding:8px 8px; text-align:center;">Trạng Thái</th>
                 <th style="padding:8px 8px; text-align:center;">Lượt Vào</th>
                 <th style="padding:8px 8px; text-align:center;">Lần Cuối</th>
@@ -1490,6 +1518,7 @@ class DohwaApp {
               ${roster.map(m => {
                 const isCur = m.lockDeviceId === curDev || (currentSession && currentSession.memberId === m.id);
                 const isClaimed = !!m.claimed;
+                const curVoice = m.voice || 'Ca viên';
 
                 let statusTag = '';
                 if (isCur) {
@@ -1510,6 +1539,11 @@ class DohwaApp {
                   <tr style="border-bottom:1px solid var(--border); ${isCur ? 'background:rgba(107,63,160,0.04);' : ''}">
                     <td style="padding:8px 10px; font-weight:700; color:var(--text-main);">
                       ${m.name} ${isCur ? '<span style="font-size:0.7rem; color:var(--primary); font-weight:700;">(Bạn)</span>' : ''}
+                    </td>
+                    <td style="padding:6px 6px; text-align:center;">
+                      <select onchange="window.dohwaApp.changeMemberVoice('${m.id}', this.value)" style="font-size:0.75rem; font-weight:700; padding:3px 6px; border-radius:6px; border:1px solid var(--border); background:var(--bg-card); color:var(--primary); cursor:pointer;">
+                        ${['Ca viên', 'Soprano', 'Alto', 'Tenor', 'Bass'].map(v => `<option value="${v}" ${v === curVoice ? 'selected' : ''}>${v}</option>`).join('')}
+                      </select>
                     </td>
                     <td style="padding:8px 8px; text-align:center;">${statusTag}</td>
                     <td style="padding:8px 8px; text-align:center; font-weight:700; color:#475569;">${m.totalVisits || 0}</td>
@@ -1663,6 +1697,17 @@ class DohwaApp {
   async toggleBanMember(id) {
     await window.dohwaStore.toggleBanMember(id);
     await this.renderCaiDatContent();
+  }
+
+  async changeMemberVoice(memberId, newVoice) {
+    if (window.dohwaStore && typeof window.dohwaStore.updateMemberVoice === 'function') {
+      await window.dohwaStore.updateMemberVoice(memberId, newVoice);
+      const toast = document.createElement('div');
+      toast.className = 'dohwa-toast';
+      toast.textContent = `🎵 Đã cập nhật bè hát: ${newVoice}`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
+    }
   }
 
   async claimMemberForCurrentDevice(id) {
@@ -2036,23 +2081,63 @@ class DohwaApp {
     }
   }
 
+  findSongFromYearlyCatalog(title) {
+    if (!title) return null;
+    const clean = title.trim().toLowerCase();
+
+    // 1. Tìm trong các bộ lễ thực tế trước để có đủ youtubeUrl và pdfData/pdfKey mới nhất
+    const sets = [...(this.allMassSets || [])];
+    if (this.currentMassSet && !sets.some(m => m && m.id === this.currentMassSet.id)) {
+      sets.unshift(this.currentMassSet);
+    }
+    for (const ms of sets) {
+      if (!ms || !ms.songs) continue;
+      const found = ms.songs.find(s => s && s.title && s.title.trim().toLowerCase() === clean);
+      if (found) return found;
+    }
+
+    // 2. Tìm trong danh mục bài đã soạn trong năm
+    if (this.yearlySongsData && this.yearlySongsData.categories) {
+      for (const cat of this.yearlySongsData.categories) {
+        const found = (cat.songs || []).find(s => s && s.title && s.title.trim().toLowerCase() === clean);
+        if (found) return found;
+      }
+    }
+    return null;
+  }
+
   playSongFromBaiDaSoan(encodedTitle) {
     const title = decodeURIComponent(encodedTitle);
-    if (window.dohwaPlayer) {
+    const matched = this.findSongFromYearlyCatalog(title);
+    const ytUrl = matched ? (matched.youtubeUrl || matched.audioUrl || '') : '';
+
+    if (ytUrl && window.dohwaPlayer) {
       window.dohwaPlayer.playSong({
-        id: 'yearly-' + Date.now(),
-        title: title,
-        composer: 'Ca Đoàn Dohwa',
-        audioUrl: '',
-        youtubeUrl: 'https://www.youtube.com/results?search_query=' + encodeURIComponent(title + ' thánh ca')
+        id: matched.id || ('yearly-' + Date.now()),
+        title: matched.title || title,
+        roleLabel: matched.roleLabel || 'Thánh Ca',
+        composer: matched.composer || 'Ca Đoàn Dohwa',
+        audioUrl: matched.audioUrl || '',
+        youtubeUrl: ytUrl
       });
+      return;
     }
+
+    // Nếu bài hát mẫu trong kho năm chưa được gắn link YouTube cụ thể, mở tìm kiếm YouTube trong tab mới
+    const searchUrl = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(title + ' thánh ca');
+    window.open(searchUrl, '_blank', 'noopener');
   }
 
   viewPdfFromBaiDaSoan(encodedTitle) {
     const title = decodeURIComponent(encodedTitle);
+    const matched = this.findSongFromYearlyCatalog(title);
     if (window.dohwaPDFViewer) {
-      window.dohwaPDFViewer.open(null, title, title.toLowerCase().replace(/\s+/g, '_') + '.pdf');
+      const pdfSource = matched ? (matched.pdfData || matched.pdfKey || null) : null;
+      const pdfFileName = (matched && matched.pdfName)
+        ? matched.pdfName
+        : (title.toLowerCase().replace(/\s+/g, '_') + '.pdf');
+      const pdfKey = matched ? (matched.pdfKey || null) : null;
+      window.dohwaPDFViewer.open(pdfSource, title, pdfFileName, pdfKey);
     }
   }
 }

@@ -5,7 +5,7 @@
  */
 
 const DB_NAME = 'CaDoanDohwaDB_v3';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 const DEFAULT_MASS_SET = {
   id: 'mass-cn-25-tn-a',
@@ -160,6 +160,9 @@ class DohwaStore {
             attStore.createIndex('massSetId', 'massSetId', { unique: false });
             attStore.createIndex('memberName', 'memberName', { unique: false });
           }
+          if (!db.objectStoreNames.contains('pdf_store')) {
+            db.createObjectStore('pdf_store', { keyPath: 'key' });
+          }
         };
 
         request.onsuccess = (e) => {
@@ -220,8 +223,88 @@ class DohwaStore {
       if (typeof localStorage === 'undefined') return;
       localStorage.setItem(`dohwa_${key}`, JSON.stringify(val));
     } catch (e) {
+      // Nếu vượt quá Quota 5MB của LocalStorage do có pdfData Base64 lớn, tự động làm nhẹ bản lưu LocalStorage
+      if (key === 'mass_sets' && Array.isArray(val)) {
+        try {
+          const lightMassSets = val.map(ms => ({
+            ...ms,
+            songs: (ms.songs || []).map(s => ({
+              ...s,
+              pdfData: (s.pdfData && s.pdfData.length > 1000) ? null : s.pdfData
+            }))
+          }));
+          localStorage.setItem(`dohwa_${key}`, JSON.stringify(lightMassSets));
+          return;
+        } catch (err2) {}
+      }
       console.warn('LocalStorage quota or error:', e);
     }
+  }
+
+  // --- QUẢN LÝ LƯU TRỮ PDF TÁCH BIỆT (INDEXEDDB + FIREBASE /pdf_files) ---
+  async savePdfBlob(pdfKey, pdfData, pdfName = '') {
+    if (!pdfKey || !pdfData) return false;
+    await this.ensureReady();
+    const record = {
+      key: pdfKey,
+      pdfData,
+      pdfName: pdfName || `${pdfKey}.pdf`,
+      updatedAt: new Date().toISOString()
+    };
+    if (this.db) {
+      try {
+        await this.put('pdf_store', record);
+      } catch (e) {
+        console.warn('[PDFStore] Lỗi lưu PDF vào IndexedDB:', e);
+      }
+    }
+    const url = this.getFirebaseUrl();
+    if (url) {
+      fetch(`${url}/pdf_files/${encodeURIComponent(pdfKey)}.json`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      }).catch(err => console.warn('[PDFStore] Lỗi đồng bộ PDF lên Cloud:', err));
+    }
+    return true;
+  }
+
+  async getPdfBlob(pdfKey, fallbackSong = null) {
+    if (fallbackSong && fallbackSong.pdfData && fallbackSong.pdfData.length > 50) {
+      return fallbackSong.pdfData;
+    }
+    if (!pdfKey) return null;
+    await this.ensureReady();
+
+    // 1. Tìm trong IndexedDB trước
+    if (this.db) {
+      try {
+        const localRec = await this.get('pdf_store', pdfKey);
+        if (localRec && localRec.pdfData) {
+          return localRec.pdfData;
+        }
+      } catch (e) {}
+    }
+
+    // 2. Tải on-demand từ Firebase Cloud nếu chưa có trên máy
+    const url = this.getFirebaseUrl();
+    if (url) {
+      try {
+        const res = await fetch(`${url}/pdf_files/${encodeURIComponent(pdfKey)}.json`);
+        if (res.ok) {
+          const cloudRec = await res.json();
+          if (cloudRec && cloudRec.pdfData) {
+            if (this.db) {
+              try { await this.put('pdf_store', cloudRec); } catch (e) {}
+            }
+            return cloudRec.pdfData;
+          }
+        }
+      } catch (e) {
+        console.warn('[PDFStore] Lỗi tải PDF từ Cloud:', e);
+      }
+    }
+    return null;
   }
 
   // --- CLOUD SYNC CONFIG & REST API (FIREBASE REALTIME DATABASE) ---
@@ -318,6 +401,18 @@ class DohwaStore {
           }
         }
       }
+
+      // 3. Đồng bộ mã PIN Admin từ Cloud nếu có
+      try {
+        const pinRes = await fetch(`${url}/settings/admin_pin.json`, { cache: 'no-store' });
+        if (pinRes.ok) {
+          const cloudPinObj = await pinRes.json();
+          if (cloudPinObj && cloudPinObj.pin && String(cloudPinObj.pin).trim().length >= 4) {
+            localStorage.setItem('dohwa_admin_pin', String(cloudPinObj.pin).trim());
+          }
+        }
+      } catch (e) {}
+
       return updated;
     } catch (e) {
       console.warn('[CloudSync] Tạm thời dùng offline cache:', e);
@@ -492,6 +587,21 @@ class DohwaStore {
 
   async directSaveMassSet(massSet) {
     await this.ensureReady();
+
+    // Tách các file PDF Base64 dung lượng lớn sang pdf_store (IndexedDB + Cloud /pdf_files)
+    // để tránh làm đầy bộ nhớ LocalStorage (5MB) và giúp tải danh sách bộ lễ siêu nhanh
+    if (massSet && Array.isArray(massSet.songs)) {
+      for (let i = 0; i < massSet.songs.length; i++) {
+        const s = massSet.songs[i];
+        if (s && s.pdfData && s.pdfData.length > 1000) {
+          const pdfKey = s.pdfKey || `pdf_${massSet.id}_${s.id || i}`;
+          s.pdfKey = pdfKey;
+          s.hasCloudPdf = true;
+          await this.savePdfBlob(pdfKey, s.pdfData, s.pdfName);
+        }
+      }
+    }
+
     // 1. Cập nhật LocalStorage ngay lập tức (100% synchronous safety)
     let all = this.getLocal('mass_sets', []);
     if (massSet.active) {
@@ -618,16 +728,52 @@ class DohwaStore {
     const existingMap = new Map();
     existing.forEach(m => existingMap.set(m.name.trim().toLowerCase(), m));
 
+    // Hỗ trợ cú pháp: "Tên Ca Viên - Soprano" hoặc "Tên Ca Viên (Alto)"
+    const parseNameAndVoice = (rawLine) => {
+      let line = String(rawLine || '').trim();
+      let voice = null;
+      const voiceMatch = line.match(/^(.*?)\s*(?:[-|–]\s*|\(\s*)(Soprano|Alto|Tenor|Bass|Bè\s*1|Bè\s*2|Bè\s*3|Bè\s*4|Ca\s*viên)\s*\)?$/i);
+      if (voiceMatch) {
+        line = voiceMatch[1].trim();
+        const vRaw = voiceMatch[2].trim().toLowerCase();
+        if (vRaw === 'soprano' || vRaw === 'bè 1') voice = 'Soprano';
+        else if (vRaw === 'alto' || vRaw === 'bè 2') voice = 'Alto';
+        else if (vRaw === 'tenor' || vRaw === 'bè 3') voice = 'Tenor';
+        else if (vRaw === 'bass' || vRaw === 'bè 4') voice = 'Bass';
+        else voice = 'Ca viên';
+      }
+      return { name: line, voice };
+    };
+
+    // Tạo ID ổn định theo tên ca viên để không bị đổi ID khi Admin cập nhật lại danh sách
+    const makeStableMemberId = (nameStr, fallbackIdx) => {
+      const slug = String(nameStr || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/gi, 'd')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      return slug ? `mb-${slug}` : (`mb-${Date.now()}-${fallbackIdx}`);
+    };
+
     // ĐỒNG BỘ CHÍNH XÁC: Tên nào bị xóa khỏi danh sách sẽ bị xóa hoàn toàn
-    const newRoster = names.map((name, idx) => {
-      const trimmed = name.trim();
+    const newRoster = names.map((rawLine, idx) => {
+      const { name: trimmed, voice: parsedVoice } = parseNameAndVoice(rawLine);
       const lower = trimmed.toLowerCase();
       if (existingMap.has(lower)) {
-        return existingMap.get(lower);
+        const prev = existingMap.get(lower);
+        return {
+          ...prev,
+          id: prev.id || makeStableMemberId(trimmed, idx),
+          name: trimmed,
+          voice: parsedVoice || prev.voice || 'Ca viên'
+        };
       }
       return {
-        id: 'mb-' + Date.now() + '-' + idx,
+        id: makeStableMemberId(trimmed, idx),
         name: trimmed,
+        voice: parsedVoice || 'Ca viên',
         claimed: false,
         lockDeviceId: null,
         totalVisits: 0,
@@ -638,6 +784,23 @@ class DohwaStore {
 
     await this.saveRoster(newRoster);
     return newRoster;
+  }
+
+  async updateMemberVoice(memberId, newVoice) {
+    await this.ensureReady();
+    const roster = await this.getRoster();
+    const member = roster.find(m => m.id === memberId || m.name === memberId);
+    if (member) {
+      member.voice = newVoice || 'Ca viên';
+      await this.saveMember(member);
+      const curSession = this.getUserSession();
+      if (curSession && curSession.memberId === member.id) {
+        curSession.voice = member.voice;
+        this.setUserSession(curSession);
+      }
+      return true;
+    }
+    return false;
   }
 
   // --- ADMIN AUTHENTICATION & PERMISSIONS ---
@@ -653,7 +816,18 @@ class DohwaStore {
     if (!newPin || newPin.trim().length < 4) {
       throw new Error('Mã PIN quản trị phải có ít nhất 4 ký tự!');
     }
-    localStorage.setItem('dohwa_admin_pin', newPin.trim());
+    const cleanPin = newPin.trim();
+    localStorage.setItem('dohwa_admin_pin', cleanPin);
+
+    // Đồng bộ mã PIN lên Cloud để các thiết bị khác của Admin nhận mã PIN mới
+    const url = this.getFirebaseUrl();
+    if (url) {
+      fetch(`${url}/settings/admin_pin.json`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin: cleanPin, updatedAt: new Date().toISOString() })
+      }).catch(() => {});
+    }
     return true;
   }
 
@@ -690,19 +864,46 @@ class DohwaStore {
     return emptyRoster;
   }
 
-  // --- MEMBER GATE & DEVICE LOCKING ---
+  // --- MEMBER GATE & DEVICE PERSISTENCE (3 LỚP: LOCALSTORAGE + COOKIE 365 NGÀY + AUTO-RECOVERY) ---
+  getCookie(name) {
+    try {
+      const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'));
+      return match ? decodeURIComponent(match[1]) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  setCookie(name, value, days = 365) {
+    try {
+      if (value === null || value === undefined) {
+        document.cookie = `${name}=; path=/; max-age=0; SameSite=Lax`;
+      } else {
+        const maxAge = days * 24 * 60 * 60;
+        document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite=Lax`;
+      }
+    } catch (e) {}
+  }
+
   getDeviceId() {
-    let id = localStorage.getItem('dohwa_device_id');
+    let id = localStorage.getItem('dohwa_device_id') || this.getCookie('dohwa_device_id');
     if (!id) {
       id = 'dev-' + Date.now().toString(36) + '-' + Math.random().toString(36).substr(2, 6);
-      localStorage.setItem('dohwa_device_id', id);
     }
+    try { localStorage.setItem('dohwa_device_id', id); } catch (e) {}
+    this.setCookie('dohwa_device_id', id, 365);
     return id;
   }
 
   getUserSession() {
     try {
-      const raw = localStorage.getItem('dohwa_user_session');
+      let raw = localStorage.getItem('dohwa_user_session');
+      if (!raw) {
+        raw = this.getCookie('dohwa_user_session');
+        if (raw) {
+          try { localStorage.setItem('dohwa_user_session', raw); } catch (e) {}
+        }
+      }
       return raw ? JSON.parse(raw) : null;
     } catch(e) {
       return null;
@@ -711,30 +912,65 @@ class DohwaStore {
 
   setUserSession(session) {
     if (!session) {
-      localStorage.removeItem('dohwa_user_session');
+      try { localStorage.removeItem('dohwa_user_session'); } catch (e) {}
+      this.setCookie('dohwa_user_session', null);
     } else {
-      localStorage.setItem('dohwa_user_session', JSON.stringify(session));
+      const json = JSON.stringify(session);
+      try { localStorage.setItem('dohwa_user_session', json); } catch (e) {}
+      this.setCookie('dohwa_user_session', json, 365);
     }
   }
 
   async claimMember(memberId) {
     await this.ensureReady();
     const dev = this.getDeviceId();
-    const roster = await this.getRoster();
-    const member = roster.find(m => m.id === memberId || m.name === memberId);
-    if (!member) throw new Error('Không tìm thấy tên ca viên trong danh sách.');
-    if (member.banned) throw new Error('Tên này đã bị khóa quyền truy cập.');
-    if (member.claimed && member.lockDeviceId && member.lockDeviceId !== dev) {
-      throw new Error(`Tên "${member.name}" đã được dùng trên thiết bị khác. Vui lòng nhờ chủ phòng mở khóa.`);
+    const targetKey = String(memberId || '').trim().toLowerCase();
+
+    // Tải danh sách mới nhất từ Cloud trước khi cập nhật để không ghi đè dữ liệu của người khác
+    const url = this.getFirebaseUrl();
+    if (url) {
+      try {
+        const res = await fetch(`${url}/roster.json`, { cache: 'no-store' });
+        if (res.ok) {
+          let cloudRoster = await res.json();
+          if (cloudRoster) {
+            if (!Array.isArray(cloudRoster)) cloudRoster = Object.values(cloudRoster);
+            if (Array.isArray(cloudRoster) && cloudRoster.length > 0) {
+              this.setLocal('roster', cloudRoster);
+            }
+          }
+        }
+      } catch (e) {}
     }
 
+    const roster = await this.getRoster();
+    const member = roster.find(m =>
+      m && (
+        m.id === memberId ||
+        m.name === memberId ||
+        String(m.id || '').trim().toLowerCase() === targetKey ||
+        String(m.name || '').trim().toLowerCase() === targetKey
+      )
+    );
+    if (!member) throw new Error('Không tìm thấy tên ca viên trong danh sách.');
+    if (member.banned) throw new Error('Tên này đã bị khóa quyền truy cập.');
+
+    // Nếu thiết bị này trước đó từng chọn nhầm một tên khác, tự động giải phóng tên cũ
+    roster.forEach(m => {
+      if (m && m.id !== member.id && m.lockDeviceId === dev) {
+        m.claimed = false;
+        m.lockDeviceId = null;
+      }
+    });
+
+    // Cho phép ca viên chọn / xác nhận lại tên của mình mượt mà (kể cả khi đổi từ Zalo sang Safari/Chrome hoặc đổi máy)
     member.claimed = true;
     member.lockDeviceId = dev;
     member.claimedAt = member.claimedAt || new Date().toISOString();
     member.lastVisitAt = new Date().toISOString();
     member.totalVisits = Number(member.totalVisits || 0) + 1;
 
-    await this.saveMember(member);
+    await this.saveRoster(roster);
     const session = {
       memberId: member.id,
       name: member.name,
@@ -742,6 +978,7 @@ class DohwaStore {
       deviceId: dev
     };
     this.setUserSession(session);
+    this.setUserProfile(member.name, member.voice || 'Ca viên');
     return session;
   }
 
@@ -1067,132 +1304,178 @@ class DohwaStore {
     };
   }
 
-  // --- CÁC BÀI ĐÃ SOẠN TRONG NĂM (CHUẨN SOANBOLE SCREENSHOT 3) ---
+  // --- CÁC BÀI ĐÃ SOẠN TRONG NĂM (TỰ ĐỘNG TỔNG HỢP ĐỘNG TỪ KHO BỘ LỄ + KHO NỀN) ---
   async getYearlySongsSummary() {
     await this.ensureReady();
-    const categories = [
+    const massSets = await this.getAllMassSets();
+
+    const baseCategories = [
       {
         id: 'cat-duc-me',
-        title: 'Kinh Đức Mẹ',
-        songsCount: 9,
-        slotsCount: 9,
+        roleKeys: ['duc_me'],
+        title: 'Kính Đức Mẹ',
         songs: [
-          { title: 'Chúc Tình con thơ', count: 1, audioUrl: '', pdfName: 'chuc_tinh_con_tho.pdf' },
-          { title: 'Dâng mẹ', count: 1, audioUrl: '', pdfName: 'dang_me.pdf' },
-          { title: 'Hoa Mân Côi', count: 1, audioUrl: '', pdfName: 'hoa_man_coi.pdf' },
-          { title: 'Khi Con Lần Chuỗi Mân Côi', count: 1, audioUrl: '', pdfName: 'khi_con_lan_chuoi_man_coi.pdf' },
-          { title: 'Lời Mẹ Nhắn Nhủ', count: 1, audioUrl: '', pdfName: 'loi_me_nhan_nhu.pdf' },
-          { title: 'Mẹ Đẹp Tươi', count: 1, audioUrl: '', pdfName: 'me_dep_tuoi.pdf' },
-          { title: 'Mẹ Đầy Ơn Phúc', count: 1, audioUrl: '', pdfName: 'me_day_on_phuc.pdf' },
-          { title: 'Muôn Lời Ca Tụng Mẹ', count: 1, audioUrl: '', pdfName: 'muon_loi_ca_tung_me.pdf' },
-          { title: 'Tạ Ơn Mẹ', count: 1, audioUrl: '', pdfName: 'ta_on_me.pdf' }
+          { title: 'Nguồn Cậy Trông', count: 1, youtubeUrl: 'https://www.youtube.com/watch?v=8KNNz5uGVtw', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Chúc Tình con thơ', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Dâng mẹ', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Hoa Mân Côi', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Khi Con Lần Chuỗi Mân Côi', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Lời Mẹ Nhắn Nhủ', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Mẹ Đẹp Tươi', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Mẹ Đầy Ơn Phúc', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Muôn Lời Ca Tụng Mẹ', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' },
+          { title: 'Tạ Ơn Mẹ', count: 1, youtubeUrl: '', pdfName: 'Duc_Me_Nguon_Cay_Trong.pdf' }
         ]
       },
       {
         id: 'cat-nhap-le',
+        roleKeys: ['nhap_le'],
         title: 'Ca Nhập Lễ',
-        songsCount: 10,
-        slotsCount: 11,
         songs: [
-          { title: 'Chung Lời Cảm Tạ', count: 2, audioUrl: 'https://www.youtube.com/watch?v=kYJv6W7tZ7U', pdfName: 'Chung_loi_cam_ta.pdf' },
-          { title: 'Con Hân Hoan', count: 1, audioUrl: '', pdfName: 'con_han_hoan.pdf' },
-          { title: 'Đâu Có Tình Yêu Thương', count: 1, audioUrl: '', pdfName: 'dau_co_tinh_yeu_thuong.pdf' },
-          { title: 'Đi Về Nhà Chúa', count: 1, audioUrl: '', pdfName: 'di_ve_nha_chua.pdf' },
-          { title: 'Hoan Ca Phục Sinh', count: 1, audioUrl: '', pdfName: 'hoan_ca_phuc_sinh.pdf' },
-          { title: 'Hôm Nay Mừng Chúa Lên Trời', count: 1, audioUrl: '', pdfName: 'hom_nay_mung_chua_len_troi.pdf' },
-          { title: 'Lên Đền Thánh', count: 1, audioUrl: '', pdfName: 'len_den_thanh.pdf' },
-          { title: 'Nguyện Chúa Thương', count: 1, audioUrl: '', pdfName: 'nguyen_chua_thuong.pdf' },
-          { title: 'Vào Cung Thánh', count: 1, audioUrl: '', pdfName: 'vao_cung_thanh.pdf' },
-          { title: 'Từ Muôn Phương', count: 1, audioUrl: '', pdfName: 'tu_muon_phuong.pdf' }
+          { title: 'Chung lời cảm tạ', count: 1, youtubeUrl: 'https://www.youtube.com/watch?v=YRgiOJiLzUQ', pdfName: 'Nhap_Le_Chung_Loi_Cam_Ta.pdf' },
+          { title: 'Con Hân Hoan', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' },
+          { title: 'Đâu Có Tình Yêu Thương', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' },
+          { title: 'Đi Về Nhà Chúa', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' },
+          { title: 'Hoan Ca Phục Sinh', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' },
+          { title: 'Hôm Nay Mừng Chúa Lên Trời', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' },
+          { title: 'Lên Đền Thánh', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' },
+          { title: 'Nguyện Chúa Thương', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' },
+          { title: 'Vào Cung Thánh', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' },
+          { title: 'Từ Muôn Phương', count: 1, youtubeUrl: '', pdfName: 'Chung_loi_cam_ta.pdf' }
         ]
       },
       {
         id: 'cat-thanh-vinh',
+        roleKeys: ['dap_ca', 'thanh_vinh'],
         title: 'Thánh Vịnh',
-        songsCount: 12,
-        slotsCount: 12,
         songs: [
-          { title: 'Chúa Nhật 12 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn12_a.pdf' },
-          { title: 'Chúa Nhật 20 Thường Niên', count: 1, audioUrl: '', pdfName: 'tv_cn20.pdf' },
-          { title: 'Chúa Nhật 23 TN năm A', count: 1, audioUrl: '', pdfName: 'tv_cn23_a.pdf' },
-          { title: 'Chúa Nhật 24 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn24_a.pdf' },
-          { title: 'Chúa Nhật 25 Thường Niên A', count: 1, audioUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', pdfName: 'tv_cn25_tna.pdf' },
-          { title: 'Chúa Nhật 26 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn26_a.pdf' },
-          { title: 'Chúa Nhật 27 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn27_a.pdf' },
-          { title: 'Chúa Nhật 28 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn28_a.pdf' },
-          { title: 'Chúa Nhật 29 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn29_a.pdf' },
-          { title: 'Chúa Nhật 30 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn30_a.pdf' },
-          { title: 'Chúa Nhật 31 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn31_a.pdf' },
-          { title: 'Chúa Nhật 32 Thường Niên A', count: 1, audioUrl: '', pdfName: 'tv_cn32_a.pdf' }
+          { title: 'Chúa Nhật 25 Thường Niên A', count: 1, youtubeUrl: 'https://www.youtube.com/watch?v=FP9UgmgYnG8', pdfName: 'Dap_Ca_Chua_Nhat_25_A.pdf' },
+          { title: 'Chúa Nhật 12 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 20 Thường Niên', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 23 TN năm A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 24 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 26 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 27 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 28 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 29 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 30 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 31 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' },
+          { title: 'Chúa Nhật 32 Thường Niên A', count: 1, youtubeUrl: '', pdfName: 'tv_cn25_tna.pdf' }
         ]
       },
       {
         id: 'cat-alleluia',
+        roleKeys: ['alleluia'],
         title: 'Alleluia',
-        songsCount: 6,
-        slotsCount: 6,
         songs: [
-          { title: 'Alleluia - Lm. Huy Hoàng', count: 1, audioUrl: '', pdfName: 'alleluia_huy_hoang.pdf' },
-          { title: 'Alleluia - Xuân Thảo', count: 1, audioUrl: '', pdfName: 'alleluia_xuan_thao.pdf' },
-          { title: 'Alleluia - Kim Long', count: 1, audioUrl: '', pdfName: 'alleluia_kim_long.pdf' },
-          { title: 'Alleluia Mùa Vọng', count: 1, audioUrl: '', pdfName: 'alleluia_mua_vong.pdf' },
-          { title: 'Alleluia Giáng Sinh', count: 1, audioUrl: '', pdfName: 'alleluia_giang_sinh.pdf' },
-          { title: 'Alleluia Phục Sinh', count: 1, audioUrl: '', pdfName: 'alleluia_phuc_sinh.pdf' }
+          { title: 'ALLELUIA', count: 1, youtubeUrl: 'https://www.youtube.com/watch?v=a5Ay4SN2_EQ', pdfName: 'Alleluia_Huy_Hoang.pdf' },
+          { title: 'Alleluia - Lm. Huy Hoàng', count: 1, youtubeUrl: 'https://www.youtube.com/watch?v=a5Ay4SN2_EQ', pdfName: 'Alleluia_Huy_Hoang.pdf' },
+          { title: 'Alleluia - Xuân Thảo', count: 1, youtubeUrl: '', pdfName: 'alleluia.pdf' },
+          { title: 'Alleluia - Kim Long', count: 1, youtubeUrl: '', pdfName: 'alleluia.pdf' },
+          { title: 'Alleluia Mùa Vọng', count: 1, youtubeUrl: '', pdfName: 'alleluia.pdf' },
+          { title: 'Alleluia Giáng Sinh', count: 1, youtubeUrl: '', pdfName: 'alleluia.pdf' },
+          { title: 'Alleluia Phục Sinh', count: 1, youtubeUrl: '', pdfName: 'alleluia.pdf' }
         ]
       },
       {
         id: 'cat-dang-le',
+        roleKeys: ['dang_le'],
         title: 'Dâng Lễ',
-        songsCount: 8,
-        slotsCount: 8,
         songs: [
-          { title: 'Xin Dâng Của Lễ Chân Thành', count: 1, audioUrl: '', pdfName: 'Dang_Le_Xin_Dang_Cua_Le.pdf' },
-          { title: 'Bánh Rượu Tinh Tuyền', count: 1, audioUrl: '', pdfName: 'banh_ruou_tinh_tuyen.pdf' },
-          { title: 'Của Lễ Tình Yêu', count: 1, audioUrl: '', pdfName: 'cua_le_tinh_yeu.pdf' },
-          { title: 'Dâng Lên Chúa', count: 1, audioUrl: '', pdfName: 'dang_len_chua.pdf' },
-          { title: 'Nguyện Dâng', count: 1, audioUrl: '', pdfName: 'nguyen_dang.pdf' },
-          { title: 'Hương Trầm Nghi Ngút', count: 1, audioUrl: '', pdfName: 'huong_tram_nghi_ngut.pdf' },
-          { title: 'Tựa Làn Khói Hương', count: 1, audioUrl: '', pdfName: 'tua_lan_khoi_huong.pdf' },
-          { title: 'Hiến Lễ Đầu Mùa', count: 1, audioUrl: '', pdfName: 'hien_le_dau_mua.pdf' }
+          { title: 'XIN DÂNG CỦA LỄ CHÂN THÀNH', count: 1, youtubeUrl: 'https://www.youtube.com/watch?v=UQXnyEzbDGg', pdfName: 'Dang_Le_Xin_Dang_Cua_Le.pdf' },
+          { title: 'Bánh Rượu Tinh Tuyền', count: 1, youtubeUrl: '', pdfName: 'dang_le.pdf' },
+          { title: 'Của Lễ Tình Yêu', count: 1, youtubeUrl: '', pdfName: 'dang_le.pdf' },
+          { title: 'Dâng Lên Chúa', count: 1, youtubeUrl: '', pdfName: 'dang_le.pdf' },
+          { title: 'Nguyện Dâng', count: 1, youtubeUrl: '', pdfName: 'dang_le.pdf' },
+          { title: 'Hương Trầm Nghi Ngút', count: 1, youtubeUrl: '', pdfName: 'dang_le.pdf' },
+          { title: 'Tựa Làn Khói Hương', count: 1, youtubeUrl: '', pdfName: 'dang_le.pdf' },
+          { title: 'Hiến Lễ Đầu Mùa', count: 1, youtubeUrl: '', pdfName: 'dang_le.pdf' }
         ]
       },
       {
         id: 'cat-hiep-le',
+        roleKeys: ['hiep_le'],
         title: 'Hiệp Lễ',
-        songsCount: 8,
-        slotsCount: 9,
         songs: [
-          { title: 'Chúa Luôn Còn Mãi', count: 2, audioUrl: '', pdfName: 'Hiep_Le_Chua_Luon_Con_Mai.pdf' },
-          { title: 'Người Ơi Chớ Quên', count: 1, audioUrl: '', pdfName: 'nguoi_oi_cho_quen.pdf' },
-          { title: 'Bánh Ban Sự Sống', count: 1, audioUrl: '', pdfName: 'banh_ban_su_song.pdf' },
-          { title: 'Chúa Là Mục Tử', count: 1, audioUrl: '', pdfName: 'chua_la_muc_tu.pdf' },
-          { title: 'Lắng Nghe Lời Chúa', count: 1, audioUrl: '', pdfName: 'lang_nghe_loi_chua.pdf' },
-          { title: 'Con Sẽ Ca Ngợi Tình Thương Chúa', count: 1, audioUrl: '', pdfName: 'con_se_ca_ngoi.pdf' },
-          { title: 'Ở Lại Trong Chúa', count: 1, audioUrl: '', pdfName: 'o_lai_trong_chua.pdf' },
-          { title: 'Thánh Thể Nhiệm Mầu', count: 1, audioUrl: '', pdfName: 'thanh_the_nhiem_mau.pdf' }
+          { title: 'CHÚA LUÔN CÒN MÃI', count: 1, youtubeUrl: 'https://www.youtube.com/watch?v=ZT2f9deVVK0', pdfName: 'Hiep_Le_Chua_Luon_Con_Mai.pdf' },
+          { title: 'Người Ơi Chớ Quên', count: 1, youtubeUrl: '', pdfName: 'hiep_le.pdf' },
+          { title: 'Bánh Ban Sự Sống', count: 1, youtubeUrl: '', pdfName: 'hiep_le.pdf' },
+          { title: 'Chúa Là Mục Tử', count: 1, youtubeUrl: '', pdfName: 'hiep_le.pdf' },
+          { title: 'Lắng Nghe Lời Chúa', count: 1, youtubeUrl: '', pdfName: 'hiep_le.pdf' },
+          { title: 'Con Sẽ Ca Ngợi Tình Thương Chúa', count: 1, youtubeUrl: '', pdfName: 'hiep_le.pdf' },
+          { title: 'Ở Lại Trong Chúa', count: 1, youtubeUrl: '', pdfName: 'hiep_le.pdf' },
+          { title: 'Thánh Thể Nhiệm Mầu', count: 1, youtubeUrl: '', pdfName: 'hiep_le.pdf' }
         ]
       },
       {
         id: 'cat-ket-le',
+        roleKeys: ['ket_le', 'khac'],
         title: 'Kết Lễ',
-        songsCount: 7,
-        slotsCount: 7,
         songs: [
-          { title: 'Nguồn Cậy Trông', count: 1, audioUrl: '', pdfName: 'Ket_Le_Nguon_Cay_Trong.pdf' },
-          { title: 'Tán Tụng Hồng Ân', count: 1, audioUrl: '', pdfName: 'tan_tung_hong_an.pdf' },
-          { title: 'Điểm Hẹn Tình Yêu', count: 1, audioUrl: '', pdfName: 'diem_hen_tinh_yeu.pdf' },
-          { title: 'Bước Về Nhà Chúa', count: 1, audioUrl: '', pdfName: 'buoc_ve_nha_chua.pdf' },
-          { title: 'Ra Về Trong Bình An', count: 1, audioUrl: '', pdfName: 'ra_ve_trong_binh_an.pdf' },
-          { title: 'Xin Vâng', count: 1, audioUrl: '', pdfName: 'xin_vang.pdf' },
-          { title: 'Trời Cao Biển Rộng', count: 1, audioUrl: '', pdfName: 'troi_cao_bien_rong.pdf' }
+          { title: 'LỜI TẠ ƠN', count: 1, youtubeUrl: 'https://www.youtube.com/watch?v=orVNPwYCtOs', pdfName: 'Ket_Le_Loi_Ta_On.pdf' },
+          { title: 'Tán Tụng Hồng Ân', count: 1, youtubeUrl: '', pdfName: 'ket_le.pdf' },
+          { title: 'Điểm Hẹn Tình Yêu', count: 1, youtubeUrl: '', pdfName: 'ket_le.pdf' },
+          { title: 'Bước Về Nhà Chúa', count: 1, youtubeUrl: '', pdfName: 'ket_le.pdf' },
+          { title: 'Ra Về Trong Bình An', count: 1, youtubeUrl: '', pdfName: 'ket_le.pdf' },
+          { title: 'Xin Vâng', count: 1, youtubeUrl: '', pdfName: 'ket_le.pdf' },
+          { title: 'Trời Cao Biển Rộng', count: 1, youtubeUrl: '', pdfName: 'ket_le.pdf' }
         ]
       }
     ];
 
+    // Ghép động các bài hát thực tế từ tất cả các bộ lễ đã lưu trong kho
+    const extraSets = (massSets || []).filter(ms => ms && ms.id !== 'mass-cn-25-tn-a');
+    extraSets.forEach(ms => {
+      (ms.songs || []).forEach(s => {
+        if (!s || !s.title || !s.title.trim()) return;
+        const cleanTitle = s.title.trim();
+        const lowerTitle = cleanTitle.toLowerCase();
+        const cat = baseCategories.find(c => c.roleKeys.includes(s.role)) || baseCategories[baseCategories.length - 1];
+        const existingSong = cat.songs.find(item => item.title.trim().toLowerCase() === lowerTitle);
+        if (existingSong) {
+          existingSong.count = (existingSong.count || 1) + 1;
+          if (s.youtubeUrl && !existingSong.youtubeUrl) existingSong.youtubeUrl = s.youtubeUrl;
+          if (s.pdfName) existingSong.pdfName = s.pdfName;
+          if (s.pdfData) existingSong.pdfData = s.pdfData;
+          if (s.pdfKey) existingSong.pdfKey = s.pdfKey;
+        } else {
+          cat.songs.unshift({
+            title: cleanTitle,
+            count: 1,
+            youtubeUrl: s.youtubeUrl || s.audioUrl || '',
+            audioUrl: s.youtubeUrl || s.audioUrl || '',
+            pdfName: s.pdfName || '',
+            pdfData: s.pdfData || null,
+            pdfKey: s.pdfKey || null
+          });
+        }
+      });
+    });
+
+    let totalUniqueSongs = 0;
+    let totalSlots = 0;
+
+    const categories = baseCategories.map(cat => {
+      const songsCount = cat.songs.length;
+      const slotsCount = cat.songs.reduce((acc, item) => acc + (item.count || 1), 0);
+      totalUniqueSongs += songsCount;
+      totalSlots += slotsCount;
+      return {
+        id: cat.id,
+        title: cat.title,
+        songsCount,
+        slotsCount,
+        songs: cat.songs.map(s => ({
+          ...s,
+          audioUrl: s.youtubeUrl || s.audioUrl || ''
+        }))
+      };
+    });
+
     return {
-      totalUniqueSongs: 60,
-      totalSlots: 82,
-      totalMassSets: 12,
+      totalUniqueSongs,
+      totalSlots,
+      totalMassSets: Math.max(12, 11 + (massSets ? massSets.length : 1)),
       categories
     };
   }
@@ -1207,13 +1490,34 @@ class DohwaStore {
     }
   }
 
-  setUserProfile(profile) {
+  setUserProfile(nameOrProfile, voice = 'Ca viên') {
+    const profile = (typeof nameOrProfile === 'object' && nameOrProfile !== null)
+      ? nameOrProfile
+      : { name: String(nameOrProfile || '').trim(), voice: voice || 'Ca viên' };
     try {
       localStorage.setItem('dohwa_user_profile', JSON.stringify(profile));
     } catch (e) {}
+    return profile;
   }
 
   // Generic IDB Low-level
+  clear(storeName) {
+    return new Promise((resolve) => {
+      if (!this.db) {
+        resolve(true);
+        return;
+      }
+      try {
+        const tx = this.db.transaction([storeName], 'readwrite');
+        const req = tx.objectStore(storeName).clear();
+        req.onsuccess = () => resolve(true);
+        req.onerror = () => resolve(false);
+      } catch (e) {
+        resolve(false);
+      }
+    });
+  }
+
   get(storeName, key) {
     return new Promise((resolve) => {
       if (!this.db) {

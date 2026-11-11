@@ -1,8 +1,11 @@
-const CACHE_NAME = 'cadoan-dohwa-v34';
+const CACHE_NAME = 'cadoan-dohwa-v36';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
+  './icons/icon.svg',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
   './css/style.css',
   './css/components.css',
   './js/firebase-config.js',
@@ -17,6 +20,9 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE)).catch(() => {})
+  );
   self.skipWaiting();
 });
 
